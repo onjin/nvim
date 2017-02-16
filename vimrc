@@ -1,6 +1,8 @@
 " enter the curren millenium
 set nocompatible
 
+let mapleader = ","
+
 " Respect XDG
 if isdirectory($XDG_CONFIG_HOME.'/vim')
 	let $VIMPATH=expand('$XDG_CONFIG_HOME/vim')
@@ -39,7 +41,7 @@ let g:jedi#usages_command = '<leader>n'
 let g:jedi#popup_on_dot = 0
 let g:jedi#max_doc_height = 40
 let g:jedi#show_call_signatures = 0
-        let g:jedi#show_call_signatures_delay = 1000
+let g:jedi#show_call_signatures_delay = 1000
 
 
 Plug 'editorconfig/editorconfig-vim'
@@ -77,6 +79,11 @@ let g:indent_guides_auto_colors = 1
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+Plug 'majutsushi/tagbar'
+nnoremap <silent> tt :TagbarToggle<CR>
+nnoremap <silent> to :TagbarOpenAutoClose<CR>
+let g:tagbar_autofocus = 1
 
 " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
@@ -151,13 +158,6 @@ set smartindent     " Smart autoindenting on new lines
 set shiftround      " Round indent to multiple of 'shiftwidth'
 set shiftwidth=2    " Number of spaces to use in auto(indent)
 
-if has('folding')
-	set foldenable
-	set foldmethod=syntax
-	set foldlevelstart=99
-	set foldtext=FoldText()
-endif
-
 set timeout ttimeout
 set timeoutlen=750  " Time out on mappings
 set ttimeoutlen=250 " Time out on key codes
@@ -175,6 +175,7 @@ set showmatch       " Jump to matching bracket
 set matchpairs+=<:> " Add HTML brackets to pair matching
 set matchtime=1     " Tenths of a second to show the matching paren
 set cpoptions-=m    " showmatch will wait 0.5s or until a char is typed
+" Searching }}}
 " Behavior {{{
 " --------
 set linebreak                   " Break long lines at 'breakat'
@@ -249,12 +250,20 @@ autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
-autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 foldmethod=syntax
 
 set cursorline
 set number
 set noruler             " Disable default status ruler
 set list                " Show hidden characters
+
+
+" Vimscript file settings ---------------------- {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker ts=2 sw=2 tw=80 noet
+augroup END
+" }}}
 
 " theme {{{
 set t_Co=256
@@ -274,5 +283,23 @@ set listchars=tab:\⋮\ ,extends:⟫,precedes:⟪,nbsp:.,trail:·
 
 " theme }}}
 
+" mappings {{{
+nnoremap <leader>re :edit $MYVIMRC<CR>
+nnoremap <leader>rs :source $MYVIMRC<CR>
+
+nnoremap <leader>/ :vsplit<CR>
+
+" stop pressing ESC
+inoremap jk <esc>
+inoremap <esc> <nop>
+
+" fast match inside (), '', and "" fi. cp, dp, cq
+onoremap p i(
+onoremap q i'
+onoremap Q i"
+
+" fast match next ()
+onoremap ar :<c-u>normal! f(vi(<cr>
+" mappings }}}
+
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
-" vim: set ts=2 sw=2 tw=80 noet foldmethod=marker:
