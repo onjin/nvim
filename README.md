@@ -33,4 +33,4 @@ Plugins:
  * https://github.com/vim-syntastic/syntastic
 
 Theme:
- * https://github.com/morhetz/gruvbox'
+ * https://github.com/morhetz/gruvbox
