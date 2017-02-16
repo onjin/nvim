@@ -13,7 +13,7 @@ else
 endif
 
 "
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+" Specify a directory for plugins
 call plug#begin('~/.cache/vim/plugins')
 
 Plug 'chriskempson/base16-shell'

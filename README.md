@@ -7,15 +7,23 @@ General features:
  * manage plugins by `vim-plug` https://github.com/junegunn/vim-plug
  * plugins are put at `~/.cache/vim`
 
+Python features:
+ * autocomplete by jedi (`pip install jedi`)
+ * check `PEP8` on write (`pip install flake8`)
+
 Code mappings:
- * tt - toggle tagbar and focus it if opened
- * to - open tagbar and close after selecting tag
+ * `tt` - toggle tagbar and focus it if opened
+ * `to` - open tagbar and close after selecting tag
 
 Operators mapping like `d`, `c`, `r`:
- * <operator>p - operate inside `()`, f.i.: `dp` - delete content between `()`
- * <operator>q - operate inside `''`, f.i.: `dp` - delete content between `''`
- * <operator>Q - operate inside `""`, f.i.: `dp` - delete content between `""`
- * <operator>ar - find next `(` and operate between `()`, f.i.: `car`
+ * `<operator>p` - operate inside `()`, f.i.: `dp` - delete content between `()`
+ * `<operator>q` - operate inside `''`, f.i.: `dp` - delete content between `''`
+ * `<operator>Q` - operate inside `""`, f.i.: `dp` - delete content between `""`
+ * `<operator>ar` - find next `(` and operate between `()`, f.i.: `car`
+
+`vimrc` mappings:
+ * `,re` - edit `$MYVIMRC`
+ * `,rs` - source `$MYVIMRC`
 
 Plugins:
  * https://github.com/chriskempson/base16-shell
@@ -34,3 +42,7 @@ Plugins:
 
 Theme:
  * https://github.com/morhetz/gruvbox
+
+Screenshot
+----------
+![vim screenshot](https://raw.githubusercontent.com/onjin/.vim/master/screenshot.png)
