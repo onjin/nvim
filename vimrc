@@ -24,25 +24,9 @@ Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_dark = 'hard'
 
 Plug 'davidhalter/jedi-vim'
-setlocal completeopt=menuone,longest
-" let g:jedi#force_py_version = 3
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#use_tag_stack = 0
-let g:jedi#popup_select_first = 1
-let g:jedi#use_splits_not_buffers = 'right'
-let g:jedi#completions_command = ''
-let g:jedi#goto_command = '<leader>d'
-let g:jedi#goto_assignments_command = '<leader>a'
-let g:jedi#documentation_command = 'K'
-let g:jedi#rename_command = '<leader>r'
-let g:jedi#usages_command = '<leader>n'
-let g:jedi#popup_on_dot = 0
-let g:jedi#max_doc_height = 40
-let g:jedi#show_call_signatures = 0
-let g:jedi#show_call_signatures_delay = 1000
 
+let g:jedi#popup_on_dot = 0
+let g:jedi#use_splits_not_buffers = 'right'
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -63,6 +47,7 @@ Plug 'dietsche/vim-lastplace'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'kshenoy/vim-signature'
 Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "context"
 
 " Track the engine.
 Plug 'SirVer/ultisnips'
