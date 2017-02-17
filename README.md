@@ -12,9 +12,11 @@ Python features:
  * check `PEP8` on write (`pip install flake8`)
 
 Navigation mappings:
+ * `<c-l>` - also clear search (`nohlsearch`) before screen cleaning
  * `,/` - split current buffer verticaly
 
  * `,l` - list buffers
+ * `,c` - delete buffer (close)
  * `,,` - goto previous buffer
  * `,.` - goto next buffer
  * `,1-0` - goto specific buffer (1-10)
@@ -28,6 +30,19 @@ Operators mapping like `d`, `c`, `r`:
  * `<operator>q` - operate inside `''`, f.i.: `dp` - delete content between `''`
  * `<operator>Q` - operate inside `""`, f.i.: `dp` - delete content between `""`
  * `<operator>ar` - find next `(` and operate between `()`, f.i.: `car`
+
+Django mappings to open related file in current app:
+ * `djm` - open related file "models.py"
+ * `djv` - open related file "views.py"
+ * `dju` - open related file "urls.py"
+ * `dja` - open related file "admin.py"
+ * `dje` - open related file "tests/"
+ * `djE` - open related file "tests.py"
+ * `djt` - open related file "templates/" 
+ * `djg` - open related file "templatetags/" 
+ * `djc` - open related file "management/" 
+ * `djS` - open main settings.py
+ * `djU` - open main urls.py
 
 `vimrc` mappings:
  * `,re` - edit `$MYVIMRC`

@@ -274,9 +274,13 @@ nnoremap <leader>rs :source $MYVIMRC<CR>
 
 nnoremap <leader>/ :vsplit<CR>
 
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-l> :nohl<CR><C-l>
+
 
 " buffers
 nnoremap <leader>l :ls<CR>
+nnoremap <leader>c :bd<CR>
 nnoremap <leader>, :bp<CR>
 nnoremap <leader>. :bn<CR>
 nnoremap <leader>1 :1b<CR>
@@ -288,7 +292,7 @@ nnoremap <leader>6 :6b<CR>
 nnoremap <leader>7 :7b<CR>
 nnoremap <leader>8 :8b<CR>
 nnoremap <leader>9 :9b<CR>
-2noremap <leader>0 :0b<CR>
+nnoremap <leader>0 :0b<CR>
 
 " stop pressing ESC
 inoremap jk <esc>
@@ -302,5 +306,43 @@ onoremap Q i"
 " fast match next ()
 onoremap ar :<c-u>normal! f(vi(<cr>
 " mappings }}}
+
+" django {{{
+let g:last_relative_dir = ''
+nnoremap djm :call RelatedFile ("models.py")<cr>
+nnoremap djv :call RelatedFile ("views.py")<cr>
+nnoremap dju :call RelatedFile ("urls.py")<cr>
+nnoremap dja :call RelatedFile ("admin.py")<cr>
+nnoremap dje :call RelatedFile ("tests/")<cr>
+nnoremap djE :call RelatedFile ("tests.py")<cr>
+nnoremap djt :call RelatedFile ( "templates/" )<cr>
+nnoremap djg :call RelatedFile ( "templatetags/" )<cr>
+nnoremap djc :call RelatedFile ( "management/" )<cr>
+nnoremap djS :e settings.py<cr>
+nnoremap djU :e urls.py<cr>
+
+fun! RelatedFile(file)
+    " This is to check that the directory looks djangoish
+    if filereadable(expand("%:h"). '/models.py') || isdirectory(expand("%:h") . "/templatetags/")
+        exec "edit %:h/" . a:file
+        let g:last_relative_dir = expand("%:h") . '/'
+        return ''
+    endif
+    if g:last_relative_dir != ''
+        exec "edit " . g:last_relative_dir . a:file
+        return ''
+    endif
+    echo "Cant determine where relative file is : " . a:file
+    return ''
+endfun
+
+fun SetAppDir()
+    if filereadable(expand("%:h"). '/models.py') || isdirectory(expand("%:h") . "/templatetags/")
+        let g:last_relative_dir = expand("%:h") . '/'
+        return ''
+    endif
+endfun
+autocmd BufEnter *.py call SetAppDir()
+" django }}}
 
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
