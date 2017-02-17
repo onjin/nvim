@@ -11,6 +11,14 @@ Python features:
  * autocomplete by jedi (`pip install jedi`)
  * check `PEP8` on write (`pip install flake8`)
 
+Navigation mappings:
+ * `,/` - split current buffer verticaly
+
+ * `,l` - list buffers
+ * `,,` - goto previous buffer
+ * `,.` - goto next buffer
+ * `,1-0` - goto specific buffer (1-10)
+
 Code mappings:
  * `tt` - toggle tagbar and focus it if opened
  * `to` - open tagbar and close after selecting tag

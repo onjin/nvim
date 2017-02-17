@@ -274,6 +274,22 @@ nnoremap <leader>rs :source $MYVIMRC<CR>
 
 nnoremap <leader>/ :vsplit<CR>
 
+
+" buffers
+nnoremap <leader>l :ls<CR>
+nnoremap <leader>, :bp<CR>
+nnoremap <leader>. :bn<CR>
+nnoremap <leader>1 :1b<CR>
+nnoremap <leader>2 :2b<CR>
+nnoremap <leader>3 :3b<CR>
+nnoremap <leader>4 :4b<CR>
+nnoremap <leader>5 :5b<CR>
+nnoremap <leader>6 :6b<CR>
+nnoremap <leader>7 :7b<CR>
+nnoremap <leader>8 :8b<CR>
+nnoremap <leader>9 :9b<CR>
+2noremap <leader>0 :0b<CR>
+
 " stop pressing ESC
 inoremap jk <esc>
 inoremap <esc> <nop>
