@@ -55,6 +55,8 @@ let g:SuperTabDefaultCompletionType = "context"
 
 " Track the engine.
 Plug 'SirVer/ultisnips'
+" If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
 
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
@@ -75,9 +77,8 @@ nnoremap <silent> to :TagbarOpenAutoClose<CR>
 let g:tagbar_autofocus = 1
 
 Plug 'tpope/vim-fugitive'
+Plug 'michaeljsmith/vim-indent-object'
 
-" If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
 
 call plug#end()
 set mouse=nvi
