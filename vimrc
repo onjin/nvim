@@ -78,6 +78,8 @@ let g:tagbar_autofocus = 1
 
 Plug 'tpope/vim-fugitive'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'kana/vim-textobj-user'
+Plug 'bps/vim-textobj-python'
 
 
 call plug#end()
