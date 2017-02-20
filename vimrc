@@ -27,6 +27,10 @@ Plug 'davidhalter/jedi-vim'
 
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_splits_not_buffers = 'right'
+let g:jedi#popup_select_first = 1
+let g:jedi#max_doc_height = 40
+let g:jedi#show_call_signatures = 0
+let g:jedi#show_call_signatures_delay = 10
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -69,6 +73,8 @@ Plug 'majutsushi/tagbar'
 nnoremap <silent> tt :TagbarToggle<CR>
 nnoremap <silent> to :TagbarOpenAutoClose<CR>
 let g:tagbar_autofocus = 1
+
+Plug 'tpope/vim-fugitive'
 
 " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
