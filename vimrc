@@ -83,6 +83,10 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-user'
 Plug 'bps/vim-textobj-python'
 
+Plug 'xolox/vim-misc'  " required by xolox/vim-notes
+Plug 'xolox/vim-notes'
+let g:notes_directories = ['~/Dropbox/Notes']
+
 
 call plug#end()
 set mouse=nvi
@@ -347,7 +351,7 @@ fun! RelatedFile(file)
     return ''
 endfun
 
-fun SetAppDir()
+fun! SetAppDir()
     if filereadable(expand("%:h"). '/models.py') || isdirectory(expand("%:h") . "/templatetags/")
         let g:last_relative_dir = expand("%:h") . '/'
         return ''
