@@ -1,0 +1,6 @@
+" alias vime=’vim -u ~/.vim/vimencrypt -x’
+source ~/.vim/vimrc
+set nobackup
+set noswapfile
+set nowritebackup
+set cm=blowfish
