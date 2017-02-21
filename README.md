@@ -11,7 +11,7 @@ Python features:
  * autocomplete by jedi (`pip install jedi`)
  * check `PEP8` on write (`pip install flake8`)
 
-Navigation mappings:
+Navigation bindings:
  * `<c-l>` - also clear search (`nohlsearch`) before screen cleaning
  * `,/` - split current buffer verticaly
 
@@ -21,17 +21,21 @@ Navigation mappings:
  * `,.` - goto next buffer
  * `,1-0` - goto specific buffer (1-10)
 
-Code mappings:
+Code bindings:
  * `tt` - toggle tagbar and focus it if opened
  * `to` - open tagbar and close after selecting tag
 
-Operators mapping like `d`, `c`, `r`:
+Errors bindings:
+ * `,e` - open location window with syntastic errors
+ * `,ee` - close location window
+
+Operators bindings like `d`, `c`, `r`:
  * `<operator>p` - operate inside `()`, f.i.: `dp` - delete content between `()`
  * `<operator>q` - operate inside `''`, f.i.: `dp` - delete content between `''`
  * `<operator>Q` - operate inside `""`, f.i.: `dp` - delete content between `""`
  * `<operator>ar` - find next `(` and operate between `()`, f.i.: `car`
 
-Django mappings to open related file in current app:
+Django bindings to open related file in current app:
  * `djm` - open related file "models.py"
  * `djv` - open related file "views.py"
  * `dju` - open related file "urls.py"
@@ -44,7 +48,7 @@ Django mappings to open related file in current app:
  * `djS` - open main settings.py
  * `djU` - open main urls.py
 
-`vimrc` mappings:
+`vimrc` bindings:
  * `,re` - edit `$MYVIMRC`
  * `,rs` - source `$MYVIMRC`
 

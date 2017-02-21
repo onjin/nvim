@@ -43,6 +43,8 @@ set laststatus=2
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+nnoremap <leader>e :Errors<CR>
+nnoremap <leader>ee :lclose<CR>
 
 Plug 'rafi/vim-tinyline'
 
