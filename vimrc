@@ -313,6 +313,9 @@ nnoremap <leader>0 :0b<CR>
 inoremap jk <esc>
 inoremap <esc> <nop>
 
+" enter in normal mode adds one line
+noremap <CR> o<ESC>
+
 " fast match inside (), '', and "" fi. cp, dp, cq
 onoremap p i(
 onoremap q i'
