@@ -87,6 +87,8 @@ Plug 'xolox/vim-misc'  " required by xolox/vim-notes
 Plug 'xolox/vim-notes'
 let g:notes_directories = ['~/Dropbox/Notes']
 
+Plug 'chaoren/vim-wordmotion'
+
 
 call plug#end()
 set mouse=nvi
