@@ -89,6 +89,8 @@ let g:notes_directories = ['~/Dropbox/Notes']
 
 Plug 'chaoren/vim-wordmotion'
 
+Plug 'mattn/emmet-vim'
+
 
 call plug#end()
 set mouse=nvi
