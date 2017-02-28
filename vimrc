@@ -45,6 +45,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 nnoremap <leader>e :Errors<CR>
 nnoremap <leader>ee :lclose<CR>
+nnoremap <C-e> :lnext<CR>
+nnoremap <C-r> :lprev<CR>
 
 Plug 'rafi/vim-tinyline'
 
@@ -91,6 +93,7 @@ Plug 'chaoren/vim-wordmotion'
 
 Plug 'mattn/emmet-vim'
 
+Plug 'Rykka/InstantRst'
 
 call plug#end()
 set mouse=nvi
@@ -292,6 +295,10 @@ nnoremap <leader>re :edit $MYVIMRC<CR>
 nnoremap <leader>rs :source $MYVIMRC<CR>
 
 nnoremap <leader>/ :vsplit<CR>
+nnoremap <leader>s :split<CR>
+
+nnoremap <leader>f :windo diffthis<CR>
+nnoremap <leader>ff :windo diffoff<CR>
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
@@ -313,6 +320,12 @@ nnoremap <leader>8 :8b<CR>
 nnoremap <leader>9 :9b<CR>
 nnoremap <leader>0 :0b<CR>
 
+" windows
+nnoremap <C-J> <C-w>j
+nnoremap <C-K> <C-w>k
+nnoremap <C-H> <C-w>h
+nnoremap <C-L> <C-w>l
+
 " stop pressing ESC
 inoremap jk <esc>
 inoremap <esc> <nop>
@@ -325,9 +338,17 @@ onoremap p i(
 onoremap q i'
 onoremap Q i"
 
+" registers :reg
+nnoremap pp "*p
+
 " fast match next ()
 onoremap ar :<c-u>normal! f(vi(<cr>
+
+nnoremap <C-s> :update<CR>
+vnoremap <C-s> <C-C>:update<CR>
+inoremap <C-s> <C-O>:update<CR>
 " mappings }}}
+"
 
 " django {{{
 let g:last_relative_dir = ''
@@ -366,5 +387,6 @@ fun! SetAppDir()
 endfun
 autocmd BufEnter *.py call SetAppDir()
 " django }}}
+
 
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
