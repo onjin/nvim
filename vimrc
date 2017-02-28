@@ -46,7 +46,7 @@ set statusline+=%*
 nnoremap <leader>e :Errors<CR>
 nnoremap <leader>ee :lclose<CR>
 nnoremap <C-e> :lnext<CR>
-nnoremap <C-r> :lprev<CR>
+nnoremap <C-q> :lprev<CR>
 
 Plug 'rafi/vim-tinyline'
 
