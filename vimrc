@@ -94,6 +94,13 @@ Plug 'chaoren/vim-wordmotion'
 Plug 'mattn/emmet-vim'
 
 Plug 'Rykka/InstantRst'
+Plug 'shime/vim-livedown'
+
+Plug 'python-rope/ropevim'
+Plug 'tmhedberg/matchit'
+
+" For some reason auto-pairs disables jedi comletion
+" Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 set mouse=nvi
@@ -115,7 +122,13 @@ if has('vim_starting')
 	set encoding=utf-8
 	scriptencoding utf-8
 endif
-" set viminfo='30,/100,:500,<10,@10,s10,h,n$VARPATH/viminfo
+
+if has('nvim')
+	set shada='30,/100,:50,<10,@10,s50,h,n$VARPATH/shada
+else
+	set viminfo='30,/100,:500,<10,@10,s10,h,n$VARPATH/viminfo
+endif
+
 set undofile swapfile nobackup
 set directory=$VARPATH/swap//,$VARPATH,~/tmp,/var/tmp,/tmp
 set undodir=$VARPATH/undo//,$VARPATH,~/tmp,/var/tmp,/tmp
@@ -321,14 +334,14 @@ nnoremap <leader>9 :9b<CR>
 nnoremap <leader>0 :0b<CR>
 
 " windows
-nnoremap <C-J> <C-w>j
-nnoremap <C-K> <C-w>k
-nnoremap <C-H> <C-w>h
-nnoremap <C-L> <C-w>l
+nnoremap JJ <C-w>j
+nnoremap KK <C-w>k
+nnoremap HH <C-w>h
+nnoremap LL <C-w>l
 
 " stop pressing ESC
 inoremap jk <esc>
-inoremap <esc> <nop>
+" inoremap <esc> <nop>
 
 " enter in normal mode adds one line
 noremap <CR> o<ESC>
@@ -387,6 +400,10 @@ fun! SetAppDir()
 endfun
 autocmd BufEnter *.py call SetAppDir()
 " django }}}
+"
+if has('nvim')
+	execute 'source' fnameescape($VIMPATH.'/neovim.vim')
+endif
 
 
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
