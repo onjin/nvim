@@ -32,6 +32,16 @@ let g:jedi#max_doc_height = 40
 let g:jedi#show_call_signatures = 0
 let g:jedi#show_call_signatures_delay = 10
 
+if has('python')
+py << EOF
+import os.path
+import sys
+import vim
+if os.path.exists('.pyenv'):
+    sys.path.insert(0, os.path.abspath('.pyenv'))
+EOF
+endif
+
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'vim-syntastic/syntastic'
@@ -78,9 +88,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 Plug 'majutsushi/tagbar'
 nnoremap <silent> tt :TagbarToggle<CR>
 nnoremap <silent> to :TagbarOpenAutoClose<CR>
+
 let g:tagbar_autofocus = 1
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'matze/vim-move'
+
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-user'
 Plug 'bps/vim-textobj-python'
@@ -96,11 +111,20 @@ Plug 'mattn/emmet-vim'
 Plug 'Rykka/InstantRst'
 Plug 'shime/vim-livedown'
 
-Plug 'python-rope/ropevim'
 Plug 'tmhedberg/matchit'
 
-" For some reason auto-pairs disables jedi comletion
-" Plug 'jiangmiao/auto-pairs'
+Plug 'janko-m/vim-test'
+Plug 'kassio/neoterm'
+
+Plug 'Shougo/echodoc.vim'
+set cmdheight=2
+let g:echodoc_enable_at_startup	= 1
+
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+
+Plug 'vim-scripts/bash-support.vim'
+
 
 call plug#end()
 set mouse=nvi
@@ -301,6 +325,9 @@ set showbreak=↪
 set fillchars=vert:│,fold:─
 set listchars=tab:\⋮\ ,extends:⟫,precedes:⟪,nbsp:.,trail:·
 
+" fix for colors in console/tmux
+set t_ut=
+
 " theme }}}
 
 " mappings {{{
@@ -314,7 +341,7 @@ nnoremap <leader>f :windo diffthis<CR>
 nnoremap <leader>ff :windo diffoff<CR>
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+nnoremap <silent> <C-i> :nohl<CR><C-l>
 
 
 " buffers
@@ -333,11 +360,32 @@ nnoremap <leader>8 :8b<CR>
 nnoremap <leader>9 :9b<CR>
 nnoremap <leader>0 :0b<CR>
 
-" windows
-nnoremap JJ <C-w>j
-nnoremap KK <C-w>k
-nnoremap HH <C-w>h
-nnoremap LL <C-w>l
+" Tmux/vim seamless movement
+function! TmuxMove(direction)
+        let wnr = winnr()
+        silent! execute 'wincmd ' . a:direction
+        " If the winnr is still the same after we moved, it is the last pane
+        if wnr == winnr()
+                call system('tmux select-pane -' . tr(a:direction, 'phjkl', 'lLDUR'))
+        end
+endfunction
+
+nnoremap <silent> <c-h> :call TmuxMove('h')<cr>
+nnoremap <silent> <c-j> :call TmuxMove('j')<cr>
+nnoremap <silent> <c-k> :call TmuxMove('k')<cr>
+nnoremap <silent> <c-l> :call TmuxMove('l')<cr>
+
+" # at ~/.tmux.conf put these lines
+" is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+"     | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+" bind-key -n C-h if-shell "$is_vim" "send-keys C-h"  "select-pane -L"
+" bind-key -n C-j if-shell "$is_vim" "send-keys C-j"  "select-pane -D"
+" bind-key -n C-k if-shell "$is_vim" "send-keys C-k"  "select-pane -U"
+" bind-key -n C-l if-shell "$is_vim" "send-keys C-l"  "select-pane -R"
+" bind -n "C-\\" run-shell 'tmux-vim-select-pane -l'
+" # Bring back clear screen under tmux prefix
+" bind C-l send-keys 'C-l'
+
 
 " stop pressing ESC
 inoremap jk <esc>
