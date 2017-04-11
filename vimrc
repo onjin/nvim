@@ -360,7 +360,7 @@ nnoremap <leader>8 :8b<CR>
 nnoremap <leader>9 :9b<CR>
 nnoremap <leader>0 :0b<CR>
 
-" Tmux/vim seamless movement
+" Tmux/vim seamless movement {{{
 function! TmuxMove(direction)
         let wnr = winnr()
         silent! execute 'wincmd ' . a:direction
@@ -374,6 +374,7 @@ nnoremap <silent> <c-h> :call TmuxMove('h')<cr>
 nnoremap <silent> <c-j> :call TmuxMove('j')<cr>
 nnoremap <silent> <c-k> :call TmuxMove('k')<cr>
 nnoremap <silent> <c-l> :call TmuxMove('l')<cr>
+" Tmux/vim seamless movement }}}
 
 " # at ~/.tmux.conf put these lines
 " is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
