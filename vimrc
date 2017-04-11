@@ -375,6 +375,20 @@ nnoremap <silent> <c-j> :call TmuxMove('j')<cr>
 nnoremap <silent> <c-k> :call TmuxMove('k')<cr>
 nnoremap <silent> <c-l> :call TmuxMove('l')<cr>
 " Tmux/vim seamless movement }}}
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <C-a>z :ZoomToggle<CR>
 
 " # at ~/.tmux.conf put these lines
 " is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
