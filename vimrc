@@ -32,15 +32,7 @@ let g:jedi#max_doc_height = 40
 let g:jedi#show_call_signatures = 0
 let g:jedi#show_call_signatures_delay = 10
 
-if has('python')
-py << EOF
-import os.path
-import sys
-import vim
-if os.path.exists('.pyenv'):
-    sys.path.insert(0, os.path.abspath('.pyenv'))
-EOF
-endif
+Plug 'lambdalisue/vim-pyenv'
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -124,6 +116,13 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
 Plug 'vim-scripts/bash-support.vim'
+
+Plug 'elzr/vim-json'
+
+if v:version >= 800
+    Plug 'skywind3000/asyncrun.vim'
+    Plug 'pedsm/sprint'
+endif
 
 
 call plug#end()
@@ -468,5 +467,16 @@ if has('nvim')
 	execute 'source' fnameescape($VIMPATH.'/neovim.vim')
 endif
 
+if jedi#init_python()
+  function! s:jedi_auto_force_py_version() abort
+    let major_version = pyenv#python#get_internal_major_version()
+    call jedi#force_py_version(major_version)
+  endfunction
+  augroup vim-pyenv-custom-augroup
+    autocmd! *
+    autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
+    autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+  augroup END
+endif
 
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
