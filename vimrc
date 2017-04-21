@@ -266,6 +266,12 @@ set path+=**
 
 " display all matching files when we tab complete
 set wildmenu
+set wildmode=list:full
+set wildignore=*.swp,*.bak,*~
+set wildignore+=*.pyc,*.class,*.sln,*.min.*,*.map
+set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
+set wildignore+=tags
+set wildignore+=*.tar.*,*.gz,*.zip
 
 nnoremap <Leader>p :find *
 nnoremap <Leader>s :sfind *
@@ -282,6 +288,9 @@ command! MakeTags !ctags -R
 " - use ^] to jump to tag under cursor
 " - use g^] for ambigous tags
 " - use ^t to jump back up the tag stack
+
+" tab complete fuzzy tag search
+nnoremap <Leader>j :tjump /
 
 " TAG jumping }}}
 "
