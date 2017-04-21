@@ -55,6 +55,8 @@ Plug 'rafi/vim-tinyline'
 Plug 'dietsche/vim-lastplace'
 
 Plug 'hynek/vim-python-pep8-indent'
+
+nnoremap <Leader>S :!isort %<CR>
 Plug 'kshenoy/vim-signature'
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "context"
@@ -274,7 +276,6 @@ set wildignore+=tags
 set wildignore+=*.tar.*,*.gz,*.zip
 
 nnoremap <Leader>p :find *
-nnoremap <Leader>s :sfind *
 nnoremap <Leader>v :vert sfind *
 nnoremap <Leader>t :tabfind *
 
