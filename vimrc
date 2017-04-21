@@ -119,11 +119,21 @@ Plug 'vim-scripts/bash-support.vim'
 
 Plug 'elzr/vim-json'
 
+Plug 'benmills/vimux'
+
+let g:VimuxOrientation = "h"
+let g:VimuxHeight = "40"
+  let g:VimuxHeight = "40"
+
+map <Leader>R :VimuxPromptCommand<CR>
+map <Leader>r :VimuxRunLastCommand<CR>
+map <Leader>i :VimuxInspectRunner<CR>
+map <Leader>z :VimuxZoomRunner<CR>
+
 if v:version >= 800
     Plug 'skywind3000/asyncrun.vim'
     Plug 'pedsm/sprint'
 endif
-
 
 call plug#end()
 set mouse=nvi
