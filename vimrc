@@ -267,6 +267,11 @@ set path+=**
 " display all matching files when we tab complete
 set wildmenu
 
+nnoremap <Leader>p :find *
+nnoremap <Leader>s :sfind *
+nnoremap <Leader>v :vert sfind *
+nnoremap <Leader>t :tabfind *
+
 " Finding files }}}
 
 " TAG jumping {{{
@@ -354,6 +359,9 @@ nnoremap <silent> <C-i> :nohl<CR><C-l>
 
 
 " buffers
+set wildcharm=<C-z>
+nnoremap <leader>b :buffer <C-z><S-Tab>
+nnoremap <leader>B :vert sbuffer <C-z><S-Tab>
 nnoremap <leader>l :ls<CR>
 nnoremap <leader>c :bd<CR>
 nnoremap <leader>, :bp<CR>
@@ -368,6 +376,9 @@ nnoremap <leader>7 :7b<CR>
 nnoremap <leader>8 :8b<CR>
 nnoremap <leader>9 :9b<CR>
 nnoremap <leader>0 :0b<CR>
+
+" quick switch buffer by number or part of filename
+nnoremap gb :ls<CR>:b<Space>
 
 " Tmux/vim seamless movement {{{
 function! TmuxMove(direction)
@@ -488,5 +499,16 @@ if jedi#init_python()
     autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
   augroup END
 endif
+
+
+" quick navigate to last closed file of given type by global marks
+augroup VIMRC
+  autocmd!
+
+  autocmd BufLeave *.css  normal! mC
+  autocmd BufLeave *.html normal! mH
+  autocmd BufLeave *.js   normal! mJ
+  autocmd BufLeave *.py   normal! mP
+augroup END
 
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
