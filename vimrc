@@ -125,7 +125,6 @@ Plug 'benmills/vimux'
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
-  let g:VimuxHeight = "40"
 
 map <Leader>R :VimuxPromptCommand<CR>
 map <Leader>r :VimuxRunLastCommand<CR>
