@@ -83,6 +83,10 @@ Plug 'majutsushi/tagbar'
 nnoremap <silent> tt :TagbarToggle<CR>
 nnoremap <silent> to :TagbarOpenAutoClose<CR>
 
+Plug 'severin-lemaignan/vim-minimap'
+nnoremap <silent> MM :MinimapToggle<CR>
+
+
 let g:tagbar_autofocus = 1
 
 Plug 'tpope/vim-fugitive'
@@ -97,6 +101,8 @@ Plug 'bps/vim-textobj-python'
 Plug 'xolox/vim-misc'  " required by xolox/vim-notes
 Plug 'xolox/vim-notes'
 let g:notes_directories = ['~/Dropbox/Notes']
+let g:notes_suffix = '.md'
+let g:notes_title_sync = 'no'
 
 Plug 'chaoren/vim-wordmotion'
 
