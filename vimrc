@@ -99,10 +99,15 @@ Plug 'kana/vim-textobj-user'
 Plug 'bps/vim-textobj-python'
 
 Plug 'xolox/vim-misc'  " required by xolox/vim-notes
-Plug 'xolox/vim-notes'
-let g:notes_directories = ['~/Dropbox/Notes']
-let g:notes_suffix = '.md'
-let g:notes_title_sync = 'no'
+" Plug 'xolox/vim-notes'
+" let g:notes_directories = ['~/Dropbox/Notes']
+" let g:notes_suffix = '.md'
+" let g:notes_title_sync = 'no'
+Plug 'Rykka/riv.vim'
+
+let riv_notes = { 'path': '~/Dropbox/Notes',}
+let g:riv_projects = [riv_notes]
+let g:riv_global_leader = '<C-x>'
 
 Plug 'chaoren/vim-wordmotion'
 
