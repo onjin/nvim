@@ -127,18 +127,16 @@ let g:echodoc_enable_at_startup	= 1
 
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-
 Plug 'vim-scripts/bash-support.vim'
-
 Plug 'elzr/vim-json'
-
 Plug 'benmills/vimux'
+Plug 'vim-scripts/todo-txt.vim'  " support for todo.txt syntax
+Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
 
 map <Leader>R :VimuxPromptCommand<CR>
-map <Leader>r :VimuxRunLastCommand<CR>
 map <Leader>i :VimuxInspectRunner<CR>
 map <Leader>z :VimuxZoomRunner<CR>
 
@@ -368,7 +366,7 @@ set t_ut=
 nnoremap <leader>re :edit $MYVIMRC<CR>
 nnoremap <leader>rs :source $MYVIMRC<CR>
 
-nnoremap <leader>/ :vsplit<CR>
+nnoremap <leader>h :vsplit<CR>
 nnoremap <leader>s :split<CR>
 
 nnoremap <leader>f :windo diffthis<CR>
