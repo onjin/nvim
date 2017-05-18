@@ -105,8 +105,13 @@ Plug 'xolox/vim-misc'  " required by xolox/vim-notes
 " let g:notes_title_sync = 'no'
 Plug 'Rykka/riv.vim'
 
-let riv_notes = { 'path': '~/Dropbox/Notes',}
-let g:riv_projects = [riv_notes]
+let riv_p_notes = {'name': 'Notes', 'path': '~/Dropbox/Notes'}
+let riv_p_drafts = {'name': '@Drafts', 'path': '~/Dropbox/@Doc/@Drafts'}
+let riv_p_working = {'name': '@Working', 'path': '~/Dropbox/@Doc/@Working'}
+let riv_p_inbox = {'name': '@Inbox', 'path': '~/Dropbox/@Doc/@Inbox'}
+let riv_p_archive = {'name': '@Archive', 'path': '~/Dropbox/@Doc/@Archive'}
+
+let g:riv_projects = [riv_p_notes, riv_p_drafts, riv_p_inbox, riv_p_working, riv_p_archive]
 let g:riv_global_leader = '<C-x>'
 
 Plug 'chaoren/vim-wordmotion'
@@ -132,6 +137,10 @@ Plug 'elzr/vim-json'
 Plug 'benmills/vimux'
 Plug 'vim-scripts/todo-txt.vim'  " support for todo.txt syntax
 Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
+Plug 'jceb/vim-orgmode'          " vim orgmode
+Plug 'tpope/vim-speeddating'     " - for orgmode
+Plug 'mfukar/robotframework-vim'
+Plug 'bagrat/vim-workspace'
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
@@ -477,6 +486,14 @@ nnoremap djg :call RelatedFile ( "templatetags/" )<cr>
 nnoremap djc :call RelatedFile ( "management/" )<cr>
 nnoremap djS :e settings.py<cr>
 nnoremap djU :e urls.py<cr>
+
+noremap <Tab> :WSNext<CR>
+noremap <S-Tab> :WSPrev<CR>
+noremap <Leader><Tab> :WSClose<CR>
+noremap <Leader><S-Tab> :WSClose!<CR>
+noremap <C-t> :WSTabNew<CR>
+
+cabbrev bonly WSBufOnly
 
 fun! RelatedFile(file)
     " This is to check that the directory looks djangoish
