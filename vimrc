@@ -36,15 +36,21 @@ Plug 'lambdalisue/vim-pyenv'
 
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'vim-syntastic/syntastic'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2  " open manualy by :Errors, auto close
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-set laststatus=2
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+Plug 'w0rp/ale'  " async linter - instead of syntastic
+Plug 'Yggdroot/indentLine'  " indent lvl indicator
+
+" syntastic {{{
+" Plug 'vim-syntastic/syntastic'
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 2  " open manualy by :Errors, auto close
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 1
+" set laststatus=2
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" syntastic }}}
 nnoremap <leader>e :Errors<CR>
 nnoremap <leader>ee :lclose<CR>
 nnoremap <C-e> :lnext<CR>
@@ -141,6 +147,15 @@ Plug 'jceb/vim-orgmode'          " vim orgmode
 Plug 'tpope/vim-speeddating'     " - for orgmode
 Plug 'mfukar/robotframework-vim'
 Plug 'bagrat/vim-workspace'
+
+Plug 'StanAngeloff/php.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'flowtype/vim-flow'
+" Plug 'fsharp/vim-fsharp'
+" let g:fsharp_interactive_bin = '/usr/bin/fsharpi'
+"
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
@@ -322,20 +337,27 @@ nnoremap <Leader>j :tjump /
 "
 "File browsing
 let g:netrw_banner=0  " no annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1  " splits to the right
 let g:netrw_liststyle=3  " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\$\+'
-let g:netrw_banner=0
+"let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1  " splits to the right
+
+nnoremap - :Explore<CR>
 
 set showcmd
 
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 foldmethod=syntax
+
 
 set cursorline
 set number
