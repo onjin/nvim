@@ -36,7 +36,20 @@ Plug 'lambdalisue/vim-pyenv'
 
 Plug 'editorconfig/editorconfig-vim'
 
+" Plug 'rafi/vim-tinyline'
+Plug 'vim-airline/vim-airline'
+let g:airline_powerline_fonts = 0
+
+
+" ale async linter {{{
 Plug 'w0rp/ale'  " async linter - instead of syntastic
+
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_open_list = 0
+let g:airline#extensions#ale#enabled = 1
+" ale async linter }}}
+
 Plug 'Yggdroot/indentLine'  " indent lvl indicator
 
 " syntastic {{{
@@ -45,18 +58,12 @@ Plug 'Yggdroot/indentLine'  " indent lvl indicator
 " let g:syntastic_auto_loc_list = 2  " open manualy by :Errors, auto close
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 1
-" set laststatus=2
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
 
 " syntastic }}}
-nnoremap <leader>e :Errors<CR>
+nnoremap <leader>e :lopen<CR>
 nnoremap <leader>ee :lclose<CR>
 nnoremap <C-e> :lnext<CR>
 nnoremap <C-q> :lprev<CR>
-
-Plug 'rafi/vim-tinyline'
 
 Plug 'dietsche/vim-lastplace'
 
@@ -165,8 +172,8 @@ map <Leader>i :VimuxInspectRunner<CR>
 map <Leader>z :VimuxZoomRunner<CR>
 
 if v:version >= 800
-    Plug 'skywind3000/asyncrun.vim'
-    Plug 'pedsm/sprint'
+	Plug 'skywind3000/asyncrun.vim'
+	Plug 'pedsm/sprint'
 endif
 
 call plug#end()
@@ -351,8 +358,8 @@ autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 augroup javascript_folding
-    au!
-    au FileType javascript setlocal foldmethod=syntax
+	au!
+	au FileType javascript setlocal foldmethod=syntax
 augroup END
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
@@ -367,8 +374,8 @@ set list                " Show hidden characters
 
 " Vimscript file settings ---------------------- {{{
 augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker ts=2 sw=2 tw=80 noet
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker ts=2 sw=2 tw=80 noet
 augroup END
 " }}}
 
@@ -431,12 +438,12 @@ nnoremap gb :ls<CR>:b<Space>
 
 " Tmux/vim seamless movement {{{
 function! TmuxMove(direction)
-        let wnr = winnr()
-        silent! execute 'wincmd ' . a:direction
-        " If the winnr is still the same after we moved, it is the last pane
-        if wnr == winnr()
-                call system('tmux select-pane -' . tr(a:direction, 'phjkl', 'lLDUR'))
-        end
+	let wnr = winnr()
+	silent! execute 'wincmd ' . a:direction
+	" If the winnr is still the same after we moved, it is the last pane
+	if wnr == winnr()
+		call system('tmux select-pane -' . tr(a:direction, 'phjkl', 'lLDUR'))
+	end
 endfunction
 
 nnoremap <silent> <c-h> :call TmuxMove('h')<cr>
@@ -446,15 +453,15 @@ nnoremap <silent> <c-l> :call TmuxMove('l')<cr>
 " Tmux/vim seamless movement }}}
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
+	if exists('t:zoomed') && t:zoomed
+		execute t:zoom_winrestcmd
+		let t:zoomed = 0
+	else
+		let t:zoom_winrestcmd = winrestcmd()
+		resize
+		vertical resize
+		let t:zoomed = 1
+	endif
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-a>z :ZoomToggle<CR>
@@ -518,25 +525,25 @@ noremap <C-t> :WSTabNew<CR>
 cabbrev bonly WSBufOnly
 
 fun! RelatedFile(file)
-    " This is to check that the directory looks djangoish
-    if filereadable(expand("%:h"). '/models.py') || isdirectory(expand("%:h") . "/templatetags/")
-        exec "edit %:h/" . a:file
-        let g:last_relative_dir = expand("%:h") . '/'
-        return ''
-    endif
-    if g:last_relative_dir != ''
-        exec "edit " . g:last_relative_dir . a:file
-        return ''
-    endif
-    echo "Cant determine where relative file is : " . a:file
-    return ''
+	" This is to check that the directory looks djangoish
+	if filereadable(expand("%:h"). '/models.py') || isdirectory(expand("%:h") . "/templatetags/")
+		exec "edit %:h/" . a:file
+		let g:last_relative_dir = expand("%:h") . '/'
+		return ''
+	endif
+	if g:last_relative_dir != ''
+		exec "edit " . g:last_relative_dir . a:file
+		return ''
+	endif
+	echo "Cant determine where relative file is : " . a:file
+	return ''
 endfun
 
 fun! SetAppDir()
-    if filereadable(expand("%:h"). '/models.py') || isdirectory(expand("%:h") . "/templatetags/")
-        let g:last_relative_dir = expand("%:h") . '/'
-        return ''
-    endif
+	if filereadable(expand("%:h"). '/models.py') || isdirectory(expand("%:h") . "/templatetags/")
+		let g:last_relative_dir = expand("%:h") . '/'
+		return ''
+	endif
 endfun
 autocmd BufEnter *.py call SetAppDir()
 " django }}}
@@ -546,26 +553,45 @@ if has('nvim')
 endif
 
 if jedi#init_python()
-  function! s:jedi_auto_force_py_version() abort
-    let major_version = pyenv#python#get_internal_major_version()
-    call jedi#force_py_version(major_version)
-  endfunction
-  augroup vim-pyenv-custom-augroup
-    autocmd! *
-    autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
-    autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
-  augroup END
+	function! s:jedi_auto_force_py_version() abort
+		let major_version = pyenv#python#get_internal_major_version()
+		call jedi#force_py_version(major_version)
+	endfunction
+	augroup vim-pyenv-custom-augroup
+		autocmd! *
+		autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
+		autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+	augroup END
 endif
 
 
 " quick navigate to last closed file of given type by global marks
 augroup VIMRC
-  autocmd!
+	autocmd!
 
-  autocmd BufLeave *.css  normal! mC
-  autocmd BufLeave *.html normal! mH
-  autocmd BufLeave *.js   normal! mJ
-  autocmd BufLeave *.py   normal! mP
+	autocmd BufLeave *.css  normal! mC
+	autocmd BufLeave *.html normal! mH
+	autocmd BufLeave *.js   normal! mJ
+	autocmd BufLeave *.py   normal! mP
 augroup END
+
+function! LinterStatus() abort
+	let l:counts = ale#statusline#Count(bufnr(''))
+
+	let l:all_errors = l:counts.error + l:counts.style_error
+	let l:all_non_errors = l:counts.total - l:all_errors
+
+	return l:counts.total == 0 ? 'OK' : printf(
+	\   '%dW %dE',
+	\   all_non_errors,
+	\   all_errors
+	\)
+endfunction
+
+set laststatus=2
+set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{LinterStatus()}
+set statusline+=%*
 
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
