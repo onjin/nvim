@@ -32,6 +32,10 @@ let g:jedi#max_doc_height = 40
 let g:jedi#show_call_signatures = 0
 let g:jedi#show_call_signatures_delay = 10
 
+Plug 'metakirby5/codi.vim'
+let g:codi#width = 80
+let g:codi#rightalign = 0
+
 Plug 'lambdalisue/vim-pyenv'
 
 Plug 'editorconfig/editorconfig-vim'
@@ -349,6 +353,11 @@ let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\$\+'
 "let g:netrw_browse_split=4  " open in prior window
 let g:netrw_altv=1  " splits to the right
+let g:netrw_winsize=25
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
 
 nnoremap - :Explore<CR>
 
