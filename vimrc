@@ -23,6 +23,12 @@ let g:base16_shell_path = $VARPATH.'/plugins/base16-shell/'
 Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_dark = 'hard'
 
+Plug 'metakirby5/codi.vim'
+let g:codi#width = 80
+let g:codi#rightalign = 0
+
+Plug 'lambdalisue/vim-pyenv'
+
 Plug 'davidhalter/jedi-vim'
 
 let g:jedi#popup_on_dot = 0
@@ -31,12 +37,6 @@ let g:jedi#popup_select_first = 1
 let g:jedi#max_doc_height = 40
 let g:jedi#show_call_signatures = 0
 let g:jedi#show_call_signatures_delay = 10
-
-Plug 'metakirby5/codi.vim'
-let g:codi#width = 80
-let g:codi#rightalign = 0
-
-Plug 'lambdalisue/vim-pyenv'
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -174,6 +174,11 @@ let g:VimuxHeight = "40"
 map <Leader>R :VimuxPromptCommand<CR>
 map <Leader>i :VimuxInspectRunner<CR>
 map <Leader>z :VimuxZoomRunner<CR>
+
+Plug 'mattn/calendar-vim'
+Plug 'vimwiki/vimwiki'
+" Set Vim Wiki to my Dropbox directory
+let g:vimwiki_list = [{ 'path':'$HOME/Dropbox/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 if v:version >= 800
 	Plug 'skywind3000/asyncrun.vim'
@@ -372,7 +377,7 @@ augroup javascript_folding
 augroup END
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-autocmd Filetype python setlocal ts=4 sts=4 sw=4 foldmethod=syntax
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 foldmethod=syntax omnifunc=jedi#completions
 
 
 set cursorline
@@ -602,5 +607,15 @@ set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%{LinterStatus()}
 set statusline+=%*
+
+
+let b:surround_{char2nr("v")} = "{{ \r }}"
+let b:surround_{char2nr("{")} = "{{ \r }}"
+let b:surround_{char2nr("%")} = "{% \r %}"
+let b:surround_{char2nr("b")} = "{% block \1block name: \1 %}\r{% endblock \1\1 %}"
+let b:surround_{char2nr("i")} = "{% if \1condition: \1 %}\r{% endif %}"
+let b:surround_{char2nr("w")} = "{% with \1with: \1 %}\r{% endwith %}"
+let b:surround_{char2nr("f")} = "{% for \1for loop: \1 %}\r{% endfor %}"
+let b:surround_{char2nr("c")} = "{% comment %}\r{% endcomment %}"
 
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
