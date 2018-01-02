@@ -618,4 +618,10 @@ let b:surround_{char2nr("w")} = "{% with \1with: \1 %}\r{% endwith %}"
 let b:surround_{char2nr("f")} = "{% for \1for loop: \1 %}\r{% endfor %}"
 let b:surround_{char2nr("c")} = "{% comment %}\r{% endcomment %}"
 
+function! ToggleEndChar(charToMatch)
+    s/\v(.)$/\=submatch(1)==a:charToMatch ? '' : submatch(1).a:charToMatch
+endfunction
+
+nnoremap ;; :call ToggleEndChar(';')<CR>
+
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
