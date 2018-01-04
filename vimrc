@@ -73,7 +73,7 @@ Plug 'dietsche/vim-lastplace'
 
 Plug 'hynek/vim-python-pep8-indent'
 
-nnoremap <Leader>S :!isort %<CR>
+nnoremap <Leader>ss :!isort %<CR>
 Plug 'kshenoy/vim-signature'
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "context"
@@ -415,7 +415,7 @@ set t_ut=
 " theme }}}
 
 " mappings {{{
-nnoremap <leader>re :edit $MYVIMRC<CR>
+nnoremap <leader>re :vsplit $MYVIMRC<CR>
 nnoremap <leader>rs :source $MYVIMRC<CR>
 
 nnoremap <leader>h :vsplit<CR>
