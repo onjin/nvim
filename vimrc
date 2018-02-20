@@ -23,6 +23,11 @@ let g:base16_shell_path = $VARPATH.'/plugins/base16-shell/'
 Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_dark = 'hard'
 
+Plug 'dikiaap/minimalist'
+let g:airline_theme='minimalist'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
 Plug 'metakirby5/codi.vim'
 let g:codi#width = 80
 let g:codi#rightalign = 0
@@ -37,6 +42,7 @@ let g:jedi#popup_select_first = 1
 let g:jedi#max_doc_height = 40
 let g:jedi#show_call_signatures = 0
 let g:jedi#show_call_signatures_delay = 10
+
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -161,6 +167,8 @@ Plug 'bagrat/vim-workspace'
 
 Plug 'StanAngeloff/php.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 Plug 'flowtype/vim-flow'
 " Plug 'fsharp/vim-fsharp'
 " let g:fsharp_interactive_bin = '/usr/bin/fsharpi'
@@ -180,10 +188,14 @@ Plug 'vimwiki/vimwiki'
 " Set Vim Wiki to my Dropbox directory
 let g:vimwiki_list = [{ 'path':'$HOME/Dropbox/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 
+Plug 'dleonard0/pony-vim-syntax'
+
 if v:version >= 800
 	Plug 'skywind3000/asyncrun.vim'
 	Plug 'pedsm/sprint'
 endif
+
+Plug 'onjin/vim-guitar-tab-syntax'
 
 call plug#end()
 set mouse=nvi
@@ -425,7 +437,7 @@ nnoremap <leader>f :windo diffthis<CR>
 nnoremap <leader>ff :windo diffoff<CR>
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-i> :nohl<CR><C-l>
+nnoremap <leader><space> :nohl<CR><C-l>
 
 
 " buffers
