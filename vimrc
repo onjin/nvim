@@ -113,6 +113,7 @@ nnoremap <silent> MM :MinimapToggle<CR>
 let g:tagbar_autofocus = 1
 
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'matze/vim-move'
@@ -174,7 +175,13 @@ Plug 'flowtype/vim-flow'
 " let g:fsharp_interactive_bin = '/usr/bin/fsharpi'
 "
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+
+noremap <C-p> :FZF<CR>
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
