@@ -174,14 +174,9 @@ Plug 'flowtype/vim-flow'
 " Plug 'fsharp/vim-fsharp'
 " let g:fsharp_interactive_bin = '/usr/bin/fsharpi'
 "
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-" Command for git grep
-" - fzf#vim#grep(command, with_column, [options], [fullscreen])
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
-
-noremap <C-p> :FZF<CR>
+Plug 'junegunn/fzf.vim'
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
@@ -644,3 +639,10 @@ endfunction
 nnoremap ;; :call ToggleEndChar(';')<CR>
 
 " nnoremap ,html :-1read $HOME/.vimsnippets.html<CR>3jwf>a
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+
+noremap <C-p> :FZF<CR>
+
