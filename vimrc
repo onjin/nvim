@@ -645,4 +645,5 @@ command! -bang -nargs=* GGrep
   \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
 
 noremap <C-p> :FZF<CR>
+noremap <leader>a :GGrep<CR>
 
