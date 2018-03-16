@@ -106,10 +106,6 @@ Plug 'majutsushi/tagbar'
 nnoremap <silent> tt :TagbarToggle<CR>
 nnoremap <silent> to :TagbarOpenAutoClose<CR>
 
-Plug 'severin-lemaignan/vim-minimap'
-nnoremap <silent> MM :MinimapToggle<CR>
-
-
 let g:tagbar_autofocus = 1
 
 Plug 'tpope/vim-fugitive'
@@ -148,6 +144,17 @@ Plug 'shime/vim-livedown'
 Plug 'tmhedberg/matchit'
 
 Plug 'janko-m/vim-test'
+let test#strategy = {
+  \ 'nearest': 'vimux',
+  \ 'file':    'vimux',
+  \ 'suite':   'vimux',
+\}
+nmap <silent> t<C-n> :TestNearest<CR> " t Ctrl+n
+nmap <silent> t<C-f> :TestFile -vv<CR>    " t Ctrl+f
+nmap <silent> t<C-s> :TestSuite<CR>   " t Ctrl+s
+nmap <silent> t<C-l> :TestLast -v<CR>    " t Ctrl+l
+nmap <silent> t<C-g> :TestVisit -v<CR>   " t Ctrl+g
+
 Plug 'kassio/neoterm'
 
 Plug 'Shougo/echodoc.vim'
@@ -198,6 +205,7 @@ if v:version >= 800
 endif
 
 Plug 'onjin/vim-guitar-tab-syntax'
+Plug 'blueyed/vim-diminactive'
 
 call plug#end()
 set mouse=nvi
@@ -646,4 +654,8 @@ command! -bang -nargs=* GGrep
 
 noremap <C-p> :FZF<CR>
 noremap <leader>a :GGrep<CR>
+noremap <S-f> :GGrep<CR>
 
+" per project .vimrc
+set exrc
+set secure
