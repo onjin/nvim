@@ -1,6 +1,3 @@
-" enter the curren millenium
-set nocompatible
-
 let mapleader = ","
 
 " Respect XDG
@@ -171,7 +168,6 @@ Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
 Plug 'jceb/vim-orgmode'          " vim orgmode
 Plug 'tpope/vim-speeddating'     " - for orgmode
 Plug 'mfukar/robotframework-vim'
-Plug 'bagrat/vim-workspace'
 
 Plug 'StanAngeloff/php.vim'
 Plug 'pangloss/vim-javascript'
@@ -206,6 +202,7 @@ endif
 
 Plug 'onjin/vim-guitar-tab-syntax'
 Plug 'blueyed/vim-diminactive'
+Plug 'othree/javascript-libraries-syntax.vim'
 
 call plug#end()
 set mouse=nvi
@@ -279,7 +276,8 @@ set tabstop=2       " The number of spaces a tab is
 set softtabstop=2   " While performing editing operations
 set smarttab        " Tab insert blanks according to 'shiftwidth'
 set autoindent      " Use same indenting on new lines
-set smartindent     " Smart autoindenting on new lines
+filetype plugin indent on
+" set smartindent     " Smart autoindenting on new lines
 set shiftround      " Round indent to multiple of 'shiftwidth'
 set shiftwidth=2    " Number of spaces to use in auto(indent)
 
@@ -344,10 +342,6 @@ set wildignore+=*.pyc,*.class,*.sln,*.min.*,*.map
 set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
 set wildignore+=tags
 set wildignore+=*.tar.*,*.gz,*.zip
-
-nnoremap <Leader>p :find *
-nnoremap <Leader>v :vert sfind *
-nnoremap <Leader>t :tabfind *
 
 " Finding files }}}
 
@@ -440,14 +434,15 @@ set t_ut=
 nnoremap <leader>re :vsplit $MYVIMRC<CR>
 nnoremap <leader>rs :source $MYVIMRC<CR>
 
-nnoremap <leader>h :vsplit<CR>
-nnoremap <leader>s :split<CR>
+nnoremap <leader>s :vsplit<CR>
+nnoremap <leader>v :split<CR>
 
 nnoremap <leader>f :windo diffthis<CR>
 nnoremap <leader>ff :windo diffoff<CR>
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <leader><space> :nohl<CR><C-l>
+nnoremap <unique> <silent> <Leader>\ <Plug>MarkSearchAnyNext
+nnoremap <leader>/ :nohl<CR><C-l>
 
 
 " buffers
@@ -456,8 +451,6 @@ nnoremap <leader>b :buffer <C-z><S-Tab>
 nnoremap <leader>B :vert sbuffer <C-z><S-Tab>
 nnoremap <leader>l :ls<CR>
 nnoremap <leader>c :bd<CR>
-nnoremap <leader>, :bp<CR>
-nnoremap <leader>. :bn<CR>
 nnoremap <leader>1 :1b<CR>
 nnoremap <leader>2 :2b<CR>
 nnoremap <leader>3 :3b<CR>
@@ -468,6 +461,9 @@ nnoremap <leader>7 :7b<CR>
 nnoremap <leader>8 :8b<CR>
 nnoremap <leader>9 :9b<CR>
 nnoremap <leader>0 :0b<CR>
+
+noremap <Tab> :bn<CR>
+noremap <S-Tab> :bp<CR>
 
 " quick switch buffer by number or part of filename
 nnoremap gb :ls<CR>:b<Space>
@@ -552,13 +548,6 @@ nnoremap djc :call RelatedFile ( "management/" )<cr>
 nnoremap djS :e settings.py<cr>
 nnoremap djU :e urls.py<cr>
 
-noremap <Tab> :WSNext<CR>
-noremap <S-Tab> :WSPrev<CR>
-noremap <Leader><Tab> :WSClose<CR>
-noremap <Leader><S-Tab> :WSClose!<CR>
-noremap <C-t> :WSTabNew<CR>
-
-cabbrev bonly WSBufOnly
 
 fun! RelatedFile(file)
 	" This is to check that the directory looks djangoish
