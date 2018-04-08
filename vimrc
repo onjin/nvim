@@ -19,6 +19,7 @@ let g:base16_shell_path = $VARPATH.'/plugins/base16-shell/'
 
 Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_dark = 'hard'
+Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'dikiaap/minimalist'
 let g:airline_theme='minimalist'
@@ -163,7 +164,14 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/bash-support.vim'
 Plug 'elzr/vim-json'
 Plug 'benmills/vimux'
+
+" todo.txt {{{
 Plug 'vim-scripts/todo-txt.vim'  " support for todo.txt syntax
+
+nnoremap <leader>tt :edit todo.txt<CR>
+nnoremap <leader>td :edit done.txt<CR>
+" todo.txt }}}
+
 Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
 Plug 'jceb/vim-orgmode'          " vim orgmode
 Plug 'tpope/vim-speeddating'     " - for orgmode
@@ -203,6 +211,10 @@ endif
 Plug 'onjin/vim-guitar-tab-syntax'
 Plug 'blueyed/vim-diminactive'
 Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'kylef/apiblueprint.vim'
+
+Plug 'aklt/plantuml-syntax'
+Plug 'scrooloose/vim-slumlord'  " plantuml preview
 
 call plug#end()
 set mouse=nvi
@@ -413,7 +425,8 @@ augroup END
 set t_Co=256
 set background=dark
 
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme PaperColor
 highlight BadWhitespace ctermfg=darkred ctermbg=black guifg=#382424 guibg=black
 
 
