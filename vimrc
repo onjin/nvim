@@ -22,7 +22,7 @@ let g:gruvbox_contrast_dark = 'hard'
 Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'dikiaap/minimalist'
-let g:airline_theme='minimalist'
+"let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
@@ -56,16 +56,16 @@ let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 0
 let g:airline#extensions#ale#enabled = 1
+
+" prevent slowdown
+let g:ale_cache_executable_check_failures = 1
 " ale async linter }}}
 
 Plug 'Yggdroot/indentLine'  " indent lvl indicator
 
 " syntastic {{{
 " Plug 'vim-syntastic/syntastic'
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 2  " open manualy by :Errors, auto close
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 1
+" Plug 'maralla/validator.vim'
 
 " syntastic }}}
 nnoremap <leader>e :lopen<CR>
@@ -86,6 +86,7 @@ let g:SuperTabDefaultCompletionType = "context"
 Plug 'SirVer/ultisnips'
 " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
@@ -143,9 +144,9 @@ Plug 'tmhedberg/matchit'
 
 Plug 'janko-m/vim-test'
 let test#strategy = {
-  \ 'nearest': 'vimux',
-  \ 'file':    'vimux',
-  \ 'suite':   'vimux',
+	\ 'nearest': 'vimux',
+	\ 'file':    'vimux',
+	\ 'suite':   'vimux',
 \}
 nmap <silent> t<C-n> :TestNearest<CR> " t Ctrl+n
 nmap <silent> t<C-f> :TestFile -vv<CR>    " t Ctrl+f
@@ -215,6 +216,9 @@ Plug 'kylef/apiblueprint.vim'
 
 Plug 'aklt/plantuml-syntax'
 Plug 'scrooloose/vim-slumlord'  " plantuml preview
+" Plug 'ambv/black'
+Plug 'vim-scripts/ZoomWin'
+Plug 'vimoutliner/vimoutliner'
 
 call plug#end()
 set mouse=nvi
@@ -399,6 +403,8 @@ set showcmd
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd BufWritePost plantuml silent make
+autocmd BufWritePost *.uml silent make
 augroup javascript_folding
 	au!
 	au FileType javascript setlocal foldmethod=syntax
@@ -425,13 +431,14 @@ augroup END
 set t_Co=256
 set background=dark
 
-" colorscheme gruvbox
+colorscheme gruvbox
 colorscheme PaperColor
 highlight BadWhitespace ctermfg=darkred ctermbg=black guifg=#382424 guibg=black
 
 
 set guioptions=aci
 set guifont=Anonymous\ Pro\ 12
+" set guifont=FiraCode\ 12
 
 " UI elements "{{{
 set showbreak=↪
@@ -590,17 +597,17 @@ if has('nvim')
 	execute 'source' fnameescape($VIMPATH.'/neovim.vim')
 endif
 
-if jedi#init_python()
-	function! s:jedi_auto_force_py_version() abort
-		let major_version = pyenv#python#get_internal_major_version()
-		call jedi#force_py_version(major_version)
-	endfunction
-	augroup vim-pyenv-custom-augroup
-		autocmd! *
-		autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
-		autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
-	augroup END
-endif
+"if jedi#init_python()
+"	function! s:jedi_auto_force_py_version() abort
+"		let major_version = pyenv#python#get_internal_major_version()
+"		call jedi#force_py_version(major_version)
+"	endfunction
+"	augroup vim-pyenv-custom-augroup
+"		autocmd! *
+"		autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
+"		autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+"	augroup END
+"endif
 
 
 " quick navigate to last closed file of given type by global marks
@@ -612,25 +619,6 @@ augroup VIMRC
 	autocmd BufLeave *.js   normal! mJ
 	autocmd BufLeave *.py   normal! mP
 augroup END
-
-function! LinterStatus() abort
-	let l:counts = ale#statusline#Count(bufnr(''))
-
-	let l:all_errors = l:counts.error + l:counts.style_error
-	let l:all_non_errors = l:counts.total - l:all_errors
-
-	return l:counts.total == 0 ? 'OK' : printf(
-	\   '%dW %dE',
-	\   all_non_errors,
-	\   all_errors
-	\)
-endfunction
-
-set laststatus=2
-set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%{LinterStatus()}
-set statusline+=%*
 
 
 let b:surround_{char2nr("v")} = "{{ \r }}"
@@ -657,6 +645,13 @@ command! -bang -nargs=* GGrep
 noremap <C-p> :FZF<CR>
 noremap <leader>a :GGrep<CR>
 noremap <S-f> :GGrep<CR>
+
+let g:black_linelength = 79
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 2  " open manualy by :Errors, auto close
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 1
 
 " per project .vimrc
 set exrc
