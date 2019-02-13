@@ -17,15 +17,18 @@ Plug 'chriskempson/base16-shell'
 let g:base16colorspace = 256
 let g:base16_shell_path = $VARPATH.'/plugins/base16-shell/'
 
+" Gruvbox theme
 Plug 'morhetz/gruvbox'
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'medium'
 Plug 'NLKNguyen/papercolor-theme'
 
-Plug 'dikiaap/minimalist'
-"let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
+" The interactive scratchpad for hackers (python)
+" Codi [filetype] activates Codi for the current buffer, using the provided filetype or the buffer's filetype.
+" Codi! deactivates Codi for the current buffer.
+" Codi!! [filetype] toggles Codi for the current buffer, using the provided filetype or the buffer's filetype.
 Plug 'metakirby5/codi.vim'
 let g:codi#width = 80
 let g:codi#rightalign = 0
@@ -55,11 +58,20 @@ Plug 'w0rp/ale'  " async linter - instead of syntastic
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 0
+let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 
 " prevent slowdown
 let g:ale_cache_executable_check_failures = 1
+let g:ale_virtualenv_dir_names = []
+
+let b:ale_linters = ['flake8', 'mypy']
+let b:ale_python_flake8_executable = '/home/onjin/.pyenv/shims/flake8'
+let b:ale_python_flake8_use_global = 1
+let b:ale_python_mypy_executable = '/home/onjin/.pyenv/shims/mypy'
+let b:ale_python_mypy_use_global = 1
 " ale async linter }}}
+Plug 'maralla/completor.vim'  " async linter
 
 Plug 'Yggdroot/indentLine'  " indent lvl indicator
 
@@ -111,7 +123,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'matze/vim-move'
 
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'kana/vim-textobj-user'
@@ -139,6 +150,8 @@ Plug 'mattn/emmet-vim'
 
 Plug 'Rykka/InstantRst'
 Plug 'shime/vim-livedown'
+Plug 'godlygeek/tabular'  " for vim-markdown
+Plug 'plasticboy/vim-markdown'
 
 Plug 'tmhedberg/matchit'
 
@@ -164,6 +177,7 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/bash-support.vim'
 Plug 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
 Plug 'benmills/vimux'
 
 " todo.txt {{{
@@ -174,7 +188,6 @@ nnoremap <leader>td :edit done.txt<CR>
 " todo.txt }}}
 
 Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
-Plug 'jceb/vim-orgmode'          " vim orgmode
 Plug 'tpope/vim-speeddating'     " - for orgmode
 Plug 'mfukar/robotframework-vim'
 
@@ -182,7 +195,10 @@ Plug 'StanAngeloff/php.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
-Plug 'flowtype/vim-flow'
+" " flow ate 4G memory and 4 CPU in 1 minute :/
+" Plug 'flowtype/vim-flow', { 'for': ['javascript'], 'do': 'npm install -g flow-bin' }
+" let g:flow#autoclose = 1
+
 " Plug 'fsharp/vim-fsharp'
 " let g:fsharp_interactive_bin = '/usr/bin/fsharpi'
 "
@@ -200,7 +216,7 @@ map <Leader>z :VimuxZoomRunner<CR>
 Plug 'mattn/calendar-vim'
 Plug 'vimwiki/vimwiki'
 " Set Vim Wiki to my Dropbox directory
-let g:vimwiki_list = [{ 'path':'$HOME/Dropbox/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{ 'path':'$HOME/Dropbox/vimwiki', 'syntax': 'markdown', 'ext': '.wiki'}]
 
 Plug 'dleonard0/pony-vim-syntax'
 
@@ -219,6 +235,17 @@ Plug 'scrooloose/vim-slumlord'  " plantuml preview
 " Plug 'ambv/black'
 Plug 'vim-scripts/ZoomWin'
 Plug 'vimoutliner/vimoutliner'
+Plug 'mrk21/yaml-vim', {'for': 'yaml'}
+
+Plug 'romainl/vim-cool'  " auto disable hlsearch when done searching
+
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim'
+let g:goyo_width = 120
+
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#end()
 set mouse=nvi
@@ -439,6 +466,7 @@ highlight BadWhitespace ctermfg=darkred ctermbg=black guifg=#382424 guibg=black
 set guioptions=aci
 set guifont=Anonymous\ Pro\ 12
 " set guifont=FiraCode\ 12
+" set guifont=iosevka\ 12
 
 " UI elements "{{{
 set showbreak=↪
@@ -631,7 +659,7 @@ let b:surround_{char2nr("f")} = "{% for \1for loop: \1 %}\r{% endfor %}"
 let b:surround_{char2nr("c")} = "{% comment %}\r{% endcomment %}"
 
 function! ToggleEndChar(charToMatch)
-    s/\v(.)$/\=submatch(1)==a:charToMatch ? '' : submatch(1).a:charToMatch
+		s/\v(.)$/\=submatch(1)==a:charToMatch ? '' : submatch(1).a:charToMatch
 endfunction
 
 nnoremap ;; :call ToggleEndChar(';')<CR>
@@ -640,13 +668,17 @@ nnoremap ;; :call ToggleEndChar(';')<CR>
 " Command for git grep
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
 command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+	\ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
 
 noremap <C-p> :FZF<CR>
 noremap <leader>a :GGrep<CR>
 noremap <S-f> :GGrep<CR>
 
 let g:black_linelength = 79
+
+" limelight for visual blocks
+nmap <Leader>l <Plug>(Limelight)
+xmap <Leader>l <Plug>(Limelight)
 
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 2  " open manualy by :Errors, auto close
