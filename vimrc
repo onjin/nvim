@@ -21,21 +21,97 @@ let g:base16_shell_path = $VARPATH.'/plugins/base16-shell/'
 Plug 'morhetz/gruvbox'
 let g:gruvbox_contrast_dark = 'medium'
 Plug 'NLKNguyen/papercolor-theme'
-
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+Plug 'vim-scripts/peaksea'
 
 " The interactive scratchpad for hackers (python)
 " Codi [filetype] activates Codi for the current buffer, using the provided filetype or the buffer's filetype.
 " Codi! deactivates Codi for the current buffer.
 " Codi!! [filetype] toggles Codi for the current buffer, using the provided filetype or the buffer's filetype.
 Plug 'metakirby5/codi.vim'
-let g:codi#width = 80
+" Plug 'jiangmiao/auto-pairs'
+let g:codi#width = 88
 let g:codi#rightalign = 0
 
-Plug 'lambdalisue/vim-pyenv'
+" inteli sense
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc-tabnine', {'do': 'yarn install --frozen-lockfile --silent'}
+" Plug 'neoclide/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-ultisnips', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yank', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'josa42/coc-sh', {'do': 'yarn install --frozen-lockfile'}
+Plug 'tpope/vim-fugitive'
+Plug 'wellle/tmux-complete.vim'
 
-Plug 'davidhalter/jedi-vim'
+Plug 'kkoomen/vim-doge'
+let g:doge_doc_standard_python = 'google'
+
+" coc-yank
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+noremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
+                                           \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+ else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_splits_not_buffers = 'right'
@@ -47,7 +123,6 @@ let g:jedi#show_call_signatures_delay = 10
 
 Plug 'editorconfig/editorconfig-vim'
 
-" Plug 'rafi/vim-tinyline'
 Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 0
 
@@ -59,27 +134,20 @@ let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_open_list = 0
 let g:ale_sign_column_always = 1
-let g:airline#extensions#ale#enabled = 1
 
 " prevent slowdown
 let g:ale_cache_executable_check_failures = 1
 let g:ale_virtualenv_dir_names = []
 
-let b:ale_linters = ['flake8', 'mypy']
+let b:ale_linters = ['flake8', 'mypy', 'pylint']
 let b:ale_python_flake8_executable = '/home/onjin/.pyenv/shims/flake8'
 let b:ale_python_flake8_use_global = 1
 let b:ale_python_mypy_executable = '/home/onjin/.pyenv/shims/mypy'
 let b:ale_python_mypy_use_global = 1
 " ale async linter }}}
-Plug 'maralla/completor.vim'  " async linter
 
 Plug 'Yggdroot/indentLine'  " indent lvl indicator
 
-" syntastic {{{
-" Plug 'vim-syntastic/syntastic'
-" Plug 'maralla/validator.vim'
-
-" syntastic }}}
 nnoremap <leader>e :lopen<CR>
 nnoremap <leader>ee :lclose<CR>
 nnoremap <C-e> :lnext<CR>
@@ -88,6 +156,7 @@ nnoremap <C-q> :lprev<CR>
 Plug 'dietsche/vim-lastplace'
 
 Plug 'hynek/vim-python-pep8-indent'
+Plug 'Konfekt/FastFold'
 
 nnoremap <Leader>ss :!isort %<CR>
 Plug 'kshenoy/vim-signature'
@@ -119,8 +188,6 @@ nnoremap <silent> to :TagbarOpenAutoClose<CR>
 
 let g:tagbar_autofocus = 1
 
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
@@ -176,8 +243,6 @@ let g:echodoc_enable_at_startup	= 1
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/bash-support.vim'
-Plug 'elzr/vim-json'
-let g:vim_json_syntax_conceal = 0
 Plug 'benmills/vimux'
 
 " todo.txt {{{
@@ -193,15 +258,11 @@ Plug 'mfukar/robotframework-vim'
 
 Plug 'StanAngeloff/php.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
+Plug 'mxw/vim-jsx'
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
-" " flow ate 4G memory and 4 CPU in 1 minute :/
-" Plug 'flowtype/vim-flow', { 'for': ['javascript'], 'do': 'npm install -g flow-bin' }
-" let g:flow#autoclose = 1
-
-" Plug 'fsharp/vim-fsharp'
-" let g:fsharp_interactive_bin = '/usr/bin/fsharpi'
-"
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -232,7 +293,7 @@ Plug 'kylef/apiblueprint.vim'
 
 Plug 'aklt/plantuml-syntax'
 Plug 'scrooloose/vim-slumlord'  " plantuml preview
-" Plug 'ambv/black'
+Plug 'ambv/black'
 Plug 'vim-scripts/ZoomWin'
 Plug 'vimoutliner/vimoutliner'
 Plug 'mrk21/yaml-vim', {'for': 'yaml'}
@@ -243,11 +304,18 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 let g:goyo_width = 120
 
+Plug 'rhysd/vim-grammarous'
+let g:grammarous#default_comments_only_filetypes = {
+	\ '*' : 1, 'help' : 0, 'markdown' : 0, 'txt': 0,
+	\ }
+Plug 'vim-voom/VOoM'
+
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 call plug#end()
+
 set mouse=nvi
 set modeline
 set report=0
@@ -279,7 +347,7 @@ set directory=$VARPATH/swap//,$VARPATH,~/tmp,/var/tmp,/tmp
 set undodir=$VARPATH/undo//,$VARPATH,~/tmp,/var/tmp,/tmp
 set backupdir=$VARPATH/backup/,$VARPATH,~/tmp,/var/tmp,/tmp
 set viewdir=$VARPATH/view/
-set nospell spellfile=$VIMPATH/spell/en.utf-8.add
+set spell spellfile=$VIMPATH/spell/en.utf-8.add spelllang=en_us
 
 " Don't backup files in temp directories or shm
 if exists('&backupskip')
@@ -312,8 +380,8 @@ augroup viminfoskip
 		\ setlocal viminfo=
 augroup END
 
-set textwidth=80    " Text width maximum chars before wrapping
-set colorcolumn=80
+set textwidth=88    " Text width maximum chars before wrapping
+set colorcolumn=88
 set expandtab       " Do expand tabs to spaces as default
 set tabstop=2       " The number of spaces a tab is
 set softtabstop=2   " While performing editing operations
@@ -438,7 +506,8 @@ augroup javascript_folding
 augroup END
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-autocmd Filetype python setlocal ts=4 sts=4 sw=4 foldmethod=syntax omnifunc=jedi#completions
+" autocmd Filetype python setlocal ts=4 sts=4 sw=4 omnifunc=jedi#completions
+autocmd Filetype python setlocal ts=4 sts=4 sw=4
 
 
 set cursorline
@@ -450,7 +519,7 @@ set list                " Show hidden characters
 " Vimscript file settings ---------------------- {{{
 augroup filetype_vim
 	autocmd!
-	autocmd FileType vim setlocal foldmethod=marker ts=2 sw=2 tw=80 noet
+	autocmd FileType vim setlocal foldmethod=marker ts=2 sw=2 tw=88 noet
 augroup END
 " }}}
 
@@ -625,19 +694,6 @@ if has('nvim')
 	execute 'source' fnameescape($VIMPATH.'/neovim.vim')
 endif
 
-"if jedi#init_python()
-"	function! s:jedi_auto_force_py_version() abort
-"		let major_version = pyenv#python#get_internal_major_version()
-"		call jedi#force_py_version(major_version)
-"	endfunction
-"	augroup vim-pyenv-custom-augroup
-"		autocmd! *
-"		autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
-"		autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
-"	augroup END
-"endif
-
-
 " quick navigate to last closed file of given type by global marks
 augroup VIMRC
 	autocmd!
@@ -674,17 +730,39 @@ noremap <C-p> :FZF<CR>
 noremap <leader>a :GGrep<CR>
 noremap <S-f> :GGrep<CR>
 
-let g:black_linelength = 79
+let g:black_virtualenv = "~/.vim/black"
+autocmd BufWritePost *.py execute ':Black'
 
 " limelight for visual blocks
+noremap <Leader>ll :Limelight!!<CR>
 nmap <Leader>l <Plug>(Limelight)
 xmap <Leader>l <Plug>(Limelight)
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 2  " open manualy by :Errors, auto close
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 1
+function! g:CoiledSnakeConfigureFold(fold)
 
+    " Don't fold nested classes.
+    if a:fold.type == 'class'
+        let a:fold.max_level = 1
+
+    " Don't fold nested functions, but do fold methods (i.e. functions 
+    " nested inside a class).
+    elseif a:fold.type == 'function'
+        let a:fold.max_level = 1
+        if get(a:fold.parent, 'type', '') == 'class'
+            let a:fold.max_level = 2
+        endif
+
+    " Only fold imports if there are 3 or more of them.
+    elseif a:fold.type == 'import'
+        let a:fold.min_lines = 3
+    endif
+
+    " Don't fold anything if the whole program is shorter than 30 lines.
+    if line('$') < 30
+        let a:fold.ignore = 1
+    endif
+
+endfunction
 " per project .vimrc
 set exrc
 set secure
