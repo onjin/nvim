@@ -304,11 +304,15 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 let g:goyo_width = 120
 
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 Plug 'rhysd/vim-grammarous'
 let g:grammarous#default_comments_only_filetypes = {
 	\ '*' : 1, 'help' : 0, 'markdown' : 0, 'txt': 0,
 	\ }
 Plug 'vim-voom/VOoM'
+Plug 'jdonaldson/vaxe'
 
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
