@@ -19,9 +19,8 @@ let g:base16_shell_path = $VARPATH.'/plugins/base16-shell/'
 
 " Gruvbox theme
 Plug 'morhetz/gruvbox'
-let g:gruvbox_contrast_dark = 'medium'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'vim-scripts/peaksea'
+let g:gruvbox_contrast_dark = 'medium'
 
 " The interactive scratchpad for hackers (python)
 " Codi [filetype] activates Codi for the current buffer, using the provided filetype or the buffer's filetype.
@@ -50,6 +49,7 @@ Plug 'neoclide/coc-yank', {'do': 'yarn install --frozen-lockfile'}
 Plug 'tpope/vim-fugitive'
 Plug 'wellle/tmux-complete.vim'
 
+" documentation generator
 Plug 'kkoomen/vim-doge'
 let g:doge_doc_standard_python = 'google'
 
@@ -128,7 +128,7 @@ let g:airline_powerline_fonts = 0
 
 
 " ale async linter {{{
-Plug 'w0rp/ale'  " async linter - instead of syntastic
+" Plug 'w0rp/ale'  " async linter - instead of syntastic
 
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
@@ -153,9 +153,9 @@ nnoremap <leader>ee :lclose<CR>
 nnoremap <C-e> :lnext<CR>
 nnoremap <C-q> :lprev<CR>
 
+" reopen file at last position
 Plug 'dietsche/vim-lastplace'
 
-Plug 'hynek/vim-python-pep8-indent'
 Plug 'Konfekt/FastFold'
 
 nnoremap <Leader>ss :!isort %<CR>
@@ -313,6 +313,11 @@ let g:grammarous#default_comments_only_filetypes = {
 	\ }
 Plug 'vim-voom/VOoM'
 Plug 'jdonaldson/vaxe'
+" narrow file into :ViewPort
+Plug 'Jorengarenar/ViewPort'
+let g:viewport_split_vertical=1
+
+Plug 'onjin/vim-cobra'
 
 " add yaml stuffs
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
@@ -458,6 +463,9 @@ set wildignore+=*/.git/**/*,*/.hg/**/*,*/.svn/**/*
 set wildignore+=tags
 set wildignore+=*.tar.*,*.gz,*.zip
 
+nnoremap ,e :e **/*<C-z><S-Tab>
+nnoremap ,f :find **/*<C-z><S-Tab>
+
 " Finding files }}}
 
 " TAG jumping {{{
@@ -504,6 +512,7 @@ autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd BufWritePost plantuml silent make
 autocmd BufWritePost *.uml silent make
+autocmd BufWritePre *.go :CocCommand editor.action.organizeImport
 augroup javascript_folding
 	au!
 	au FileType javascript setlocal foldmethod=syntax
@@ -604,6 +613,26 @@ nnoremap <silent> <c-j> :call TmuxMove('j')<cr>
 nnoremap <silent> <c-k> :call TmuxMove('k')<cr>
 nnoremap <silent> <c-l> :call TmuxMove('l')<cr>
 " Tmux/vim seamless movement }}}
+
+" navigate python code {{{
+let g:textobj_python_no_default_key_mappings = 1
+
+call textobj#user#map('python', {
+      \   'class': {
+      \     'select-a': '<buffer>ac',
+      \     'select-i': '<buffer>ic',
+      \     'move-n': '<buffer><c-S-Right>',
+      \     'move-p': '<buffer><c-S-Left>',
+      \   },
+      \   'function': {
+      \     'select-a': '<buffer>af',
+      \     'select-i': '<buffer>if',
+      \     'move-n': '<buffer><c-S-Up>',
+      \     'move-p': '<buffer><c-S-Down>',
+      \   }
+      \ })
+" navigate python code }}}
+
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
 	if exists('t:zoomed') && t:zoomed
@@ -735,7 +764,7 @@ noremap <leader>a :GGrep<CR>
 noremap <S-f> :GGrep<CR>
 
 let g:black_virtualenv = "~/.vim/black"
-autocmd BufWritePost *.py execute ':Black'
+" autocmd BufWritePost *.py execute ':Black'
 
 " limelight for visual blocks
 noremap <Leader>ll :Limelight!!<CR>
