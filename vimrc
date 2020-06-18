@@ -89,6 +89,8 @@ Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
 Plug 'camspiers/animate.vim'
 Plug 'camspiers/lens.vim'
 
+Plug 'vim-scripts/mako.vim'
+
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
@@ -214,6 +216,10 @@ augroup filetype_vim
 	autocmd FileType vim setlocal foldmethod=marker ts=2 sw=2 tw=88 noet
 augroup END
 autocmd Filetype python setlocal ts=4 sts=4 sw=4
+
+augroup filetype_mako
+	autocmd BufNewFile,BufRead,BufReadPost *.mako :set filetype=mako
+augroup END
 
 " stop pressing ESC
 inoremap jk <esc>
