@@ -2,5 +2,8 @@
   "python.formatting.provider": "black",
   "python.jediEnabled": false,
   "emmet.includeLanguages": { "htmldjango": "html" },
-  "coc.preferences.formatOnSaveFiletypes": ["python", "json"]
+  "coc.preferences.formatOnSaveFiletypes": ["python", "json"],
+  "json.enable": true,
+  "json.format.enable": true,
+  "python.venvFolders": ["envs", ".pyenv"]
 }
