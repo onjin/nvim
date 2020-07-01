@@ -91,6 +91,11 @@ Plug 'camspiers/lens.vim'
 
 Plug 'vim-scripts/mako.vim'
 
+" semantic python syntax
+if has('nvim')
+	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+endif
+
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
