@@ -1,4 +1,5 @@
 {
+  "coc.preferences.jumpCommand": "vsplit",
   "python.formatting.provider": "black",
   "python.jediEnabled": false,
   "emmet.includeLanguages": { "htmldjango": "html" },
