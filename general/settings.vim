@@ -1,3 +1,6 @@
+let mapleader = ","
+let g:maplocalleader = "\<Space>"
+
 if has('vim_starting')
 	set encoding=utf-8
 	scriptencoding utf-8
@@ -19,7 +22,7 @@ set spell spellfile=$VIMPATH/spell/en.utf-8.add spelllang=en_us
 
 syntax enable                       " enable syntax highlighting
 filetype plugin on
-let mapleader = ","
+
 " Finding files {{{
 "
 " Usage:

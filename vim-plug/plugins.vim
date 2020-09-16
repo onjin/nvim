@@ -65,6 +65,8 @@ call plug#begin('~/.cache/vim/plugins')
 		Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 	endif
 
+	Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
 call plug#end()
 
 " Automatically install missing plugins on startup
