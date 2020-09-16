@@ -7,6 +7,9 @@ else
 	let $VARPATH=expand('$HOME/.cache/vim')
 endif
 
+let $RTP=$VIMPATH
+let $RC="$RTP/vimrc"
+
 source $VIMPATH/vim-plug/plugins.vim
 
 source $VIMPATH/general/settings.vim
