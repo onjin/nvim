@@ -4,18 +4,25 @@ if empty(glob('$VIMPATH/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.cache/vim/plugins')
+  " Color Theme
 	Plug 'NLKNguyen/papercolor-theme'
 
+	" more colors
 	Plug 'chriskempson/base16-shell'
 	" Plug 'chriskempson/base16-vim'
-
+	
+	" Support .editorconfig file
 	Plug 'editorconfig/editorconfig-vim'
+
+	" status line framework
 	Plug 'vim-airline/vim-airline' 
 	Plug 'vim-airline/vim-airline-themes'
 
 	" reopen file at last position
 	Plug 'dietsche/vim-lastplace'
-	Plug 'Yggdroot/indentLine'  " indent lvl indicator
+
+	" indent lvl indicator
+	Plug 'Yggdroot/indentLine'  
 
 	" fuzzy finder
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -27,8 +34,10 @@ call plug#begin('~/.cache/vim/plugins')
 	" documentation generator
 	Plug 'kkoomen/vim-doge'
 
+	" right sidebar with classes/functions/variables from current buffer
 	Plug 'majutsushi/tagbar'
 
+	" tagbar replacement with LSP support
 	Plug 'liuchengxu/vista.vim'
 
 	Plug 'tmhedberg/matchit'

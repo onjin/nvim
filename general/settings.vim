@@ -3,6 +3,10 @@ syntax on
 set backspace=indent,eol,start		" Intuitive backspacing in insert mode
 set hidden 												" hide not saved buffers
 
+set undofile
+set swapfile
+set nobackup
+
 if has('vim_starting')
 	set encoding=utf-8
 	scriptencoding utf-8
@@ -14,9 +18,6 @@ else
 	set viminfo='30,/100,:500,<10,@10,s10,h,n$VARPATH/viminfo
 endif
 
-set undofile
-set swapfile
-set nobackup
 
 set directory=$VARPATH/swap//,$VARPATH,~/tmp,/var/tmp,/tmp
 set undodir=$VARPATH/undo//,$VARPATH,~/tmp,/var/tmp,/tmp
@@ -37,6 +38,7 @@ set spell spellfile=$VIMPATH/spell/en.utf-8.add spelllang=en_us
 " search down into subfolder
 " provides tab-completion for all file-related tasks
 set path+=**
+
 " display all matching files when we tab complete
 set wildmenu
 set wildmode=list:full

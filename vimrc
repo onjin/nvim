@@ -32,3 +32,4 @@ source $VIMPATH/plug-config/ultisnips.vim
 source $VIMPATH/plug-config/vim-doge.vim
 source $VIMPATH/plug-config/vim-textobj.vim
 source $VIMPATH/plug-config/vim-which-key.vim
+source $VIMPATH/plug-config/vista.vim
