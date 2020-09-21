@@ -27,6 +27,7 @@ source $VIMPATH/plug-config/fzf.vim
 source $VIMPATH/plug-config/goyo.vim
 source $VIMPATH/plug-config/lens.vim
 source $VIMPATH/plug-config/limelight.vim
+source $VIMPATH/plug-config/polyglot.vim
 source $VIMPATH/plug-config/tagbar.vim
 source $VIMPATH/plug-config/ultisnips.vim
 source $VIMPATH/plug-config/vim-doge.vim

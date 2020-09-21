@@ -6,6 +6,7 @@ endif
 call plug#begin('~/.cache/vim/plugins')
   " Color Theme
 	Plug 'NLKNguyen/papercolor-theme'
+	Plug '/sheerun/vim-polyglot'
 
 	" more colors
 	Plug 'chriskempson/base16-shell'
