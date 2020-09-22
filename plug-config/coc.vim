@@ -147,3 +147,6 @@ nmap <Leader>ba <Plug>(coc-bookmark-annotate)
 nmap <Leader>bb <Plug>(coc-bookmark-toggle)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" better coc-pairs behavior on `enter`
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
