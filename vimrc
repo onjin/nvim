@@ -20,6 +20,7 @@ source $VIMPATH/general/tmux.vim
 source $VIMPATH/themes/theme.vim
 source $VIMPATH/themes/airline.vim
 
+source $VIMPATH/plug-config/black.vim
 source $VIMPATH/plug-config/coc.vim
 source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim

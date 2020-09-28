@@ -29,9 +29,6 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
 
-	" python folding
-	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
-
 	" documentation generator
 	Plug 'kkoomen/vim-doge'
 
@@ -45,7 +42,6 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'chaoren/vim-wordmotion'
 	Plug 'michaeljsmith/vim-indent-object'
 	Plug 'kana/vim-textobj-user'
-	Plug 'bps/vim-textobj-python'
 
 	Plug 'tpope/vim-fugitive'
 	Plug 'wellle/tmux-complete.vim'
@@ -70,12 +66,18 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'vim-scripts/mako.vim'
 	Plug 'metakirby5/codi.vim'
 
+	" python folding
+	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
+	Plug 'psf/black', { 'tag': '19.10b0' }
+
+	Plug 'bps/vim-textobj-python'
 	" semantic python syntax
 	if has('nvim')
 		Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 	endif
 
 	Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
 
 call plug#end()
 
