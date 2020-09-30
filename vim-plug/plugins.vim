@@ -44,6 +44,7 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'kana/vim-textobj-user'
 
 	Plug 'tpope/vim-fugitive'
+	Plug 'airblade/vim-gitgutter'
 	Plug 'wellle/tmux-complete.vim'
 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
