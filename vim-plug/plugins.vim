@@ -59,6 +59,8 @@ call plug#begin('~/.cache/vim/plugins')
 
 	Plug 'SirVer/ultisnips'
 	Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
+	" markdowns / diagrams
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 	" automatically resize windows
 	Plug 'camspiers/animate.vim'
@@ -69,9 +71,12 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" python folding
 	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
-	Plug 'psf/black', { 'tag': '19.10b0' }
+	Plug 'psf/black', { 'tag': '20.8b1' }
 
-	Plug 'bps/vim-textobj-python'
+	" Plug 'bps/vim-textobj-python'
+	Plug 'jeetsukumaran/vim-pythonsense'  " replacement for vim_textobj-python
+	" Plug 'ivanov/vim-ipython'  " lack of python 3 support
+	" Plug 'wmvanvliet/jupyter-vim'
 	" semantic python syntax
 	if has('nvim')
 		Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}

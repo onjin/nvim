@@ -28,11 +28,12 @@ source $VIMPATH/plug-config/fzf.vim
 source $VIMPATH/plug-config/goyo.vim
 source $VIMPATH/plug-config/lens.vim
 source $VIMPATH/plug-config/limelight.vim
+source $VIMPATH/plug-config/markdown-preview.vim
 source $VIMPATH/plug-config/polyglot.vim
 source $VIMPATH/plug-config/tagbar.vim
 source $VIMPATH/plug-config/ultisnips.vim
 source $VIMPATH/plug-config/vim-doge.vim
 source $VIMPATH/plug-config/vim-gitgutter.vim
-source $VIMPATH/plug-config/vim-textobj.vim
+" source $VIMPATH/plug-config/vim-textobj.vim
 source $VIMPATH/plug-config/vim-which-key.vim
 source $VIMPATH/plug-config/vista.vim

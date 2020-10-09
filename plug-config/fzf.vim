@@ -1,5 +1,5 @@
 noremap <Leader>b :Buffers<CR>
-noremap <Leader>c :BTags<CR>
+noremap <Leader>B :BTags<CR>
 
 command! -bang -nargs=* GGrep
 	\ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
