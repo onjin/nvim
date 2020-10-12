@@ -30,7 +30,7 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'junegunn/fzf.vim'
 
 	" documentation generator
-	Plug 'kkoomen/vim-doge'
+	Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 	" right sidebar with classes/functions/variables from current buffer
 	Plug 'majutsushi/tagbar'

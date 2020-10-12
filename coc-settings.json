@@ -1,4 +1,5 @@
 {
+  "coc.source.emoji.filetypes": ["gitcommit", "markdown"],
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.jumpCommand": "vsplit",
   "python.formatting.provider": "black",
