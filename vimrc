@@ -33,6 +33,7 @@ source $VIMPATH/plug-config/polyglot.vim
 source $VIMPATH/plug-config/tagbar.vim
 source $VIMPATH/plug-config/ultisnips.vim
 source $VIMPATH/plug-config/vim-doge.vim
+source $VIMPATH/plug-config/vim-bracey.vim
 source $VIMPATH/plug-config/vim-gitgutter.vim
 " source $VIMPATH/plug-config/vim-textobj.vim
 source $VIMPATH/plug-config/vim-which-key.vim

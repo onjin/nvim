@@ -55,7 +55,8 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'junegunn/limelight.vim'
 	Plug 'junegunn/goyo.vim'
 
-	Plug 'mattn/emmet-vim'
+	Plug 'mattn/emmet-vim'  " html/css magic macros
+	Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}  " html live preview by :Bracey"
 
 	Plug 'SirVer/ultisnips'
 	Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m

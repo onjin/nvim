@@ -1,4 +1,5 @@
 {
+  "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.jumpCommand": "vsplit",
   "python.formatting.provider": "black",
   "python.jediEnabled": false,
@@ -7,10 +8,6 @@
   "python.analysis.autoImportCompletions": true,
   "json.enable": true,
   "json.format.enable": true,
-  "python.venvFolders": [
-    "envs",
-    ".pyenv",
-    "/home/onjin/.pyevn/versions/"
-  ],
+  "python.venvFolders": ["envs", ".pyenv", "/home/onjin/.pyevn/versions/"],
   "clangd.path": "/home/onjin/.config/coc/extensions/coc-clangd-data/install/10.0.0/clangd_10.0.0/bin/clangd"
 }
