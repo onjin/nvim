@@ -4,13 +4,13 @@ Mostly used for DevOps and Python (web) development.
 
 ## Features
 
- * Plugins manager - https://github.com/junegunn/vim-plug
- * Support for `.editorconfig` - https://github.com/editorconfig/editorconfig-vim
- * Fuzzy search engine - https://github.com/junegunn/fzf.vim
- * Intelissense engine - https://github.com/neoclide/coc.nvim
- * Autoresize windows - https://github.com/camspiers/lens.vim
- * Live Markdown preview with diagrams support - https://github.com/iamcco/markdown-preview.nvim
- * Displays available keybindings in popup - https://github.com/liuchengxu/vim-which-key
+ * Plugins manager — https://github.com/junegunn/vim-plug
+ * Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
+ * Fuzzy search engine — https://github.com/junegunn/fzf.vim
+ * Intelissense engine — https://github.com/neoclide/coc.nvim
+ * Autoresize windows — https://github.com/camspiers/lens.vim
+ * Live Markdown preview with diagrams support — https://github.com/iamcco/markdown-preview.nvim
+ * Displays available keybindings in popup — https://github.com/liuchengxu/vim-which-key
 
 For a full list of plugins reffer to https://github.com/onjin/.vim/blob/main/vim-plug/plugins.vim
 

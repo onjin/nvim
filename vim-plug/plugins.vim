@@ -43,8 +43,10 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'michaeljsmith/vim-indent-object'
 	Plug 'kana/vim-textobj-user'
 
+	" git utils"
 	Plug 'tpope/vim-fugitive'
-	Plug 'airblade/vim-gitgutter'
+	Plug 'airblade/vim-gitgutter'  " A Vim plugin which shows a git diff in the sign column.
+
 	Plug 'wellle/tmux-complete.vim'
 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -60,6 +62,7 @@ call plug#begin('~/.cache/vim/plugins')
 
 	Plug 'SirVer/ultisnips'
 	Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
+
 	" markdowns / diagrams
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
@@ -82,6 +85,9 @@ call plug#begin('~/.cache/vim/plugins')
 	if has('nvim')
 		Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 	endif
+
+	" grammary checker
+  Plug 'rhysd/vim-grammarous'
 
 	Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 

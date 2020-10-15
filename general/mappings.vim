@@ -35,4 +35,7 @@ command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-a>z :ZoomToggle<CR>
 
 " conceal level
-nnoremap <leader>c :setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>
+nnoremap <leader>sc :setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>
+
+" write modeline
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
