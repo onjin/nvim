@@ -1,11 +1,12 @@
 " let g:is_pythonsense_suppress_motion_keymaps = 1
+" let g:is_pythonsense_alternate_motion_keymaps = 1
 
-map <buffer> ac <Plug>(PythonsenseOuterClassTextObject)
-map <buffer> ic <Plug>(PythonsenseInnerClassTextObject)
-map <buffer> af <Plug>(PythonsenseOuterFunctionTextObject)
-map <buffer> if <Plug>(PythonsenseInnerFunctionTextObject)
-map <buffer> ad <Plug>(PythonsenseOuterDocStringTextObject)
-map <buffer> id <Plug>(PythonsenseInnerDocStringTextObject)
+" map <buffer> ac <Plug>(PythonsenseOuterClassTextObject)
+" map <buffer> ic <Plug>(PythonsenseInnerClassTextObject)
+" map <buffer> af <Plug>(PythonsenseOuterFunctionTextObject)
+" map <buffer> if <Plug>(PythonsenseInnerFunctionTextObject)
+" map <buffer> ad <Plug>(PythonsenseOuterDocStringTextObject)
+" map <buffer> id <Plug>(PythonsenseInnerDocStringTextObject)
 
 map <buffer> ]] <Plug>(PythonsenseStartOfNextPythonClass)
 map <buffer> ][ <Plug>(PythonsenseEndOfPythonClass)
