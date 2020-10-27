@@ -6,6 +6,7 @@ endif
 call plug#begin('~/.cache/vim/plugins')
   " Color Theme
 	Plug 'NLKNguyen/papercolor-theme'
+	Plug 'tomasiser/vim-code-dark'
 	Plug 'sheerun/vim-polyglot'
 
 	" more colors
@@ -21,6 +22,7 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" reopen file at last position
 	Plug 'dietsche/vim-lastplace'
+	Plug 'airblade/vim-rooter'
 
 	" indent lvl indicator
 	Plug 'Yggdroot/indentLine'  
