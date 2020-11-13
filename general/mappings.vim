@@ -1,6 +1,7 @@
 
 " stop pressing ESC
-inoremap jk <esc>
+inoremap jj <esc>
+inoremap kk <esc>
 " inoremap <esc> <nop>
 
 " enter in normal mode adds one line
