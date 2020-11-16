@@ -15,7 +15,6 @@ onoremap Q i"
 " registers :reg
 nnoremap pp "*p
 
-" create the `tags` file (may need to isntall ctags first)
 
 " Now we can
 " - use ^] to jump to tag under cursor
@@ -40,3 +39,6 @@ nnoremap <leader>sc :setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceall
 
 " write modeline
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+" allow to use `.` on visual selections
+vnoremap . :norm.<CR>

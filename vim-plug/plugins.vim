@@ -44,6 +44,7 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'chaoren/vim-wordmotion'
 	Plug 'michaeljsmith/vim-indent-object'
 	Plug 'kana/vim-textobj-user'
+	Plug 'tpope/vim-surround'
 
 	" git utils"
 	Plug 'tpope/vim-fugitive'
@@ -92,6 +93,7 @@ call plug#begin('~/.cache/vim/plugins')
   Plug 'rhysd/vim-grammarous'
 
 	Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+	Plug 'hauleth/vim-backscratch'  " :Scratch buffers
 
 
 call plug#end()

@@ -38,4 +38,5 @@ source $VIMPATH/plug-config/vim-fugitive.vim
 source $VIMPATH/plug-config/vim-gitgutter.vim
 source $VIMPATH/plug-config/vim-grammarous.vim
 source $VIMPATH/plug-config/vim-which-key.vim
+source $VIMPATH/plug-config/vim-surround.vim
 source $VIMPATH/plug-config/vista.vim
