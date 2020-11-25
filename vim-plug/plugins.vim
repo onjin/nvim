@@ -22,7 +22,7 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" reopen file at last position
 	Plug 'dietsche/vim-lastplace'
-	Plug 'airblade/vim-rooter'
+  Plug 'airblade/vim-rooter'
 
 	" indent lvl indicator
 	Plug 'Yggdroot/indentLine'  
@@ -63,11 +63,17 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'mattn/emmet-vim'  " html/css magic macros
 	Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}  " html live preview by :Bracey"
 
-	Plug 'SirVer/ultisnips'
 	Plug 'vim-scripts/Mark--Karkat'  " highlight words unser cursor <leader>m
 
-	" markdowns / diagrams
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+	Plug 'SirVer/ultisnips'
+
+	" documents management
+	Plug 'fmoralesc/vim-pad'  " notes management
+	Plug 'vim-pandoc/vim-pandoc'
+	Plug 'vim-pandoc/vim-pandoc-syntax'
+  Plug 'dhruvasagar/vim-table-mode'  " <leader>tm to start creating tables
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }	" markdowns / diagrams
+	Plug 'chrisbra/NrrwRgn'
 
 	" automatically resize windows
 	Plug 'camspiers/animate.vim'

@@ -29,7 +29,7 @@ nnoremap - :Explore<CR>
 " nnoremap ,e :e **/*<C-z><S-Tab>
 " nnoremap ,f :find **/*<C-z><S-Tab>
 "
-nnoremap <Leader>ss :!isort %<CR>
+nnoremap <Leader>cs :!isort %<CR>
 
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-a>z :ZoomToggle<CR>
