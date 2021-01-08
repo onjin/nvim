@@ -4,6 +4,7 @@
   "coc.preferences.jumpCommand": "vsplit",
   "python.formatting.provider": "black",
   "python.jediEnabled": false,
+  "python.linting.mypyEnabled": false,
   "emmet.includeLanguages": { "htmldjango": "html" },
   "coc.preferences.formatOnSaveFiletypes": ["python", "json"],
   "python.analysis.autoImportCompletions": true,

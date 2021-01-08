@@ -63,6 +63,7 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'mattn/emmet-vim'  " html/css magic macros
 	Plug 'turbio/bracey.vim', {'do': 'npm install --prefix server'}  " html live preview by :Bracey"
 
+	Plug 'inkarkat/vim-ingo-library'  " required by vim-mark
 	Plug 'inkarkat/vim-mark'  " highlight words unser cursor <leader>m
 	Plug 'borisbrodski/vim-highlight-hero'
 

@@ -11,6 +11,10 @@ if has('vim_starting')
 	set encoding=utf-8
 	scriptencoding utf-8
 endif
+" Disable menu.vim
+if has('gui_running')
+  set guioptions=Mc
+endif
 
 if has('nvim')
 	set shada='30,/100,:50,<10,@10,s50,h,n$VARPATH/shada
