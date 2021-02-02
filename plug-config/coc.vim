@@ -1,4 +1,4 @@
-let g:coc_global_extensions = ['coc-ultisnips', 'coc-pairs', 'coc-yank', 'coc-prettier', 'coc-snippets', 'coc-bookmark', 'coc-pyright', 'coc-sh', 'coc-html', 'coc-emmet', 'coc-omnisharp', 'coc-emoji']
+let g:coc_global_extensions = ['coc-ultisnips', 'coc-pairs', 'coc-yank', 'coc-prettier', 'coc-snippets', 'coc-pyright', 'coc-sh', 'coc-html', 'coc-emmet', 'coc-omnisharp', 'coc-emoji', 'coc-explorer']
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -130,8 +130,6 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" List bookmarks
-nnoremap <silent> <space>b  :<C-u>CocList bookmark<cr>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -139,11 +137,6 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-" bookmarks
-nmap <Leader>bj <Plug>(coc-bookmark-next)
-nmap <Leader>bk <Plug>(coc-bookmark-prev)
-nmap <Leader>ba <Plug>(coc-bookmark-annotate)
-nmap <Leader>bb <Plug>(coc-bookmark-toggle)
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 

@@ -103,6 +103,8 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 	Plug 'hauleth/vim-backscratch'  " :Scratch buffers
 
+	Plug 'ryanoasis/vim-devicons'
+
 
 call plug#end()
 

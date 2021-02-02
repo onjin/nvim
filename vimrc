@@ -22,6 +22,7 @@ source $VIMPATH/themes/airline.vim
 
 source $VIMPATH/plug-config/black.vim
 source $VIMPATH/plug-config/coc.vim
+source $VIMPATH/plug-config/coc-explorer.vim
 source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
 source $VIMPATH/plug-config/fzf.vim
