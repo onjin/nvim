@@ -42,3 +42,6 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 " allow to use `.` on visual selections
 vnoremap . :norm.<CR>
+
+noremap <Leader>bn :bn<CR>
+noremap <Leader>bp :bp<CR>

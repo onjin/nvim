@@ -104,6 +104,8 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'hauleth/vim-backscratch'  " :Scratch buffers
 
 	Plug 'ryanoasis/vim-devicons'
+	Plug 'mhinz/vim-startify'
+	Plug 'bagrat/vim-buffet'
 
 
 call plug#end()
