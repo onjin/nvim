@@ -16,7 +16,7 @@ For a full list of plugins reffer to https://github.com/onjin/.vim/blob/main/vim
 
 ## Screenshots
 
-Which key keybindings popup
+Which key keybindings popup, just press `,` and wait for help
 
 ![Screenshot](https://user-images.githubusercontent.com/44516/95565033-e65c3a80-0a1f-11eb-9cb4-8cfca2ad4fef.png)
 
@@ -37,7 +37,14 @@ Plugins should be installed at first run of editor. If not, then run `:PlugInsta
 
 ## Requirements for `nvim`
 
+* pynvim
 ```
 pip install pynvim
 ```
+
+ * `ag` - silver search for fzf/codesearch https://github.com/ggreer/the_silver_searcher
+
+## Nice to have
+* Nerd Icons - https://www.nerdfonts.com/
+
 
