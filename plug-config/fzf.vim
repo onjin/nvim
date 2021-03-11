@@ -1,15 +1,15 @@
 noremap <Leader>b :Buffers<CR>
 noremap <Leader>B :BTags<CR>
 
-command! -bang -nargs=* GGrep
-	\ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+command! -bang -nargs=* CodeGrep
+	\ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 1, <bang>1)
 
 noremap <C-p> :GFiles<CR>
-noremap <S-f> :GGrep<CR>
+noremap <S-f> :Ag<CR>
 
 noremap <Leader>fg :GFiles<CR>
 noremap <Leader>ff :Files<CR>
-noremap <Leader>fr :GGrep<CR>
+noremap <Leader>fr :Ag<CR>
 noremap <Leader>ft :Tags<CR>
 
 command! FZFMru call fzf#run({
