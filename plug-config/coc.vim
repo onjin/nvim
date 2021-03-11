@@ -142,3 +142,5 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " better coc-pairs behavior on `enter`
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+nnoremap <Leader><esc> :call coc#float#close_all()<CR>

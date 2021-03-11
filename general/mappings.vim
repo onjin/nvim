@@ -1,11 +1,10 @@
 
 " stop pressing ESC
-inoremap jj <esc>
-inoremap kk <esc>
+inoremap jk <esc>
 " inoremap <esc> <nop>
 
 " enter in normal mode adds one line
-noremap <CR> o<ESC>
+" noremap <CR> o<ESC>
 
 " fast match inside (), '', and "" fi. cp, dp, cq
 onoremap p i(
@@ -35,7 +34,7 @@ command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-a>z :ZoomToggle<CR>
 
 " conceal level
-nnoremap <leader>sc :setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>
+nnoremap <leader>vc :setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>
 
 " write modeline
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
@@ -45,3 +44,7 @@ vnoremap . :norm.<CR>
 
 noremap <Leader>bn :bn<CR>
 noremap <Leader>bp :bp<CR>
+
+noremap <Leader><Tab> :bn <CR>
+noremap <Leader><S-Tab> :bp<CR>
+

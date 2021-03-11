@@ -16,3 +16,15 @@ endfunction
         \ { 'header': ['   Commits'],        'type': function('s:list_commits') },
         \ { 'header': ['   MRU'],            'type': 'files' },
         \ ]
+
+let g:startify_enable_special = 0
+let g:startify_relative_path = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_session_dir = '.vim/session'
+let g:startify_session_persistence = 1
+let g:startify_session_delete_buffers = 0
+
+noremap <Leader>ss :SSave<CR>
+noremap <Leader>sc :SClose<CR>
+noremap <Leader>sd :SDelete<CR>
+

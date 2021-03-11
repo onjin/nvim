@@ -11,5 +11,15 @@
   "json.enable": true,
   "json.format.enable": true,
   "python.venvFolders": ["envs", ".pyenv", "/home/onjin/.pyevn/versions/"],
-  "explorer.icon.enableNerdfont": true
+  "explorer.icon.enableNerdfont": true,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  }
 }

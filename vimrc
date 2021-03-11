@@ -10,6 +10,7 @@ endif
 let $RTP=$VIMPATH
 let $RC="$RTP/vimrc"
 
+source $VIMPATH/general/pre-plugins.vim
 source $VIMPATH/vim-plug/plugins.vim
 
 source $VIMPATH/general/settings.vim
