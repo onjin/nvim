@@ -85,7 +85,7 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'metakirby5/codi.vim'
 
 	" python folding
-	Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
+	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
 	Plug 'psf/black', { 'tag': '20.8b1' }
 
 	" Plug 'bps/vim-textobj-python'
