@@ -52,7 +52,10 @@ call plug#begin('~/.cache/vim/plugins')
 
 	Plug 'wellle/tmux-complete.vim'
 
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-compe'
+
 	Plug 'honza/vim-snippets'
 
 	Plug 'romainl/vim-cool'  " auto disable hlsearch when done searching
