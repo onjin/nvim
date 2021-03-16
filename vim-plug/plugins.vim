@@ -55,6 +55,7 @@ call plug#begin('~/.cache/vim/plugins')
 	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
+	Plug 'jiangmiao/auto-pairs'
 
 	Plug 'honza/vim-snippets'
 
