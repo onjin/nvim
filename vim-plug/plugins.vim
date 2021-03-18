@@ -53,6 +53,7 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'wellle/tmux-complete.vim'
 
 	" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'codota/tabnine-vim'
 	Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
 	Plug 'jiangmiao/auto-pairs'
