@@ -93,9 +93,11 @@ call plug#begin('~/.cache/vim/plugins')
 	" Plug 'ivanov/vim-ipython'  " lack of python 3 support
 	" Plug 'wmvanvliet/jupyter-vim'
 	" semantic python syntax
-	if has('nvim')
-		Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-	endif
+	" if has('nvim')
+	" 	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+	" endif
+	" semantic syntax
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 	" grammary checker
   Plug 'rhysd/vim-grammarous'
