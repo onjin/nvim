@@ -22,6 +22,8 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" reopen file at last position
 	Plug 'dietsche/vim-lastplace'
+
+	" :lcd to project root on open buffer
   Plug 'airblade/vim-rooter'
 
 	" indent lvl indicator
@@ -35,14 +37,21 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 	" right sidebar with classes/functions/variables from current buffer
-	Plug 'majutsushi/tagbar'
+	" Plug 'majutsushi/tagbar'
 
 	" tagbar replacement with LSP support
 	Plug 'liuchengxu/vista.vim'
 
+	" extended matching for the % operator
 	Plug 'tmhedberg/matchit'
+
+	" better wordmotion (f.i. between CamelCaseWords)
 	Plug 'chaoren/vim-wordmotion'
+
+	" a convenient way to select and operate on various types of objects 
 	Plug 'michaeljsmith/vim-indent-object'
+
+	" create your own text objects without pain
 	Plug 'kana/vim-textobj-user'
 	Plug 'tpope/vim-surround'
 
@@ -86,28 +95,41 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" python folding
 	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
+	"
+	" Python files autoformat using `black`
 	Plug 'psf/black', { 'tag': '20.8b1' }
 
 	" Plug 'bps/vim-textobj-python'
 	Plug 'jeetsukumaran/vim-pythonsense'  " replacement for vim_textobj-python
 	" Plug 'ivanov/vim-ipython'  " lack of python 3 support
 	" Plug 'wmvanvliet/jupyter-vim'
+
 	" semantic python syntax
 	" if has('nvim')
 	" 	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 	" endif
 	" semantic syntax
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update- testing instead of semshi plugin
 
 	" grammary checker
   Plug 'rhysd/vim-grammarous'
 
+	" visual help for leader keys
 	Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
 	Plug 'hauleth/vim-backscratch'  " :Scratch buffers
 
+	" nice icons
 	Plug 'ryanoasis/vim-devicons'
+
+	" customizable starting window
 	Plug 'mhinz/vim-startify'
+
+  " takes your buffers and tabs, and shows them combined in the tabline  
 	Plug 'bagrat/vim-buffet'
+
+	" rockstart language syntax
+	Plug 'sirosen/vim-rockstar'
 
 
 call plug#end()
