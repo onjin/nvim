@@ -5,7 +5,8 @@ command! -bang -nargs=* CodeGrep
 	\ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 1, <bang>1)
 
 noremap <C-p> :GFiles<CR>
-noremap <S-f> :Rg<CR>
+" do not map F - it's used to find backward
+" noremap <S-f> :Rg<CR>
 
 noremap <Leader>fg :GFiles<CR>
 noremap <Leader>ff :Files<CR>
