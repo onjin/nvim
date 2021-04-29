@@ -25,6 +25,7 @@ source $VIMPATH/plug-config/black.vim
 source $VIMPATH/plug-config/coc.vim
 source $VIMPATH/plug-config/coc-explorer.vim
 source $VIMPATH/plug-config/cyfolds.vim
+source $VIMPATH/plug-config/vim-dashboard.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
 source $VIMPATH/plug-config/fzf.vim
 source $VIMPATH/plug-config/goyo.vim
@@ -40,8 +41,9 @@ source $VIMPATH/plug-config/vim-buffet.vim
 source $VIMPATH/plug-config/vim-fugitive.vim
 source $VIMPATH/plug-config/vim-gitgutter.vim
 source $VIMPATH/plug-config/vim-grammarous.vim
+source $VIMPATH/plug-config/vim-indentline.vim
 source $VIMPATH/plug-config/vim-pad.vim
-source $VIMPATH/plug-config/vim-startify.vim
+" source $VIMPATH/plug-config/vim-startify.vim
 source $VIMPATH/plug-config/vim-surround.vim
 source $VIMPATH/plug-config/vim-treesitter.vim
 source $VIMPATH/plug-config/vim-which-key.vim

@@ -60,6 +60,7 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'airblade/vim-gitgutter'  " A Vim plugin which shows a git diff in the sign column.
 
 	Plug 'wellle/tmux-complete.vim'
+  Plug 'tmux-plugins/vim-tmux'
 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'honza/vim-snippets'
@@ -123,7 +124,8 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'ryanoasis/vim-devicons'
 
 	" customizable starting window
-	Plug 'mhinz/vim-startify'
+	" Plug 'mhinz/vim-startify'
+	Plug 'glepnir/dashboard-nvim'
 
   " takes your buffers and tabs, and shows them combined in the tabline  
 	Plug 'bagrat/vim-buffet'
