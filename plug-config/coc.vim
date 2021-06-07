@@ -48,9 +48,12 @@ nnoremap <Leader>dp :call CocAction('diagnosticPrev')<cr>
 " GoTo code navigation.
 nmap <silent> ge <Plug>(coc-action-diagnosticList)
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+autocmd FileType cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>

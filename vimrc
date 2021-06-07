@@ -46,5 +46,7 @@ source $VIMPATH/plug-config/vim-pad.vim
 " source $VIMPATH/plug-config/vim-startify.vim
 source $VIMPATH/plug-config/vim-surround.vim
 source $VIMPATH/plug-config/vim-treesitter.vim
+source $VIMPATH/plug-config/vim-test.vim
 source $VIMPATH/plug-config/vim-which-key.vim
+source $VIMPATH/plug-config/vimux.vim
 source $VIMPATH/plug-config/vista.vim

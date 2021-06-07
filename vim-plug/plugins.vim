@@ -57,13 +57,15 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" git utils"
 	Plug 'tpope/vim-fugitive'
-	Plug 'airblade/vim-gitgutter'  " A Vim plugin which shows a git diff in the sign column.
+	Plug 'airblade/vim-gitgutter'     " A Vim plugin which shows a git diff in the sign column.
 
-	Plug 'wellle/tmux-complete.vim'
-  Plug 'tmux-plugins/vim-tmux'
+	Plug 'wellle/tmux-complete.vim'		" coc complete from tmux panes
+  Plug 'tmux-plugins/vim-tmux'			" tmux syntax
+	Plug 'preservim/vimux'						" manageg tmux from vim"
 
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'honza/vim-snippets'
+	Plug 'https://github.com/OmniSharp/omnisharp-vim'  " for goto definition
 
 	Plug 'romainl/vim-cool'  " auto disable hlsearch when done searching
 
@@ -76,6 +78,8 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'inkarkat/vim-ingo-library'  " required by vim-mark
 	Plug 'inkarkat/vim-mark'  " highlight words unser cursor <leader>m
 	Plug 'borisbrodski/vim-highlight-hero'
+
+	Plug 'freitass/todo.txt-vim'  " TODO.txt support
 
 	Plug 'SirVer/ultisnips'
 
@@ -98,7 +102,8 @@ call plug#begin('~/.cache/vim/plugins')
 	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
 	"
 	" Python files autoformat using `black`
-	Plug 'psf/black', { 'tag': '20.8b1' }
+	" Plug 'psf/black', { 'tag': '20.8b1' }
+	Plug 'psf/black', { 'tag': '19.10b0' }
 
 	" Plug 'bps/vim-textobj-python'
 	Plug 'jeetsukumaran/vim-pythonsense'  " replacement for vim_textobj-python
@@ -132,6 +137,8 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" rockstart language syntax
 	Plug 'sirosen/vim-rockstar'
+
+	Plug 'vim-test/vim-test'
 
 
 call plug#end()
