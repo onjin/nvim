@@ -122,3 +122,4 @@ augroup END
 
 let mapleader = ","
 let g:maplocalleader = "\<Space>"
+let g:python3_host_prog = '~/.pyenv/versions/neovim/bin/python3.9'
