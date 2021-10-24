@@ -116,6 +116,7 @@ call plug#begin('~/.cache/vim/plugins')
 	" endif
 	" semantic syntax
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update- testing instead of semshi plugin
+  Plug 'romgrk/nvim-treesitter-context'
 
 	" grammary checker
   Plug 'rhysd/vim-grammarous'
