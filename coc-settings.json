@@ -1,26 +1,28 @@
 {
-  "coc.source.emoji.filetypes": ["gitcommit", "markdown"],
-  "coc.preferences.useQuickfixForLocations": true,
-  "coc.preferences.jumpCommand": "vsplit",
-  "python.formatting.provider": "black",
-  "python.jediEnabled": false,
-  "python.linting.mypyEnabled": false,
-  "emmet.includeLanguages": { "htmldjango": "html" },
-  "coc.preferences.formatOnSaveFiletypes": ["python", "json"],
-  "python.analysis.autoImportCompletions": true,
-  "json.enable": true,
-  "json.format.enable": true,
-  "python.venvFolders": ["envs", ".pyenv", "/home/onjin/.pyevn/versions/"],
-  "explorer.icon.enableNerdfont": true,
-  "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true
-      }
-    }
-  },
-  "clangd.path": "/home/onjin/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd"
+    "coc.source.emoji.filetypes": ["gitcommit", "markdown"],
+    "coc.preferences.useQuickfixForLocations": true,
+    "coc.preferences.jumpCommand": "vsplit",
+    "python.formatting.provider": "black",
+    "python.jediEnabled": false,
+    "python.linting.mypyEnabled": false,
+    "emmet.includeLanguages": { "htmldjango": "html" },
+    "coc.preferences.formatOnSaveFiletypes": ["python", "json"],
+    "python.analysis.autoImportCompletions": true,
+    "json.enable": true,
+    "json.format.enable": true,
+    "python.venvFolders": ["envs", ".pyenv", "/home/onjin/.pyevn/versions/"],
+    "explorer.icon.enableNerdfont": true,
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+            "filetypes": ["go"],
+            "initializationOptions": {
+                "usePlaceholders": true
+            }
+        },
+    },
+    "clangd.path": "/home/onjin/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
+    "yaml.trace.server": "verbose",
+    "yaml.schemaStore.enable": true
 }
