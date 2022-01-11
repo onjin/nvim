@@ -1,4 +1,4 @@
-# Personal `vim` and `neovim` configuration
+# Personal `vim` and `neovim` configuration.
 
 Mostly used for DevOps and Python (web) development.
 
