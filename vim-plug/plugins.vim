@@ -104,7 +104,7 @@ call plug#begin('~/.cache/vim/plugins')
 	" Python files autoformat using `black`
 	" Plug 'psf/black', { 'tag': '20.8b1' }
 	" Plug 'psf/black', { 'tag': '19.10b0' }
-	Plug 'averms/black-nvim'
+	" Plug 'averms/black-nvim'
 
 	" Plug 'bps/vim-textobj-python'
 	Plug 'jeetsukumaran/vim-pythonsense'  " replacement for vim_textobj-python
