@@ -48,3 +48,7 @@ noremap <Leader>bp :bp<CR>
 noremap <Leader><Tab> :bn <CR>
 noremap <Leader><S-Tab> :bp<CR>
 
+" debug higlight file entry
+nnoremap <Leader>dh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>

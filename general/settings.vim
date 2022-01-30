@@ -27,7 +27,7 @@ set directory=$VARPATH/swap//,$VARPATH,~/tmp,/var/tmp,/tmp
 set undodir=$VARPATH/undo//,$VARPATH,~/tmp,/var/tmp,/tmp
 set backupdir=$VARPATH/backup/,$VARPATH,~/tmp,/var/tmp,/tmp
 set viewdir=$VARPATH/view/
-set spell spellfile=$VIMPATH/spell/en.utf-8.add spelllang=en_us
+set nospell spellfile=$VIMPATH/spell/en.utf-8.add spelllang=en_us
 
 
 " Finding files.
