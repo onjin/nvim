@@ -6,6 +6,7 @@ endif
 call plug#begin('~/.cache/vim/plugins')
   " Color Theme
 	Plug 'NLKNguyen/papercolor-theme'
+	Plug 'navarasu/onedark.nvim'
 	Plug 'tomasiser/vim-code-dark'
 	Plug 'sheerun/vim-polyglot'
 
