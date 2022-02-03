@@ -20,4 +20,5 @@ let g:onedark_config = {
     \ 'background': v:true,
   \ },
 \ }
-colorscheme onedark
+"colorscheme onedark
+colorscheme base16-chalk
