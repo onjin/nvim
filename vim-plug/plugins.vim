@@ -12,7 +12,7 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" more colors
 	Plug 'chriskempson/base16-shell'
-	" Plug 'chriskempson/base16-vim'
+	Plug 'chriskempson/base16-vim'
 	
 	" Support .editorconfig file
 	Plug 'editorconfig/editorconfig-vim'
