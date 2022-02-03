@@ -1,4 +1,4 @@
-let g:coc_global_extensions = ['coc-ultisnips', 'coc-pairs', 'coc-yank', 'coc-prettier', 'coc-snippets', 'coc-pyright', 'coc-sh', 'coc-html', 'coc-emmet', 'coc-omnisharp', 'coc-emoji', 'coc-explorer', 'coc-lists', 'coc-yaml']
+let g:coc_global_extensions = ['coc-ultisnips', 'coc-pairs', 'coc-yank', 'coc-prettier', 'coc-snippets', 'coc-pyright', 'coc-sh', 'coc-html', 'coc-emmet', 'coc-omnisharp', 'coc-emoji', 'coc-explorer', 'coc-lists', 'coc-yaml', 'coc-pydocstring']
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -84,14 +84,10 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
 " Remap keys for applying codeAction to the current line.
 nmap <leader>ca  <Plug>(coc-codeaction)
+nmap <leader>cl <Plug>(coc-codeaction-line)
+
 " Apply AutoFix to problem on the current line.
 nmap <leader>cf  <Plug>(coc-fix-current)
 

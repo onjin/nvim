@@ -1,18 +1,21 @@
 {
-    "coc.source.emoji.filetypes": ["gitcommit", "markdown"],
-    "coc.preferences.useQuickfixForLocations": true,
-    "coc.preferences.jumpCommand": "vsplit",
-    "python.formatting.provider": "black",
     "coc.preferences.formatOnSaveFiletypes": ["python", "json"],
     "coc.preferences.formatOnType": true,
-    "python.jediEnabled": false,
-    "python.linting.mypyEnabled": false,
+    "coc.preferences.jumpCommand": "vsplit",
+    "coc.preferences.useQuickfixForLocations": true,
+    "coc.source.emoji.filetypes": ["gitcommit", "markdown"],
     "emmet.includeLanguages": { "htmldjango": "html" },
-    "python.analysis.autoImportCompletions": true,
+    "explorer.icon.enableNerdfont": true,
     "json.enable": true,
     "json.format.enable": true,
+    "pydocstring.formatter": "google",
+    "python.analysis.autoImportCompletions": true,
+    "python.formatting.provider": "black",
+    "python.jediEnabled": false,
+    "python.linting.mypyEnabled": false,
     "python.venvFolders": ["envs", ".pyenv", "/home/onjin/.pyevn/versions/"],
-    "explorer.icon.enableNerdfont": true,
+    "yaml.trace.server": "verbose",
+    "yaml.schemaStore.enable": true,
     "languageserver": {
         "golang": {
             "command": "gopls",
@@ -22,8 +25,5 @@
                 "usePlaceholders": true
             }
         },
-    },
-    "clangd.path": "/home/onjin/.config/coc/extensions/coc-clangd-data/install/12.0.0/clangd_12.0.0/bin/clangd",
-    "yaml.trace.server": "verbose",
-    "yaml.schemaStore.enable": true
+    }
 }
