@@ -85,7 +85,8 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'SirVer/ultisnips'
 
 	" documents management
-	Plug 'fmoralesc/vim-pad', { 'branch': 'devel' } " notes management
+	Plug 'renerocksai/telekasten.nvim'
+	" Plug 'fmoralesc/vim-pad', { 'branch': 'devel' } " notes management
 	Plug 'vim-pandoc/vim-pandoc'
 	Plug 'vim-pandoc/vim-pandoc-syntax'
   Plug 'dhruvasagar/vim-table-mode'  " <leader>tm to start creating tables
