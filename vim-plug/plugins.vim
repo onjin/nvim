@@ -32,12 +32,13 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" fuzzy finder
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	" Plug 'junegunn/fzf.vim'
+	Plug 'junegunn/fzf.vim'
 
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-telescope/telescope.nvim'
-	Plug 'nvim-telescope/telescope-frecency.nvim'  "history
-	Plug 'nvim-telescope/telescope-github.nvim'
+	"Plug 'nvim-lua/plenary.nvim'
+	"Plug 'nvim-telescope/telescope.nvim'
+	"Plug 'nvim-telescope/telescope-frecency.nvim'  "history
+	"Plug 'nvim-telescope/telescope-github.nvim'
+	"Plug 'renerocksai/telekasten.nvim'
 
 	" documentation generator
 	"Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
@@ -90,7 +91,6 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'SirVer/ultisnips'
 
 	" documents management
-	Plug 'renerocksai/telekasten.nvim'
 	" Plug 'fmoralesc/vim-pad', { 'branch': 'devel' } " notes management
 	Plug 'vim-pandoc/vim-pandoc'
 	Plug 'vim-pandoc/vim-pandoc-syntax'

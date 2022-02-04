@@ -27,9 +27,9 @@ source $VIMPATH/plug-config/coc-explorer.vim
 source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/vim-dashboard.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
-"source $VIMPATH/plug-config/fzf.vim
-source $VIMPATH/plug-config/telescope.vim
-source $VIMPATH/plug-config/telekasten.vim
+source $VIMPATH/plug-config/fzf.vim
+"source $VIMPATH/plug-config/telescope.vim
+"source $VIMPATH/plug-config/telekasten.vim
 source $VIMPATH/plug-config/goyo.vim
 source $VIMPATH/plug-config/lens.vim
 source $VIMPATH/plug-config/limelight.vim
