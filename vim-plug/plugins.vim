@@ -32,7 +32,12 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" fuzzy finder
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	Plug 'junegunn/fzf.vim'
+	" Plug 'junegunn/fzf.vim'
+
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
+	Plug 'nvim-telescope/telescope-frecency.nvim'  "history
+	Plug 'nvim-telescope/telescope-github.nvim'
 
 	" documentation generator
 	"Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
