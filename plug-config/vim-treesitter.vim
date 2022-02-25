@@ -21,6 +21,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" treesitter indenting
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=20
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
