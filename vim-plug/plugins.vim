@@ -148,6 +148,7 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'sirosen/vim-rockstar'
 
 	Plug 'vim-test/vim-test'
+	Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 
 	Plug 'github/copilot.vim'
 

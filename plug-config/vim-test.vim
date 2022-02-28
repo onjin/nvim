@@ -16,3 +16,9 @@ nmap <Leader>tf :TestFile<CR>
 nmap <Leader>ts :TestSuite<CR>
 nmap <Leader>tl :TestLast<CR>
 nmap <Leader>tg :TestVisit<CR>
+
+" vim-ultest
+let g:ultest_use_pty = 1
+let test#python#pytest#options = "--color=yes"
+nmap ]t <Plug>(ultest-next-fail)
+nmap [t <Plug>(ultest-prev-fail)
