@@ -13,7 +13,7 @@ let g:VimuxHeight = "50"
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
 nmap <Leader>tn :TestNearest<CR>
 nmap <Leader>tf :TestFile<CR>
-nmap <Leader>ts :TestSuite<CR>
+nmap <Leader>ta :TestSuite<CR>
 nmap <Leader>tl :TestLast<CR>
 nmap <Leader>tg :TestVisit<CR>
 
@@ -22,3 +22,5 @@ let g:ultest_use_pty = 1
 let test#python#pytest#options = "--color=yes"
 nmap ]t <Plug>(ultest-next-fail)
 nmap [t <Plug>(ultest-prev-fail)
+nmap <Leader>ts :UltestSummary<CR>
+nmap <Leader>tc :UltestClear<CR>
