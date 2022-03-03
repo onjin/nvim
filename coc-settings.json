@@ -14,7 +14,6 @@
     "python.jediEnabled": false,
     "python.linting.enabled": true,
     "python.linting.mypyEnabled": false,
-    "python.linting.banditEnabled": true,
     "python.linting.pylamaEnabled": true,
     "python.venvFolders": ["envs", ".pyenv", "/home/onjin/.pyevn/versions/"],
     "yaml.trace.server": "verbose",
