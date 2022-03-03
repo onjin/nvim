@@ -11,11 +11,11 @@ let g:VimuxOrientation = "h"
 let g:VimuxHeight = "50"
 
 " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
-nmap <Leader>tn :TestNearest<CR>
-nmap <Leader>tf :TestFile<CR>
-nmap <Leader>ta :TestSuite<CR>
-nmap <Leader>tl :TestLast<CR>
-nmap <Leader>tg :TestVisit<CR>
+nmap <Leader>Tn :TestNearest<CR>
+nmap <Leader>Tf :TestFile<CR>
+nmap <Leader>Ta :TestSuite<CR>
+nmap <Leader>Tl :TestLast<CR>
+nmap <Leader>Tg :TestVisit<CR>
 
 " vim-ultest
 let g:ultest_use_pty = 1
@@ -24,3 +24,7 @@ nmap ]t <Plug>(ultest-next-fail)
 nmap [t <Plug>(ultest-prev-fail)
 nmap <Leader>ts :UltestSummary<CR>
 nmap <Leader>tc :UltestClear<CR>
+
+nmap <Leader>tn :UltestNearest<CR>
+nmap <Leader>tf :Ultest<CR>
+nmap <Leader>tl :UltestLast<CR>

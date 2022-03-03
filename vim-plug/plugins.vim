@@ -62,6 +62,10 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'kana/vim-textobj-user'
 	Plug 'tpope/vim-surround'
 
+	" SQL
+	Plug 'lifepillar/pgsql.vim'
+	" let g:sql_type_default = 'pgsql' " force all `.sql` to postgres
+
 	" git utils"
 	Plug 'tpope/vim-fugitive'
 	Plug 'airblade/vim-gitgutter'     " A Vim plugin which shows a git diff in the sign column.
