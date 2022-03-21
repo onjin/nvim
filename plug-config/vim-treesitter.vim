@@ -5,10 +5,6 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,              -- false will disable the whole extension
   },
-  indent = {
-    enable = true,
-  disable = { "python" },
-  },
   incremental_selection = {
     enable = true,
     keymaps = {
