@@ -30,15 +30,20 @@ call plug#begin('~/.cache/vim/plugins')
 	" indent lvl indicator
 	Plug 'Yggdroot/indentLine'  
 
-	" fuzzy finder
+	" fuzzy finder {{{
+if $FUZZY_FINDER == 'fzf'
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
+endif
 
-	"Plug 'nvim-lua/plenary.nvim'
-	"Plug 'nvim-telescope/telescope.nvim'
-	"Plug 'nvim-telescope/telescope-frecency.nvim'  "history
-	"Plug 'nvim-telescope/telescope-github.nvim'
-	"Plug 'renerocksai/telekasten.nvim'
+if $FUZZY_FINDER == 'telescope'
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
+	Plug 'nvim-telescope/telescope-frecency.nvim'  "history
+	Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+	Plug 'nvim-telescope/telescope-github.nvim' " gh-cli
+endif
+	" fuzzy finder }}}
 
 	" documentation generator
 	"Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }

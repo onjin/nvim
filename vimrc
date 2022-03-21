@@ -10,6 +10,9 @@ endif
 let $RTP=$VIMPATH
 let $RC="$RTP/vimrc"
 
+" let $FUZZY_FINDER='fzf'
+let $FUZZY_FINDER='telescope'
+
 source $VIMPATH/general/pre-plugins.vim
 source $VIMPATH/vim-plug/plugins.vim
 
@@ -28,7 +31,7 @@ source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/vim-dashboard.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
 source $VIMPATH/plug-config/fzf.vim
-"source $VIMPATH/plug-config/telescope.vim
+source $VIMPATH/plug-config/telescope.vim
 "source $VIMPATH/plug-config/telekasten.vim
 source $VIMPATH/plug-config/goyo.vim
 source $VIMPATH/plug-config/lens.vim

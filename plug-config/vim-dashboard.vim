@@ -1,4 +1,10 @@
-let g:dashboard_default_executive ='fzf'
+if $FUZZY_FINDER == 'telescope'
+      let g:dashboard_default_executive ='telescope'
+endif
+if $FUZZY_FINDER == 'fzf'
+      let g:dashboard_default_executive ='fzf'
+endif
+
 autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
 
 let g:dashboard_custom_header = [
