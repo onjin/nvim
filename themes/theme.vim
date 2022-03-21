@@ -22,3 +22,4 @@ let g:onedark_config = {
 \ }
 "colorscheme onedark
 colorscheme base16-chalk
+highlight WinSeparator guibg=None

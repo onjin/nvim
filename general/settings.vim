@@ -131,5 +131,8 @@ augroup END
 
 "au BufWinLeave * mkview
 "au BufWinEnter * silent loadview
-"
+
+" single global status line without win separators
+set laststatus=3
+
 set exrc
