@@ -8,8 +8,8 @@ if $FUZZY_FINDER == 'telescope'
     noremap <Leader>b <cmd>Telescope buffers<cr>
     noremap <Leader>B <cmd>Telescope current_buffer_tags<cr>
 
-    noremap <C-p> <cmd>Telescope git_files show_untracked=Ffalse<cr>
-    noremap <Leader>fg <cmd>Telescope git_files<cr>
+    noremap <C-p> <cmd>Telescope git_files show_untracked=false<cr>
+    noremap <Leader>fg <cmd>Telescope git_files show_ungracked=false<cr>
     " do not map F - it's used to find backward
 
     "noremap <Leader>fr :lua args = {'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case'} table.insert(args, vim.fn.input('rg > ')) require('telescope.builtin').live_grep( { vimgrep_arguments = args} )<CR>
@@ -50,6 +50,8 @@ lua << END
         }
     }
     require('telescope').load_extension('fzf')
+    require('telescope').load_extension('media_files')
     require('telescope').load_extension('gh')
+    require('telescope').load_extension('coc')
 END
 endif

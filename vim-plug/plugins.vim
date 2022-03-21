@@ -41,7 +41,9 @@ if $FUZZY_FINDER == 'telescope'
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'nvim-telescope/telescope-frecency.nvim'  "history
 	Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+	Plug 'nvim-telescope/telescope-media-files.nvim'
 	Plug 'nvim-telescope/telescope-github.nvim' " gh-cli
+	Plug 'fannheyward/telescope-coc.nvim'
 endif
 	" fuzzy finder }}}
 
