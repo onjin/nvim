@@ -126,6 +126,7 @@ endif
 
 	" Plug 'bps/vim-textobj-python'
 	Plug 'jeetsukumaran/vim-pythonsense'  " replacement for vim_textobj-python
+	Plug 'raimon49/requirements.txt.vim'
 	" Plug 'ivanov/vim-ipython'  " lack of python 3 support
 	" Plug 'wmvanvliet/jupyter-vim'
 
