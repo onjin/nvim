@@ -1,3 +1,5 @@
+let g:buffet_show_index = 1
+
 noremap <Leader>bw :Bw<CR>
 noremap <Leader>bon :Bonly<CR>
 
