@@ -1,3 +1,4 @@
+if $LSP == 'coc'
 let g:coc_global_extensions = ['coc-ultisnips', 'coc-pairs', 'coc-yank', 'coc-prettier', 'coc-snippets', 'coc-pyright', 'coc-sh', 'coc-html', 'coc-emmet', 'coc-omnisharp', 'coc-emoji', 'coc-explorer', 'coc-lists', 'coc-yaml', 'coc-pydocstring', 'coc-dictionary', 'coc-vimlsp']
 
 " TextEdit might fail if hidden is not set.
@@ -143,3 +144,7 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nnoremap <Leader><esc> :call coc#float#close_all()<CR>
+
+source $VIMPATH/plug-config/coc-explorer.vim
+
+endif

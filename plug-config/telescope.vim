@@ -52,6 +52,8 @@ lua << END
     require('telescope').load_extension('fzf')
     require('telescope').load_extension('media_files')
     require('telescope').load_extension('gh')
-    require('telescope').load_extension('coc')
+    if vim.g.LSP == 'coc' then
+        require('telescope').load_extension('coc')
+    end
 END
 endif

@@ -13,6 +13,9 @@ let $RC="$RTP/vimrc"
 " let $FUZZY_FINDER='fzf'
 let $FUZZY_FINDER='telescope'
 
+" let $LSP='coc'
+let $LSP='native'
+
 source $VIMPATH/general/pre-plugins.vim
 source $VIMPATH/vim-plug/plugins.vim
 
@@ -23,16 +26,24 @@ source $VIMPATH/general/quickfix.vim
 source $VIMPATH/general/tmux.vim
 
 source $VIMPATH/themes/theme.vim
-source $VIMPATH/themes/airline.vim
+" source $VIMPATH/themes/airline.vim
+source $VIMPATH/themes/lualine.vim
 
 source $VIMPATH/plug-config/black.vim
+" LSP {{{
 source $VIMPATH/plug-config/coc.vim
-source $VIMPATH/plug-config/coc-explorer.vim
+source $VIMPATH/plug-config/lsp.vim
+" LSP }}}
+"
 source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/vim-dashboard.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
+
+" FUZZY_FINDER {{{
 source $VIMPATH/plug-config/fzf.vim
 source $VIMPATH/plug-config/telescope.vim
+" FUZZY_FINDER }}}
+"
 "source $VIMPATH/plug-config/telekasten.vim
 source $VIMPATH/plug-config/goyo.vim
 source $VIMPATH/plug-config/lens.vim

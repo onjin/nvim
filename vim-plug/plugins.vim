@@ -18,8 +18,10 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'editorconfig/editorconfig-vim'
 
 	" status line framework
-	Plug 'vim-airline/vim-airline' 
-	Plug 'vim-airline/vim-airline-themes'
+	Plug 'nvim-lualine/lualine.nvim'
+	Plug 'arkav/lualine-lsp-progress'
+	" Plug 'vim-airline/vim-airline' 
+	" Plug 'vim-airline/vim-airline-themes'
 
 	" reopen file at last position
 	Plug 'dietsche/vim-lastplace'
@@ -43,7 +45,9 @@ if $FUZZY_FINDER == 'telescope'
 	Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 	Plug 'nvim-telescope/telescope-media-files.nvim'
 	Plug 'nvim-telescope/telescope-github.nvim' " gh-cli
-	Plug 'fannheyward/telescope-coc.nvim'
+	if $LSP == 'coc'
+		Plug 'fannheyward/telescope-coc.nvim'
+	endif
 endif
 	" fuzzy finder }}}
 
@@ -81,7 +85,30 @@ endif
   Plug 'tmux-plugins/vim-tmux'			" tmux syntax
 	Plug 'preservim/vimux'						" manageg tmux from vim"
 
+if $LSP == 'coc'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+endif
+
+if $LSP == 'native'
+	" LSP Support
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'williamboman/nvim-lsp-installer'
+
+	" Autocompletion
+	Plug 'hrsh7th/nvim-cmp'
+	Plug 'hrsh7th/cmp-buffer'
+	Plug 'hrsh7th/cmp-path'
+	Plug 'saadparwaiz1/cmp_luasnip'
+	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'hrsh7th/cmp-nvim-lua'
+
+	"  Snippets
+	Plug 'L3MON4D3/LuaSnip'
+	Plug 'rafamadriz/friendly-snippets'
+
+	Plug 'VonHeikemen/lsp-zero.nvim'
+endif
+
 	Plug 'honza/vim-snippets'
 	Plug 'https://github.com/OmniSharp/omnisharp-vim'  " for goto definition
 
