@@ -51,6 +51,7 @@ source $VIMPATH/plug-config/limelight.vim
 source $VIMPATH/plug-config/markdown-preview.vim
 source $VIMPATH/plug-config/polyglot.vim
 source $VIMPATH/plug-config/tagbar.vim
+source $VIMPATH/plug-config/tree.vim
 source $VIMPATH/plug-config/ultisnips.vim
 source $VIMPATH/plug-config/vim-bracey.vim
 source $VIMPATH/plug-config/vim-buffet.vim

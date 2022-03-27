@@ -85,6 +85,8 @@ endif
   Plug 'tmux-plugins/vim-tmux'			" tmux syntax
 	Plug 'preservim/vimux'						" manageg tmux from vim"
 
+	Plug 'kyazdani42/nvim-tree.lua'
+
 if $LSP == 'coc'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
