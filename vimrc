@@ -23,7 +23,6 @@ source $VIMPATH/general/settings.vim
 source $VIMPATH/general/functions.vim
 source $VIMPATH/general/mappings.vim
 source $VIMPATH/general/quickfix.vim
-source $VIMPATH/general/tmux.vim
 
 source $VIMPATH/themes/theme.vim
 " source $VIMPATH/themes/airline.vim
@@ -35,6 +34,7 @@ source $VIMPATH/plug-config/coc.vim
 source $VIMPATH/plug-config/lsp.vim
 " LSP }}}
 "
+source $VIMPATH/general/tmux.vim
 source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/vim-dashboard.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
