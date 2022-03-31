@@ -104,6 +104,11 @@ if $LSP == 'native'
 	Plug 'hrsh7th/cmp-nvim-lsp'
 	Plug 'hrsh7th/cmp-nvim-lua'
 
+	Plug 'hrsh7th/cmp-calc'
+	Plug 'andersevenrud/cmp-tmux'
+	Plug 'hrsh7th/cmp-copilot'
+	Plug 'hrsh7th/cmp-emoji'
+
 	"  Snippets
 	Plug 'L3MON4D3/LuaSnip'
 	Plug 'rafamadriz/friendly-snippets'

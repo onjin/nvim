@@ -4,6 +4,22 @@ lua <<EOF
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
+
+local cmp_sources = require('lsp-zero.nvim-cmp-setup').sources()
+
+lsp.setup_nvim_cmp({
+    sources = {
+        {name = 'path'},
+        {name = 'nvim_lsp', keyword_length = 3},
+        {name = 'buffer', keyword_length = 3},
+        {name = 'luasnip', keyword_length = 2},
+        {name = 'calc'},
+        {name = 'copilot'},
+        {name = 'emoji'},
+        {name = 'tmux', option = {all_panes = true}},
+    }
+})
+
 lsp.setup()
 
 EOF
