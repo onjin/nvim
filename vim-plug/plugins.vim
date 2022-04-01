@@ -154,9 +154,8 @@ endif
 	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
 	"
 	" Python files autoformat using `black`
-	" Plug 'psf/black', { 'tag': '20.8b1' }
+	Plug 'psf/black', { 'tag': '20.8b1' }
 	" Plug 'psf/black', { 'tag': '19.10b0' }
-	" Plug 'averms/black-nvim'
 
 	" Plug 'bps/vim-textobj-python'
 	Plug 'jeetsukumaran/vim-pythonsense'  " replacement for vim_textobj-python
