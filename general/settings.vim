@@ -1,6 +1,7 @@
 filetype plugin indent on
 syntax on
 set backspace=indent,eol,start		" Intuitive backspacing in insert mode
+set confirm
 set hidden 												" hide not saved buffers
 
 set undofile
