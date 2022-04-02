@@ -23,7 +23,6 @@ source $VIMPATH/general/settings.vim
 source $VIMPATH/general/functions.vim
 source $VIMPATH/general/mappings.vim
 source $VIMPATH/general/quickfix.vim
-source $VIMPATH/general/confirm-quit.vim
 
 source $VIMPATH/themes/theme.vim
 " source $VIMPATH/themes/airline.vim
