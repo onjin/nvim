@@ -86,6 +86,7 @@ endif
 	Plug 'preservim/vimux'						" manageg tmux from vim"
 
 	Plug 'kyazdani42/nvim-tree.lua'
+	Plug 'windwp/nvim-autopairs'
 
 if $LSP == 'coc'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}

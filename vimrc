@@ -37,6 +37,7 @@ source $VIMPATH/plug-config/lsp.vim
 source $VIMPATH/general/tmux.vim
 source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/vim-dashboard.vim
+source $VIMPATH/plug-config/nvim-autopairs.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
 
 " FUZZY_FINDER {{{
