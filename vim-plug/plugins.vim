@@ -19,7 +19,7 @@ call plug#begin('~/.cache/vim/plugins')
 
 	" status line framework
 	Plug 'nvim-lualine/lualine.nvim'
-	Plug 'arkav/lualine-lsp-progress'
+	"Plug 'arkav/lualine-lsp-progress'
 	" Plug 'vim-airline/vim-airline' 
 	" Plug 'vim-airline/vim-airline-themes'
 
@@ -150,6 +150,9 @@ endif
 
 	Plug 'vim-scripts/mako.vim'
 	Plug 'metakirby5/codi.vim'
+
+	Plug 'rcarriga/nvim-notify'
+  Plug 'j-hui/fidget.nvim'		
 
 	" python folding
 	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 setup.py build_ext --inplace' }
