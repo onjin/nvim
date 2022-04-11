@@ -130,8 +130,8 @@ augroup yaml_fix
 augroup END
 
 " automate saving/loading fold
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
 " single global status line without win separators
 set laststatus=3
