@@ -11,8 +11,10 @@ call plug#begin('~/.cache/vim/plugins')
 	Plug 'sheerun/vim-polyglot'
 
 	" more colors
-	Plug 'chriskempson/base16-shell'
-	Plug 'chriskempson/base16-vim'
+	" Plug 'chriskempson/base16-shell'
+	" Plug 'chriskempson/base16-vim'
+
+	Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 	
 	" Support .editorconfig file
 	Plug 'editorconfig/editorconfig-vim'
