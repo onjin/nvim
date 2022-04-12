@@ -135,6 +135,7 @@ endif
 	Plug 'borisbrodski/vim-highlight-hero'
 
 	Plug 'freitass/todo.txt-vim'  " TODO.txt support
+	Plug 'folke/todo-comments.nvim'
 
 	Plug 'SirVer/ultisnips'
 
