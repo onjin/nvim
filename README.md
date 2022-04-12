@@ -6,23 +6,32 @@ Mostly used for DevOps and Python (web) development.
 
  * Plugins manager — https://github.com/junegunn/vim-plug
  * Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
- * Fuzzy search engine — https://github.com/junegunn/fzf.vim
- * Intelissense engine — https://github.com/neoclide/coc.nvim
+ * Fuzzy search engines:
+	* https://github.com/nvim-telescope/telescope.nvim -> (let $FUZZY_FINDER='telescope') [default]
+	* https://github.com/junegunn/fzf.vim -> (let $FUZZY_FINDER='fzf')
+ * Intellisense engines:
+	*	https://github.com/neovim/nvim-lspconfig ->  (let $LSP='native') [default]
+	* https://github.com/neoclide/coc.nvim -> (let $LSP='coc') 
  * Autoresize windows — https://github.com/camspiers/lens.vim
  * Live Markdown preview with diagrams support — https://github.com/iamcco/markdown-preview.nvim
  * Displays available keybindings in popup — https://github.com/liuchengxu/vim-which-key
 
-For a full list of plugins reffer to https://github.com/onjin/.vim/blob/main/vim-plug/plugins.vim
+For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/vim-plug/plugins.vim
 
 ## Screenshots
 
 Which key keybindings popup, just press `,` and wait for help
 
-![Screenshot](https://user-images.githubusercontent.com/44516/95565033-e65c3a80-0a1f-11eb-9cb4-8cfca2ad4fef.png)
+![Screenshot](https://user-images.githubusercontent.com/44516/162916448-0d41d3e6-96e2-4ab4-92f0-6e4f7fcc1f8c.png)
+
+
+LSP support
+
+![Screenshot](https://user-images.githubusercontent.com/44516/162918787-1c788b22-51db-4c9a-888a-f5cfc4abcc79.png)
 
 Markdown live preview
 
-![image](https://user-images.githubusercontent.com/44516/95565256-31764d80-0a20-11eb-8216-7c2dc85b7fe8.png)
+![Screenshot](https://user-images.githubusercontent.com/44516/162917974-f36a192c-3347-476d-91e0-e22f2e1bf916.png)
 
 ## Install by `git`
 
