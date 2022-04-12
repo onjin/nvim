@@ -151,6 +151,7 @@ set foldminlines=0 " Minimum number of lines in a fold; don't fold small things.
 "set foldmethod=manual " Set for other file types if desired; Cyfolds ignores it for Python.
 "
 autocmd FileType python setlocal foldlevel=1
+let b:cyfolds_suppress_insert_mode_switching = 0
 
 function! SuperFoldToggle()
     " Force the fold on the current line to immediately open or close.  Unlike za
