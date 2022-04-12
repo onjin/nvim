@@ -92,12 +92,6 @@ set cpoptions-=m                    " showmatch will wait 0.5s or until a char i
 " set colorcolumn=120                  " mark column
 set cursorline                      " show a visual line under the cursor's current line 
 
-set foldenable
-"set nofoldenable                    " Disable folding and show normal, unfolded text.
-set foldcolumn=0                    " The width of the fold-info column on the left, default is 0
-set foldlevelstart=-1               " The initial foldlevel; 0 closes all, 99 closes none, -1 default.
-set foldminlines=0                  " Minimum number of lines in a fold; don't fold small things.
-"set foldmethod=manual               " Set for other file types if desired; Cyfolds ignores it for Python.
 "
 set linebreak                   " Break long lines at 'breakat'
 set breakat=\ \	;:,!?           " Long lines break chars
@@ -135,5 +129,43 @@ autocmd BufWinEnter *.* silent loadview
 
 " single global status line without win separators
 set laststatus=3
+
+" Cyfolds settings.
+let cyfolds = 1 " Enable or disable loading the plugin.
+"let cyfolds_fold_keywords = "class,def,async def,cclass,cdef,cpdef" " Cython.
+let cyfolds_fold_keywords = "class,def,async def" " Python default.
+let cyfolds_lines_of_module_docstrings = 20 " Lines to keep unfolded, -1 means keep all.
+let cyfolds_lines_of_fun_and_class_docstrings = -1 " Lines to keep, -1 means keep all.
+let cyfolds_start_in_manual_method = 1 " Default is to start in manual mode.
+let cyfolds_no_initial_fold_calc = 0 " Whether to skip initial fold calculations.
+let cyfolds_fix_syntax_highlighting_on_update = 1 " Redo syntax highlighting on all updates.
+let cyfolds_update_all_windows_for_buffer = 1 " Update all windows for buffer, not just current.
+let cyfolds_increase_toplevel_non_class_foldlevels = 0
+
+" General folding settings.
+set foldenable " Enable folding and show the current folds.
+"set nofoldenable " Disable folding and show normal, unfolded text.
+set foldcolumn=0 " The width of the fold-info column on the left, default is 0
+set foldlevelstart=-1 " The initial foldlevel; 0 closes all, 99 closes none, -1 default.
+set foldminlines=0 " Minimum number of lines in a fold; don't fold small things.
+"set foldmethod=manual " Set for other file types if desired; Cyfolds ignores it for Python.
+"
+autocmd FileType python setlocal foldlevel=1
+
+function! SuperFoldToggle()
+    " Force the fold on the current line to immediately open or close.  Unlike za
+    " and zo it only takes one application to open any fold.  Unlike zO it does
+    " not open recursively, it only opens the current fold.
+    if foldclosed('.') == -1
+        silent! foldclose
+    else
+        while foldclosed('.') != -1
+            silent! foldopen
+        endwhile
+    endif
+endfunction
+
+" This sets the space bar to toggle folding and unfolding in normal mode.
+nnoremap <silent> <space> :call SuperFoldToggle()<CR>
 
 set exrc
