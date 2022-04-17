@@ -147,6 +147,8 @@ endif
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }	" markdowns / diagrams
 	Plug 'chrisbra/NrrwRgn'
 
+	Plug 'osohq/polar.vim'
+
 	" automatically resize windows
 	Plug 'camspiers/animate.vim'
 	Plug 'camspiers/lens.vim'
