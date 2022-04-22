@@ -39,6 +39,7 @@ source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/vim-dashboard.vim
 source $VIMPATH/plug-config/nvim-autopairs.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
+source $VIMPATH/plug-config/dap.vim
 
 " FUZZY_FINDER {{{
 source $VIMPATH/plug-config/fzf.vim

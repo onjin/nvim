@@ -171,6 +171,11 @@ endif
 	Plug 'raimon49/requirements.txt.vim'
 	" Plug 'ivanov/vim-ipython'  " lack of python 3 support
 	" Plug 'wmvanvliet/jupyter-vim'
+	
+	" Debugging
+	Plug 'mfussenegger/nvim-dap'
+	Plug 'mfussenegger/nvim-dap-python'
+	Plug 'rcarriga/nvim-dap-ui'
 
 	" semantic python syntax
 	" if has('nvim')
