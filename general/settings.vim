@@ -169,4 +169,13 @@ endfunction
 " This sets the space bar to toggle folding and unfolding in normal mode.
 nnoremap <silent> <space> :call SuperFoldToggle()<CR>
 
+" hybrid numbering in command mode
+:set number
+
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+:  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+:augroup END
+
 set exrc
