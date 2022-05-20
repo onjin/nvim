@@ -55,6 +55,7 @@ endif
 
 	" documentation generator
 	"Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+	Plug 'danymat/neogen'
 
 	" right sidebar with classes/functions/variables from current buffer
 	" Plug 'majutsushi/tagbar'

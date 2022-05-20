@@ -64,6 +64,7 @@ source $VIMPATH/plug-config/vim-grammarous.vim
 source $VIMPATH/plug-config/vim-indentline.vim
 source $VIMPATH/plug-config/nvim-notify.vim
 source $VIMPATH/plug-config/vim-fidget.vim
+source $VIMPATH/plug-config/neogen.vim
 source $VIMPATH/plug-config/vim-pad.vim
 " source $VIMPATH/plug-config/vim-startify.vim
 source $VIMPATH/plug-config/vim-surround.vim
