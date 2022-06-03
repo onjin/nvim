@@ -161,7 +161,7 @@ endif
   Plug 'j-hui/fidget.nvim'		
 
 	" python folding
-	Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 ./compile.py' }
+	" Plug 'abarker/cyfolds', { 'do': 'cd python3 && python3 ./compile.py' }
 	
 	" Python files autoformat using `black`
 	Plug 'psf/black', { 'tag': '20.8b1' }
