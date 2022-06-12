@@ -14,7 +14,7 @@ lsp.setup_nvim_cmp({
         {name = 'buffer', keyword_length = 3},
         {name = 'luasnip', keyword_length = 2},
         {name = 'calc'},
-        {name = 'copilot'},
+        -- {name = 'copilot'},
         {name = 'emoji'},
         -- {name = 'tmux', option = {all_panes = true}},
     }
