@@ -47,9 +47,6 @@ if $FUZZY_FINDER == 'telescope'
 	Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 	Plug 'nvim-telescope/telescope-media-files.nvim'
 	Plug 'nvim-telescope/telescope-github.nvim' " gh-cli
-	if $LSP == 'coc'
-		Plug 'fannheyward/telescope-coc.nvim'
-	endif
 endif
 	" fuzzy finder }}}
 
@@ -91,11 +88,6 @@ endif
 	Plug 'kyazdani42/nvim-tree.lua'
 	Plug 'windwp/nvim-autopairs'
 
-if $LSP == 'coc'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-endif
-
-if $LSP == 'native'
 	" LSP Support
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'williamboman/nvim-lsp-installer'
@@ -118,7 +110,6 @@ if $LSP == 'native'
 	Plug 'rafamadriz/friendly-snippets'
 
 	Plug 'VonHeikemen/lsp-zero.nvim'
-endif
 
 	Plug 'honza/vim-snippets'
 	Plug 'https://github.com/OmniSharp/omnisharp-vim'  " for goto definition

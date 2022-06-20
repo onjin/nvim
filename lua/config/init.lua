@@ -1,0 +1,7 @@
+require('config/dap')
+require('config/dashboard-nvim')
+require('config/lsp')
+require('config/lualine')
+require('config/neogen')
+require('config/nvim-tree')
+require('config/telescope')

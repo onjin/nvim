@@ -1,6 +1,3 @@
-if $LSP == 'native'
-
-lua <<EOF
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
@@ -22,12 +19,11 @@ lsp.setup_nvim_cmp({
 
 lsp.setup()
 
-EOF
+local map = require("utils").map
 
-nnoremap <Leader>dn :lua vim.diagnostic.goto_next()<cr>
-nnoremap <Leader>dp :lua vim.diagnostic.goto_prev()<cr>
-nnoremap <Leader>dd :lua vim.diagnostic.setloclist()<cr>
-" nnoremap <Leader>cf :lua vim.lsp.buf.formatting()<cr>
-nnoremap <Leader>cf :Black<cr>
+map("n", "<Leader>b", "<cmd>Telescope buffers<cr>")
 
-endif
+map("n", "<Leader>dn", ":lua vim.diagnostic.goto_next()<cr>")
+map("n", "<Leader>dp", ":lua vim.diagnostic.goto_prev()<cr>")
+map("n", "<Leader>dd", ":lua vim.diagnostic.setloclist()<cr>")
+map("n", "<Leader>cf", ":Black<cr>")

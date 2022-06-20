@@ -1,4 +1,3 @@
-lua <<EOF
 require'nvim-treesitter.configs'.setup {
     ensure_installed = {"python", "html", "javascript", "bash"},
     sync_insatll = false,
@@ -19,8 +18,6 @@ require'nvim-treesitter.configs'.setup {
         },
     },
 }
-EOF
-
-" set foldlevel=20
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+-- set foldlevel=20
+-- set foldmethod=expr
+-- set foldexpr=nvim_treesitter#foldexpr()

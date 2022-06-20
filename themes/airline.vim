@@ -14,10 +14,5 @@ let g:airline#extensions#languageserver#enabled= 1
 set showtabline=2
 
 
-if $LSP == 'coc'
-  let g:airline#extensions#coc#enabled= 1
-endif
-if $LSP == 'native'
-  let g:airline#extensions#lsp#enabled= 1
-  let g:airline#extensions#nvimlsp#enabled= 1
-endif
+let g:airline#extensions#lsp#enabled= 1
+let g:airline#extensions#nvimlsp#enabled= 1
