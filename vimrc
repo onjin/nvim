@@ -10,21 +10,18 @@ endif
 let $RTP=$VIMPATH
 let $RC="$RTP/vimrc"
 
-" let $FUZZY_FINDER='fzf'
-let $FUZZY_FINDER='telescope'
-
 source $VIMPATH/general/pre-plugins.vim
-"source $VIMPATH/vim-plug/plugins.vim
+"
+lua require("packer_init")
+lua require('core')
 
-source $VIMPATH/general/settings.vim
+" source $VIMPATH/general/settings.vim
 source $VIMPATH/general/functions.vim
-source $VIMPATH/general/mappings.vim
 source $VIMPATH/general/quickfix.vim
 
 source $VIMPATH/themes/theme.vim
 " source $VIMPATH/themes/airline.vim
 
-lua require('core')
 
 source $VIMPATH/plug-config/black.vim
 "
@@ -32,10 +29,6 @@ source $VIMPATH/general/tmux.vim
 source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
 
-" FUZZY_FINDER {{{
-source $VIMPATH/plug-config/fzf.vim
-" FUZZY_FINDER }}}
-"
 "source $VIMPATH/plug-config/telekasten.vim
 source $VIMPATH/plug-config/goyo.vim
 source $VIMPATH/plug-config/lens.vim

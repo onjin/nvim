@@ -51,6 +51,7 @@ map("n", "<Leader>fb", "<cmd>Telescope file_browser<cr>")
 map("n", "<Leader>fd", "<cmd>Telescope file_browser path=" .. home .. "/dotfiles<cr>")
 map("n", "<Leader>fg", "<cmd>Telescope git_files show_ungracked=false<cr>")
 map("n", "<Leader>ff", "<cmd>Telescope find_files find_command=rg,--hidden,--files<cr>")
+print("mapping telescope")
 
 -- do not map F - it's used to find backward
 -- map("") <Leader>fr :lua args = {'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case'} table.insert(args, vim.fn.input('rg > ')) require('telescope.builtin').live_grep( { vimgrep_arguments = args} )<CR>
