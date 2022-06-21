@@ -1,6 +1,6 @@
 --local packer = require('packer')
 --packer.ensure_plugins()
-require('config')
+-- require('config')
 --require('core.options')
 --require('core.mapping')
 --require('keymap')

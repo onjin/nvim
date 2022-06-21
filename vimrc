@@ -12,8 +12,7 @@ let $RC="$RTP/vimrc"
 
 source $VIMPATH/general/pre-plugins.vim
 "
-lua require("packer_init")
-lua require('core')
+lua require("init")
 
 " source $VIMPATH/general/settings.vim
 source $VIMPATH/general/functions.vim
