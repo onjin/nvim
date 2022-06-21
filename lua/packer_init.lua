@@ -30,9 +30,14 @@ end
 
 return require('packer').startup({function(use)
     -- Color Theme
-    use {'NLKNguyen/papercolor-theme'}
-    use {'navarasu/onedark.nvim'}
-    use {'tomasiser/vim-code-dark'}
+    use { 'arcticicestudio/nord-vim' }
+    use { 'crispybaccoon/fantastic.vim' }
+    use { 'navarasu/onedark.nvim' }
+    use { 'NLKNguyen/papercolor-theme' }
+    use { 'rakr/vim-one' }
+    use { 'sonph/onehalf', rtp = 'vim' }
+    use { 'tomasiser/vim-code-dark' }
+
     use {'sheerun/vim-polyglot'}
 
     -- more colors
@@ -89,7 +94,7 @@ return require('packer').startup({function(use)
     -- better wordmotion (f.i. between CamelCaseWords)
     use {'chaoren/vim-wordmotion'}
 
-    -- a convenient way to select and operate on various types of objects 
+    -- a convenient way to select and operate on various types of objects
     use {'michaeljsmith/vim-indent-object'}
 
     -- create your own text objects without pain
@@ -215,6 +220,7 @@ return require('packer').startup({function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
+    use { 'nvim-treesitter/playground' }
     use {'romgrk/nvim-treesitter-context'}
 
     -- grammary checker
@@ -240,7 +246,7 @@ return require('packer').startup({function(use)
     -- use {'mhinz/vim-startify'}
     use {'glepnir/dashboard-nvim'}
 
-    -- takes your buffers and tabs, and shows them combined in the tabline  
+    -- takes your buffers and tabs, and shows them combined in the tabline
     use {'bagrat/vim-buffet'}
 
     -- rockstart language syntax
