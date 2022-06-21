@@ -30,21 +30,23 @@ end
 
 return require('packer').startup({function(use)
     -- Color Theme
-    use { 'arcticicestudio/nord-vim' }
-    use { 'crispybaccoon/fantastic.vim' }
-    use { 'navarasu/onedark.nvim' }
-    use { 'NLKNguyen/papercolor-theme' }
-    use { 'rakr/vim-one' }
-    use { 'sonph/onehalf', rtp = 'vim' }
-    use { 'tomasiser/vim-code-dark' }
+    use { 'Shatur/neovim-ayu' }
+    -- use { 'arcticicestudio/nord-vim' }
+    -- use { 'crispybaccoon/fantastic.vim' }
+    -- use { 'navarasu/onedark.nvim' }
+    -- use { 'NLKNguyen/papercolor-theme' }
+    -- use { 'rakr/vim-one' }
+    -- use { 'sonph/onehalf', rtp = 'vim' }
+    -- use { 'tomasiser/vim-code-dark' }
+    -- use({ 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*' })
+    -- use {'folke/tokyonight.nvim'}
 
-    use {'sheerun/vim-polyglot'}
+    -- use {'sheerun/vim-polyglot'}
 
     -- more colors
     -- use {'chriskempson/base16-shell'}
     -- use {'chriskempson/base16-vim'}
 
-    use {'folke/tokyonight.nvim'}
 
     -- Support .editorconfig file
     use {'editorconfig/editorconfig-vim'}

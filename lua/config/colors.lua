@@ -1,8 +1,9 @@
 vim.o.background = "dark"
 
-vim.g.tokyonight_style = "night"
-vim.g.tokyonight_italic_functions = true
-vim.g.tokyonight_sidebars	= {"qf", "vista_kind", "terminal", "packer" }
-vim.g.tokyonight_colors = { hint = 'orange', error = '#ff0000' }
-
-vim.cmd[[colorscheme onedark]]
+require('ayu').setup({
+  overrides = {
+    IncSearch = { fg = '#FFFFFF' },
+    NormalNC = {bg = '#0f151e', fg = '#808080'}
+  }
+})
+vim.cmd('colorscheme ayu-mirage')
