@@ -19,12 +19,9 @@ lua require('core')
 source $VIMPATH/general/functions.vim
 source $VIMPATH/general/quickfix.vim
 
-source $VIMPATH/themes/theme.vim
+" source $VIMPATH/themes/theme.vim
 " source $VIMPATH/themes/airline.vim
 
-
-source $VIMPATH/plug-config/black.vim
-"
 source $VIMPATH/general/tmux.vim
 source $VIMPATH/plug-config/cyfolds.vim
 source $VIMPATH/plug-config/editorconfig-vim.vim
