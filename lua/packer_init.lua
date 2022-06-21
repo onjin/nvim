@@ -260,7 +260,9 @@ return require('packer').startup({function(use)
         requires = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
-            "antoinemadec/FixCursorHold.nvim"
+            "antoinemadec/FixCursorHold.nvim",
+            "nvim-neotest/neotest-python",
+            "nvim-neotest/neotest-plenary"
         }
     }
 
