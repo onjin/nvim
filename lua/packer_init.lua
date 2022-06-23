@@ -78,6 +78,8 @@ return require('packer').startup({function(use)
     use {'nvim-telescope/telescope-media-files.nvim'}
     use {'nvim-telescope/telescope-github.nvim'} -- gh-cli
     use { "nvim-telescope/telescope-file-browser.nvim" }
+    use { 'nvim-telescope/telescope-project.nvim' }
+    use { 'cljoly/telescope-repo.nvim' }
     -- fuzzy finder }}}
 
     -- documentation generator
@@ -264,6 +266,38 @@ return require('packer').startup({function(use)
             "nvim-neotest/neotest-python",
             "nvim-neotest/neotest-plenary"
         }
+    }
+    -- use { 'diepm/vim-rest-console' }
+    use {
+      "NTBBloodbath/rest.nvim",
+      requires = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("rest-nvim").setup({
+          -- Open request results in a horizontal split
+          result_split_horizontal = false,
+          -- Keep the http file buffer above|left when split horizontal|vertical
+          result_split_in_place = false,
+          -- Skip SSL verification, useful for unknown certificates
+          skip_ssl_verification = false,
+          -- Highlight request on run
+          highlight = {
+            enabled = true,
+            timeout = 150,
+          },
+          result = {
+            -- toggle showing URL, HTTP info, headers at top the of result window
+            show_url = true,
+            show_http_info = true,
+            show_headers = true,
+          },
+          -- Jump to request line on run
+          jump_to_request = false,
+          env_file = '.env',
+          custom_dynamic_variables = {},
+          yank_dry_run = true,
+        })
+        vim.keymap.set("n", "<C-j>", "<Plug>RestNvim", { noremap = true, silent = true })
+      end
     }
 
     use {'github/copilot.vim'}

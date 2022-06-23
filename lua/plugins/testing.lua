@@ -14,7 +14,7 @@ require("neotest").setup({
   }
 })
 
-map('n', '<leader>tn', ':lua require("neotest").run.run()<cr>')
+map('n', '<leader>tr', ':lua require("neotest").run.run()<cr>')
 map('n', '<leader>tl', ':lua require("neotest").run.run_last()<cr>')
 map('n', '<leader>tf', ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>')
 map('n', '<leader>tu', ':lua require("neotest").run.stop()<cr>')

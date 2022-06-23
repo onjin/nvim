@@ -33,14 +33,23 @@ require('telescope').setup{
     file_browser = {
       theme = "ivy",
       hijack_netrw = true,
+    },
+     project = {
+          base_dirs = {
+            {'~/Workspace/src', max_depth = 4},
+          },
+          display_type  = 'full', -- or 'minimal'
+          hidden_files = true, -- default: false
+          -- theme = "dropdown"
     }
-  }
-}
+}}
 require('telescope').load_extension('file_browser')
 require('telescope').load_extension('frecency')
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('gh')
 require('telescope').load_extension('media_files')
+require'telescope'.load_extension('project')
+require'telescope'.load_extension'repo'
 
 local map = require("utils").map
 
@@ -49,6 +58,7 @@ map("n", "<Leader>B", "<cmd>Telescope current_buffer_tags<cr>")
 
 map("n", "<Leader>fb", "<cmd>Telescope file_browser<cr>")
 map("n", "<Leader>fd", "<cmd>Telescope file_browser path=" .. home .. "/dotfiles<cr>")
+map("n", "<Leader>fv", "<cmd>Telescope file_browser path=" .. home .. "/.vim/<cr>")
 map("n", "<Leader>fg", "<cmd>Telescope git_files show_ungracked=false<cr>")
 map("n", "<Leader>ff", "<cmd>Telescope find_files find_command=rg,--hidden,--files<cr>")
 
@@ -60,3 +70,4 @@ map("n", "<Leader>ft", "<cmd>Telescope tags<cr>")
 map("n", "<Leader>fh", "<cmd>Telescope frecency<cr>")
 
 map("n", "<C-p>", "<cmd>Telescope git_files show_untracked=false<cr>")
+map("n", "<leader>p", "<cmd>Telescope project<cr>")
