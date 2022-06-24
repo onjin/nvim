@@ -18,3 +18,4 @@ map <buffer> <leader>pm <Plug>(PythonsenseStartOfPythonFunction)
 map <buffer> <leader>pM <Plug>(PythonsenseEndOfPreviousPythonFunction)
 
 map <buffer> g: <Plug>(PythonsensePyWhere)
+map <buffer> <leader>cf :Black<cr>
