@@ -31,15 +31,16 @@ end
 return require('packer').startup({function(use)
     -- Color Theme
     use { 'Shatur/neovim-ayu' }
-    -- use { 'arcticicestudio/nord-vim' }
-    -- use { 'crispybaccoon/fantastic.vim' }
-    -- use { 'navarasu/onedark.nvim' }
-    -- use { 'NLKNguyen/papercolor-theme' }
-    -- use { 'rakr/vim-one' }
-    -- use { 'sonph/onehalf', rtp = 'vim' }
-    -- use { 'tomasiser/vim-code-dark' }
-    -- use({ 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*' })
-    -- use {'folke/tokyonight.nvim'}
+    use { 'arcticicestudio/nord-vim' }
+    use { 'crispybaccoon/fantastic.vim' }
+    use { 'navarasu/onedark.nvim' }
+    use { 'NLKNguyen/papercolor-theme' }
+    use { 'pappasam/papercolor-theme-slim' }
+    use { 'rakr/vim-one' }
+    use { 'sonph/onehalf', rtp = 'vim' }
+    use { 'tomasiser/vim-code-dark' }
+    use({ 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*' })
+    use {'folke/tokyonight.nvim'}
 
     -- use {'sheerun/vim-polyglot'}
 

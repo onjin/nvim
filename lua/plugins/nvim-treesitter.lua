@@ -24,7 +24,7 @@ require 'nvim-treesitter.configs'.setup {
     disable = {}
   },
   indent = {
-    enable = true, -- false will disable the whole extension
+    enable = false, -- false will disable the whole extension
     disale = {}
   },
 }

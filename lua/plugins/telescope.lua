@@ -66,6 +66,7 @@ map("n", "<Leader>ff", "<cmd>Telescope find_files find_command=rg,--hidden,--fil
 -- map("") <Leader>fr :lua args = {'rg','--color=never','--no-heading','--with-filename','--line-number','--column','--smart-case'} table.insert(args, vim.fn.input('rg > ')) require('telescope.builtin').live_grep( { vimgrep_arguments = args} )<CR>
 map("n", "<Leader>fr", "<cmd>Telescope live_grep<cr>")
 map("n", "<Leader>ft", "<cmd>Telescope tags<cr>")
+map("n", "<Leader>fc", "<cmd>Telescope colorscheme<cr>")
 
 map("n", "<Leader>fh", "<cmd>Telescope frecency<cr>")
 
