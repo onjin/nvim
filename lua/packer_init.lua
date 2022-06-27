@@ -62,6 +62,26 @@ return require('packer').startup({function(use)
 
     -- :lcd to project root on open buffer
     use {'airblade/vim-rooter'}
+    use {
+      'rmagatti/auto-session',
+      config = function()
+        require('auto-session').setup {
+          log_level = 'info',
+          auto_session_suppress_dirs = {'~/', '/tmp'}
+        }
+      end
+    }
+    use {
+      'rmagatti/session-lens',
+      requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+      config = function()
+        require('session-lens').setup({
+        path_display = {'shorten'},
+        theme_conf = { border = true },
+        previewer = false
+      })
+      end
+    }
 
     -- indent lvl indicator
     use {'Yggdroot/indentLine'  }
@@ -122,6 +142,13 @@ return require('packer').startup({function(use)
         config = function() require("nvim-autopairs").setup {}
         end
     }
+    use({
+        'CosmicNvim/cosmic-ui',
+      requires = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+      config = function()
+        require('cosmic-ui').setup()
+      end,
+    })
 
     -- LSP Support
     use {'neovim/nvim-lspconfig'}
