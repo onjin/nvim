@@ -70,4 +70,4 @@ map("n", "<Leader>ft", "<cmd>Telescope tags<cr>")
 map("n", "<Leader>fh", "<cmd>Telescope frecency<cr>")
 
 map("n", "<C-p>", "<cmd>Telescope git_files show_untracked=false<cr>")
-map("n", "<leader>p", "<cmd>Telescope project<cr>")
+map("n", "<leader>fp", "<cmd>Telescope project<cr>")
