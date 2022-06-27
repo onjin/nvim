@@ -53,7 +53,8 @@ map('n', '<leader>cf', '<cmd>lua vim.lsp.buf.formatting()<cr>')
 map('v', '<leader>cf', '<cmd>lua vim.lsp.buf.range_formatting()<cr>')
 
 -- signature help
-map('n', '<C-K>', '<cmd>lua require("lsp_signature").signature()<cr>')
+-- clashes with ctrl-hjkl navigation
+-- map('n', '<C-K>', '<cmd>lua require("lsp_signature").signature()<cr>')
 
 -- lsp workspace
 map('n', '<leader>wd', '<cmd>Telescope diagnostics<cr>')

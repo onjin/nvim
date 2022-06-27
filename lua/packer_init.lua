@@ -133,6 +133,28 @@ return require('packer').startup({function(use)
     use {'tpope/vim-fugitive'}
     use {'airblade/vim-gitgutter'     }-- A Vim plugin which shows a git diff in the sign column.
 
+		use({
+				"aserowy/tmux.nvim",
+				config = function()
+						require("tmux").setup({
+								-- overwrite default configuration
+								-- here, e.g. to enable default bindings
+								copy_sync = {
+										-- enables copy sync and overwrites all register actions to
+										-- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
+										enable = true,
+								},
+								navigation = {
+										-- enables default keybindings (C-hjkl) for normal mode
+										enable_default_keybindings = true,
+								},
+								resize = {
+										-- enables default keybindings (A-hjkl) for normal mode
+										enable_default_keybindings = true,
+								}
+						})
+				end
+		})
     use {'wellle/tmux-complete.vim'		}-- coc complete from tmux panes
     use {'tmux-plugins/vim-tmux'			}-- tmux syntax
     use {'preservim/vimux'						}-- manageg tmux from vim
@@ -323,7 +345,7 @@ return require('packer').startup({function(use)
           custom_dynamic_variables = {},
           yank_dry_run = true,
         })
-        vim.keymap.set("n", "<C-j>", "<Plug>RestNvim", { noremap = true, silent = true })
+        vim.keymap.set("n", "<leader>u", "<Plug>RestNvim", { noremap = true, silent = true })
       end
     }
 

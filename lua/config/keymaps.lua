@@ -3,7 +3,7 @@ local map = require('utils').map
 vim.g.mapleader = ','
 
 
-map("i", "jk", "<esc>")
+-- map("i", "jk", "<esc>")
 
 -- registers :reg
 map("n", "pp", '"*p')
@@ -21,7 +21,7 @@ map("n", "<leader>cs", ":!isort %<CR>")
 map("", "<leader>bn", ":bn<CR>")
 map("", "<leader>bp", ":bp<CR>")
 map("", "<leader><Tab>", ":bn<CR>")
-map("", "<leader><js-Tab>", ":bp<CR>")
+map("", "<leader><S-Tab>", ":bp<CR>")
 
 -- allow to use `.` on visual selections
 map("v", ".", ":norm.<CR>")
