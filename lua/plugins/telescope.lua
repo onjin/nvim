@@ -72,3 +72,6 @@ map("n", "<Leader>fh", "<cmd>Telescope frecency<cr>")
 
 map("n", "<C-p>", "<cmd>Telescope git_files show_untracked=false<cr>")
 map("n", "<leader>fp", "<cmd>Telescope project<cr>")
+
+-- spellcheck
+map("n", "<leader>ss", "<cmd>Telescope spell_suggest<cr>")
