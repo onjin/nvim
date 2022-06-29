@@ -189,6 +189,7 @@ return require('packer').startup({function(use)
     use {'andersevenrud/cmp-tmux'}
     use {'hrsh7th/cmp-copilot'}
     use {'hrsh7th/cmp-emoji'}
+    use { 'davidsierradz/cmp-conventionalcommits' }
 
     --  Snippets
     use {'L3MON4D3/LuaSnip'}
