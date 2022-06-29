@@ -46,3 +46,5 @@ source $VIMPATH/plug-config/vim-test.vim
 source $VIMPATH/plug-config/vim-which-key.vim
 source $VIMPATH/plug-config/vimux.vim
 source $VIMPATH/plug-config/vista.vim
+
+lua require("utils").load_dynamic_configs()
