@@ -1,3 +1,8 @@
+local map = function(mode, lhs, rhs)
+  local opts = {remap = false, buffer = bufnr}
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
@@ -14,49 +19,54 @@ lsp.setup_nvim_cmp({
         -- {name = 'copilot'},
         {name = 'emoji'},
         -- {name = 'tmux', option = {all_panes = true}},
-    }
+    },
 })
+
+-- pyrigh config, f.e. code format using :Black
+lsp.configure('pyright', {
+  on_attach = function(client, bufnr)
+    -- formatting
+    map('n', '<leader>cf', '<cmd>:Black<cr>')
+    map('v', '<leader>cf', '<cmd>vim.notify("code range format not supported with Black")<cr>')
+  end
+})
+
 
 lsp.setup()
 
-local map = require("utils").map
 
-map("n", "<Leader>b", "<cmd>Telescope buffers<cr>")
+lsp.on_attach(function(client, bufnr)
+  vim.notify("Client " .. client.name .. " attached to buffer ".. bufnr, nil, { title = 'LSP'})
 
-map("n", "<Leader>dn", ":lua vim.diagnostic.goto_next()<cr>")
-map("n", "<Leader>dp", ":lua vim.diagnostic.goto_prev()<cr>")
-map("n", "<Leader>dd", ":lua vim.diagnostic.setloclist()<cr>")
-map("n", "<Leader>ca", ":lua vim.lsp.buf.code_action()<cr>")
+  -- LSP actions
+  map('n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>')
+  map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+  map('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>')
+  map('n', 'gt', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>')
+  map('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
+  map('n', 'gs', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>')
+  map('n', 'gn', '<cmd>lua require("cosmic-ui").rename()<cr>')
 
-map('n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>')
-map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
-map('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>')
-map('n', 'gt', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>')
-map('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
-map('n', 'gn', '<cmd>lua require("cosmic-ui").rename()<cr>')
+  -- code actions
+  map('n', '<leader>ca', '<cmd>lua require("cosmic-ui").code_actions()<cr>')
+  map('v', '<leader>ca', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>')
 
--- diagnostics
-map('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-map('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-map('n', 'ge', '<cmd>lua vim.diagnostic.open_float(nil, { scope = "line", })<cr>')
-map('n', '<leader>ce', '<cmd>Telescope diagnostics bufnr=0<cr>')
+  -- formatting
+  map('n', '<leader>cf', '<cmd>lua vim.lsp.buf.format({ async = true })<cr>')
+  map('v', '<leader>cf', '<cmd>lua vim.lsp.buf.range_formatting()<cr>')
 
--- hover
-map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+  -- lsp workspace
+  map('n', '<leader>wd', '<cmd>Telescope diagnostics<cr>')
+  map('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>')
+  map('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>')
 
--- code actions
-map('n', '<leader>ca', '<cmd>lua require("cosmic-ui").code_actions()<cr>')
-map('v', '<leader>ca', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>')
-
--- formatting
-map('n', '<leader>cf', '<cmd>lua vim.lsp.buf.formatting()<cr>')
-map('v', '<leader>cf', '<cmd>lua vim.lsp.buf.range_formatting()<cr>')
-
--- signature help
--- clashes with ctrl-hjkl navigation
--- map('n', '<C-K>', '<cmd>lua require("lsp_signature").signature()<cr>')
-
--- lsp workspace
-map('n', '<leader>wd', '<cmd>Telescope diagnostics<cr>')
-map('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>')
-map('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>')
+  -- Diagnostics
+  map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+  map('n', 'ge', '<cmd>lua vim.diagnostic.open_float(nil, { scope = "line", })<cr>')
+  map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+  map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+  map("n", "<Leader>dn", ":lua vim.diagnostic.goto_next()<cr>")
+  map("n", "<Leader>dp", ":lua vim.diagnostic.goto_prev()<cr>")
+  map("n", "<Leader>dd", ":lua vim.diagnostic.setloclist()<cr>")
+  map("n", "<Leader>ca", ":lua vim.lsp.buf.code_action()<cr>")
+end)

@@ -63,25 +63,10 @@ return require('packer').startup({function(use)
 
     -- :lcd to project root on open buffer
     use {'airblade/vim-rooter'}
-    use {
-      'rmagatti/auto-session',
-      config = function()
-        require('auto-session').setup {
-          log_level = 'info',
-          auto_session_suppress_dirs = {'~/', '/tmp'}
-        }
-      end
-    }
+    use { 'rmagatti/auto-session', }
     use {
       'rmagatti/session-lens',
       requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
-      config = function()
-        require('session-lens').setup({
-        path_display = {'shorten'},
-        theme_conf = { border = true },
-        previewer = false
-      })
-      end
     }
 
     -- indent lvl indicator
@@ -134,28 +119,7 @@ return require('packer').startup({function(use)
     use {'tpope/vim-fugitive'}
     use {'airblade/vim-gitgutter'     }-- A Vim plugin which shows a git diff in the sign column.
 
-		use({
-				"aserowy/tmux.nvim",
-				config = function()
-						require("tmux").setup({
-								-- overwrite default configuration
-								-- here, e.g. to enable default bindings
-								copy_sync = {
-										-- enables copy sync and overwrites all register actions to
-										-- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
-										enable = true,
-								},
-								navigation = {
-										-- enables default keybindings (C-hjkl) for normal mode
-										enable_default_keybindings = true,
-								},
-								resize = {
-										-- enables default keybindings (A-hjkl) for normal mode
-										enable_default_keybindings = true,
-								}
-						})
-				end
-		})
+		use({ "aserowy/tmux.nvim", })
     use {'wellle/tmux-complete.vim'		}-- coc complete from tmux panes
     use {'tmux-plugins/vim-tmux'			}-- tmux syntax
     use {'preservim/vimux'						}-- manageg tmux from vim
@@ -238,15 +202,8 @@ return require('packer').startup({function(use)
     use {'vim-scripts/mako.vim'}
     use {'metakirby5/codi.vim'}
 
-    use {'rcarriga/nvim-notify',
-        config = function() require("notify").setup({level='info'})
-        require('telescope').load_extension('notify')
-        end
-    }
-    use {'j-hui/fidget.nvim',
-        config = function() require("fidget").setup()
-        end
-    }
+    use {'rcarriga/nvim-notify'}
+    use {'j-hui/fidget.nvim' }
 
     -- python folding
     -- use {'abarker/cyfolds', { 'do': 'cd python3 && python3 ./compile.py' }}
@@ -282,16 +239,7 @@ return require('packer').startup({function(use)
     use {'rhysd/vim-grammarous'}
 
     -- visual help for leader keys
-    use {
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
-    }
+    use { "folke/which-key.nvim" }
     use {'hauleth/vim-backscratch'  }-- :Scratch buffers
 
     -- nice icons
@@ -322,33 +270,6 @@ return require('packer').startup({function(use)
     use {
       "NTBBloodbath/rest.nvim",
       requires = { "nvim-lua/plenary.nvim" },
-      config = function()
-        require("rest-nvim").setup({
-          -- Open request results in a horizontal split
-          result_split_horizontal = false,
-          -- Keep the http file buffer above|left when split horizontal|vertical
-          result_split_in_place = false,
-          -- Skip SSL verification, useful for unknown certificates
-          skip_ssl_verification = false,
-          -- Highlight request on run
-          highlight = {
-            enabled = true,
-            timeout = 150,
-          },
-          result = {
-            -- toggle showing URL, HTTP info, headers at top the of result window
-            show_url = true,
-            show_http_info = true,
-            show_headers = true,
-          },
-          -- Jump to request line on run
-          jump_to_request = false,
-          env_file = '.env',
-          custom_dynamic_variables = {},
-          yank_dry_run = true,
-        })
-        vim.keymap.set("n", "<leader>u", "<Plug>RestNvim", { noremap = true, silent = true })
-      end
     }
 
     use {'github/copilot.vim'}
