@@ -45,4 +45,15 @@ function M.load_dynamic_configs()
 	M.load_user_config("colors")
 end
 
+function M.reload_nvim_conf()
+  for name,_ in pairs(package.loaded) do
+    if name:match('^core') or name:match('^config') or name:match('^plugins') then
+      package.loaded[name] = nil
+    end
+  end
+
+  require('init')
+  vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
+end
+
 return M

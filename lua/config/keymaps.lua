@@ -4,6 +4,7 @@ vim.g.mapleader = ','
 
 
 -- map("i", "jk", "<esc>")
+map('n', "<leader>RR", "<cmd>lua require('utils').reload_nvim_conf()<cr>")
 
 -- registers :reg
 map("n", "pp", '"*p')
@@ -41,3 +42,14 @@ map("n", "<leader>c3", ":lua require'utils'.colors('ayu-dark')<cr>")
 map("n", "<leader>c4", ":lua require'utils'.colors('tokyonight')<cr>")
 map("n", "<leader>c5", ":lua require'utils'.colors('fantastic')<cr>")
 map("n", "<leader>c6", ":lua require'utils'.colors('nord')<cr>")
+
+
+-- terminal
+map('n', "<leader>TT", ':split term://bash<cr>')
+map('n', "<leader>tv", ':split term://bash<cr>')
+map("t", "<Esc>", '<C-\\><C-n>')
+
+map("t", "<C-h>", '<C-\\><C-n><C-w>h')
+map("t", "<C-j>", '<C-\\><C-n><C-w>j')
+map("t", "<C-k>", '<C-\\><C-n><C-w>k')
+map("t", "<C-l>", '<C-\\><C-n><C-w>l')
