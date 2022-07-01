@@ -52,9 +52,10 @@ autocmd('TermOpen', {
   command = 'setlocal listchars= nonumber norelativenumber nocursorline',
 })
 
+-- skip terms from NeoTest
 autocmd('TermOpen', {
   pattern = '*',
-  command = 'startinsert'
+  command = "if nvim_buf_get_name(0) =~# '^term://.*' | startinsert | endif"
 })
 
 -- Close terminal buffer on process exit
