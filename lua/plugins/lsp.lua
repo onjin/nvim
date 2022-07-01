@@ -40,12 +40,25 @@ lsp.on_attach(function(client, bufnr)
 
   -- LSP actions
   map('n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>')
+  map('n', '<leader>ld', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>')
+
   map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+  map('n', '<leader>lD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+
   map('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>')
+  map('n', '<leader>li', '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>')
+
   map('n', 'gt', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>')
+  map('n', '<leader>lt', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>')
+
   map('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
+  map('n', '<leader>lr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
+
   map('n', 'gs', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>')
+  map('n', '<leader>ls', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>')
+
   map('n', 'gn', '<cmd>lua require("cosmic-ui").rename()<cr>')
+  map('n', '<leader>ln', '<cmd>lua require("cosmic-ui").rename()<cr>')
 
   -- code actions
   map('n', '<leader>ca', '<cmd>lua require("cosmic-ui").code_actions()<cr>')
@@ -56,13 +69,17 @@ lsp.on_attach(function(client, bufnr)
   map('v', '<leader>cf', '<cmd>lua vim.lsp.buf.range_formatting()<cr>')
 
   -- lsp workspace
-  map('n', '<leader>wd', '<cmd>Telescope diagnostics<cr>')
+  map('n', '<leader>wl', '<cmd>lua vim.lsp.buf.list_workspace_folders()<cr>')
   map('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>')
   map('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>')
 
   -- Diagnostics
   map('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
+  map('n', '<leader>ll', '<cmd>lua vim.diagnostic.open_float()<cr>')
+
   map('n', 'ge', '<cmd>lua vim.diagnostic.open_float(nil, { scope = "line", })<cr>')
+  map('n', '<leader>le', '<cmd>lua vim.diagnostic.open_float(nil, { scope = "line", })<cr>')
+
   map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
   map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   map("n", "<Leader>dn", ":lua vim.diagnostic.goto_next()<cr>")
