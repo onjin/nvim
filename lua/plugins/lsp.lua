@@ -36,7 +36,7 @@ lsp.setup()
 
 
 lsp.on_attach(function(client, bufnr)
-  vim.notify("Client " .. client.name .. " attached to buffer ".. bufnr, nil, { title = 'LSP'})
+  -- vim.notify("Client " .. client.name .. " attached to buffer ".. bufnr, nil, { title = 'LSP'})
 
   -- LSP actions
   map('n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>')
