@@ -1,5 +1,6 @@
 local g = vim.g       -- Global variables
 local opt = vim.opt   -- Set options (global/buffer/windows-scoped)
+local prefix = vim.env.XDG_STATE_HOME or vim.fn.expand("~/.local/state")
 
 -----------------------------------------------------------
 -- General
@@ -42,6 +43,17 @@ opt.history = 100           -- Remember N lines in history
 opt.lazyredraw = true       -- Faster scrolling
 opt.synmaxcol = 240         -- Max column for syntax highlight
 opt.updatetime = 700        -- ms to wait for trigger an event
+
+-----------------------------------------------------------
+-- Undo, backup
+-----------------------------------------------------------
+opt.undofile = true
+opt.swapfile = true
+opt.backup = false
+
+opt.undodir = { prefix .. "/nvim/undo//"}
+opt.backupdir = {prefix .. "/nvim/backup//"}
+opt.directory = { prefix .. "/nvim/swp//"}
 
 -----------------------------------------------------------
 -- Startup

@@ -23,8 +23,8 @@ else
 endif
 
 
-set directory=$VARPATH/swap//,$VARPATH,~/tmp,/var/tmp,/tmp
-set undodir=$VARPATH/undo//,$VARPATH,~/tmp,/var/tmp,/tmp
+set directory=$VARPATH/swap/,$VARPATH,~/tmp,/var/tmp,/tmp
+set undodir=$VARPATH/undo/,$VARPATH,~/tmp,/var/tmp,/tmp
 set backupdir=$VARPATH/backup/,$VARPATH,~/tmp,/var/tmp,/tmp
 set viewdir=$VARPATH/view/
 set nospell spellfile=$VIMPATH/spell/en.utf-8.add spelllang=en_us
@@ -69,13 +69,13 @@ autocmd FileType html,htmldjango,css EmmetInstall
 
 set showcmd
 
-set number                          " show line numbers 
+set number                          " show line numbers
 
-set shiftwidth=4                    " when using the >> or << commands, shift lines by 4 spaces 
-set tabstop=4                            " set tabs to have 4 spaces 
-set softtabstop=4                            " set tabs to have 4 spaces 
+set shiftwidth=4                    " when using the >> or << commands, shift lines by 4 spaces
+set tabstop=4                            " set tabs to have 4 spaces
+set softtabstop=4                            " set tabs to have 4 spaces
 set autoindent                      " indent when moving to the next line while writing codeP
-set expandtab                       " expand tabs into spaces 
+set expandtab                       " expand tabs into spaces
 set shiftround                      " Round indent to multiple of 'shiftwidth'
 
 set ignorecase                      " Search ignoring case
@@ -90,7 +90,7 @@ set matchtime=1                     " Tenths of a second to show the matching pa
 set cpoptions-=m                    " showmatch will wait 0.5s or until a char is typed
 
 " set colorcolumn=120                  " mark column
-set cursorline                      " show a visual line under the cursor's current line 
+set cursorline                      " show a visual line under the cursor's current line
 
 "
 set linebreak                   " Break long lines at 'breakat'
