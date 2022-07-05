@@ -28,6 +28,7 @@ lsp.configure('pyright', {
     -- formatting
     map('n', '<leader>cf', '<cmd>:Black<cr>')
     map('v', '<leader>cf', '<cmd>vim.notify("code range format not supported with Black")<cr>')
+    map('n', '<leader>ci', '<cmd>PyrightOrganizeImports<cr>')
   end
 })
 

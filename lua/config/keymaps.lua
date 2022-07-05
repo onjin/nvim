@@ -16,7 +16,6 @@ map("n", "<leader>vc", ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conc
 map("n", "<leader>ml", ":call AppendModeline()<CR>", { silent = true })
 
 -- utilities
-map("n", "<leader>cs", ":!isort %<CR>")
 
 -- buffers navigation
 map("", "<leader>bn", ":bn<CR>")
