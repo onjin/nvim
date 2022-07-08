@@ -35,6 +35,17 @@ lsp.configure('pyright', {
 
 lsp.setup()
 
+require'lspconfig'.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+    },
+  },
+}
+
 
 lsp.on_attach(function(client, bufnr)
   -- vim.notify("Client " .. client.name .. " attached to buffer ".. bufnr, nil, { title = 'LSP'})
@@ -88,3 +99,4 @@ lsp.on_attach(function(client, bufnr)
   map("n", "<Leader>dd", ":lua vim.diagnostic.setloclist()<cr>")
   map("n", "<Leader>ca", ":lua vim.lsp.buf.code_action()<cr>")
 end)
+map("n", "<Leader>dt", ":TroubleToggle<cr>")
