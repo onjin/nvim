@@ -268,6 +268,7 @@ return require('packer').startup({ function(use)
   use { 'sirosen/vim-rockstar' }
 
   use { 'vim-test/vim-test' }
+  use { 'skywind3000/asyncrun.vim' }
   use {
     "nvim-neotest/neotest",
     requires = {
