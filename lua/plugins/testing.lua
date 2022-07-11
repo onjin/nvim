@@ -2,6 +2,7 @@ local map = require('utils').map
 
 require("neotest").setup({
   adapters = {
+    --[[
     require("neotest-python")({
       dap = { justMyCode = false },
       args = {"--log-level", "DEBUG"},
@@ -10,6 +11,8 @@ require("neotest").setup({
       runner = "pytest",
       executable = "docker-compose exec app pytest --ini=config.ini"
     }),
+    --]]
+    require("neotest-vim-test")({ ignore_filetypes = { } }),
     require("neotest-plenary")
   }
 })

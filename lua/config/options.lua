@@ -61,6 +61,9 @@ opt.directory = { prefix .. "/nvim/swp//"}
 -- Disable nvim intro
 opt.shortmess:append "sI"
 
+-- Allow .nvimrc and .exrc
+opt.exrc = true
+
 -- Disable builtins plugins
 local disabled_built_ins = {
   "netrw",

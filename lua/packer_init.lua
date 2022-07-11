@@ -275,7 +275,8 @@ return require('packer').startup({ function(use)
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-plenary"
+      "nvim-neotest/neotest-plenary",
+      "nvim-neotest/neotest-vim-test"
     }
   }
   -- use { 'diepm/vim-rest-console' }
