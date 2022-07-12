@@ -33,7 +33,8 @@ return require('packer').startup({ function(use)
   use { 'arcticicestudio/nord-vim' }
   use({
     "catppuccin/nvim",
-    as = "catppuccin"
+    as = "catppuccin",
+    requires = { "lukas-reineke/indent-blankline.nvim" }
   })
   use { 'crispybaccoon/fantastic.vim' }
   use { 'folke/tokyonight.nvim' }
@@ -75,7 +76,7 @@ return require('packer').startup({ function(use)
   }
 
   -- indent lvl indicator
-  use { 'Yggdroot/indentLine' }
+  -- use { 'Yggdroot/indentLine' }
 
   -- fuzzy finder {{{
 

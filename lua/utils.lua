@@ -12,7 +12,7 @@ end
 function M.colors(scheme)
 	-- example: colors('PaperColor')
 	vim.cmd(string.format('colorscheme %s', scheme))
-	M.save_user_conf('colors', string.format("vim.cmd('colorschem %s')", scheme))
+	M.save_user_conf('colors', string.format("vim.cmd('colorscheme %s')", scheme))
 	require('notify').notify(string.format('Color scheme changed to %s', scheme))
 end
 

@@ -10,55 +10,54 @@ require('ayu').setup({
 })
 -- vim.cmd('colorscheme ayu-dark')
 require('rose-pine').setup({
-	--- @usage 'main' | 'moon'
-	dark_variant = 'main',
-	bold_vert_split = false,
-	dim_nc_background = false,
-	disable_background = false,
-	disable_float_background = false,
-	disable_italics = false,
+    --- @usage 'main' | 'moon'
+    dark_variant = 'main',
+    bold_vert_split = false,
+    dim_nc_background = false,
+    disable_background = false,
+    disable_float_background = false,
+    disable_italics = false,
 
-	--- @usage string hex value or named color from rosepinetheme.com/palette
-	groups = {
-		background = 'base',
-		panel = 'surface',
-		border = 'highlight_med',
-		comment = 'muted',
-		link = 'iris',
-		punctuation = 'subtle',
+    --- @usage string hex value or named color from rosepinetheme.com/palette
+    groups = {
+        background = 'base',
+        panel = 'surface',
+        border = 'highlight_med',
+        comment = 'muted',
+        link = 'iris',
+        punctuation = 'subtle',
 
-		error = 'love',
-		hint = 'iris',
-		info = 'foam',
-		warn = 'gold',
+        error = 'love',
+        hint = 'iris',
+        info = 'foam',
+        warn = 'gold',
 
-		headings = {
-			h1 = 'iris',
-			h2 = 'foam',
-			h3 = 'rose',
-			h4 = 'gold',
-			h5 = 'pine',
-			h6 = 'foam',
-		}
-		-- or set all headings at once
-		-- headings = 'subtle'
-	},
+        headings = {
+            h1 = 'iris',
+            h2 = 'foam',
+            h3 = 'rose',
+            h4 = 'gold',
+            h5 = 'pine',
+            h6 = 'foam',
+        }
+        -- or set all headings at once
+        -- headings = 'subtle'
+    },
 
-	-- Change specific vim highlight groups
-	highlight_groups = {
-		ColorColumn = { bg = 'rose' }
-	}
+    -- Change specific vim highlight groups
+    highlight_groups = {
+        ColorColumn = { bg = 'rose' }
+    }
 })
 
 require('catppuccin').setup({
-  dim_inactive = true,
   transparent_background = false,
   term_colors = false,
   styles = {
     comments = "italic",
     conditionals = "italic",
     loops = "NONE",
-    functions = "italic",
+    functions = "NONE",
     keywords = "NONE",
     strings = "NONE",
     variables = "NONE",
@@ -102,7 +101,7 @@ require('catppuccin').setup({
       show_root = false,
       transparent_panel = false,
     },
-    which_key = true,
+    which_key = false,
     indent_blankline = {
       enabled = true,
       colored_indent_levels = false,
@@ -120,7 +119,6 @@ require('catppuccin').setup({
     notify = true,
     telekasten = true,
     symbols_outline = true,
-    mini = false,
   }
 })
 vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
@@ -128,4 +126,4 @@ vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 -- set colorscheme after options
 -- vim.cmd('colorscheme rose-pine')
 -- default colorscheme, might be changed and saved using `:lua requre'utils' colors('schema')`
-vim.cmd('colorscheme catppuccin')
+-- vim.cmd('colorscheme catppuccin')
