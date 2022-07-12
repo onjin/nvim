@@ -56,4 +56,4 @@ vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 -- set colorscheme after options
 -- vim.cmd('colorscheme rose-pine')
 -- default colorscheme, might be changed and saved using `:lua requre'utils' colors('schema')`
-vim.cmd('colorschem catppuccin')
+vim.cmd('colorscheme catppuccin')
