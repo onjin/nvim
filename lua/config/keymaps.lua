@@ -23,6 +23,20 @@ map("", "<leader>bp", ":bp<CR>")
 map("", "<leader><Tab>", ":bn<CR>")
 map("", "<leader><S-Tab>", ":bp<CR>")
 
+map("n", "<Leader>bw", ":Bw<CR>")
+map("n", "<Leader>bon", ":Bonly<CR>")
+
+map("", "<Leader>1", "<Plug>BuffetSwitch(1)")
+map("", "<Leader>2", "<Plug>BuffetSwitch(2)")
+map("", "<Leader>3", "<Plug>BuffetSwitch(3)")
+map("", "<Leader>4", "<Plug>BuffetSwitch(4)")
+map("", "<Leader>5", "<Plug>BuffetSwitch(5)")
+map("", "<Leader>6", "<Plug>BuffetSwitch(6)")
+map("", "<Leader>7", "<Plug>BuffetSwitch(7)")
+map("", "<Leader>8", "<Plug>BuffetSwitch(8)")
+map("", "<Leader>9", "<Plug>BuffetSwitch(9)")
+map("", "<Leader>0", "<Plug>BuffetSwitch(0)")
+
 -- allow to use `.` on visual selections
 map("v", ".", ":norm.<CR>")
 

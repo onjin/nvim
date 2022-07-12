@@ -1,34 +1,36 @@
--- Automatically install packer
 local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local map = require('utils').map
+
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path
-  })
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
--- Autocommand that reloads neovim whenever you save the packer_init.lua file
-vim.cmd [[
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost packer_init.lua source <afile> | PackerSync
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
-]]
+]])
 
 -- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, 'packer')
+local status_ok, packer = pcall(require, "packer")
 if not status_ok then
-  return
+	return
 end
 
-return require('packer').startup({ function(use)
+-- Have packer use a popup window
+packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "rounded" })
+		end,
+	},
+})
+
+-- Install your plugins here
+return require('packer').startup(function(use)
   -- Color Theme
   use { 'arcticicestudio/nord-vim' }
   use({
@@ -95,14 +97,7 @@ return require('packer').startup({ function(use)
   -- fuzzy finder }}}
   use {
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
-    config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
+    requires = "kyazdani42/nvim-web-devicons"
   }
 
   -- documentation generator
@@ -142,16 +137,10 @@ return require('packer').startup({ function(use)
   use { 'preservim/vimux' } -- manageg tmux from vim
 
   use { 'kyazdani42/nvim-tree.lua' }
-  use { 'windwp/nvim-autopairs',
-    config = function() require("nvim-autopairs").setup {}
-    end
-  }
+  use { 'windwp/nvim-autopairs' }
   use({
     'CosmicNvim/cosmic-ui',
     requires = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('cosmic-ui').setup()
-    end,
   })
 
   -- LSP Support
@@ -187,6 +176,7 @@ return require('packer').startup({ function(use)
   use { 'junegunn/goyo.vim' }
 
   use { 'mattn/emmet-vim' } -- html/css magic macros
+	-- plugin for live html, css, and javascript editing in vim
   use { 'turbio/bracey.vim', run = 'npm install --prefix server' } -- html live preview by :Bracey
 
   use { 'inkarkat/vim-ingo-library' } -- required by vim-mark
@@ -194,10 +184,7 @@ return require('packer').startup({ function(use)
   use { 'borisbrodski/vim-highlight-hero' }
 
   use { 'freitass/todo.txt-vim' } -- TODO.txt support
-  use { 'folke/todo-comments.nvim',
-    config = function() require("todo-comments").setup()
-    end
-  }
+  use { 'folke/todo-comments.nvim' }
 
   use { 'SirVer/ultisnips' }
 
@@ -248,7 +235,7 @@ return require('packer').startup({ function(use)
   -- semantic syntax
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
   use { 'nvim-treesitter/playground' }
   use { 'romgrk/nvim-treesitter-context' }
@@ -294,15 +281,9 @@ return require('packer').startup({ function(use)
 
   use { 'github/copilot.vim' }
 
-  -- Automatically set up your configuration after cloning packer.nvim
+    -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
     require('packer').sync()
   end
-end,
-  config = {
-    display = {
-      open_fn = require('packer.util').float,
-    }
-  } }
-)
+end)

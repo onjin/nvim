@@ -1,5 +1,12 @@
 local map = require('utils').map
 
+-- vim-test
+vim.g["test#neovim#term_position"] =  "vert"
+vim.g["test#strategy"] = "vimux"
+vim.g.VimuxOrientation = "h"
+vim.g.VimuxHeight = "50"
+
+-- neotest
 require("neotest").setup({
   adapters = {
     --[[
