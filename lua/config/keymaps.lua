@@ -41,6 +41,7 @@ map("n", "<leader>c3", ":lua require'utils'.colors('ayu-dark')<cr>")
 map("n", "<leader>c4", ":lua require'utils'.colors('tokyonight')<cr>")
 map("n", "<leader>c5", ":lua require'utils'.colors('fantastic')<cr>")
 map("n", "<leader>c6", ":lua require'utils'.colors('nord')<cr>")
+map("n", "<leader>c7", ":lua require'utils'.colors('catppuccin')<cr>")
 
 
 -- terminal

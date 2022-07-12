@@ -30,17 +30,22 @@ end
 
 return require('packer').startup({ function(use)
   -- Color Theme
-  use { 'Shatur/neovim-ayu' }
   use { 'arcticicestudio/nord-vim' }
+  use({
+    "catppuccin/nvim",
+    as = "catppuccin"
+  })
   use { 'crispybaccoon/fantastic.vim' }
+  use { 'folke/tokyonight.nvim' }
   use { 'navarasu/onedark.nvim' }
   use { 'NLKNguyen/papercolor-theme' }
   use { 'pappasam/papercolor-theme-slim' }
   use { 'rakr/vim-one' }
+  use { "rebelot/kanagawa.nvim" }
+  use { 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*' }
+  use { 'Shatur/neovim-ayu' }
   use { 'sonph/onehalf', rtp = 'vim' }
   use { 'tomasiser/vim-code-dark' }
-  use({ 'rose-pine/neovim', as = 'rose-pine', tag = 'v1.*' })
-  use { 'folke/tokyonight.nvim' }
 
   -- use {'sheerun/vim-polyglot'}
 
