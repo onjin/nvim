@@ -171,7 +171,8 @@ M.notify = function()
    end
 
    local options = {
-      level = "info"
+      level = "info",
+      background_color = "#000000"
    }
 
    options = load_override(options, "rcarriga/nvim-notify")
@@ -234,6 +235,24 @@ M.session_lens = function()
    }
    options = load_override(options, "rmagatti/session-lens")
    session.setup(options)
+end
+
+M.lsp_signature = function()
+   local present, lsp_signature = pcall(require, "lsp_signature")
+
+   if not present then
+      return
+   end
+
+ local options = {
+    bind = true, -- This is mandatory, otherwise border config won't get registered.
+    handler_opts = {
+      border = "rounded"
+    },
+    hint_prefix = "💡"
+  }
+   options = load_override(options, "ray-x/lsp_signature.nvim")
+   lsp_signature.setup(options)
 end
 
 return M

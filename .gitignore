@@ -4,4 +4,4 @@
 /tags
 /sessions
 /plugin
-/lua/dynamic/*.lua
+/lua/local/*.lua

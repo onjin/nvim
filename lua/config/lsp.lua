@@ -98,5 +98,10 @@ lsp.on_attach(function(client, bufnr)
   map("n", "<Leader>dp", ":lua vim.diagnostic.goto_prev()<cr>")
   map("n", "<Leader>dd", ":lua vim.diagnostic.setloclist()<cr>")
   map("n", "<Leader>ca", ":lua vim.lsp.buf.code_action()<cr>")
+  if client == 'pyright' then
+    map('n', '<leader>cf', '<cmd>:Black<cr>')
+    map('v', '<leader>cf', '<cmd>vim.notify("code range format not supported with Black")<cr>')
+    map('n', '<leader>ci', '<cmd>PyrightOrganizeImports<cr>')
+  end
 end)
 map("n", "<Leader>dt", ":TroubleToggle<cr>")

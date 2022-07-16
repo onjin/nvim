@@ -1,8 +1,11 @@
 update:
 	nvim /tmp --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-clear:
+
+clean:
 	rm -rf ~/.local/share/nvim
 	rm -rf ~/.local/state/nvim
 	rm -rf ~/.cache/nvim
-uninstall: clear
+	rm -rf ~/.config/nvim/plugin/
+
+uninstall: clean
 	rm -rf ~/.config/nvim

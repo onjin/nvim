@@ -62,13 +62,13 @@ local plugins = {
   },
   ["j-hui/fidget.nvim"]= {
     config = function()
-      require("fidget").setup()
+      require("plugins.configs.others").fidget()
     end
   },
 
   ["nvim-lualine/lualine.nvim"]  = {
     config = function()
-      require("plugins.configs.lualine").setup()
+      require "plugins.configs.lualine"
     end
   },
 
@@ -104,6 +104,12 @@ local plugins = {
          require "plugins.configs.lspconfig"
       end,
    },
+   [ "ray-x/lsp_signature.nvim"] = {
+      config = function()
+         require("plugins.configs.others").lsp_signature()
+       end
+     },
+
   -- load luasnips + cmp related in insert mode only
 
    ["rafamadriz/friendly-snippets"] = {
@@ -153,9 +159,6 @@ local plugins = {
    ["hrsh7th/cmp-calc"] = {
        after = "cmp-emoji",
    },
-   ["hrsh7th/cmp-nvim-lsp-signature-help"] = {
-       after = "cmp-emoji",
-   },
 
    ["davidsierradz/cmp-conventionalcommits"] = {
        after = "cmp_luasnip"
@@ -183,16 +186,25 @@ local plugins = {
    -- sessions
   [ 'airblade/vim-rooter' ] = {},
   [ 'rmagatti/auto-session'] = {
+    after = "plenary.nvim",
       config = function()
          require("plugins.configs.others").auto_session()
       end,
+      requires = {
+      "nvim-lua/plenary.nvim",
+      }
 
   },
   ['rmagatti/session-lens'] = {
+    after = "plenary.nvim",
       config = function()
          require("plugins.configs.others").session_lens()
       end,
-    requires = { 'rmagatti/auto-session', 'nvim-telescope/telescope.nvim' },
+    requires = {
+      'rmagatti/auto-session',
+      'nvim-telescope/telescope.nvim',
+      "nvim-lua/plenary.nvim",
+    },
   },
 
   -- misc plugins

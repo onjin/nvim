@@ -7,6 +7,7 @@ end
 local options = {
    ensure_installed = {
       "lua",
+      "python",
    },
    highlight = {
       enable = true,

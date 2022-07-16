@@ -8,7 +8,7 @@ local options = {
    -- ensure_installed is not needed as automatic_installation is enabled
    -- then any lsp server you setup by lspconfig is going to get installed automatically!
 
-   -- ensure_installed = { "lua" },
+   ensure_installed = { "lua", "pyright", },
    automatic_installation = true,
 
    ui = {

@@ -99,16 +99,16 @@ M.buffers = {
       ["<leader>x"] = { "<cmd> :bd <CR>", "   close buffer"},
 
       -- buffers shortcuts
-      ["<leader>1"] = { "<Plug> buffet#bswitch(1) <CR>", "   jump to buffer 1"},
-      ["<leader>2"] = { "<Plug> buffet#bswitch(2) <CR>", "   jump to buffer 2"},
-      ["<leader>3"] = { "<Plug> buffet#bswitch(3) <CR>", "   jump to buffer 3"},
-      ["<leader>4"] = { "<Plug> buffet#bswitch(4) <CR>", "   jump to buffer 4"},
-      ["<leader>5"] = { "<Plug> buffet#bswitch(5) <CR>", "   jump to buffer 5"},
-      ["<leader>6"] = { "<Plug> buffet#bswitch(6) <CR>", "   jump to buffer 6"},
-      ["<leader>7"] = { "<Plug> buffet#bswitch(7) <CR>", "   jump to buffer 7"},
-      ["<leader>8"] = { "<Plug> buffet#bswitch(8) <CR>", "   jump to buffer 8"},
-      ["<leader>9"] = { "<Plug> buffet#bswitch(9) <CR>", "   jump to buffer 9"},
-      ["<leader>0"] = { "<Plug> buffet#bswitch(10) <CR>", "   jump to buffer 10"},
+      ["<leader>1"] = { ":call buffet#bswitch(1) <CR>", "   jump to buffer 1"},
+      ["<leader>2"] = { ":call buffet#bswitch(2) <CR>", "   jump to buffer 2"},
+      ["<leader>3"] = { ":call buffet#bswitch(3) <CR>", "   jump to buffer 3"},
+      ["<leader>4"] = { ":call buffet#bswitch(4) <CR>", "   jump to buffer 4"},
+      ["<leader>5"] = { ":call buffet#bswitch(5) <CR>", "   jump to buffer 5"},
+      ["<leader>6"] = { ":call buffet#bswitch(6) <CR>", "   jump to buffer 6"},
+      ["<leader>7"] = { ":call buffet#bswitch(7) <CR>", "   jump to buffer 7"},
+      ["<leader>8"] = { ":call buffet#bswitch(8) <CR>", "   jump to buffer 8"},
+      ["<leader>9"] = { ":call buffet#bswitch(9) <CR>", "   jump to buffer 9"},
+      ["<leader>0"] = { ":call buffet#bswitch(10) <CR>", "   jump to buffer 10"},
    },
 }
 M.comment = {
@@ -166,7 +166,8 @@ M.lspconfig = {
 
       ["<leader>ls"] = {
          function()
-            vim.lsp.buf.signature_help()
+            -- vim.lsp.buf.signature_help()
+            require("lsp_signature").signature()
          end,
          "   lsp signature_help",
       },
