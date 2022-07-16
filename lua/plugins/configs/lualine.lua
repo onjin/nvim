@@ -17,7 +17,11 @@ local options = {
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = { "filename", "lsp_progress" },
+		lualine_c = {
+			require("auto-session-library").current_session_name,
+			"filename",
+			"lsp_progress",
+		},
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
@@ -30,7 +34,15 @@ local options = {
 		lualine_y = {},
 		lualine_z = {},
 	},
-	tabline = {},
+	tabline = {
+		lualine_a = { "buffers" },
+		lualine_b = { "branch" },
+		lualine_c = { "filename" },
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = { "tabs" },
+	},
+
 	extensions = {},
 }
 

@@ -186,9 +186,17 @@ local plugins = {
 		config = function()
 			require("plugins.configs.telescope")
 		end,
+		requires = {
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-github.nvim",
+		},
 	},
 	-- sessions
-	["airblade/vim-rooter"] = {},
+	["ahmedkhalf/project.nvim"] = {
+		config = function()
+			require("plugins.configs.others").project()
+		end,
+	},
 	["rmagatti/auto-session"] = {
 		after = "plenary.nvim",
 		config = function()
@@ -303,14 +311,9 @@ local plugins = {
 
   -- fuzzy finder {{{
 
-  use {
-    "nvim-telescope/telescope-frecency.nvim",
-    requires = { "tami5/sqlite.lua" }
-  }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use { 'nvim-telescope/telescope-media-files.nvim' }
   use { 'nvim-telescope/telescope-github.nvim' } -- gh-cli
-  use { "nvim-telescope/telescope-file-browser.nvim" }
+  use {  }
   use { 'nvim-telescope/telescope-project.nvim' }
   use { 'cljoly/telescope-repo.nvim' }
   -- fuzzy finder }}}

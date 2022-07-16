@@ -291,6 +291,7 @@ M.tmux = function()
 	options = load_override(options, "aserowy/tmux.nvim")
 	tmux.setup(options)
 end
+
 M.cosmic_ui = function()
 	local present, cosmic_ui = pcall(require, "cosmic-ui")
 
@@ -301,6 +302,20 @@ M.cosmic_ui = function()
 	local options = {}
 	options = load_override(options, "CosmicNvim/cosmic-ui")
 	cosmic_ui.setup(options)
+end
+
+M.project = function()
+	local present, project = pcall(require, "project_nvim")
+
+	if not present then
+		return
+	end
+
+	local options = {
+		silent_chdir = false,
+	}
+	options = load_override(options, "ahmedkhalf/project.nvim")
+	project.setup(options)
 end
 
 return M

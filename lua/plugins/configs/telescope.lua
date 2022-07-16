@@ -3,7 +3,6 @@ local present, telescope = pcall(require, "telescope")
 if not present then
 	return
 end
-
 vim.g.theme_switcher_loaded = true
 
 -- require("base46").load_highlight "telescope"
@@ -57,17 +56,16 @@ local options = {
 			n = { ["q"] = require("telescope.actions").close },
 		},
 	},
+	extensions = {
+		file_browser = {
+			theme = "catppuccin",
+		},
+	},
 
 	extensions_list = {
-		"themes",
-		"terms",
 		"file_browser",
-		"frecency",
-		"fzf",
 		"gh",
-		"media_files",
-		"project",
-		"repo",
+		"projects",
 	},
 }
 
@@ -76,8 +74,7 @@ options = require("core.utils").load_override(options, "nvim-telescope/telescope
 telescope.setup(options)
 
 -- load extensions
-pcall(function()
-	for _, ext in ipairs(options.extensions_list) do
-		telescope.load_extension(ext)
-	end
-end)
+for _, ext in ipairs(options.extensions_list) do
+	telescope.load_extension(ext)
+	vim.notify(ext)
+end
