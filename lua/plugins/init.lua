@@ -135,6 +135,12 @@ local plugins = {
    ["saadparwaiz1/cmp_luasnip"] = {
       after = "LuaSnip",
    },
+   ["lukas-reineke/lsp-format.nvim"] = {
+      config = function()
+         require("plugins.configs.lsp_format")
+      end,
+
+   },
 
    ["hrsh7th/cmp-nvim-lua"] = {
       after = "cmp_luasnip",
@@ -250,6 +256,41 @@ local plugins = {
     end
   },
 
+  -- tmux seamless navigation and clipboard integration
+  ["aserowy/tmux.nvim"] = {
+    config = function()
+      require("plugins.configs.others").tmux()
+    end
+  },
+  ["CosmicNvim/cosmic-ui"] = {
+    config = function()
+      require("plugins.configs.others").cosmic_ui()
+    end,
+    requires = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+  },
+
+  -- testing
+  ["nvim-neotest/neotest"] = {
+      config = function()
+         require("plugins.configs.neotest")
+      end,
+  requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-plenary",
+      "nvim-neotest/neotest-vim-test",
+      "preservim/vimux"
+    }
+  },
+  ["NTBBloodbath/rest.nvim"] = {
+      config = function()
+         require("plugins.configs.rest_nvim")
+      end,
+    requires = { "nvim-lua/plenary.nvim" },
+  },
+
     -- Only load whichkey after all the gui
    ["folke/which-key.nvim"] = {
       module = "which-key",
@@ -309,13 +350,10 @@ local plugins = {
   use { 'tpope/vim-fugitive' }
   use { 'airblade/vim-gitgutter' } -- A Vim plugin which shows a git diff in the sign column.
 
-  use({ "aserowy/tmux.nvim", })
   use { 'tmux-plugins/vim-tmux' } -- tmux syntax
-  use { 'preservim/vimux' } -- manageg tmux from vim
+  use {  } -- manageg tmux from vim
 
   use({
-    'CosmicNvim/cosmic-ui',
-    requires = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
   })
 
   -- LSP Support
@@ -401,20 +439,9 @@ local plugins = {
   use { 'vim-test/vim-test' }
   use { 'skywind3000/asyncrun.vim' }
   use {
-    "nvim-neotest/neotest",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-plenary",
-      "nvim-neotest/neotest-vim-test"
-    }
   }
   -- use { 'diepm/vim-rest-console' }
   use {
-    "NTBBloodbath/rest.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
   }
 
   use { 'github/copilot.vim' }

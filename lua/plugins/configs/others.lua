@@ -268,4 +268,43 @@ M.neogen = function()
    neogen.setup(options)
 end
 
+M.tmux = function()
+   local present, tmux = pcall(require, "tmux")
+
+   if not present then
+      return
+   end
+
+   local options = {
+    -- overwrite default configuration
+    -- here, e.g. to enable default bindings
+    copy_sync = {
+        -- enables copy sync and overwrites all register actions to
+        -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
+        enable = true,
+    },
+    navigation = {
+        -- enables default keybindings (C-hjkl) for normal mode
+        enable_default_keybindings = true,
+    },
+    resize = {
+        -- enables default keybindings (A-hjkl) for normal mode
+        enable_default_keybindings = true,
+    }
+   }
+   options = load_override(options, "aserowy/tmux.nvim")
+   tmux.setup(options)
+end
+M.cosmic_ui = function()
+   local present, cosmic_ui = pcall(require, "cosmic-ui")
+
+   if not present then
+      return
+   end
+
+   local options = {}
+   options = load_override(options, "CosmicNvim/cosmic-ui")
+   cosmic_ui.setup(options)
+end
+
 return M

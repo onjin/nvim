@@ -25,10 +25,9 @@ M.general = {
 
       ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
       -- registers :reg
-      ["<leader>pp"] = {"*pp"},
-
+      ["<leader>pp"] = {"*pp", "paste from *pp"},
       -- conceal level
-      ["<leader>vc"] = { ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>"},
+      ["<leader>vc"] = { ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>", "toggle conceal level" },
 
       -- switch between windows
       ["<C-h>"] = { "<C-w>h", " window left" },
@@ -68,6 +67,10 @@ M.general = {
 
    t = {
       ["<C-x>"] = { termcodes "<C-\\><C-N>", "   escape terminal mode" },
+      ["<C-h>"] = { termcodes '<C-\\><C-N><C-w>h'},
+      ["<C-j>"] = { termcodes '<C-\\><C-N><C-w>j'},
+      ["<C-k>"] = { termcodes '<C-\\><C-N><C-w>k'},
+      ["<C-l>"] = { termcodes '<C-\\><C-N><C-w>l'},
    },
 
    v = {
@@ -78,6 +81,8 @@ M.general = {
       -- Don't copy the replaced text after pasting in visual mode
       -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
       ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
+      -- allow to use `.` on visual selections
+      ["."] = { ':norm.<CR>'},
    },
 }
 
@@ -145,7 +150,8 @@ M.lspconfig = {
 
       ["gd"] = {
          function()
-            vim.lsp.buf.definition()
+            -- vim.lsp.buf.definition()
+            require("telescope.builtin").lsp_definitions()
          end,
          "   lsp definition",
       },
@@ -159,7 +165,8 @@ M.lspconfig = {
 
       ["gi"] = {
          function()
-            vim.lsp.buf.implementation()
+            -- vim.lsp.buf.implementation()
+            require("telescope.builtin").lsp_implementations()
          end,
          "   lsp implementation",
       },
@@ -174,28 +181,38 @@ M.lspconfig = {
 
       ["<leader>D"] = {
          function()
-            vim.lsp.buf.type_definition()
+            -- vim.lsp.buf.type_definition()
+            require("telescope.builtin").lsp_type_definitions()
          end,
          "   lsp definition type",
       },
 
       ["<leader>ra"] = {
          function()
-            require("nvchad_ui.renamer").open()
+            require("cosmic-ui").rename()
          end,
          "   lsp rename",
       },
 
       ["<leader>ca"] = {
          function()
-            vim.lsp.buf.code_action()
+            -- vim.lsp.buf.code_action()
+            require('cosmic-ui').code_actions()
          end,
          "   lsp code_action",
       },
 
       ["gr"] = {
          function()
-            vim.lsp.buf.references()
+            -- vim.lsp.buf.references()
+            require("telescope.builtin").lsp_references()
+         end,
+         "   lsp references",
+      },
+      ["gs"] = {
+         function()
+            -- vim.lsp.buf.references()
+            require("telescope.builtin").lsp_document_symbols()
          end,
          "   lsp references",
       },
@@ -230,7 +247,7 @@ M.lspconfig = {
 
       ["<leader>fm"] = {
          function()
-            vim.lsp.buf.format()
+            vim.lsp.buf.format({async=true})
          end,
          "   lsp formatting",
       },
@@ -340,4 +357,26 @@ M.blankline = {
    },
 }
 
+M.neotest = {
+
+   n = {
+      ['<leader>tr'] = { ':lua require("neotest").run.run()<cr>' },
+      ['<leader>tl'] = { ':lua require("neotest").run.run_last()<cr>' },
+      ['<leader>tf'] = { ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>' },
+      ['<leader>tu'] = { ':lua require("neotest").run.stop()<cr>' },
+      ['<leader>ta'] = { ':lua require("neotest").run.attach()<cr>' },
+
+      ['<leader>tw'] = { ':lua require("neotest").summary.toggle()<cr>' },
+      ['<leader>to'] = { ':lua require("neotest").output.open()<cr>' },
+      ['<leader>ts'] = { ':lua require("neotest").output.open({ short = true })<cr>' },
+   }
+ }
+
  return M
+ --[[
+-- for python
+    map('n', '<leader>cf', '<cmd>:Black<cr>')
+    map('v', '<leader>cf', '<cmd>vim.notify("code range format not supported with Black")<cr>')
+    map('n', '<leader>ci', '<cmd>PyrightOrganizeImports<cr>')
+
+ ]]
