@@ -265,6 +265,8 @@ local plugins = {
 		end,
 		requires = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 	},
+	-- highlight words unser cursor <leader>m
+	["inkarkat/vim-mark"] = {},
 
 	-- testing
 	["nvim-neotest/neotest"] = {
@@ -301,7 +303,6 @@ local plugins = {
 
   -- fuzzy finder {{{
 
-  use { 'nvim-telescope/telescope.nvim' }
   use {
     "nvim-telescope/telescope-frecency.nvim",
     requires = { "tami5/sqlite.lua" }
@@ -317,10 +318,6 @@ local plugins = {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons"
   }
-
-  -- documentation generator
-  use { 'danymat/neogen' }
-
 
   -- tagbar replacement with LSP support
   use { 'liuchengxu/vista.vim' }
@@ -345,15 +342,6 @@ local plugins = {
   -- git utils
   use { 'tpope/vim-fugitive' }
   use { 'airblade/vim-gitgutter' } -- A Vim plugin which shows a git diff in the sign column.
-
-  use { 'tmux-plugins/vim-tmux' } -- tmux syntax
-  use {  } -- manageg tmux from vim
-
-  use({
-  })
-
-  -- LSP Support
-
 
   --  Snippets
 

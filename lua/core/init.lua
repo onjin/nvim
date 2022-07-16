@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
+local user_command = vim.api.nvim_create_user_command
 
 -- Highlight on yank
 augroup("YankHighlight", { clear = true })
@@ -61,3 +62,8 @@ autocmd("BufLeave", {
 	pattern = "term://*",
 	command = "stopinsert",
 })
+
+user_command("PP", function(input)
+	require("plugins")
+	vim.cmd("PackerSync")
+end, { bang = false, desc = "Reload plugins and run PackerSync" })
