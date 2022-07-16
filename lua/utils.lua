@@ -22,10 +22,10 @@ function M.file_exists(name)
 end
 
 function M.load_user_config(name)
-	local path = os.getenv('HOME') .. "/.config/nvim/lua/dynamic/" .. name .. ".lua"
+	local path = os.getenv('HOME') .. "/.config/nvim/lua/local/" .. name .. ".lua"
 
 	if M.file_exists(path) then
-		local status_ok, _ = pcall(require, 'dynamic.' .. name)
+		local status_ok, _ = pcall(require, 'local.' .. name)
 
 		if not status_ok then
 			vim.notify(string.format('Failed loading %s with status %s', path, status_ok), vim.log.levels.ERROR)
@@ -35,13 +35,13 @@ function M.load_user_config(name)
 end
 
 function M.save_user_conf(name, data)
-	local path = os.getenv('HOME') .. "/.config/nvim/lua/dynamic/" .. name .. ".lua"
+	local path = os.getenv('HOME') .. "/.config/nvim/lua/local/" .. name .. ".lua"
 	local file = io.open(path, 'w')
 	file:write(data)
 	file:close()
 end
 
-function M.load_dynamic_configs()
+function M.load_dynamic_config()
 	M.load_user_config("colors")
 end
 

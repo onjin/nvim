@@ -1,4 +1,10 @@
-require('lualine').setup {
+local present, lualine = pcall(require, "lualine")
+
+if not present then
+   return
+end
+
+local options = {
   options = {
     icons_enabled = true,
     theme = 'catppuccin',
@@ -27,3 +33,5 @@ require('lualine').setup {
   tabline = {},
   extensions = {}
 }
+
+lualine.setup(options)

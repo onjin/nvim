@@ -1,6 +1,7 @@
 local g = vim.g       -- Global variables
 local opt = vim.opt   -- Set options (global/buffer/windows-scoped)
 local prefix = vim.env.XDG_STATE_HOME or vim.fn.expand("~/.local/state")
+local config = require("core.utils").load_config()
 
 g.python_host_prog = "~/.pyenv/versions/neovim2/bin/python"
 g.python3_host_prog = "~/.pyenv/versions/neovim/bin/python"
@@ -61,6 +62,10 @@ opt.directory = { prefix .. "/nvim/swp//"}
 -----------------------------------------------------------
 -- Startup
 -----------------------------------------------------------
+
+g.mapleader = ","
+g.buffet_show_index = true
+
 -- Disable nvim intro
 opt.shortmess:append "sI"
 
@@ -69,26 +74,54 @@ opt.exrc = true
 
 -- Disable builtins plugins
 local disabled_built_ins = {
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "gzip",
-  "zip",
-  "zipPlugin",
-  "tar",
-  "tarPlugin",
-  "getscript",
-  "getscriptPlugin",
-  "vimball",
-  "vimballPlugin",
-  "2html_plugin",
-  "logipat",
-  "rrhelper",
-  "spellfile_plugin",
-  "matchit"
+   "2html_plugin",
+   "getscript",
+   "getscriptPlugin",
+   "gzip",
+   "logipat",
+   "netrw",
+   "netrwPlugin",
+   "netrwSettings",
+   "netrwFileHandlers",
+   "matchit",
+   "tar",
+   "tarPlugin",
+   "rrhelper",
+   "spellfile_plugin",
+   "vimball",
+   "vimballPlugin",
+   "zip",
+   "zipPlugin",
+   "tutor",
+   "rplugin",
+   "syntax",
+   "synmenu",
+   "optwin",
+   "compiler",
+   "bugreport",
+   "ftplugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
   g["loaded_" .. plugin] = 1
 end
+
+local default_providers = {
+   "node",
+   "perl",
+   "python3",
+   "ruby",
+}
+
+for _, provider in ipairs(default_providers) do
+   vim.g["loaded_" .. provider .. "_provider"] = 0
+end
+
+-- set shada path
+vim.schedule(function()
+   vim.opt.shadafile = vim.fn.expand "$HOME" .. "/.local/share/nvim/shada/main.shada"
+   vim.cmd [[ silent! rsh ]]
+end)
+
+-- load user options
+config.options.user()

@@ -1,27 +1,12 @@
-require "config.options"
-require "config.keymaps"
-require "config.plugins"
+require "core"
+require "core.options"
 
--- 
-local status_ok, comment = pcall(require, "packer")
-if not status_ok then
-  return
-end
+vim.defer_fn(function()
+   require("core.utils").load_mappings()
+end, 0)
 
-require "config.theme"
-require "config.general"
+-- setup packer + plugins
+require("core.packer").bootstrap()
+require "plugins"
 
-require "config.black"
-require "config.dap"
-require "config.dashboard-nvim"
-require "config.lsp"
-require "config.lualine"
-require "config.neogen"
-require "config.testing"
-require "config.nvim-treesitter"
-require "config.nvim-tree"
-require "config.telescope"
-
-require "config.autocmds"
-
-require "utils" .load_dynamic_configs()
+pcall(require, "custom")

@@ -1,22 +1,17 @@
-# Personal `vim` and `neovim` configuration.
+# Personal `neovim` configuration.
 
 Mostly used for DevOps and Python (web) development.
 
 ## Features
 
- * Plugins manager — https://github.com/junegunn/vim-plug
+ * Plugins manager — https://github.com/wbthomason/packer.nvim
  * Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
- * Fuzzy search engines:
-	* https://github.com/nvim-telescope/telescope.nvim -> (let $FUZZY_FINDER='telescope') [default]
-	* https://github.com/junegunn/fzf.vim -> (let $FUZZY_FINDER='fzf')
- * Intellisense engines:
-	*	https://github.com/neovim/nvim-lspconfig ->  (let $LSP='native') [default]
-	* https://github.com/neoclide/coc.nvim -> (let $LSP='coc') 
+ * Fuzzy search engine https://github.com/nvim-telescope/telescope.nvim
+ * Intellisense engine https://github.com/neovim/nvim-lspconfig
  * Autoresize windows — https://github.com/camspiers/lens.vim
- * Live Markdown preview with diagrams support — https://github.com/iamcco/markdown-preview.nvim
  * Displays available keybindings in popup — https://github.com/liuchengxu/vim-which-key
 
-For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/vim-plug/plugins.vim
+For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/init.lua
 
 ## Screenshots
 
@@ -38,22 +33,19 @@ Markdown live preview
 Make sure you move old `~/.vim` to f.i. `~/.vim.old` then you can go
 
 ```
-git clone https://github.com/onjin/.vim ~/.vim
+git clone https://github.com/onjin/nvim ~/.config/nvim
 ```
 
-Plugins should be installed at first run of editor. If not, then run `:PlugInstall` to do it manually.
+Plugins should be installed at first run of editor. If not, then run `:PackerSync` to do it manually.
 
 
-## Requirements for `nvim`
+## Requirements for python
 
 * pynvim
 ```
 pip install pynvim
 ```
 
- * `ag` - silver search for fzf/codesearch https://github.com/ggreer/the_silver_searcher
 
 ## Nice to have
 * Nerd Icons - https://www.nerdfonts.com/
-
-
