@@ -244,6 +244,11 @@ local plugins = {
          require("plugins.configs.others").todo_comments()
       end,
   },
+  ["danymat/neogen"] = {
+    config = function()
+      require("plugins.configs.others").neogen()
+    end
+  },
 
     -- Only load whichkey after all the gui
    ["folke/which-key.nvim"] = {

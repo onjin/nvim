@@ -255,4 +255,17 @@ M.lsp_signature = function()
    lsp_signature.setup(options)
 end
 
+M.neogen = function()
+   local present, neogen = pcall(require, "neogen")
+
+   if not present then
+      return
+   end
+
+ local options = {
+  }
+   options = load_override(options, "danymat/neogen")
+   neogen.setup(options)
+end
+
 return M
