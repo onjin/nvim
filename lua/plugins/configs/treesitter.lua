@@ -1,18 +1,18 @@
 local present, treesitter = pcall(require, "nvim-treesitter.configs")
 
 if not present then
-   return
+	return
 end
 
 local options = {
-   ensure_installed = {
-      "lua",
-      "python",
-   },
-   highlight = {
-      enable = true,
-      use_languagetree = true,
-   },
+	ensure_installed = {
+		"lua",
+		"python",
+	},
+	highlight = {
+		enable = true,
+		use_languagetree = true,
+	},
 }
 
 -- check for any override
