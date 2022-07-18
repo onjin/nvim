@@ -288,6 +288,7 @@ local plugins = {
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-plenary",
 			"nvim-neotest/neotest-vim-test",
+			"vim-test/vim-test",
 			"preservim/vimux",
 		},
 	},
@@ -423,7 +424,6 @@ local plugins = {
   use { 'glepnir/dashboard-nvim' }
 
 
-  use { 'vim-test/vim-test' }
   use { 'skywind3000/asyncrun.vim' }
   use {
   }

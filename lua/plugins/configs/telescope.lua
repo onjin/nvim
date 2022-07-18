@@ -66,6 +66,7 @@ local options = {
     "file_browser",
     "gh",
     "projects",
+    "notify",
   },
 }
 
