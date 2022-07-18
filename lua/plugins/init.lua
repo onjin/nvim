@@ -5,7 +5,6 @@ local plugins = {
 	["wbthomason/packer.nvim"] = {},
 
 	["rcarriga/nvim-notify"] = {
-		after = "plenary.vim",
 		as = "notify",
 		config = function()
 			require("plugins.configs.others").notify()
