@@ -214,6 +214,12 @@ M.auto_session = function()
 	local options = {
 		log_level = "info",
 		auto_session_suppress_dirs = { "~/", "/tmp" },
+		post_restore_cmds = { vim.cmd([[
+    try
+      source .nvimrc
+    catch
+    endtry
+    ]]) },
 	}
 	options = load_override(options, "rmagatti/auto-session")
 	session.setup(options)
@@ -232,6 +238,7 @@ M.session_lens = function()
 	}
 	options = load_override(options, "rmagatti/session-lens")
 	session.setup(options)
+	vim.notify("session lens loaded")
 end
 
 M.lsp_signature = function()

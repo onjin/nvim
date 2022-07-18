@@ -33,10 +33,10 @@ M.general = {
 		},
 
 		-- switch between windows
-		["<C-h>"] = { "<C-w>h", " window left" },
-		["<C-l>"] = { "<C-w>l", " window right" },
-		["<C-j>"] = { "<C-w>j", " window down" },
-		["<C-k>"] = { "<C-w>k", " window up" },
+		-- ["<C-h>"] = { "<C-w>h", " window left" },
+		-- ["<C-l>"] = { "<C-w>l", " window right" },
+		-- ["<C-j>"] = { "<C-w>j", " window down" },
+		-- ["<C-k>"] = { "<C-w>k", " window up" },
 		-- save
 		["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
 

@@ -4,6 +4,19 @@ local plugins = {
 	["nvim-lua/plenary.nvim"] = { module = "plenary" },
 	["wbthomason/packer.nvim"] = {},
 
+	["rcarriga/nvim-notify"] = {
+		after = "plenary.vim",
+		as = "notify",
+		config = function()
+			require("plugins.configs.others").notify()
+		end,
+	},
+	["j-hui/fidget.nvim"] = {
+		config = function()
+			require("plugins.configs.others").fidget()
+		end,
+	},
+
 	["catppuccin/nvim"] = {
 		as = "catppuccin",
 		requires = { "lukas-reineke/indent-blankline.nvim" },
@@ -51,18 +64,6 @@ local plugins = {
 		requires = {
 			"romgrk/nvim-treesitter-context",
 		},
-	},
-
-	["rcarriga/nvim-notify"] = {
-		as = "notify",
-		config = function()
-			require("plugins.configs.others").notify()
-		end,
-	},
-	["j-hui/fidget.nvim"] = {
-		config = function()
-			require("plugins.configs.others").fidget()
-		end,
 	},
 
 	["nvim-lualine/lualine.nvim"] = {
@@ -182,15 +183,6 @@ local plugins = {
 		end,
 	},
 
-	["nvim-telescope/telescope.nvim"] = {
-		config = function()
-			require("plugins.configs.telescope")
-		end,
-		requires = {
-			"nvim-telescope/telescope-file-browser.nvim",
-			"nvim-telescope/telescope-github.nvim",
-		},
-	},
 	-- sessions
 	["ahmedkhalf/project.nvim"] = {
 		config = function()
@@ -213,8 +205,6 @@ local plugins = {
 		end,
 		requires = {
 			"rmagatti/auto-session",
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim",
 		},
 	},
 
@@ -297,6 +287,16 @@ local plugins = {
 			require("plugins.configs.rest_nvim")
 		end,
 		requires = { "nvim-lua/plenary.nvim" },
+	},
+
+	["nvim-telescope/telescope.nvim"] = {
+		config = function()
+			require("plugins.configs.telescope")
+		end,
+		requires = {
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-github.nvim",
+		},
 	},
 
 	-- Only load whichkey after all the gui
