@@ -32,6 +32,10 @@ M.options = {
 			return require("packer.util").float({ border = "single" })
 		end,
 	},
+	profile = {
+		enable = true,
+		threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+	},
 }
 
 M.run = function(plugins)

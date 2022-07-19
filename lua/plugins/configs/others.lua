@@ -238,7 +238,6 @@ M.session_lens = function()
 	}
 	options = load_override(options, "rmagatti/session-lens")
 	session.setup(options)
-	require("telescope").load_extension("session-lens")
 end
 
 M.lsp_signature = function()

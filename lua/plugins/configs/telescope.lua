@@ -60,19 +60,24 @@ local options = {
 		file_browser = {
 			theme = "catppuccin",
 		},
+		session_lens = {},
 	},
 
 	extensions_list = {
 		"file_browser",
 		"gh",
-		"projects",
 		"notify",
+		"projects",
+		"repo",
+		"session-lens",
 	},
 }
 
 -- check for any override
 options = require("core.utils").load_override(options, "nvim-telescope/telescope.nvim")
 telescope.setup(options)
+
+require("plugins.configs.others").session_lens()
 
 -- load extensions
 for _, ext in ipairs(options.extensions_list) do

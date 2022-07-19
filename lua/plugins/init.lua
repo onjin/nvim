@@ -198,15 +198,6 @@ local plugins = {
 			"nvim-lua/plenary.nvim",
 		},
 	},
-	["rmagatti/session-lens"] = {
-		after = "plenary.nvim",
-		config = function()
-			require("plugins.configs.others").session_lens()
-		end,
-		requires = {
-			"rmagatti/auto-session",
-		},
-	},
 
 	-- misc plugins
 
@@ -290,12 +281,16 @@ local plugins = {
 	},
 
 	["nvim-telescope/telescope.nvim"] = {
+		after = "notify",
 		config = function()
 			require("plugins.configs.telescope")
 		end,
 		requires = {
 			"nvim-telescope/telescope-file-browser.nvim",
 			"nvim-telescope/telescope-github.nvim",
+			"rmagatti/session-lens",
+			"nvim-telescope/telescope-project.nvim",
+			"cljoly/telescope-repo.nvim",
 		},
 	},
 
@@ -315,8 +310,6 @@ local plugins = {
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use { 'nvim-telescope/telescope-github.nvim' } -- gh-cli
   use {  }
-  use { 'nvim-telescope/telescope-project.nvim' }
-  use { 'cljoly/telescope-repo.nvim' }
   -- fuzzy finder }}}
   use {
     "folke/trouble.nvim",
