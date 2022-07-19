@@ -19,6 +19,7 @@ local plugins = {
 	["catppuccin/nvim"] = {
 		as = "catppuccin",
 		requires = { "lukas-reineke/indent-blankline.nvim" },
+		run = ":CatppuccinCompile",
 		config = function()
 			require("plugins.configs.catppuccin")
 		end,

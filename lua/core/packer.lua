@@ -20,6 +20,7 @@ end
 M.options = {
 	auto_clean = true,
 	compile_on_sync = true,
+	auto_reload_compiled = true,
 	git = { clone_timeout = 6000 },
 	display = {
 		working_sym = "ﲊ",

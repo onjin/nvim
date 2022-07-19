@@ -67,7 +67,6 @@ local options = {
 		"gh",
 		"projects",
 		"notify",
-		"session-lens",
 	},
 }
 
