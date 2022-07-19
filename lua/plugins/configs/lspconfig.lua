@@ -8,7 +8,7 @@ local M = {}
 local utils = require("core.utils")
 
 M.on_attach = function(client, bufnr)
-	require("lsp-format").on_attach(client)
+	-- require("lsp-format").on_attach(client)
 
 	local lsp_mappings = utils.load_config().mappings.lspconfig
 	utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
