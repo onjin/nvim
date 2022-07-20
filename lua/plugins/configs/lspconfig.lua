@@ -119,7 +119,8 @@ if #addlsp_confs ~= 0 then
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = false,
+  -- whether to show or not inline diagnostics errors - still available as float
+	virtual_text = true,
 })
 
 return M

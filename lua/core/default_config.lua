@@ -5,11 +5,6 @@ local M = {}
 M.options = {
 	-- load your options here or load module with options
 	user = function() end,
-
-	nvChad = {
-		update_url = "https://github.com/NvChad/NvChad",
-		update_branch = "main",
-	},
 }
 
 M.ui = {
