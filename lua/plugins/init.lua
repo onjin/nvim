@@ -111,6 +111,10 @@ local plugins = {
 		end,
 	},
 
+	["SmiteshP/nvim-navic"] = {
+		requires = "neovim/nvim-lspconfig",
+	},
+
 	-- load luasnips + cmp related in insert mode only
 
 	["rafamadriz/friendly-snippets"] = {
@@ -239,7 +243,7 @@ local plugins = {
 
 	-- reopen file at last position
 	["dietsche/vim-lastplace"] = {},
-	["bagrat/vim-buffet"] = {},
+	["bagrat/vim-buffet"] = { disable = true },
 
 	["folke/todo-comments.nvim"] = {
 		config = function()
@@ -306,6 +310,15 @@ local plugins = {
 		},
 	},
 
+	-- better wordmotion (f.i. between CamelCaseWords)
+	["chaoren/vim-wordmotion"] = {},
+
+	-- text objects and motions for python
+	["jeetsukumaran/vim-pythonsense"] = {},
+
+	-- requirements.txt syntax
+	["raimon49/requirements.txt.vim"] = {},
+
 	["folke/zen-mode.nvim"] = {},
 
 	["junegunn/limelight.vim"] = {},
@@ -338,9 +351,6 @@ local plugins = {
 
   -- extended matching for the % operator
   use { 'tmhedberg/matchit' }
-
-  -- better wordmotion (f.i. between CamelCaseWords)
-  use { 'chaoren/vim-wordmotion' }
 
   -- a convenient way to select and operate on various types of objects
   use { 'michaeljsmith/vim-indent-object' }
@@ -383,43 +393,18 @@ local plugins = {
 
   use { 'osohq/polar.vim' }
 
-  -- automatically resize windows
-  use { 'camspiers/animate.vim' }
-  use { 'camspiers/lens.vim' }
-
   use { 'vim-scripts/mako.vim' }
   use { 'metakirby5/codi.vim' }
 
-
-  -- python folding
-  -- use {'abarker/cyfolds', { 'do': 'cd python3 && python3 ./compile.py' }}
 
   -- Python files autoformat using `black`
   use { 'psf/black' }
   -- use {'psf/black', { 'tag': '19.10b0' }}
 
-  -- use {'bps/vim-textobj-python'}
-  use { 'jeetsukumaran/vim-pythonsense' } -- replacement for vim_textobj-python
-  use { 'raimon49/requirements.txt.vim' }
-  -- use {'ivanov/vim-ipython'  # lack of python 3 support}
-  -- use {'wmvanvliet/jupyter-vim'}
-
   -- Debugging
   use { 'mfussenegger/nvim-dap' }
   use { 'mfussenegger/nvim-dap-python' }
   use { 'rcarriga/nvim-dap-ui' }
-
-  -- semantic python syntax
-  -- if has('nvim')
-  -- 	use {'numirias/semshi', {'do': ':UpdateRemotePlugins'}}
-  -- endif
-  -- semantic syntax
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-  }
-  use { 'nvim-treesitter/playground' }
-  use { 'romgrk/nvim-treesitter-context' }
 
   -- grammary checker
   use { 'rhysd/vim-grammarous' }
@@ -427,17 +412,7 @@ local plugins = {
   -- visual help for leader keys
   use { 'hauleth/vim-backscratch' } -- :Scratch buffers
 
-  -- customizable starting window
-  -- use {'mhinz/vim-startify'}
-  use { 'glepnir/dashboard-nvim' }
-
-
   use { 'skywind3000/asyncrun.vim' }
-  use {
-  }
-  -- use { 'diepm/vim-rest-console' }
-  use {
-  }
 
   use { 'github/copilot.vim' }
   use 'wakatime/vim-wakatime'
