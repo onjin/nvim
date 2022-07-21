@@ -307,9 +307,12 @@ M.telescope = {
 		["<leader>vk"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
 
 		-- git
-		["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "   git commits" },
+		["<leader>fg"] = { "<cmd> Telescope git_files <CR>", "  git files" },
+
+		["<leader>gm"] = { "<cmd> Telescope git_commits <CR>", "   git commits" },
 		["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "  git status" },
-		["<leader>fg"] = { "<cmd> Telescope git_files <CR>", "  git status" },
+		["<leader>gf"] = { "<cmd> Telescope git_files <CR>", "  git files" },
+		["<leader>gb"] = { "<cmd> Git blame_line <CR>", "  git blame line" },
 
 		["<C-p>"] = { "<cmd> Telescope find <CR>", "  find files" },
 		["<C-P>"] = { "<cmd> Telescope git_files <CR>", "  git files" },
