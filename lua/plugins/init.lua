@@ -113,6 +113,9 @@ local plugins = {
 
 	["SmiteshP/nvim-navic"] = {
 		requires = "neovim/nvim-lspconfig",
+    config = function()
+      require('plugins.configs.navic')
+    end
 	},
 
 	-- load luasnips + cmp related in insert mode only
