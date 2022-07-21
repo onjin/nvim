@@ -314,7 +314,7 @@ M.telescope = {
 		["<leader>gf"] = { "<cmd> Telescope git_files <CR>", "  git files" },
 		["<leader>gb"] = { "<cmd> Git blame_line <CR>", "  git blame line" },
 
-		["<C-p>"] = { "<cmd> Telescope find <CR>", "  find files" },
+		["<C-p>"] = { "<cmd> Telescope find_files <CR>", "  find files" },
 		["<C-P>"] = { "<cmd> Telescope git_files <CR>", "  git files" },
 
 		-- pick a hidden term
