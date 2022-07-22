@@ -113,9 +113,9 @@ local plugins = {
 
 	["SmiteshP/nvim-navic"] = {
 		requires = "neovim/nvim-lspconfig",
-    config = function()
-      require('plugins.configs.navic')
-    end
+		config = function()
+			require("plugins.configs.navic")
+		end,
 	},
 
 	-- load luasnips + cmp related in insert mode only
@@ -273,7 +273,13 @@ local plugins = {
 	},
 
 	-- highlight words unser cursor <leader>m
-	["inkarkat/vim-mark"] = {},
+	["inkarkat/vim-mark"] = {
+    disable = true,
+		requires = { "nkarkat/vim-ingo-library" },
+	},
+  ['t9md/vim-quickhl'] = {
+
+  },
 
 	-- testing
 	["nvim-neotest/neotest"] = {
