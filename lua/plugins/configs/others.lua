@@ -318,7 +318,7 @@ M.project = function()
 	end
 
 	local options = {
-		silent_chdir = false,
+		silent_chdir = true,
 	}
 	options = load_override(options, "ahmedkhalf/project.nvim")
 	project.setup(options)
