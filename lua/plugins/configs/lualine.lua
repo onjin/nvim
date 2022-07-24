@@ -45,6 +45,15 @@ local options = {
 		disabled_filetypes = {},
 		always_divide_middle = true,
 		globalstatus = true,
+		refresh = { -- sets how often lualine should refreash it's contents (in ms)
+			statusline = 1000, -- The refresh option sets minimum time that lualine tries
+			tabline = 1000, -- to maintain between refresh. It's not guarantied if situation
+			winbar = 1000, -- arises that lualine needs to refresh itself before this time
+			-- it'll do it.
+
+			-- Also you can force lualine's refresh by calling refresh function
+			-- like require('lualine').refresh()
+		},
 	},
 	sections = {
 		lualine_a = { "mode" },
@@ -71,10 +80,33 @@ local options = {
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
-		lualine_y = { {"buffers", mode = 2} },
+		lualine_y = { { "buffers", mode = 2 } },
 		lualine_z = { "tabs" },
 	},
-
+	winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {
+      {"diff", separator = '|'},
+      {"filename", separator = '|'},
+      {"filetype", separator ='|'},
+    },
+		lualine_y = {},
+		lualine_z = {},
+	},
+	inactive_winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {
+      {"diff", separator = '|'},
+      {"filename", separator = '|'},
+      {"filetype", separator ='|'},
+    },
+		lualine_y = {},
+		lualine_z = {},
+	},
 	extensions = {},
 }
 
