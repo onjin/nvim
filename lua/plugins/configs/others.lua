@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local M = {}
 
 local load_override = require("core.utils").load_override

@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local present, telescope = pcall(require, "telescope")
 
 if not present then

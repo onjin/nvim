@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local present, catppuccin = pcall(require, "catppuccin")
 
 if not present then

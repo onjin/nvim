@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local M = {}
 
 M.bootstrap = function()

@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 require "core"
 require "core.options"
 

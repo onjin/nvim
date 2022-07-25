@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local present, navic = pcall(require, "nvim-navic")
 
 if not present then

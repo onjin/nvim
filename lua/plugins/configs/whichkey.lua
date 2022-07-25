@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local present, wk = pcall(require, "which-key")
 
 if not present then

@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local present, cmp = pcall(require, "cmp")
 
 if not present then

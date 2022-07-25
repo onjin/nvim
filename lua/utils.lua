@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local M = {}
 
 function M.map(mode, lhs, rhs, opts)

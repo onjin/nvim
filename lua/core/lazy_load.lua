@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local M = {}
 local autocmd = vim.api.nvim_create_autocmd
 

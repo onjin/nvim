@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local present, neotest = pcall(require, "neotest")
 
 if not present then

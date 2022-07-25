@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local present, nvimtree = pcall(require, "nvim-tree")
 
 if not present then

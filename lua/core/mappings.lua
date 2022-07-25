@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 -- n, v, i, t = mode names
 
 local function termcodes(str)

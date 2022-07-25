@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 vim.cmd("packadd packer.nvim")
 
 local plugins = {

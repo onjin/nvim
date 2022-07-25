@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local present, formatter = pcall(require, "formatter")
 
 if not present then
