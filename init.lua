@@ -10,4 +10,6 @@ end, 0)
 require("core.packer").bootstrap()
 require "plugins"
 
+require("core.custom_rc")
+
 pcall(require, "custom")

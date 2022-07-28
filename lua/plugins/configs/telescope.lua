@@ -59,18 +59,20 @@ local options = {
 	},
 	extensions = {
 		file_browser = {
-			theme = "catppuccin",
+			theme = "ivy",
+			-- disables netrw and use telescope-file-browser in its place
+			hijack_netrw = true,
 		},
 		session_lens = {},
 	},
 
 	extensions_list = {
-		"file_browser",
 		"gh",
 		"notify",
 		"projects",
 		"repo",
 		"session-lens",
+		"file_browser",
 	},
 }
 
@@ -78,9 +80,9 @@ local options = {
 options = require("core.utils").load_override(options, "nvim-telescope/telescope.nvim")
 telescope.setup(options)
 
-require("plugins.configs.others").session_lens()
-
 -- load extensions
 for _, ext in ipairs(options.extensions_list) do
 	telescope.load_extension(ext)
 end
+
+require("plugins.configs.others").session_lens()
