@@ -7,8 +7,19 @@ end
 
 local home = os.getenv("HOME")
 
-local M = {}
+local F = {}
+function F.edit_nvim()
+	require("telescope.builtin").git_files({
+		shorten_path = true,
+		cwd = "~/.config/nvim",
+		prompt = "~ nvim ~",
+		height = 10,
+		layout_strategy = "horizontal",
+		layout_options = { preview_width = 0.75 },
+	})
+end
 
+local M = {}
 M.general = {
 	i = {
 
@@ -299,10 +310,7 @@ M.telescope = {
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
 		["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "   find oldfiles" },
-		["<leader>fn"] = {
-			"<cmd> Telescope file_browser path=" .. home .. "/.config/nvim <CR>",
-			"   open ~/.config/nvim",
-		},
+		["<leader>fn"] = { F.edit_nvim, "   open ~/.config/nvim" },
 		["<leader>fd"] = { "<cmd> Telescope file_browser path=" .. home .. "/dotfiles <CR>", "   open ~/dotfiles" },
 		["<leader>ft"] = { "<cmd> Telescope file_browser <CR>", "   open file browser" },
 
