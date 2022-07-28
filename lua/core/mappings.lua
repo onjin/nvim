@@ -300,10 +300,11 @@ M.telescope = {
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
 		["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "   find oldfiles" },
 		["<leader>fn"] = {
-			"<cmd> Telescope file_browser path=" .. home .. ".config/nvim <CR>",
+			"<cmd> Telescope file_browser path=" .. home .. "/.config/nvim <CR>",
 			"   open ~/.config/nvim",
 		},
-		["<leader>fd"] = { "<cmd> Telescope file_browser path=" .. home .. "dotfiles <CR>", "   open dotfiles" },
+		["<leader>fd"] = { "<cmd> Telescope file_browser path=" .. home .. "/dotfiles <CR>", "   open ~/dotfiles" },
+		["<leader>ft"] = { "<cmd> Telescope file_browser <CR>", "   open file browser" },
 
 		["<leader>vk"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
 
