@@ -201,6 +201,13 @@ local plugins = {
 		end,
 	},
 
+  ['mickael-menu/zk-nvim'] = {
+		config = function()
+			require("plugins.configs.others").zk()
+		end,
+
+  },
+
 	-- sessions
 	["ahmedkhalf/project.nvim"] = {
 		config = function()
