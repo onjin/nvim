@@ -38,6 +38,23 @@ capabilities.textDocument.completion.completionItem = {
 	},
 }
 
+-- autocnofigure all servers
+local lsp_installer = require("nvim-lsp-installer")
+
+-- 2. (optional) Override the default configuration to be applied to all servers.
+lspconfig.util.default_config = vim.tbl_extend(
+    "force",
+    lspconfig.util.default_config,
+    {
+        on_attach = M.on_attach
+    }
+)
+
+-- 3. Loop through all of the installed servers and set it up via lspconfig
+for _, server in ipairs(lsp_installer.get_installed_servers()) do
+  lspconfig[server.name].setup {}
+end
+
 lspconfig.sumneko_lua.setup({
 	on_attach = M.on_attach,
 	capabilities = capabilities,
@@ -63,6 +80,7 @@ lspconfig.pyright.setup({
 	on_attach = M.on_attach,
 	capabilities = capabilities,
 })
+
 
 -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
 local black = require("efm/black")
