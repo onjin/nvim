@@ -83,6 +83,7 @@ lspconfig.pyright.setup({
 
 
 -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
+local bandit = require("efm/bandit")
 local black = require("efm/black")
 local eslint = require("efm/eslint")
 local flake8 = require("efm/flake8")
@@ -115,7 +116,8 @@ lspconfig.efm.setup({
 			vim = { vint },
 			lua = { stylua, luacheck },
 			go = { staticcheck, goimports, go_vet },
-			python = { black, isort, flake8, mypy },
+			-- python = { black, isort, flake8, mypy },
+			python = { black, isort, bandit},
 			typescript = { prettier, eslint },
 			javascript = { prettier, eslint },
 			typescriptreact = { prettier, eslint },
