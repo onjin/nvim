@@ -310,9 +310,11 @@ M.telescope = {
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
 		["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "   find oldfiles" },
-		["<leader>fn"] = { F.edit_nvim, "   open ~/.config/nvim" },
-		["<leader>fd"] = { "<cmd> Telescope file_browser path=" .. home .. "/dotfiles <CR>", "   open ~/dotfiles" },
+
 		["<leader>ft"] = { "<cmd> Telescope file_browser <CR>", "   open file browser" },
+		["<leader><leader>e"] = { F.edit_nvim, "   open ~/.config/nvim" },
+		["<leader><leader>d"] = { "<cmd> Telescope file_browser path=" .. home .. "/dotfiles <CR>", "   open ~/dotfiles" },
+		["<leader><leader>n"] = { "<cmd> Telescope file_browser path=" .. home .. "/notes <CR>", "   open ~/notes" },
 
 		["<leader>vk"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
 
