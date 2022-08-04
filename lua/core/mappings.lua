@@ -391,6 +391,33 @@ M.neotest = {
 	},
 }
 
+M.gitsigns = {
+  n = {
+		["<leader>hs"] = { ':Gitsigns stage_hunk<cr>', "  stage hunk" },
+		["<leader>hr"] = { ':Gitsigns reset_hunk<cr>', "  reset hunk" },
+		["<leader>hS"] = { ":lua require('gitsigns').stage_buffer()<cr>", "  stage buffer"},
+		["<leader>hu"] = { ":lua require('gitsigns').undo_stage_hunk()<cr>", "  undo stage buffer"},
+		["<leader>hR"] = { ":lua require('gitsigns').reset_buffer()<cr>", "  reset buffer"},
+		["<leader>hp"] = { ":lua require('gitsigns').preview_hunk()<cr>", "  preview hunk"},
+		["<leader>hb"] = { function() require('gitsigns').blame_line({ full = true }) end, "  blame line"},
+		["<leader>hd"] = { ":lua require('gitsigns').diffthis()<cr>", "  diff this"},
+		["<leader>hD"] = { function() require('gitsigns').diffthis("~") end, "  diff this"},
+    -- toggle
+		["<leader>tb"] = { ":lua require('gitsigns').toggle_current_line_blame()<cr>", "  toggle blame"},
+		["<leader>td"] = { ":lua require('gitsigns').toggle_deleted()<cr>", "  toggle deleted"},
+  },
+  v = {
+		["<leader>hs"] = { ':Gitsigns stage_hunk<cr>', "  stage hunk" },
+		["<leader>hr"] = { ':Gitsigns reset_hunk<cr>', "  reset hunk" },
+  },
+  o = {
+    ["ih"] = {":<C-U>Gitsigns select_hunk<CR>"},
+  },
+  x = {
+    ["ih"] = {":<C-U>Gitsigns select_hunk<CR>"},
+  },
+}
+
 return M
 --[[
 -- for python

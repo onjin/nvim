@@ -88,6 +88,8 @@ local plugins = {
 		end,
 	},
 
+	["tpope/vim-fugitive"] = {},
+
 	-- lsp stuff
 
 	["williamboman/nvim-lsp-installer"] = {
@@ -201,12 +203,11 @@ local plugins = {
 		end,
 	},
 
-  ['mickael-menu/zk-nvim'] = {
+	["mickael-menu/zk-nvim"] = {
 		config = function()
 			require("plugins.configs.others").zk()
 		end,
-
-  },
+	},
 
 	-- sessions
 	["ahmedkhalf/project.nvim"] = {
@@ -282,12 +283,10 @@ local plugins = {
 
 	-- highlight words unser cursor <leader>m
 	["inkarkat/vim-mark"] = {
-    disable = true,
+		disable = true,
 		requires = { "nkarkat/vim-ingo-library" },
 	},
-  ['t9md/vim-quickhl'] = {
-
-  },
+	["t9md/vim-quickhl"] = {},
 
 	-- testing
 	["nvim-neotest/neotest"] = {
@@ -381,7 +380,6 @@ local plugins = {
   -- let g:sql_type_default = 'pgsql' # force all `.sql` to postgres
 
   -- git utils
-  use { 'tpope/vim-fugitive' }
   use { 'airblade/vim-gitgutter' } -- A Vim plugin which shows a git diff in the sign column.
 
   --  Snippets

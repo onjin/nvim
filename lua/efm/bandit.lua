@@ -1,5 +1,5 @@
 return {
-  lintCommand = "bandit -q --format custom --msg-template  '{abspath}:{line}:{col}: {severity}: {msg} bandit[{test_id}]'" ,
+  lintCommand = "bandit -r -q --skip B101 --format custom --msg-template  '{abspath}:{line}:{col}: {severity}: {msg} bandit[{test_id}]'" ,
 	lintFormats = {
     "%f:%l:%c: %tOW: %m",
 		"%f:%l:%c: %tEDIUM: %m",

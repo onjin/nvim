@@ -1,6 +1,7 @@
 -- luacheck: globals vim
 local M = {}
 
+local utils = require("core.utils")
 local load_override = require("core.utils").load_override
 
 M.autopairs = function()
@@ -52,6 +53,39 @@ M.gitsigns = function()
 			topdelete = { hl = "DiffDelete", text = "‾", numhl = "GitSignsDeleteNr" },
 			changedelete = { hl = "DiffChangeDelete", text = "~", numhl = "GitSignsChangeNr" },
 		},
+		on_attach = function(bufnr)
+			local gs = package.loaded.gitsigns
+
+			local function map(mode, l, r, opts)
+				opts = opts or {}
+				opts.buffer = bufnr
+				vim.keymap.set(mode, l, r, opts)
+			end
+
+			-- Navigation
+      local git_mappings = utils.load_config().mappings.gitsigns
+      utils.load_mappings({ git_mappings }, { buffer = bufnr })
+			map("n", "]c", function()
+				if vim.wo.diff then
+					return "]c"
+				end
+				vim.schedule(function()
+					gs.next_hunk()
+				end)
+				return "<Ignore>"
+			end, { expr = true })
+
+			map("n", "[c", function()
+				if vim.wo.diff then
+					return "[c"
+				end
+				vim.schedule(function()
+					gs.prev_hunk()
+				end)
+				return "<Ignore>"
+			end, { expr = true })
+
+		end,
 	}
 
 	options = load_override(options, "lewis6991/gitsigns.nvim")
