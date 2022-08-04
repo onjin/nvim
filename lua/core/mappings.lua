@@ -81,11 +81,11 @@ M.general = {
 	},
 
 	t = {
-		["<C-x>"] = { termcodes("<C-\\><C-N>"), "   escape terminal mode" },
-		["<C-h>"] = { termcodes("<C-\\><C-N><C-w>h") },
-		["<C-j>"] = { termcodes("<C-\\><C-N><C-w>j") },
-		["<C-k>"] = { termcodes("<C-\\><C-N><C-w>k") },
-		["<C-l>"] = { termcodes("<C-\\><C-N><C-w>l") },
+		["<C-x>"] = { [[<C-\><C-n>]], opts = { buffer = 0 }, "   escape terminal mode" },
+		["<C-h>"] = { [[<Cmd>wincmd h<CR>]], opts = { buffer = 0} },
+		["<C-j>"] = { [[<Cmd>wincmd j<CR>]], opts = { buffer = 0} },
+		["<C-k>"] = { [[<Cmd>wincmd k<CR>]], opts = { buffer = 0} },
+		["<C-l>"] = { [[<Cmd>wincmd l<CR>]], opts = { buffer = 0} },
 	},
 
 	v = {

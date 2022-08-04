@@ -385,4 +385,16 @@ M.zk = function()
 	zk.setup(options)
 end
 
+M.toggleterm = function()
+	local present, toggleterm = pcall(require, "toggleterm")
+
+	if not present then
+		return
+	end
+
+	local options = {}
+	options = load_override(options, "akinsho/toggleterm.nvim")
+	toggleterm.setup(options)
+end
+
 return M

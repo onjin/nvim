@@ -209,6 +209,13 @@ local plugins = {
 		end,
 	},
 
+	["akinsho/toggleterm.nvim"] = {
+		tag = "v2.*",
+		config = function()
+			require("plugins.configs.others").toggleterm()
+		end,
+	},
+
 	-- sessions
 	["ahmedkhalf/project.nvim"] = {
 		config = function()

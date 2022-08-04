@@ -47,7 +47,7 @@ autocmd("CmdlineEnter", {
 	command = "command! Term :botright vsplit term://$SHELL",
 })
 
--- Enter insert mode when switching to terminal
+--[[ Enter insert mode when switching to terminal
 autocmd("TermOpen", {
 	command = "setlocal listchars= nonumber norelativenumber nocursorline",
 })
@@ -56,7 +56,7 @@ autocmd("TermOpen", {
 autocmd("TermOpen", {
 	pattern = "*",
 	command = "if nvim_buf_get_name(0) =~# '^term://.*' | startinsert | endif",
-})
+})]]
 
 -- Close terminal buffer on process exit
 autocmd("BufLeave", {
