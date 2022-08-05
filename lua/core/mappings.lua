@@ -62,14 +62,6 @@ M.general = {
 		-- update nvchad
 		["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
 
-		["<leader>tt"] = {
-			function()
-				require("base46").toggle_theme()
-			end,
-
-			"   change theme",
-		},
-
 		-- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
 		-- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 		-- empty mode is same as using <cmd> :map
@@ -82,10 +74,10 @@ M.general = {
 
 	t = {
 		["<C-x>"] = { [[<C-\><C-n>]], opts = { buffer = 0 }, "   escape terminal mode" },
-		["<C-h>"] = { [[<Cmd>wincmd h<CR>]], opts = { buffer = 0} },
-		["<C-j>"] = { [[<Cmd>wincmd j<CR>]], opts = { buffer = 0} },
-		["<C-k>"] = { [[<Cmd>wincmd k<CR>]], opts = { buffer = 0} },
-		["<C-l>"] = { [[<Cmd>wincmd l<CR>]], opts = { buffer = 0} },
+		["<C-h>"] = { [[<Cmd>wincmd h<CR>]], opts = { buffer = 0 } },
+		["<C-j>"] = { [[<Cmd>wincmd j<CR>]], opts = { buffer = 0 } },
+		["<C-k>"] = { [[<Cmd>wincmd k<CR>]], opts = { buffer = 0 } },
+		["<C-l>"] = { [[<Cmd>wincmd l<CR>]], opts = { buffer = 0 } },
 	},
 
 	v = {
@@ -112,8 +104,8 @@ M.buffers = {
 		["<S-Tab>"] = { "<cmd> :bp <CR> ", "  goto prev buffer" },
 
 		-- cycle through tabs
-		["<leader>tp"] = { "<cmd> tabprevious <CR>", "  goto next tab" },
-		["<leader>tn"] = { "<cmd> tabnext <CR> ", "  goto prev tab" },
+		["<leader>Tp"] = { "<cmd> tabprevious <CR>", "  goto next tab" },
+		["<leader>Tn"] = { "<cmd> tabnext <CR> ", "  goto prev tab" },
 
 		-- close buffer + hide terminal buffer
 		["<leader>x"] = { "<cmd> :bd <CR>", "   close buffer" },
@@ -313,8 +305,14 @@ M.telescope = {
 
 		["<leader>ft"] = { "<cmd> Telescope file_browser <CR>", "   open file browser" },
 		["<leader><leader>e"] = { F.edit_nvim, "   open ~/.config/nvim" },
-		["<leader><leader>d"] = { "<cmd> Telescope file_browser path=" .. home .. "/dotfiles <CR>", "   open ~/dotfiles" },
-		["<leader><leader>n"] = { "<cmd> Telescope file_browser path=" .. home .. "/notes <CR>", "   open ~/notes" },
+		["<leader><leader>d"] = {
+			"<cmd> Telescope file_browser path=" .. home .. "/dotfiles <CR>",
+			"   open ~/dotfiles",
+		},
+		["<leader><leader>n"] = {
+			"<cmd> Telescope file_browser path=" .. home .. "/notes <CR>",
+			"   open ~/notes",
+		},
 
 		["<leader>vk"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
 
@@ -333,7 +331,7 @@ M.telescope = {
 		["<leader>pt"] = { "<cmd> Telescope terms <CR>", "   pick hidden term" },
 
 		-- theme switcher
-		["<leader>tc"] = { "<cmd> Telescope colorscheme <CR>", "   themes" },
+		["<leader>sc"] = { "<cmd> Telescope colorscheme <CR>", "   themes" },
 
 		-- spelling
 		["<leader>ss"] = { "<cmd> Telescope spell_sugges <CR>", "   spelling" },
@@ -378,46 +376,72 @@ M.blankline = {
 	},
 }
 
+M.vimux = {
+	n = {
+		-- ["<leader>tr"] = { ':lua require("neotest").run.run()<cr>', "λ Run tests" },
+		["<leader>vp"] = { ":VimuxPromptCommand<cr>", "~ Run prompted command in vimux runner" },
+		["<leader>vo"] = { ":VimuxOpenRunner<cr>", "~ Open vimux runner" },
+		["<leader>vz"] = { ":VimuxZoomRunner<cr>", "~ Zoom vimux runner" },
+		["<leader>vq"] = { ":VimuxCloseRunner<cr>", "~ Close vimux runner" },
+		["<leader>vx"] = { ":VimuxInterruptRunner<cr>", "~ Close vimux runner" },
+		["<leader>vi"] = { ":VimuxInspectRunner<cr>", "~ Inspect vimux runner" },
+		["<leader>v<C-l>"] = { ":VimuxClearTerminalScreen<cr>", "~ Clear screen of vimux runner" },
+	},
+}
+
 M.neotest = {
 
 	n = {
-		["<leader>tr"] = { ':lua require("neotest").run.run()<cr>' },
-		["<leader>tl"] = { ':lua require("neotest").run.run_last()<cr>' },
-		["<leader>tf"] = { ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>' },
-		["<leader>tu"] = { ':lua require("neotest").run.stop()<cr>' },
-		["<leader>ta"] = { ':lua require("neotest").run.attach()<cr>' },
+		-- ["<leader>tr"] = { ':lua require("neotest").run.run()<cr>', "λ Run tests" },
+		["<leader>tr"] = { ":TestNearest<cr>", "λ Run tests" },
+		-- ["<leader>tl"] = { ':lua require("neotest").run.run_last()<cr>', "λ Run last test" },
+		["<leader>tl"] = { ":TestLast<cr>", "λ Run last test" },
+		-- ["<leader>tf"] = { ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', "λ Test file" },
+		["<leader>tf"] = { ":TestFile<cr>", "λ Test file" },
+		["<leader>tu"] = { ':lua require("neotest").run.stop()<cr>', "λ Stop tests" },
+		["<leader>ta"] = { ':lua require("neotest").run.attach()<cr>', "λ Attach to tests" },
 
-		["<leader>tw"] = { ':lua require("neotest").summary.toggle()<cr>' },
-		["<leader>to"] = { ':lua require("neotest").output.open()<cr>' },
-		["<leader>ts"] = { ':lua require("neotest").output.open({ short = true })<cr>' },
+		["<leader>tw"] = { ':lua require("neotest").summary.toggle()<cr>', "λ Toggle tests sumamry" },
+		["<leader>to"] = { ':lua require("neotest").output.open()<cr>', "λ Open output window" },
+		["<leader>ts"] = { ':lua require("neotest").output.open({ short = true })<cr>', "λ Open output summary" },
 	},
 }
 
 M.gitsigns = {
-  n = {
-		["<leader>hs"] = { ':Gitsigns stage_hunk<cr>', "  stage hunk" },
-		["<leader>hr"] = { ':Gitsigns reset_hunk<cr>', "  reset hunk" },
-		["<leader>hS"] = { ":lua require('gitsigns').stage_buffer()<cr>", "  stage buffer"},
-		["<leader>hu"] = { ":lua require('gitsigns').undo_stage_hunk()<cr>", "  undo stage buffer"},
-		["<leader>hR"] = { ":lua require('gitsigns').reset_buffer()<cr>", "  reset buffer"},
-		["<leader>hp"] = { ":lua require('gitsigns').preview_hunk()<cr>", "  preview hunk"},
-		["<leader>hb"] = { function() require('gitsigns').blame_line({ full = true }) end, "  blame line"},
-		["<leader>hd"] = { ":lua require('gitsigns').diffthis()<cr>", "  diff this"},
-		["<leader>hD"] = { function() require('gitsigns').diffthis("~") end, "  diff this"},
-    -- toggle
-		["<leader>tb"] = { ":lua require('gitsigns').toggle_current_line_blame()<cr>", "  toggle blame"},
-		["<leader>td"] = { ":lua require('gitsigns').toggle_deleted()<cr>", "  toggle deleted"},
-  },
-  v = {
-		["<leader>hs"] = { ':Gitsigns stage_hunk<cr>', "  stage hunk" },
-		["<leader>hr"] = { ':Gitsigns reset_hunk<cr>', "  reset hunk" },
-  },
-  o = {
-    ["ih"] = {":<C-U>Gitsigns select_hunk<CR>"},
-  },
-  x = {
-    ["ih"] = {":<C-U>Gitsigns select_hunk<CR>"},
-  },
+	n = {
+		["<leader>hs"] = { ":Gitsigns stage_hunk<cr>", "  stage hunk" },
+		["<leader>hr"] = { ":Gitsigns reset_hunk<cr>", "  reset hunk" },
+		["<leader>hS"] = { ":lua require('gitsigns').stage_buffer()<cr>", "  stage buffer" },
+		["<leader>hu"] = { ":lua require('gitsigns').undo_stage_hunk()<cr>", "  undo stage buffer" },
+		["<leader>hR"] = { ":lua require('gitsigns').reset_buffer()<cr>", "  reset buffer" },
+		["<leader>hp"] = { ":lua require('gitsigns').preview_hunk()<cr>", "  preview hunk" },
+		["<leader>hb"] = {
+			function()
+				require("gitsigns").blame_line({ full = true })
+			end,
+			"  blame line",
+		},
+		["<leader>hd"] = { ":lua require('gitsigns').diffthis()<cr>", "  diff this" },
+		["<leader>hD"] = {
+			function()
+				require("gitsigns").diffthis("~")
+			end,
+			"  diff this",
+		},
+		-- toggle
+		["<leader>Tb"] = { ":lua require('gitsigns').toggle_current_line_blame()<cr>", "  toggle blame" },
+		["<leader>Td"] = { ":lua require('gitsigns').toggle_deleted()<cr>", "  toggle deleted" },
+	},
+	v = {
+		["<leader>hs"] = { ":Gitsigns stage_hunk<cr>", "  stage hunk" },
+		["<leader>hr"] = { ":Gitsigns reset_hunk<cr>", "  reset hunk" },
+	},
+	o = {
+		["ih"] = { ":<C-U>Gitsigns select_hunk<CR>" },
+	},
+	x = {
+		["ih"] = { ":<C-U>Gitsigns select_hunk<CR>" },
+	},
 }
 
 return M

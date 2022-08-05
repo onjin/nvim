@@ -7,8 +7,8 @@ end
 -- vim-test
 vim.g["test#neovim#term_position"] = "vert"
 vim.g["test#strategy"] = "vimux"
-vim.g.VimuxOrientation = "h"
-vim.g.VimuxHeight = "50"
+vim.g.VimuxOrientation = "v"
+vim.g.VimuxHeight = "20"
 
 -- neotest
 local options = {
