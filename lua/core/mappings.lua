@@ -383,7 +383,7 @@ M.vimux = {
 		["<leader>vo"] = { ":VimuxOpenRunner<cr>", "~ Open vimux runner" },
 		["<leader>vz"] = { ":VimuxZoomRunner<cr>", "~ Zoom vimux runner" },
 		["<leader>vq"] = { ":VimuxCloseRunner<cr>", "~ Close vimux runner" },
-		["<leader>vx"] = { ":VimuxInterruptRunner<cr>", "~ Close vimux runner" },
+		["<leader>vx"] = { ":VimuxInterruptRunner<cr>", "~ Interrupt vimux runner process" },
 		["<leader>vi"] = { ":VimuxInspectRunner<cr>", "~ Inspect vimux runner" },
 		["<leader>v<C-l>"] = { ":VimuxClearTerminalScreen<cr>", "~ Clear screen of vimux runner" },
 	},
