@@ -221,7 +221,7 @@ M.lspconfig = {
 				-- vim.lsp.buf.references()
 				require("telescope.builtin").lsp_document_symbols()
 			end,
-			"   lsp references",
+			"   lsp document symbols",
 		},
 
 		["<leader>f"] = {
@@ -447,6 +447,8 @@ M.lspsaga = {
 	n = {
 		-- find
 		["<leader>tt"] = { "<cmd>LSoutlineToggle<CR>", "  toggle outline" },
+		["<leader>lf"] = { "<cmd>Lspsaga lsp_finder<CR>", "  LSP finder" },
+		["<leader>rt"] = { "<cmd>LspsagaFloaterm bash<CR>", "  floating term" },
   }
 }
 	

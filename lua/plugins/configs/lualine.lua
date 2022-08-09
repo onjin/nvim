@@ -76,6 +76,7 @@ local options = {
 		lualine_z = {},
 	},
 	tabline = {
+		-- lualine_a = { { navic.get_location, cond = navic.is_available } },
 		lualine_a = { { navic.get_location, cond = navic.is_available } },
 		lualine_b = {},
 		lualine_c = {},
