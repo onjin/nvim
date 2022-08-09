@@ -281,12 +281,20 @@ local plugins = {
 			require("plugins.configs.others").tmux()
 		end,
 	},
+
 	["CosmicNvim/cosmic-ui"] = {
 		config = function()
 			require("plugins.configs.others").cosmic_ui()
 		end,
 		requires = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 	},
+
+  ["glepnir/lspsaga.nvim"] = {
+    branch = "main",
+		config = function()
+			require("plugins.configs.others").lspsaga()
+		end,
+  },
 
 	-- highlight words unser cursor <leader>m
 	["inkarkat/vim-mark"] = {

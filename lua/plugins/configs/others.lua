@@ -63,8 +63,8 @@ M.gitsigns = function()
 			end
 
 			-- Navigation
-      local git_mappings = utils.load_config().mappings.gitsigns
-      utils.load_mappings({ git_mappings }, { buffer = bufnr })
+			local git_mappings = utils.load_config().mappings.gitsigns
+			utils.load_mappings({ git_mappings }, { buffer = bufnr })
 			map("n", "]c", function()
 				if vim.wo.diff then
 					return "]c"
@@ -84,7 +84,6 @@ M.gitsigns = function()
 				end)
 				return "<Ignore>"
 			end, { expr = true })
-
 		end,
 	}
 
@@ -395,6 +394,22 @@ M.toggleterm = function()
 	local options = {}
 	options = load_override(options, "akinsho/toggleterm.nvim")
 	toggleterm.setup(options)
+end
+
+M.lspsaga = function()
+	local present, lspsaga = pcall(require, "lspsaga")
+
+	if not present then
+		return
+	end
+
+	local options = {
+		symbol_in_winbar = {
+			in_custom = true,
+		},
+	}
+	options = load_override(options, "glepnir/lspsaga.vim")
+	lspsaga.init_lsp_saga(options)
 end
 
 return M

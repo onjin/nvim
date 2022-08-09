@@ -443,6 +443,13 @@ M.gitsigns = {
 		["ih"] = { ":<C-U>Gitsigns select_hunk<CR>" },
 	},
 }
+M.lspsaga = {
+	n = {
+		-- find
+		["<leader>tt"] = { "<cmd>LSoutlineToggle<CR>", "  toggle outline" },
+  }
+}
+	
 
 return M
 --[[
