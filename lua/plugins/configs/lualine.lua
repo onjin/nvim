@@ -100,8 +100,8 @@ local options = {
       {"diff", separator = '|'},
       {"filename", separator = '|'},
       {"filetype", separator ='|'},
-    },]]
-	},
+    },
+	},]]
 	extensions = {},
 }
 
