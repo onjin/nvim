@@ -9,11 +9,6 @@ local M = {}
 local utils = require("core.utils")
 
 M.on_attach = function(client, bufnr)
-	if client.name ~= "efm" then
-		local navic = require("nvim-navic")
-		navic.attach(client, bufnr)
-	end
-
 	local lsp_mappings = utils.load_config().mappings.lspconfig
 	utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
 end

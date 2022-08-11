@@ -116,6 +116,7 @@ local plugins = {
 
 	["SmiteshP/nvim-navic"] = {
 		requires = "neovim/nvim-lspconfig",
+    disable = true,
 		config = function()
 			require("plugins.configs.navic")
 		end,

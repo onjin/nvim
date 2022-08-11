@@ -29,11 +29,6 @@ local current_treesitter_context = function()
 	return " " .. fun_name
 end
 
-local navic = require("nvim-navic")
-
---[[lualine_c = {
-  { navic.get_location, cond = navic.is_available },
-},]]
 
 local options = {
 	options = {
@@ -76,37 +71,36 @@ local options = {
 		lualine_z = {},
 	},
 	tabline = {
-		-- lualine_a = { { navic.get_location, cond = navic.is_available } },
-		lualine_a = { { navic.get_location, cond = navic.is_available } },
+		lualine_a = {},
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = { { "buffers", mode = 2 } },
 		lualine_z = { "tabs" },
 	},
-	winbar = {
-		lualine_a = {
-      {"diff", separator = '|'},
-      {"filename", separator = '|'},
-      {"filetype", separator ='|'},
-    },
+	--[[winbar = {
+		lualine_a = {},
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
-		lualine_z = {},
+		lualine_z = {
+      {"diff", separator = '|'},
+      {"filename", separator = '|'},
+      {"filetype", separator ='|'},
+    },
 	},
 	inactive_winbar = {
-		lualine_a = {
-      {"diff", separator = '|'},
-      {"filename", separator = '|'},
-      {"filetype", separator ='|'},
-    },
+		lualine_a = {},
 		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
 		lualine_y = {},
-		lualine_z = {},
+		lualine_z = {
+      {"diff", separator = '|'},
+      {"filename", separator = '|'},
+      {"filetype", separator ='|'},
+    },]]
 	},
 	extensions = {},
 }

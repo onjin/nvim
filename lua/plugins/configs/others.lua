@@ -405,7 +405,9 @@ M.lspsaga = function()
 
 	local options = {
 		symbol_in_winbar = {
-			in_custom = true,
+			in_custom = false,
+      enable = true,
+      click_support = true,
 		},
 	}
 	options = load_override(options, "glepnir/lspsaga.vim")
