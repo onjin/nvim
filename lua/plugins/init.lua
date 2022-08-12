@@ -116,7 +116,7 @@ local plugins = {
 
 	["SmiteshP/nvim-navic"] = {
 		requires = "neovim/nvim-lspconfig",
-    disable = true,
+		disable = true,
 		config = function()
 			require("plugins.configs.navic")
 		end,
@@ -290,12 +290,12 @@ local plugins = {
 		requires = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 	},
 
-  ["glepnir/lspsaga.nvim"] = {
-    branch = "main",
+	["glepnir/lspsaga.nvim"] = {
+		branch = "main",
 		config = function()
 			require("plugins.configs.others").lspsaga()
 		end,
-  },
+	},
 
 	-- highlight words unser cursor <leader>m
 	["inkarkat/vim-mark"] = {
@@ -340,6 +340,12 @@ local plugins = {
 			"nvim-telescope/telescope-project.nvim",
 			"cljoly/telescope-repo.nvim",
 		},
+	},
+
+	["iamcco/markdown-preview.nvim"] = {
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
 	},
 
 	-- better wordmotion (f.i. between CamelCaseWords)
