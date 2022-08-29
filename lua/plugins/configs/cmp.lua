@@ -136,6 +136,7 @@ local options = {
 		{ name = "nvim_lua" },
 		{ name = "path" },
 		{ name = "emoji" },
+		{ name = "crates" },
 		{ name = "calc" },
 	},
 }

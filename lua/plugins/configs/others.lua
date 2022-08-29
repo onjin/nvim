@@ -414,4 +414,16 @@ M.lspsaga = function()
 	lspsaga.init_lsp_saga(options)
 end
 
+M.crates = function()
+	local present, crates = pcall(require, "crates")
+
+	if not present then
+		return
+	end
+
+	local options = {}
+	options = load_override(options, "saecki/crates.nvim")
+	crates.setup(options)
+end
+
 return M

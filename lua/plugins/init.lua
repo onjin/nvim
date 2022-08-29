@@ -355,6 +355,15 @@ local plugins = {
 	-- text objects and motions for python
 	["jeetsukumaran/vim-pythonsense"] = {},
 
+	-- rust crates.io
+	["saecki/crates.nvim"] = {
+		tag = "v0.2.1",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("plugins.configs.others").crates()
+		end,
+	},
+
 	-- requirements.txt syntax
 	["raimon49/requirements.txt.vim"] = {},
 

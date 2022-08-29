@@ -449,9 +449,30 @@ M.lspsaga = {
 		["<leader>tt"] = { "<cmd>LSoutlineToggle<CR>", "  toggle outline" },
 		["<leader>lf"] = { "<cmd>Lspsaga lsp_finder<CR>", "  LSP finder" },
 		["<leader>rt"] = { "<cmd>LspsagaFloaterm bash<CR>", "  floating term" },
-  }
+	},
 }
-	
+
+M.cargo = {
+	n = {
+		["<leader>ct"] = { ":lua require('crates').toggle()<cr>", "[Cargo] toggle" },
+		["<leader>cr"] = { ":lua require('crates').reload()<cr>", "[Cargo] reload" },
+
+		["<leader>cv"] = { ":lua require('crates').show_versions_popup()<cr>", "[Cargo] show versions" },
+		["<leader>cf"] = { ":lua require('crates').show_features_popup()<cr>", "[Cargo] show features" },
+		["<leader>cd"] = { ":lua require('crates').show_dependencies_popup()<cr>", "[Cargo] show dependencies" },
+
+		["<leader>cu"] = { ":lua require('crates').update_crate()<cr>", "[Cargo] update crate" },
+		["<leader>ca"] = { ":lua require('crates').update_all_crates()<cr>", "[Cargo] update all" },
+		["<leader>cU"] = { ":lua require('crates').upgrade_crate()<cr>", "[Cargo] upgrade crate" },
+		["<leader>cA"] = { ":lua require('crates').upgrade_all_crates()<cr>", "[Cargo] upgrade all" },
+
+		["<leader>cC"] = { ":lua require('crates').focus_popup()<cr>", "[Cargo] focus popup" },
+	},
+	v = {
+		["<leader>cu"] = { ":lua require('crates').update_crates()<cr>", "[Cargo] update crates" },
+		["<leader>cU"] = { ":lua require('crates').upgrade_crates()<cr>", "[Cargo] upgrade crates" },
+	},
+}
 
 return M
 --[[
