@@ -130,16 +130,9 @@ lspconfig.efm.setup({
 	},
 })
 
--- requires a file containing user's lspconfigs
-local addlsp_confs = utils.load_config().plugins.options.lspconfig.setup_lspconf
-
-if #addlsp_confs ~= 0 then
-	require(addlsp_confs).setup_lsp(M.on_attach, capabilities)
-end
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	-- whether to show or not inline diagnostics errors - still available as float
-	virtual_text = false,
+	virtual_text = utils.load_config().options.lsp_virtual_test,
 })
 
 return M

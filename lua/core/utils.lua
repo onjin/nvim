@@ -5,51 +5,8 @@ local merge_tb = vim.tbl_deep_extend
 
 M.load_config = function()
 	local config = require("core.default_config")
-	local chadrc_exists, chadrc = pcall(require, "custom.chadrc")
-
-	if chadrc_exists then
-		-- merge user config if it exists and is a table; otherwise display an error
-		if type(chadrc) == "table" then
-			M.remove_default_keys()
-			config = merge_tb("force", config, chadrc)
-		else
-			error("chadrc must return a table!")
-		end
-	end
-
 	config.mappings.disabled = nil
 	return config
-end
-
-M.remove_default_keys = function()
-	local chadrc = require("custom.chadrc")
-	local user_mappings = chadrc.mappings or {}
-	local user_keys = {}
-	local user_sections = vim.tbl_keys(user_mappings)
-
-	-- push user_map keys in user_keys table
-	for _, section in ipairs(user_sections) do
-		user_keys = vim.tbl_deep_extend("force", user_keys, user_mappings[section])
-	end
-
-	local function disable_key(mode, keybind, mode_mapping)
-		local keys_in_mode = vim.tbl_keys(user_keys[mode] or {})
-
-		if vim.tbl_contains(keys_in_mode, keybind) then
-			mode_mapping[keybind] = nil
-		end
-	end
-
-	local default_mappings = require("core.default_config").mappings
-
-	-- remove user_maps from default mapping table
-	for _, section_mappings in pairs(default_mappings) do
-		for mode, mode_mapping in pairs(section_mappings) do
-			for keybind, _ in pairs(mode_mapping) do
-				disable_key(mode, keybind, mode_mapping)
-			end
-		end
-	end
 end
 
 M.load_mappings = function(mappings, mapping_opt)

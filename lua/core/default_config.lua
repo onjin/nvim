@@ -5,6 +5,8 @@ local M = {}
 M.options = {
 	-- load your options here or load module with options
 	user = function() end,
+  -- whether display diagnostic text after the line
+  lsp_virtual_test = true,
 }
 
 M.ui = {
@@ -21,11 +23,6 @@ M.plugins = {
 	override = {},
 	remove = {},
 	user = {},
-	options = {
-		lspconfig = {
-			setup_lspconf = "", -- path of lspconfig file
-		},
-	},
 }
 
 -- check core.mappings for table structure
