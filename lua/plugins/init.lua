@@ -64,6 +64,7 @@ local plugins = {
 		end,
 		requires = {
 			"romgrk/nvim-treesitter-context",
+			"nvim-treesitter/playground",
 		},
 	},
 
