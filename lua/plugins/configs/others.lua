@@ -211,7 +211,7 @@ M.notify = function()
 
 	options = load_override(options, "rcarriga/nvim-notify")
 	notify.setup(options)
-	vim.notify = notify
+	-- vim.notify = notify
 end
 
 M.fidget = function()
