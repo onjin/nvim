@@ -91,7 +91,7 @@ local plugins = {
 
 	["tpope/vim-fugitive"] = {},
 
-	-- lsp stuff
+	-- lsp stuff {{{
 
 	["williamboman/nvim-lsp-installer"] = {
 		opt = true,
@@ -122,6 +122,7 @@ local plugins = {
 			require("plugins.configs.navic")
 		end,
 	},
+	-- lsp stuff }}}
 
 	-- load luasnips + cmp related in insert mode only
 
@@ -191,11 +192,17 @@ local plugins = {
 		after = "cmp_luasnip",
 	},
 
-	--[[["tzachar/cmp-tabnine"] = {
-      after = "friendly-snippets",
-      run='./install.sh',
-      requires = 'hrsh7th/nvim-cmp'
-   },]]
+	-- smart coding {{{
+	["github/copilot.vim"] = {
+		disable = true,
+	},
+	["tzachar/cmp-tabnine"] = {
+		run = "./install.sh",
+		requires = "hrsh7th/nvim-cmp",
+		after = "nvim-cmp",
+	},
+	-- smart coding }}}
+
 	-- file managing , picker etc
 	["kyazdani42/nvim-tree.lua"] = {
 		ft = "alpha",
@@ -461,9 +468,9 @@ local plugins = {
 
   use { 'skywind3000/asyncrun.vim' }
 
-  use { 'github/copilot.vim' }
   use 'wakatime/vim-wakatime'
 --]]
 }
 
 require("core.packer").run(plugins)
+

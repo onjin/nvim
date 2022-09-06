@@ -86,6 +86,7 @@ local options = {
 				tmux = "[Tmux]",
 				look = "[Look]",
 				rg = "[RG]",
+        cmp_tabnine = "[Tabnine]",
 			}
 			vim_item.menu = menu_map[entry.source.name] or string.format("[%s]", entry.source.name)
 
@@ -130,10 +131,11 @@ local options = {
 		}),
 	},
 	sources = {
+		{ name = "cmp_tabnine" },
 		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
-		{ name = "buffer" },
 		{ name = "nvim_lua" },
+		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "emoji" },
 		{ name = "crates" },
