@@ -474,6 +474,12 @@ M.cargo = {
 	},
 }
 
+M.folding = {
+	n = {
+		["<leader>Ft"] = { ":lua require('core.utils').toggle_folding()<cr>", "Toggle folding" },
+  },
+}
+
 return M
 --[[
 -- for python
