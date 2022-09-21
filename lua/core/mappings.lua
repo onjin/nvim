@@ -480,6 +480,15 @@ M.folding = {
   },
 }
 
+M.diagnostic = {
+	n = {
+		["<leader>ds"] = { ":lua vim.diagnostic.show(nil, 0)<cr>", " Show diagnostic (buf)" },
+		["<leader>dh"] = { ":lua vim.diagnostic.hide(nil, 0)<cr>", " Hide diagnostic (buf)" },
+		["<leader>dd"] = { ":lua vim.diagnostic.disable(0)<cr>", " Disable diagnostic (buf)" },
+		["<leader>de"] = { ":lua vim.diagnostic.enable(0)<cr>", " Enable diagnostic (buf)" },
+  },
+}
+
 return M
 --[[
 -- for python
