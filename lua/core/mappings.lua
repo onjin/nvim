@@ -156,17 +156,18 @@ M.lspconfig = {
 		},
 
 		["gd"] = {
-			function()
-				-- vim.lsp.buf.definition()
-				require("telescope.builtin").lsp_definitions()
-			end,
+			-- function()
+			-- 	require("telescope.builtin").lsp_definitions()
+			-- end,
+			"<cmd>Lspsaga peek_definition<CR>",
 			"   lsp definition",
 		},
 
 		["K"] = {
-			function()
-				vim.lsp.buf.hover()
-			end,
+			-- function()
+			-- 	vim.lsp.buf.hover()
+			-- end,
+			"<cmd>Lspsaga hover_doc<CR>",
 			"   lsp hover",
 		},
 
@@ -210,10 +211,10 @@ M.lspconfig = {
 		},
 
 		["gr"] = {
-			function()
-				-- vim.lsp.buf.references()
-				require("telescope.builtin").lsp_references()
-			end,
+			-- function()
+			-- 	require("telescope.builtin").lsp_references()
+			-- end,
+			"<cmd>Lspsaga lsp_finder<CR>",
 			"   lsp references",
 		},
 		["gs"] = {
@@ -225,9 +226,10 @@ M.lspconfig = {
 		},
 
 		["<leader>f"] = {
-			function()
-				vim.diagnostic.open_float()
-			end,
+			-- function()
+			-- 	vim.diagnostic.open_float()
+			-- end,
+			"<cmd>Lspsaga show_line_diagnostics<CR>",
 			"   floating diagnostic",
 		},
 
@@ -447,8 +449,11 @@ M.lspsaga = {
 	n = {
 		-- find
 		["<leader>tt"] = { "<cmd>LSoutlineToggle<CR>", "  toggle outline" },
-		["<leader>lf"] = { "<cmd>Lspsaga lsp_finder<CR>", "  LSP finder" },
-		["<leader>rt"] = { "<cmd>LspsagaFloaterm bash<CR>", "  floating term" },
+		["<leader>sf"] = { "<cmd>Lspsaga lsp_finder<CR>", "  LSP finder" },
+		["<leader>sa"] = { "<cmd>Lspsaga code_action<CR>", "  LSP Code action" },
+		["<leader>sr"] = { "<cmd>Lspsaga rename<CR>", "  LSP Rename" },
+		["<leader>sd"] = { "<cmd>Lspsaga peek_definition<CR>", "  LSP Peek definition" },
+		["<leader>st"] = { "<cmd>Lspsaga open_floaterm<CR>", "  LSP Floating term" },
 	},
 }
 
@@ -477,7 +482,7 @@ M.cargo = {
 M.folding = {
 	n = {
 		["<leader>Ft"] = { ":lua require('core.utils').toggle_folding()<cr>", "Toggle folding" },
-  },
+	},
 }
 
 M.diagnostic = {
@@ -486,7 +491,7 @@ M.diagnostic = {
 		["<leader>dh"] = { ":lua vim.diagnostic.hide(nil, 0)<cr>", " Hide diagnostic (buf)" },
 		["<leader>dd"] = { ":lua vim.diagnostic.disable(0)<cr>", " Disable diagnostic (buf)" },
 		["<leader>de"] = { ":lua vim.diagnostic.enable(0)<cr>", " Enable diagnostic (buf)" },
-  },
+	},
 }
 
 return M
