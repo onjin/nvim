@@ -336,7 +336,7 @@ M.telescope = {
 		["<leader>sc"] = { "<cmd> Telescope colorscheme <CR>", "   themes" },
 
 		-- spelling
-		["<leader>ss"] = { "<cmd> Telescope spell_sugges <CR>", "   spelling" },
+		["<leader>ss"] = { "<cmd> Telescope spell_suggest<CR>", "   spelling" },
 	},
 }
 

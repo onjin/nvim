@@ -30,6 +30,7 @@ opt.linebreak = true -- Wrap on word boundary
 opt.wrap = false -- do not wrap lines
 opt.termguicolors = true -- Enable 24-bit RGB colors
 opt.laststatus = 3 -- Set global statusline
+opt.scrolloff = 5 -- leave 5 lines before and after cursor
 
 -----------------------------------------------------------
 -- Tabs, indent
@@ -59,6 +60,12 @@ opt.undodir = { prefix .. "/nvim/undo//" }
 opt.backupdir = { prefix .. "/nvim/backup//" }
 opt.directory = { prefix .. "/nvim/swp//" }
 
+-----------------------------------------------------------
+-- Spelling
+-----------------------------------------------------------
+
+opt.spell = true
+opt.spelllang = "en"
 -----------------------------------------------------------
 -- Startup
 -----------------------------------------------------------
