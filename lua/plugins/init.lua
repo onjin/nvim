@@ -379,6 +379,20 @@ local plugins = {
 
 	["junegunn/limelight.vim"] = {},
 	["folke/twilight.nvim"] = {},
+	-- Debugging
+	["mfussenegger/nvim-dap"] = {},
+	["mfussenegger/nvim-dap-python"] = {
+		config = function()
+			require("plugins.configs.dap").dappython()
+		end,
+
+  },
+	["rcarriga/nvim-dap-ui"] = {
+		config = function()
+			require("plugins.configs.dap").dapui()
+		end,
+
+  },
 
 	-- Only load whichkey after all the gui
 	["folke/which-key.nvim"] = {
@@ -456,10 +470,6 @@ local plugins = {
   use { 'psf/black' }
   -- use {'psf/black', { 'tag': '19.10b0' }}
 
-  -- Debugging
-  use { 'mfussenegger/nvim-dap' }
-  use { 'mfussenegger/nvim-dap-python' }
-  use { 'rcarriga/nvim-dap-ui' }
 
   -- grammary checker
   use { 'rhysd/vim-grammarous' }
@@ -474,4 +484,3 @@ local plugins = {
 }
 
 require("core.packer").run(plugins)
-
