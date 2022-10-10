@@ -12,7 +12,6 @@ M.dappython = function()
 
   local options = '~/.pyenv/versions/debugpy/bin/python'
   dappython.setup(options)
-  vim.notify('dap python set')
 end
 
 M.dapui = function()
