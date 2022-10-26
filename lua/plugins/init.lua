@@ -90,6 +90,7 @@ local plugins = {
 	},
 
 	["tpope/vim-fugitive"] = {},
+  ["tveskag/nvim-blame-line"] = {},
 
 	-- lsp stuff {{{
 
