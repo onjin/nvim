@@ -109,6 +109,7 @@ M.buffers = {
 
 		-- close buffer + hide terminal buffer
 		["<leader>x"] = { "<cmd> :bd <CR>", "   close buffer" },
+		["<leader>X"] = { "<cmd> :Bdelete menu<CR>", "   buffers delete menu" },
 
 		-- buffers shortcuts
 		["<leader>1"] = { "<cmd> LualineBuffersJump 1  <CR>", "jump to buffer 1" },

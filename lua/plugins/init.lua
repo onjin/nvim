@@ -403,6 +403,8 @@ local plugins = {
 		end,
 	},
 
+  ["Asheq/close-buffers.vim"] = {},
+
 	--[[
 
 

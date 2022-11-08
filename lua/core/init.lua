@@ -68,8 +68,3 @@ user_command("PP", function(input)
 	require("plugins")
 	vim.cmd("PackerSync")
 end, { bang = false, desc = "Reload plugins and run PackerSync" })
-
-user_command("BufOnly", function(input)
-	vim.cmd('%bdelete|edit #|normal `"')
-  vim.notify("Only " .. vim.api.nvim_buf_get_name(0) .. " buffer left")
-end, { bang = false, desc = "Close all buffers expect current"})
