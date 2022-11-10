@@ -6,6 +6,22 @@ end
 
 local options = {
 	ensure_installed = {
+    "bash",
+    "comment",
+    "dockerfile",
+    "gitattributes",
+    "gitignore",
+    "html",
+    "json",
+    "latex",
+    "make",
+    "markdown",
+    "regex",
+    "sql",
+    "todotxt",
+    "toml",
+    "vim",
+    "yaml",
 		"lua",
 		"python",
 	},
