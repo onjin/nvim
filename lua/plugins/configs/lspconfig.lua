@@ -130,6 +130,12 @@ lspconfig.efm.setup({
 	},
 })
 
+require('lspconfig').sqls.setup{
+    on_attach = function(client, bufnr)
+        require('sqls').on_attach(client, bufnr)
+    end
+}
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	-- whether to show or not inline diagnostics errors - still available as float
 	virtual_text = utils.load_config().options.lsp_virtual_test,

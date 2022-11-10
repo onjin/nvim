@@ -394,6 +394,7 @@ local plugins = {
 		end,
 
   },
+  ["nanotee/sqls.nvim"] = {},
 
 	-- Only load whichkey after all the gui
 	["folke/which-key.nvim"] = {
