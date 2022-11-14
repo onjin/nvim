@@ -396,6 +396,16 @@ local plugins = {
   },
   ["nanotee/sqls.nvim"] = {},
 
+  -- plantuml {{{
+  ["weirongxu/plantuml-previewer.vim"] = {
+		requires = {
+			"tyru/open-browser.vim",
+			"aklt/plantuml-syntax",
+		}
+  },
+
+  -- plantuml }}}
+
 	-- Only load whichkey after all the gui
 	["folke/which-key.nvim"] = {
 		module = "which-key",
