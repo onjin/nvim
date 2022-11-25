@@ -396,6 +396,8 @@ local plugins = {
   },
   ["nanotee/sqls.nvim"] = {},
 
+  ['freitass/todo.txt-vim'] = {},
+
   -- plantuml {{{
   ["weirongxu/plantuml-previewer.vim"] = {
 		requires = {

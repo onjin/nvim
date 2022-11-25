@@ -1,5 +1,5 @@
 update:
-	nvim /tmp --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+	nvim /tmp/tmp --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 clean:
 	rm -rf ~/.local/share/nvim
