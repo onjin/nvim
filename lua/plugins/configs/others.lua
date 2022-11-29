@@ -447,4 +447,17 @@ M.crates = function()
 	crates.setup(options)
 end
 
+M.regexplainer = function()
+	local present, regexplainer = pcall(require, "regexplainer")
+
+	if not present then
+		return
+	end
+
+	local options = {}
+	options = load_override(options, "bennypowers/nvim-regexplainer")
+	regexplainer.setup(options)
+end
+
+
 return M

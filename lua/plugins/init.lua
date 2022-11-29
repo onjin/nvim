@@ -90,7 +90,7 @@ local plugins = {
 	},
 
 	["tpope/vim-fugitive"] = {},
-  ["tveskag/nvim-blame-line"] = {},
+	["tveskag/nvim-blame-line"] = {},
 
 	-- lsp stuff {{{
 
@@ -280,6 +280,15 @@ local plugins = {
 			require("plugins.configs.others").todo_comments()
 		end,
 	},
+	["bennypowers/nvim-regexplainer"] = {
+		config = function()
+			require("plugins.configs.others").regexplainer()
+		end,
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+			"MunifTanjim/nui.nvim",
+		},
+	},
 	["danymat/neogen"] = {
 		config = function()
 			require("plugins.configs.others").neogen()
@@ -386,27 +395,25 @@ local plugins = {
 		config = function()
 			require("plugins.configs.dap").dappython()
 		end,
-
-  },
+	},
 	["rcarriga/nvim-dap-ui"] = {
 		config = function()
 			require("plugins.configs.dap").dapui()
 		end,
+	},
+	["nanotee/sqls.nvim"] = {},
 
-  },
-  ["nanotee/sqls.nvim"] = {},
+	["freitass/todo.txt-vim"] = {},
 
-  ['freitass/todo.txt-vim'] = {},
-
-  -- plantuml {{{
-  ["weirongxu/plantuml-previewer.vim"] = {
+	-- plantuml {{{
+	["weirongxu/plantuml-previewer.vim"] = {
 		requires = {
 			"tyru/open-browser.vim",
 			"aklt/plantuml-syntax",
-		}
-  },
+		},
+	},
 
-  -- plantuml }}}
+	-- plantuml }}}
 
 	-- Only load whichkey after all the gui
 	["folke/which-key.nvim"] = {
@@ -416,7 +423,7 @@ local plugins = {
 		end,
 	},
 
-  ["Asheq/close-buffers.vim"] = {},
+	["Asheq/close-buffers.vim"] = {},
 
 	--[[
 
