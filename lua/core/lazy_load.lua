@@ -70,6 +70,14 @@ M.lsp_cmds = {
 	"LspPrintInstalled",
 }
 
+M.mason_cmds = {
+  "Mason",
+  "MasonInstall",
+  "MasonUninstall",
+  "MasonUninstallAll",
+  "MasonLog",
+}
+
 M.treesitter_cmds = {
 	"TSInstall",
 	"TSBufEnable",
