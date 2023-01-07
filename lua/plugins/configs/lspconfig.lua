@@ -1,5 +1,5 @@
 -- luacheck: globals vim
-local present, lspconfig = pcall(require, "lspconfig")
+local present, mason = pcall(require, "mason")
 
 if not present then
   return
@@ -7,9 +7,13 @@ end
 
 local M = {}
 local utils = require("core.utils")
+local lspconfig = require('lspconfig')
+local mason_lspconfig = require('mason-lspconfig')
+
+local mason_options = {}
+mason.setup(mason_options)
 
 M.on_attach = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   local lsp_mappings = utils.load_config().mappings.lspconfig
   utils.load_mappings({ lsp_mappings }, { buffer = bufnr })
 end
@@ -41,7 +45,8 @@ lspconfig.util.default_config = vim.tbl_extend(
   "force",
   lspconfig.util.default_config,
   {
-    on_attach = M.on_attach
+    on_attach = M.on_attach,
+    capabilities = capabilities,
   }
 )
 
@@ -93,38 +98,60 @@ local stylua = require("efm/stylua")
 local terraform = require("efm/terraform")
 local vint = require("efm/vint")
 
-lspconfig.efm.setup({
-  capabilities = capabilities,
-  on_attach = M.on_attach,
-  init_options = { documentFormatting = true },
-  root_dir = vim.loop.cwd,
-  settings = {
-    rootMarkers = { ".git/" },
-    lintDebounce = 100,
-    -- logLevel = 5,
-    languages = {
-      ["="] = { misspell },
-      vim = { vint },
-      lua = { stylua, luacheck },
-      go = { staticcheck, goimports, go_vet },
-      -- python = { black, isort, flake8, mypy },
-      python = { black, isort, bandit },
-      typescript = { prettier, eslint },
-      javascript = { prettier, eslint },
-      typescriptreact = { prettier, eslint },
-      javascriptreact = { prettier, eslint },
-      yaml = { prettier },
-      json = { prettier },
-      html = { prettier },
-      scss = { prettier },
-      css = { prettier },
-      markdown = { prettier },
-      sh = { shellcheck, shfmt },
-      terraform = { terraform },
-      rego = { opa },
-    },
-  },
-})
+local mason_lspconfig_options = {
+  ensure_installed = { "sumneko_lua", "efm", "pyright" }
+}
+mason_lspconfig.setup(mason_lspconfig_options)
+mason_lspconfig.setup_handlers {
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function(server_name) -- default handler (optional)
+    require("lspconfig")[server_name].setup {}
+  end,
+  -- Next, you can provide a dedicated handler for specific servers.
+  -- For example, a handler override for the `rust_analyzer`:
+  -- ["rust_analyzer"] = function ()
+  --     require("rust-tools").setup {}
+  -- end
+  ['efm'] = function()
+    lspconfig.efm.setup({
+      capabilities = capabilities,
+      on_attach = M.on_attach,
+      init_options = { documentFormatting = true },
+      root_dir = vim.loop.cwd,
+      settings = {
+        rootMarkers = { ".git/" },
+        lintDebounce = 100,
+        -- logLevel = 5,
+        languages = {
+          ["="] = { misspell },
+          vim = { vint },
+          lua = { stylua, luacheck },
+          go = { staticcheck, goimports, go_vet },
+          -- python = { black, isort, flake8, mypy },
+          python = { black, isort, bandit },
+          typescript = { prettier, eslint },
+          javascript = { prettier, eslint },
+          typescriptreact = { prettier, eslint },
+          javascriptreact = { prettier, eslint },
+          yaml = { prettier },
+          json = { prettier },
+          html = { prettier },
+          scss = { prettier },
+          css = { prettier },
+          markdown = { prettier },
+          sh = { shellcheck, shfmt },
+          terraform = { terraform },
+          rego = { opa },
+        },
+      },
+    })
+  end,
+}
+vim.notify('mason-lspconfig END')
+
+
 
 require('lspconfig').sqls.setup {
   on_attach = function(client, bufnr)

@@ -95,24 +95,15 @@ local plugins = {
 	-- lsp stuff {{{
 
   ["williamboman/mason.nvim"] = {
-		config = function()
-			require("plugins.configs.others").mason()
-		end,
-  },
-  ["williamboman/mason-lspconfig.nvim"] = {
-    after='mason.nvim',
-    config = function()
-			require("plugins.configs.others").mason_lspconfig()
-    end,
-  },
-
-	["neovim/nvim-lspconfig"] = {
-    after ='mason-lspconfig.nvim',
-		module = "lspconfig",
+    requires = {
+      "williamboman/mason-lspconfig.nvim",
+	    "neovim/nvim-lspconfig",
+    },
 		config = function()
 			require("plugins.configs.lspconfig")
 		end,
-	},
+  },
+
 	["ray-x/lsp_signature.nvim"] = {
 		config = function()
 			require("plugins.configs.others").lsp_signature()
