@@ -1,14 +1,21 @@
 -- luacheck: globals vim
 local present, mason = pcall(require, "mason")
+if not present then
+  return
+end
 
+local present, lspconfig = pcall(require, "lspconfig")
+if not present then
+  return
+end
+
+local present, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not present then
   return
 end
 
 local M = {}
 local utils = require("core.utils")
-local lspconfig = require('lspconfig')
-local mason_lspconfig = require('mason-lspconfig')
 
 local mason_options = {}
 mason.setup(mason_options)
