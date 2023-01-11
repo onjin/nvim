@@ -156,7 +156,6 @@ mason_lspconfig.setup_handlers {
     })
   end,
 }
-vim.notify('mason-lspconfig END')
 
 
 
