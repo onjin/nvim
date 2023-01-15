@@ -431,7 +431,7 @@ M.lspsaga = function()
     },
   }
   options = load_override(options, "glepnir/lspsaga.vim")
-  lspsaga.init_lsp_saga(options)
+  lspsaga.setup(options)
 end
 
 M.crates = function()
