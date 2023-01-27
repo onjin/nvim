@@ -418,6 +418,7 @@ local plugins = {
 	},
 
 	["Asheq/close-buffers.vim"] = {},
+	["tweekmonster/startuptime.vim"] = {},
 
 	--[[
 
