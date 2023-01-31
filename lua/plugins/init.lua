@@ -274,7 +274,7 @@ local plugins = {
 			require("plugins.configs.others").todo_comments()
 		end,
 	},
-	["bennypowers/nvim-regexplainer"] = {
+	--[[ ["bennypowers/nvim-regexplainer"] = {
 		config = function()
 			require("plugins.configs.others").regexplainer()
 		end,
@@ -283,6 +283,7 @@ local plugins = {
 			"MunifTanjim/nui.nvim",
 		},
 	},
+  --]]
 	["danymat/neogen"] = {
 		config = function()
 			require("plugins.configs.others").neogen()
@@ -296,12 +297,13 @@ local plugins = {
 		end,
 	},
 
-	["CosmicNvim/cosmic-ui"] = {
+	--[[ ["CosmicNvim/cosmic-ui"] = {
 		config = function()
 			require("plugins.configs.others").cosmic_ui()
 		end,
 		requires = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
 	},
+  --]]
 
 	["glepnir/lspsaga.nvim"] = {
 		branch = "main",

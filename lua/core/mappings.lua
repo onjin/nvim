@@ -205,8 +205,8 @@ M.lspconfig = {
 
 		["<leader>ca"] = {
 			function()
-				-- vim.lsp.buf.code_action()
-				require("cosmic-ui").code_actions()
+				vim.lsp.buf.code_action()
+				-- require("cosmic-ui").code_actions()
 			end,
 			"   lsp code_action",
 		},
