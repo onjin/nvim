@@ -204,10 +204,10 @@ M.lspconfig = {
 		},
 
 		["<leader>ca"] = {
-			function()
-				vim.lsp.buf.code_action()
-				-- require("cosmic-ui").code_actions()
-			end,
+			"<cmd>Lspsaga code_action<CR>",
+			-- function()
+				-- vim.lsp.buf.code_action()
+			-- end,
 			"   lsp code_action",
 		},
 
@@ -449,7 +449,7 @@ M.gitsigns = {
 M.lspsaga = {
 	n = {
 		-- find
-		["<leader>tt"] = { "<cmd>LSoutlineToggle<CR>", "  toggle outline" },
+		["<leader>tt"] = { "<cmd>Lspsaga outline<CR>", "  toggle outline" },
 		["<leader>sf"] = { "<cmd>Lspsaga lsp_finder<CR>", "  LSP finder" },
 		["<leader>sa"] = { "<cmd>Lspsaga code_action<CR>", "  LSP Code action" },
 		["<leader>sr"] = { "<cmd>Lspsaga rename<CR>", "  LSP Rename" },
