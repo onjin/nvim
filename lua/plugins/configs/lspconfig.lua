@@ -57,7 +57,7 @@ lspconfig.util.default_config = vim.tbl_extend(
   }
 )
 
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
   on_attach = M.on_attach,
   capabilities = capabilities,
 
@@ -106,7 +106,7 @@ local terraform = require("efm/terraform")
 local vint = require("efm/vint")
 
 local mason_lspconfig_options = {
-  ensure_installed = { "sumneko_lua", "efm", "pyright" }
+  ensure_installed = { "lua_ls", "efm", "pyright" }
 }
 mason_lspconfig.setup(mason_lspconfig_options)
 mason_lspconfig.setup_handlers {
