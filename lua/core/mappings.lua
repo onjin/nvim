@@ -305,6 +305,7 @@ M.telescope = {
 		["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
 		["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
 		["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "   find oldfiles" },
+		["<leader>fs"] = { "<cmd> Telescope session-lens search_session <CR>", "   find saved sessions" },
 
 		["<leader>ft"] = { "<cmd> Telescope file_browser <CR>", "   open file browser" },
 		["<leader><leader>e"] = { F.edit_nvim, "   open ~/.config/nvim" },

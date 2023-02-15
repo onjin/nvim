@@ -243,10 +243,12 @@ M.auto_session = function()
   if not present then
     return
   end
+  vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
   local options = {
     log_level = "info",
     auto_session_suppress_dirs = { "~/", "/tmp" },
+    auto_restore_enabled = false,
   }
   options = load_override(options, "rmagatti/auto-session")
   session.setup(options)
