@@ -502,7 +502,8 @@ M.space = {
 		["<space>b"] = { "<cmd> Telescope buffers <CR>", "Open buffer picker" },
 		["<space>s"] = { "<cmd> Telescope lsp_document_symbols <CR>", "Open symbol picker" },
 		["<space>d"] = { "<cmd> Telescope diagnostics <CR>", "Open diagnostic picker" },
-		["<space>a"] = {"<cmd>Lspsaga code_action<CR>", "Perform code action" },
+		["<space>a"] = { "<cmd>Lspsaga code_action<CR>", "Perform code action" },
+		["<space>k"] = { "<cmd>Lspsaga hover_doc<CR>", "Show doc for item under cursor" },
   }
 }
 
