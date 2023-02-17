@@ -496,6 +496,16 @@ M.diagnostic = {
 	},
 }
 
+M.space = {
+  n = {
+		["<space>f"] = { "<cmd> Telescope find_files <CR>", "Open file picker" },
+		["<space>b"] = { "<cmd> Telescope buffers <CR>", "Open buffer picker" },
+		["<space>s"] = { "<cmd> Telescope lsp_document_symbols <CR>", "Open symbol picker" },
+		["<space>d"] = { "<cmd> Telescope diagnostics <CR>", "Open diagnostic picker" },
+		["<space>a"] = {"<cmd>Lspsaga code_action<CR>", "Perform code action" },
+  }
+}
+
 return M
 --[[
 -- for python
