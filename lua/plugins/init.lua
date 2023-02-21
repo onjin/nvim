@@ -361,6 +361,12 @@ local plugins = {
   },
   ["Asheq/close-buffers.vim"] = {},
   ["tweekmonster/startuptime.vim"] = {},
+
+  ["~/.config/nvim/local/quickstart"] = {
+    config = function()
+      require('quickstart').setup({})
+    end
+  },
   --[[
 
 
