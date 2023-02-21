@@ -64,7 +64,9 @@ local options = {
 			-- disables netrw and use telescope-file-browser in its place
 			hijack_netrw = true,
 		},
-		session_lens = {},
+    sessions_picker = {
+      sessions_dir = vim.fn.stdpath('data') ..'/sessions/', 
+    }
 	},
 
 	extensions_list = {
@@ -72,8 +74,8 @@ local options = {
 		"notify",
 		"projects",
 		"repo",
-		"session-lens",
 		"file_browser",
+    "sessions_picker",
 	},
 }
 
@@ -86,7 +88,6 @@ for _, ext in ipairs(options.extensions_list) do
 	telescope.load_extension(ext)
 end
 
-require("plugins.configs.others").session_lens()
 
 -- borderless layout
 local TelescopePrompt = {

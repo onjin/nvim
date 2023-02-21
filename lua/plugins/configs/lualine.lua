@@ -54,7 +54,6 @@ local options = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
 		lualine_c = {
-			require("auto-session-library").current_session_name,
 			"filename",
 			"lsp_progress",
 		},

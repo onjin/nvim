@@ -68,3 +68,21 @@ user_command("PP", function(input)
 	require("plugins")
 	vim.cmd("PackerSync")
 end, { bang = false, desc = "Reload plugins and run PackerSync" })
+
+user_command("SS", function(opts)
+  local sessions_dir = vim.fn.stdpath('data') ..'/sessions/'
+  local sname = opts.args .. '.vim'
+  local path = sessions_dir .. sname
+  print(path)
+  vim.notify('Session ' .. sname .. ' saved')
+  vim.cmd('mks! '.. path)
+end, { bang = false, desc = "Create named session ", nargs = 1})
+
+user_command("SL", function(opts)
+  local sessions_dir = vim.fn.stdpath('data') ..'/sessions/'
+  local sname = opts.args .. '.vim'
+  local path = sessions_dir .. sname
+  print(path)
+  vim.notify('Session ' .. sname .. ' loaded')
+  vim.cmd('source '.. path)
+end, { bang = false, desc = "Load named session ", nargs = 1})
