@@ -187,7 +187,8 @@ M.luasnip = function()
 
   vim.api.nvim_create_autocmd("InsertLeave", {
     callback = function()
-      if require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+      if
+          require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
           and not require("luasnip").session.jump_active
       then
         require("luasnip").unlink_current()
@@ -243,7 +244,7 @@ M.auto_session = function()
   if not present then
     return
   end
-  vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+  vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
   local options = {
     log_level = "info",
@@ -364,7 +365,6 @@ M.zk = function()
     -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
     -- it's recommended to use "telescope" or "fzf"
     picker = "telescope",
-
     lsp = {
       -- `config` is passed to `vim.lsp.start_client(config)`
       config = {
@@ -458,6 +458,28 @@ M.regexplainer = function()
   local options = {}
   options = load_override(options, "bennypowers/nvim-regexplainer")
   regexplainer.setup(options)
+end
+
+M.zen = function()
+  local present, zen = pcall(require, "true-zen")
+
+  if not present then
+    return
+  end
+
+  local options = {
+    integrations = {
+      tmux = true, -- hide tmux status bar in (minimalist, ataraxis)
+      kitty = { -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)
+        enabled = true,
+        font = "+3",
+      },
+      twilight = false, -- enable twilight (ataraxis)
+      lualine = true, -- hide nvim-lualine (ataraxis)
+    },
+  }
+  options = load_override(options, "Pocco81/true-zen.nvim")
+  zen.setup(options)
 end
 
 return M

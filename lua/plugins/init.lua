@@ -202,8 +202,6 @@ local plugins = {
   -- misc plugins
 
   -- automatically resize windows
-  ["camspiers/animate.vim"] = {},
-  ["camspiers/lens.vim"] = {},
   ["windwp/nvim-autopairs"] = {
     after = "nvim-cmp",
     config = function()
@@ -326,7 +324,6 @@ local plugins = {
   },
   -- requirements.txt syntax
   ["raimon49/requirements.txt.vim"] = {},
-  ["folke/zen-mode.nvim"] = {},
   ["junegunn/limelight.vim"] = {},
   ["folke/twilight.nvim"] = {},
   -- Debugging
@@ -361,6 +358,11 @@ local plugins = {
   },
   ["Asheq/close-buffers.vim"] = {},
   ["tweekmonster/startuptime.vim"] = {},
+  ["Pocco81/true-zen.nvim"] = {
+    config = function()
+      require("plugins.configs.others").zen()
+    end
+  },
 
   ["~/.config/nvim/local/quickstart"] = {
     config = function()

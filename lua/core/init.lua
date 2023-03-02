@@ -23,6 +23,10 @@ autocmd("BufEnter", {
 	pattern = "*",
 	command = "set fo-=c fo-=r fo-=o",
 })
+--[[ autocmd("BufEnter", {
+  pattern = "*",
+  command = "vertical resize 80"
+}) ]]
 
 -- Settings for filetypes:
 -- Disable line length marker

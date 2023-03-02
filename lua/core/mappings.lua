@@ -507,6 +507,21 @@ M.space = {
   }
 }
 
+M.resize = {
+  n = {
+		["<space>1"] = { ":vertical resize 80<cr>", "Resize buffer width to 80" },
+		["<space>2"] = { ":vertical resize 120<cr>", "Resize buffer width to 120" },
+		["<space>ww"] = { ":TZAtaraxis<cr>", "Focus window as floating" },
+		["<space>wa"] = { ":TZAtaraxis<cr>", "Focus window as floating" },
+		["<space>wf"] = { ":TZFocus<cr>", "Focus window as single" },
+		["<space>wm"] = { ":TZMinimalist<cr>", "Focus windows using minimalistic mode" },
+		["<space>wn"] = { ":TZNarrow<cr>", "Focus code by narrowing" },
+  },
+  v = {
+		["<space>wn"] = { ":'<,'>TZNarrow<cr>", "Focus code by narrowing" },
+  }
+}
+
 return M
 --[[
 -- for python
