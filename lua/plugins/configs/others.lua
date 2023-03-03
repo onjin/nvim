@@ -144,14 +144,14 @@ M.colorizer = function()
       hsl_fn = false, -- CSS hsl() and hsla() functions
       css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
       css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-      mode = "background", -- Set the display mode.
+      mode = "background", -- Set the display mode. background, foreground, virtualtext
     },
   }
 
   options = load_override(options, "NvChad/nvim-colorizer.lua")
-  colorizer.setup(options["filetypes"], options["user_default_options"])
+  colorizer.setup(options)
 
-  vim.cmd("ColorizerAttachToBuffer")
+  -- vim.cmd("ColorizerAttachToBuffer")
 end
 
 M.devicons = function()
@@ -352,37 +352,6 @@ M.project = function()
   }
   options = load_override(options, "ahmedkhalf/project.nvim")
   project.setup(options)
-end
-
-M.zk = function()
-  local present, zk = pcall(require, "zk")
-
-  if not present then
-    return
-  end
-
-  local options = {
-    -- can be "telescope", "fzf" or "select" (`vim.ui.select`)
-    -- it's recommended to use "telescope" or "fzf"
-    picker = "telescope",
-    lsp = {
-      -- `config` is passed to `vim.lsp.start_client(config)`
-      config = {
-        cmd = { "zk", "lsp" },
-        name = "zk",
-        -- on_attach = ...
-        -- etc, see `:h vim.lsp.start_client()`
-      },
-
-      -- automatically attach buffers in a zk notebook that match the given filetypes
-      auto_attach = {
-        enabled = true,
-        filetypes = { "markdown" },
-      },
-    },
-  }
-  options = load_override(options, "mickael-menu/zk-nvim")
-  zk.setup(options)
 end
 
 M.toggleterm = function()

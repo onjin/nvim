@@ -39,10 +39,6 @@ local plugins = {
     end,
   },
   ["NvChad/nvim-colorizer.lua"] = {
-    opt = true,
-    setup = function()
-      require("core.lazy_load").colorizer()
-    end,
     config = function()
       require("plugins.configs.others").colorizer()
     end,
@@ -179,11 +175,6 @@ local plugins = {
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     config = function()
       require("plugins.configs.nvimtree")
-    end,
-  },
-  ["mickael-menu/zk-nvim"] = {
-    config = function()
-      require("plugins.configs.others").zk()
     end,
   },
   ["akinsho/toggleterm.nvim"] = {
