@@ -323,10 +323,12 @@ M.telescope = {
 		-- git
 		["<leader>fg"] = { "<cmd> Telescope git_files <CR>", "  git files" },
 
-		["<leader>gm"] = { "<cmd> Telescope git_commits <CR>", "   git commits" },
-		["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "  git status" },
+		["<leader>gb"] = { "<cmd> Telescope git_branches <CR>", "  git branches" },
+		["<leader>gc"] = { "<cmd> Telescope git_commits <CR>", "  git commits" },
+		["<leader>go"] = { "<cmd> Telescope git_bcommits <CR>", "  git buffer commits" },
+		["<leader>gs"] = { "<cmd> Telescope git_status <CR>", "  git status" },
 		["<leader>gf"] = { "<cmd> Telescope git_files <CR>", "  git files" },
-		["<leader>gb"] = { "<cmd> Git blame_line <CR>", "  git blame line" },
+		["<leader>gt"] = { "<cmd> Telescope git_stash <CR>", "  git stash" },
 
 		["<C-p>"] = { "<cmd> Telescope find_files <CR>", "  find files" },
 		["<C-P>"] = { "<cmd> Telescope git_files <CR>", "  git files" },
