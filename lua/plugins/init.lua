@@ -329,7 +329,6 @@ local plugins = {
       require("plugins.configs.dap").dapui()
     end,
   },
-  ["nanotee/sqls.nvim"] = {},
   ["freitass/todo.txt-vim"] = {},
   -- plantuml {{{
   ["weirongxu/plantuml-previewer.vim"] = {
