@@ -19,5 +19,6 @@ return {
 			"hrsh7th/nvim-cmp",
 		},
 		config = config,
+		event = "InsertEnter",
 	},
 }

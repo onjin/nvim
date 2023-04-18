@@ -135,20 +135,16 @@ return {
     lazy=false,
   }, ]]
 	--
-	{ "nvim-telescope/telescope-file-browser.nvim" },
-	{ "nvim-telescope/telescope-github.nvim" },
+	{ "nvim-telescope/telescope-file-browser.nvim", lazy = true },
+	{ "nvim-telescope/telescope-github.nvim", lazy = true },
 	{
 		"nvim-telescope/telescope-project.nvim",
 		dependencies = {
 			"ahmedkhalf/project.nvim",
 		},
-	},
-	{ "cljoly/telescope-repo.nvim" },
-	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-	{ "nvim-telescope/telescope-github.nvim" },
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
 		lazy = true,
-		-- event = "VeryLazy",
 	},
+	{ "cljoly/telescope-repo.nvim", lazy = true },
+	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+	{ "nvim-telescope/telescope-ui-select.nvim", lazy = true },
 }

@@ -2,7 +2,7 @@
 local function config()
   local mason = require("mason")
   local lspconfig = require("lspconfig")
-  local  mason_lspconfig = require("mason-lspconfig")
+  local mason_lspconfig = require("mason-lspconfig")
 
   local M = {}
 
@@ -35,19 +35,14 @@ local function config()
   -- autocnofigure all servers
 
   -- 2. (optional) Override the default configuration to be applied to all servers.
-  lspconfig.util.default_config = vim.tbl_extend(
-    "force",
-    lspconfig.util.default_config,
-    {
-      on_attach = M.on_attach,
-      capabilities = capabilities,
-    }
-  )
+  lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+    on_attach = M.on_attach,
+    capabilities = capabilities,
+  })
 
   lspconfig.lua_ls.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
-
     settings = {
       Lua = {
         diagnostics = {
@@ -65,12 +60,10 @@ local function config()
     },
   })
 
-
   lspconfig.pyright.setup({
     on_attach = M.on_attach,
     capabilities = capabilities,
   })
-
 
   -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
   local bandit = require("efm/bandit")
@@ -93,22 +86,22 @@ local function config()
   local vint = require("efm/vint")
 
   local mason_lspconfig_options = {
-    ensure_installed = { "lua_ls", "efm", "pyright" }
+    ensure_installed = { "lua_ls", "efm", "pyright" },
   }
   mason_lspconfig.setup(mason_lspconfig_options)
-  mason_lspconfig.setup_handlers {
+  mason_lspconfig.setup_handlers({
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
-      require("lspconfig")[server_name].setup {}
+      require("lspconfig")[server_name].setup({})
     end,
     -- Next, you can provide a dedicated handler for specific servers.
     -- For example, a handler override for the `rust_analyzer`:
     -- ["rust_analyzer"] = function ()
     --     require("rust-tools").setup {}
     -- end
-    ['efm'] = function()
+    ["efm"] = function()
       lspconfig.efm.setup({
         capabilities = capabilities,
         on_attach = M.on_attach,
@@ -142,20 +135,20 @@ local function config()
         },
       })
     end,
-  }
+  })
 
-  require('lspconfig').emmet_ls.setup({
-      -- on_attach = on_attach,
-      capabilities = capabilities,
-      filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'htmldjango' },
-      init_options = {
-        html = {
-          options = {
-            -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-            ["bem.enabled"] = true,
-          },
+  require("lspconfig").emmet_ls.setup({
+    -- on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "htmldjango" },
+    init_options = {
+      html = {
+        options = {
+          -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+          ["bem.enabled"] = true,
         },
-      }
+      },
+    },
   })
 
   vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -192,7 +185,7 @@ local function config()
         elseif button == "r" then
           if modifiers == "s" then
             print("lspsaga") -- shift right click to print "lspsaga"
-          end -- jump to node's ending line+char
+          end          -- jump to node's ending line+char
           vim.fn.cursor(en.line + 1, en.character + 1)
         elseif button == "m" then
           -- middle click to visual select node
@@ -209,14 +202,16 @@ local function config()
 end
 
 return {
-  {"williamboman/mason.nvim",
+  {
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",
-  "ray-x/lsp_signature.nvim",
-  "glepnir/lspsaga.nvim",
-  'liuchengxu/vista.vim',
+      "ray-x/lsp_signature.nvim",
+      "glepnir/lspsaga.nvim",
+      "liuchengxu/vista.vim",
     },
     config = config,
-  }
+  },
 }
