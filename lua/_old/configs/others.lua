@@ -158,19 +158,6 @@ end
 
 
 
-M.todo_comments = function()
-  -- TODO: works?
-  local present, todo_comments = pcall(require, "todo-comments")
-
-  if not present then
-    return
-  end
-
-  local options = {}
-  options = load_override(options, "folke/todo-comments.nvim")
-  todo_comments.setup(options)
-end
-
 M.auto_session = function()
   local present, session = pcall(require, "auto-session")
 

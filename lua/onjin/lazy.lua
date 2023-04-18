@@ -17,6 +17,7 @@ require("lazy").setup({
   "rcarriga/nvim-notify",
   "j-hui/fidget.nvim",
   "editorconfig/editorconfig-vim",
+  "stevearc/dressing.nvim",
 
 	{ import = "plugins" },
 	{

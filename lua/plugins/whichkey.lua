@@ -22,7 +22,7 @@ return {
 	},
 	{
 		'mrjones2014/legendary.nvim',
-		tag = 'v2.1.0',
+		-- tag = 'v2.1.0',
 		dependencies = {
 			'kkharji/sqlite.lua',
 			"folke/which-key.nvim",
