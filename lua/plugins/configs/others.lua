@@ -24,18 +24,6 @@ M.autopairs = function()
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 end
 
-M.comment = function()
-  local present, nvim_comment = pcall(require, "Comment")
-
-  if not present then
-    return
-  end
-
-  local options = {}
-  options = load_override(options, "numToStr/Comment.nvim")
-  nvim_comment.setup(options)
-end
-
 M.gitsigns = function()
   local present, gitsigns = pcall(require, "gitsigns")
 
@@ -168,62 +156,7 @@ M.devicons = function()
   end
 end
 
-M.luasnip = function()
-  local present, luasnip = pcall(require, "luasnip")
 
-  if not present then
-    return
-  end
-
-  local options = {
-    history = true,
-    updateevents = "TextChanged,TextChangedI",
-  }
-
-  options = load_override(options, "L3MON4D3/LuaSnip")
-  luasnip.config.set_config(options)
-  require("luasnip.loaders.from_vscode").lazy_load()
-  require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.luasnippets_path or "" })
-
-  vim.api.nvim_create_autocmd("InsertLeave", {
-    callback = function()
-      if
-          require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-          and not require("luasnip").session.jump_active
-      then
-        require("luasnip").unlink_current()
-      end
-    end,
-  })
-end
-
-M.notify = function()
-  local present, notify = pcall(require, "notify")
-
-  if not present then
-    return
-  end
-
-  local options = {
-    level = "info",
-    background_color = "#000000",
-  }
-
-  options = load_override(options, "rcarriga/nvim-notify")
-  notify.setup(options)
-  -- vim.notify = notify
-end
-
-M.fidget = function()
-  local present, fidget = pcall(require, "fidget")
-
-  if not present then
-    return
-  end
-
-  local options = {}
-  fidget.setup(options)
-end
 
 M.todo_comments = function()
   -- TODO: works?
@@ -366,44 +299,6 @@ M.toggleterm = function()
   toggleterm.setup(options)
 end
 
-M.lspsaga = function()
-  local present, lspsaga = pcall(require, "lspsaga")
-
-  if not present then
-    return
-  end
-
-  local options = {
-    symbol_in_winbar = {
-      in_custom = false,
-      enable = true,
-      click_support = function(node, clicks, button, modifiers)
-        -- To see all avaiable details: vim.pretty_print(node)
-        local st = node.range.start
-        local en = node.range["end"]
-        if button == "l" then
-          if clicks == 2 then
-            -- double left click to do nothing
-          else -- jump to node's starting line+char
-            vim.fn.cursor(st.line + 1, st.character + 1)
-          end
-        elseif button == "r" then
-          if modifiers == "s" then
-            print("lspsaga") -- shift right click to print "lspsaga"
-          end -- jump to node's ending line+char
-          vim.fn.cursor(en.line + 1, en.character + 1)
-        elseif button == "m" then
-          -- middle click to visual select node
-          vim.fn.cursor(st.line + 1, st.character + 1)
-          vim.cmd("normal v")
-          vim.fn.cursor(en.line + 1, en.character + 1)
-        end
-      end,
-    },
-  }
-  options = load_override(options, "glepnir/lspsaga.vim")
-  lspsaga.setup(options)
-end
 
 M.crates = function()
   local present, crates = pcall(require, "crates")
