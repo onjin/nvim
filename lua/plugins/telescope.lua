@@ -127,7 +127,8 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		lazy = false,
+		lazy = true,
+    cmd = "Telescope",
 		config = config,
 	},
 	--[[ {

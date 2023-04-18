@@ -205,6 +205,8 @@ return {
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
+    lazy = True,
+    cmd = {"Mason", "LspInstall"},
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "neovim/nvim-lspconfig",

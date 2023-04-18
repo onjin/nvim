@@ -170,6 +170,8 @@ end
 return {
   {
     "hrsh7th/nvim-cmp",
+    lazy=True,
+    event="InsertEnter",
     config = config,
     dependencies = {
       "rafamadriz/friendly-snippets",
