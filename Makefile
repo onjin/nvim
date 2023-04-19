@@ -1,5 +1,5 @@
 update:
-	nvim /tmp/tmp --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+	nvim --headless "+Lazy! sync" +qa
 
 clean:
 	rm -rf ~/.local/share/nvim
@@ -9,3 +9,6 @@ clean:
 
 uninstall: clean
 	rm -rf ~/.config/nvim
+
+lint:
+	selene ./lua/

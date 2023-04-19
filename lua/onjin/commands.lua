@@ -68,10 +68,6 @@ autocmd("BufLeave", {
 	command = "stopinsert",
 })
 
-user_command("PP", function(input)
-	require("plugins")
-	vim.cmd("PackerSync")
-end, { bang = false, desc = "Reload plugins and run PackerSync" })
 
 user_command("SessionSave", function(opts)
   local sessions_dir = vim.fn.stdpath('data') ..'/sessions/'

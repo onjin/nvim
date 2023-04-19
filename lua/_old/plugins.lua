@@ -115,4 +115,4 @@ local plugins = {
     end
   },
 }
-# vim:foldmarker={,}
+-- vim:foldmarker={,}

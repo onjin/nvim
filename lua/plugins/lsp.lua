@@ -69,13 +69,13 @@ local function config()
   local bandit = require("efm/bandit")
   local black = require("efm/black")
   local eslint = require("efm/eslint")
-  local flake8 = require("efm/flake8")
+  -- local flake8 = require("efm/flake8")
   local goimports = require("efm/goimports")
   local go_vet = require("efm/go_vet")
   local isort = require("efm/isort")
   local luacheck = require("efm/luacheck")
   local misspell = require("efm/misspell")
-  local mypy = require("efm/mypy")
+  -- local mypy = require("efm/mypy")
   local opa = require("efm/opa")
   local prettier = require("efm/prettier")
   local shellcheck = require("efm/shellcheck")
@@ -157,14 +157,14 @@ local function config()
   })
 
   local lsp_signature = require("lsp_signature")
-  local options = {
+  local options_saga = {
     bind = true, -- This is mandatory, otherwise border config won't get registered.
     handler_opts = {
       border = "rounded",
     },
     hint_prefix = "💡",
   }
-  lsp_signature.setup(options)
+  lsp_signature.setup(options_saga)
 
   local lspsaga = require("lspsaga")
 
@@ -179,6 +179,7 @@ local function config()
         if button == "l" then
           if clicks == 2 then
             -- double left click to do nothing
+            clicks = 2
           else -- jump to node's starting line+char
             vim.fn.cursor(st.line + 1, st.character + 1)
           end
@@ -205,7 +206,7 @@ return {
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
-    lazy = True,
+    lazy = true,
     cmd = {"Mason", "LspInstall"},
     dependencies = {
       "williamboman/mason-lspconfig.nvim",

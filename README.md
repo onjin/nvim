@@ -4,7 +4,7 @@ Mostly used for DevOps and Python (web) development.
 
 ## Features
 
- * Plugins manager — https://github.com/wbthomason/packer.nvim
+ * Plugins manager — https://github.com/folke/lazy.nvim
  * Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
  * Fuzzy search engine https://github.com/nvim-telescope/telescope.nvim
  * Intellisense engine https://github.com/neovim/nvim-lspconfig
@@ -36,7 +36,7 @@ Make sure you move old `~/.vim` to f.i. `~/.vim.old` then you can go
 git clone https://github.com/onjin/nvim ~/.config/nvim
 ```
 
-Plugins should be installed at first run of editor. If not, then run `:PackerSync` to do it manually.
+Plugins should be installed at first run of editor. If not, then run `:Lazy` to do it manually.
 
 
 ## Requirements for python

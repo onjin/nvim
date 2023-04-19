@@ -170,7 +170,7 @@ end
 return {
   {
     "hrsh7th/nvim-cmp",
-    lazy=True,
+    lazy=true,
     event="InsertEnter",
     config = config,
     dependencies = {
