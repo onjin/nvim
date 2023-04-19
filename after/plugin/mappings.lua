@@ -440,6 +440,14 @@ register("n", {
 	["<leader>lk"] = { "<cmd>Legendary keymaps<CR>", "   Keymaps legend" },
 })
 
+-- based, to/from hex converter
+register("n", {
+  ["<leader>ph"] = {"<cmd>:lua require('based').convert()<cr>", "Convert to/from hex"},
+})
+register("v", {
+  ["<leader>ph"] = {"<cmd>:lua require('based').convert()<cr>", "Convert to/from hex"},
+})
+
 -- whichkey
 register("n", {
 	["<leader>wK"] = {
