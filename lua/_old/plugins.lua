@@ -46,21 +46,6 @@ local plugins = {
 
   ["t9md/vim-quickhl"] = {},
   -- testing
-  ["nvim-neotest/neotest"] = {
-    config = function()
-      require("plugins.configs.neotest")
-    end,
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-plenary",
-      "nvim-neotest/neotest-vim-test",
-      "vim-test/vim-test",
-      "preservim/vimux",
-    },
-  },
   ["NTBBloodbath/rest.nvim"] = {
     config = function()
       require("plugins.configs.rest_nvim")
