@@ -14,8 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- devicons
 	"nvim-tree/nvim-web-devicons",
-  "rcarriga/nvim-notify",
-  "j-hui/fidget.nvim",
   "editorconfig/editorconfig-vim",
   "stevearc/dressing.nvim",
 
