@@ -216,7 +216,8 @@ register("n", {
 	["<leader>tt"] = { "<cmd>Lspsaga outline<CR>", "  toggle outline" },
 	["<leader>sf"] = { "<cmd>Lspsaga lsp_finder<CR>", "  LSP finder" },
 	["<leader>sa"] = { "<cmd>Lspsaga code_action<CR>", "  LSP Code action" },
-	["<leader>sd"] = { "<cmd>Lspsaga peek_definition<CR>", "  LSP Peek definition" },
+	["<leader>sd"] = { "<cmd>Lspsaga goto_definition<CR>", "  LSP Goto definition" },
+	["<leader>sp"] = { "<cmd>Lspsaga peek_definition<CR>", "  LSP Peek definition" },
 	["<leader>st"] = { "<cmd>Lspsaga open_floaterm<CR>", "  LSP Floating term" },
 })
 
@@ -285,20 +286,9 @@ register("n", {
 		end,
 		"   lsp declaration",
 	},
-	["gd"] = {
-		-- function()
-		-- 	require("telescope.builtin").lsp_definitions()
-		-- end,
-		"<cmd>Lspsaga peek_definition<CR>",
-		"   lsp definition",
-	},
-	["K"] = {
-		-- function()
-		-- 	vim.lsp.buf.hover()
-		-- end,
-		"<cmd>Lspsaga hover_doc<CR>",
-		"   lsp hover",
-	},
+	["gd"] = { "<cmd>Lspsaga goto_definition<CR>", "  LSP Goto definition", },
+	["gp"] = { "<cmd>Lspsaga peek_definition<CR>", "  LSP Peek definition", },
+	["K"] = { "<cmd>Lspsaga hover_doc<CR>", "   lsp hover", },
 	["gi"] = {
 		function()
 			-- vim.lsp.buf.implementation()
