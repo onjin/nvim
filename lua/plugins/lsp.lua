@@ -72,6 +72,7 @@ local function config()
     local goimports = require("efm/goimports")
     local go_vet = require("efm/go_vet")
     local isort = require("efm/isort")
+    local ruff = require("efm/ruff")
     local luacheck = require("efm/luacheck")
     local misspell = require("efm/misspell")
     -- local mypy = require("efm/mypy")
@@ -115,8 +116,7 @@ local function config()
                         vim = { vint },
                         lua = { stylua, luacheck },
                         go = { staticcheck, goimports, go_vet },
-                        -- python = { black, isort, flake8, mypy },
-                        python = { black, isort, bandit },
+                        python = { ruff, black },
                         typescript = { prettier, eslint },
                         javascript = { prettier, eslint },
                         typescriptreact = { prettier, eslint },
