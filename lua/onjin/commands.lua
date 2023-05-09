@@ -86,3 +86,12 @@ user_command("SessionLoad", function(opts)
   vim.notify('Session ' .. sname .. ' loaded')
   vim.cmd('source '.. path)
 end, { bang = false, desc = "Load named session ", nargs = 1})
+
+autocmd("BufNewFile", {
+	pattern = { "/dev/shm/gopass*" },
+	command = 'setlocal noswapfile nobackup noundofile shada=""',
+})
+autocmd("BufRead", {
+	pattern = { "/dev/shm/gopass*" },
+	command = 'setlocal noswapfile nobackup noundofile shada=""',
+})
