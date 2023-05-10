@@ -381,6 +381,7 @@ register("n", {
 		end,
 		"   list workspace folders",
 	},
+  ["<leader>."] = {"<cmd>Navbuddy<CR>", "Code navigation popup"},
 })
 
 -- telescope
