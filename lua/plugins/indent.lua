@@ -1,10 +1,14 @@
 vim.opt.list = true
-vim.opt.listchars:append "space: "
-vim.opt.listchars:append "tab:▸ "
-vim.opt.listchars:append "eol:¬"
-vim.opt.listchars:append "trail:●"
-vim.opt.listchars:append "precedes:«"
-vim.opt.listchars:append "extends:»"
+
+local icons = require('onjin.icons')
+
+vim.opt.listchars:append ("space:" .. icons.listchars.space)
+vim.opt.listchars:append ("tab:" .. icons.listchars.tab)
+vim.opt.listchars:append ("eol:" .. icons.listchars.eol)
+vim.opt.listchars:append ("trail:" .. icons.listchars.trail)
+vim.opt.listchars:append ("precedes:" .. icons.listchars.precedes)
+vim.opt.listchars:append ("extends:" .. icons.listchars.extends)
+
 
 return {
     {

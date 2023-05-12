@@ -23,6 +23,7 @@ local options = {
       executable = "docker-compose exec app pytest --ini=config.ini"
     }),
     --]]
+    require("neotest-python")({runner="docker run"}),
 		require("neotest-vim-test")({ ignore_filetypes = {} }),
 		require("neotest-plenary"),
 	},

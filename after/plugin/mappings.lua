@@ -149,7 +149,6 @@ register("n", {
 
 -- vimux
 register("n", {
-	-- ["<leader>tr"] = { ':lua require("neotest").run.run()<cr>', "λ Run tests" },
 	["<leader>vp"] = { ":VimuxPromptCommand<cr>", "~ Run prompted command in vimux runner" },
 	["<leader>vo"] = { ":VimuxOpenRunner<cr>", "~ Open vimux runner" },
 	["<leader>vz"] = { ":VimuxZoomRunner<cr>", "~ Zoom vimux runner" },
@@ -161,17 +160,17 @@ register("n", {
 
 -- neotest
 register("n", {
-	-- ["<leader>tr"] = { ':lua require("neotest").run.run()<cr>', "λ Run tests" },
-	["<leader>tr"] = { ":TestNearest<cr>", "λ Run tests" },
-	-- ["<leader>tl"] = { ':lua require("neotest").run.run_last()<cr>', "λ Run last test" },
-	["<leader>tl"] = { ":TestLast<cr>", "λ Run last test" },
-	-- ["<leader>tf"] = { ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', "λ Test file" },
-	["<leader>tf"] = { ":TestFile<cr>", "λ Test file" },
-	["<leader>tu"] = { ':lua require("neotest").run.stop()<cr>', "λ Stop tests" },
+	["<leader>Tr"] = { ":TestNearest<cr>", "λ Run tests" },
+	["<leader>Tf"] = { ":TestFile<cr>", "λ Test file" },
+	["<leader>Tl"] = { ":TestLast<cr>", "λ Run last test" },
+	["<leader>tr"] = { ':lua require("neotest").run.run()<cr>', "λ Run tests" },
+	["<leader>tl"] = { ':lua require("neotest").run.run_last()<cr>', "λ Run last test" },
+	["<leader>tf"] = { ':lua require("neotest").run.run(vim.fn.expand("%"))<cr>', "λ Test file" },
+	["<leader>ts"] = { ':lua require("neotest").run.stop()<cr>', "λ Stop tests" },
 	["<leader>ta"] = { ':lua require("neotest").run.attach()<cr>', "λ Attach to tests" },
-	["<leader>tw"] = { ':lua require("neotest").summary.toggle()<cr>', "λ Toggle tests sumamry" },
-	["<leader>to"] = { ':lua require("neotest").output.open()<cr>', "λ Open output window" },
-	["<leader>ts"] = { ':lua require("neotest").output.open({ short = true })<cr>', "λ Open output summary" },
+	["<leader>tv"] = { ':lua require("neotest").summary.toggle()<cr>', "λ Toggle tests sumamry" },
+	["<leader>tO"] = { ':lua require("neotest").output.open()<cr>', "λ Open output window" },
+	["<leader>to"] = { ':lua require("neotest").output.open({ short = true })<cr>', "λ Open output summary" },
 })
 
 -- gitsigns

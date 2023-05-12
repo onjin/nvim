@@ -2,6 +2,7 @@
   "Comment.nvim": { "branch": "master", "commit": "e1fe53117aab24c378d5e6deaad786789c360123" },
   "LuaSnip": { "branch": "master", "commit": "b4bc24c4925aeb05fd47d2ee9b24b7f73f5d7e32" },
   "NeoZoom.lua": { "branch": "main", "commit": "76aa719b04d9d0175af7842545c9548ae41c04bf" },
+  "apiblueprint.vim": { "branch": "master", "commit": "776b9863e32a8ba59bf8a9656770a77c148c6e9c" },
   "backseat.nvim": { "branch": "main", "commit": "3bb2781cdbf9b26c60e9ba45bfb22625e235c142" },
   "based.nvim": { "branch": "main", "commit": "8a36e03313a07da23f06dbd803843e0646a5a70a" },
   "blam.nvim": { "branch": "main", "commit": "0133b7070e2650ef14709475140fef5962c9bf55" },
