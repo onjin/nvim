@@ -35,12 +35,12 @@ return
           -- NOTE: Add popup-effect (replace the window on-zoom with a `[No Name]`).
           -- This way you won't see two windows of the same buffer
           -- got updated at the same time.
-          enabled = true,
+          enabled = false,
           exclude_filetypes = {},
           exclude_buftypes = {},
         },
       }
-      vim.keymap.set('n', '<CR>', function() vim.cmd('NeoZoomToggle') end, { silent = true, nowait = true })
+      vim.keymap.set('n', '<leader>z', function() vim.cmd('NeoZoomToggle') end, { silent = true, nowait = true })
     end
   }
 }
