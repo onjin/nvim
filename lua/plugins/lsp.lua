@@ -157,11 +157,15 @@ local function config()
 
     local lsp_signature = require("lsp_signature")
     local options_saga = {
-        bind = true, -- This is mandatory, otherwise border config won't get registered.
-        handler_opts = {
-            border = "rounded",
+        ui = {
         },
-        hint_prefix = "💡",
+        lightbulb = {
+            enable = true,
+            enable_in_insert = false,
+            sign = true,
+            sign_priority = 40,
+            virtual_text = false,
+        },
     }
     -- lsp_signature.setup(options_saga)
 
@@ -196,7 +200,7 @@ local function config()
             end,
         },
     }
-    lspsaga.setup(options)
+    lspsaga.setup(options_saga)
 
     return M
 end
@@ -217,17 +221,17 @@ return {
         config = config,
     },
     {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-        {
-            "SmiteshP/nvim-navbuddy",
-            dependencies = {
-                "SmiteshP/nvim-navic",
-                "MunifTanjim/nui.nvim"
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            {
+                "SmiteshP/nvim-navbuddy",
+                dependencies = {
+                    "SmiteshP/nvim-navic",
+                    "MunifTanjim/nui.nvim",
+                },
+                opts = { lsp = { auto_attach = true } },
             },
-            opts = { lsp = { auto_attach = true } }
-        }
+        },
+        -- your lsp config or other stuff
     },
-    -- your lsp config or other stuff
-  },
 }
