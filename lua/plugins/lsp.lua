@@ -63,6 +63,13 @@ local function config()
         on_attach = M.on_attach,
         capabilities = capabilities,
     })
+    lspconfig.yamlls.setup({
+        settings = {
+            yaml = {
+                keyOrdering = false,
+            },
+        },
+    })
 
     -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
     local bandit = require("efm/bandit")
@@ -157,8 +164,7 @@ local function config()
 
     local lsp_signature = require("lsp_signature")
     local options_saga = {
-        ui = {
-        },
+        ui = {},
         lightbulb = {
             enable = true,
             enable_in_insert = false,
