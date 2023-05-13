@@ -157,6 +157,7 @@ local function config()
         },
         sources = {
             -- { name = "cmp_tabnine" },
+            { name = "codeium" },
             { name = "nvim_lsp" },
             { name = "luasnip" },
             { name = "nvim_lua" },
