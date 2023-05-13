@@ -159,6 +159,11 @@ M.listchars_plain = {
     precedes = "<",
 }
 
-M.listchars = M.listchars_symbols
+M.available_listchars = {
+    M.listchars_symbols,
+    M.listchars_plain,
+    M.listchars_fancy,
+}
+M.default_listchars = M.listchars_fancy
 
 return M
