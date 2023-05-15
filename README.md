@@ -32,6 +32,8 @@ Markdown live preview
 
 Make sure you move old `~/.vim` to f.i. `~/.vim.old` then you can go
 
+**Requirements**: some plugins require `rust` already installed (f.e. `blam`).
+
 ```
 git clone https://github.com/onjin/nvim ~/.config/nvim
 ```
