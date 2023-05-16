@@ -134,7 +134,7 @@ return {
 		opts = {
 			fps = 10,
 			render = "compact",
-			stages = "static",
+			stages = "fade",
 			timeout = 4000,
 			top_down = false,
 			background_color = "none",
