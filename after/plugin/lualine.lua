@@ -26,6 +26,11 @@ if require("lazy.core.config").plugins["lualine.nvim"] then
     return " " .. fun_name
   end
 
+  local function get_short_cwd()
+    return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+    -- return vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
+  end
+
 
   local options = {
     options = {
@@ -51,6 +56,7 @@ if require("lazy.core.config").plugins["lualine.nvim"] then
       lualine_a = { "mode" },
       lualine_b = { "branch", "diff", "diagnostics" },
       lualine_c = {
+        get_short_cwd,
         "filename",
         "lsp_progress",
       },

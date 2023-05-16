@@ -75,10 +75,10 @@ local function config()
     t.setup(opt())
     t.load_extension("file_browser")
     t.load_extension("ui-select")
+    t.load_extension("projects")
     vim.defer_fn(function()
         t.load_extension("gh")
         t.load_extension("notify")
-        t.load_extension("projects")
         t.load_extension("repo")
         -- t.load_extension("session_picker")
         -- t.load_extension("conventional_commits")
@@ -148,4 +148,10 @@ return {
     { "cljoly/telescope-repo.nvim", lazy = true },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
     { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
+    {
+        "ahmedkhalf/project.nvim",
+        config = function()
+            require("project_nvim").setup({ silent_chdir = false })
+        end,
+    },
 }

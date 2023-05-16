@@ -261,6 +261,7 @@ register("n", {
     ["<space>d"] = { "<cmd> Telescope diagnostics <CR>", "Open diagnostic picker" },
     ["<space>a"] = { "<cmd>Lspsaga code_action<CR>", "Perform code action" },
     ["<space>k"] = { "<cmd>Lspsaga hover_doc<CR>", "Show doc for item under cursor" },
+    ["<space>p"] = { "<cmd> Telescope projects <CR>", "Open projects browser" },
 })
 
 -- resize
