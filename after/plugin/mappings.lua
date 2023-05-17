@@ -47,11 +47,6 @@ register("n", {
     ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
     -- registers :reg
     ["<leader>pp"] = { "*pp", "paste from *pp" },
-    -- conceal level
-    ["<leader>vc"] = {
-        ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>",
-        "toggle conceal level",
-    },
     ["<leader>vm"] = { "<cmd>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
     -- switch between windows
     -- ["<C-h>"] = { "<C-w>h", " window left" },
@@ -454,5 +449,18 @@ register("n", {
             vim.cmd("WhichKey " .. input)
         end,
         "   which-key query lookup",
+    },
+})
+register("n", {
+    ["<leader>cl"] = {
+        function()
+            vim.cmd("CycleListchars")
+        end,
+        "␋ Cycle listchars themes",
+    },
+    -- conceal level
+    ["<leader>vc"] = {
+        ":setlocal <C-R>=&conceallevel ? 'conceallevel=0' : 'conceallevel=2'<CR><CR>",
+        "toggle conceal level (listchars)",
     },
 })

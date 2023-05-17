@@ -1,6 +1,7 @@
 vim.opt.list = true
 
 local function set_listchars(listchars)
+    vim.notify("Using listchars theme " .. listchars.name)
     vim.opt.listchars:append("space:" .. listchars.space)
     vim.opt.listchars:append("tab:" .. listchars.tab)
     vim.opt.listchars:append("eol:" .. listchars.eol)
@@ -10,7 +11,7 @@ local function set_listchars(listchars)
 end
 
 local icons = require("onjin.icons")
-local current_listchars = icons.default_listchars
+local current_listchars = icons.available_listchars[icons.default_listchars]
 
 local function indexOf(array, value)
     for i, v in ipairs(array) do
@@ -54,7 +55,6 @@ return {
                 show_current_context_start = true,
             })
             vim.api.nvim_create_user_command("CycleListchars", cycle_listchars, {})
-            vim.keymap.set('n', '<leader>cl', function() vim.cmd('CycleListchars') end, { silent = true, nowait = true })
         end,
     },
 }

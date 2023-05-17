@@ -133,37 +133,35 @@ M.misc = {
     kebab = "",
 }
 
-M.listchars_fancy = {
-    space = " ",
-    tab = "▸ ",
-    eol = "¬",
-    trail = "●",
-    precedes = "«",
-    extends = "»",
-}
-M.listchars_symbols = {
-    space = " ",
-    tab = "␋ ",
-    eol = "␤",
-    trail = "␠",
-    precedes = "«",
-    extends = "»",
-}
-
-M.listchars_plain = {
-    space = " ",
-    tab = ">-",
-    eol = "$",
-    trail = "~",
-    extends = ">",
-    precedes = "<",
-}
-
 M.available_listchars = {
-    M.listchars_symbols,
-    M.listchars_plain,
-    M.listchars_fancy,
+    {
+        name = "Symbols",
+        space = " ",
+        tab = "␋ ",
+        eol = "␤",
+        trail = "␠",
+        precedes = "«",
+        extends = "»",
+    },
+    {
+        name = "Fancy",
+        space = " ",
+        tab = "▸ ",
+        eol = "¬",
+        trail = "●",
+        precedes = "«",
+        extends = "»",
+    },
+    {
+        name = "Plain",
+        space = " ",
+        tab = ">-",
+        eol = "$",
+        trail = "~",
+        extends = ">",
+        precedes = "<",
+    },
 }
-M.default_listchars = M.listchars_fancy
+M.default_listchars = 2
 
 return M
