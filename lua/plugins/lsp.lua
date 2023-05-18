@@ -9,7 +9,9 @@ local function config()
     local mason_options = {}
     mason.setup(mason_options)
 
-    M.on_attach = function(client, bufnr) end
+    M.on_attach = function(client, bufnr)
+        -- print("attached")
+    end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -37,38 +39,6 @@ local function config()
     lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
         on_attach = M.on_attach,
         capabilities = capabilities,
-    })
-
-    lspconfig.lua_ls.setup({
-        on_attach = M.on_attach,
-        capabilities = capabilities,
-        settings = {
-            Lua = {
-                diagnostics = {
-                    globals = { "vim" },
-                },
-                workspace = {
-                    library = {
-                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                    },
-                    maxPreload = 100000,
-                    preloadFileSize = 10000,
-                },
-            },
-        },
-    })
-
-    lspconfig.pyright.setup({
-        on_attach = M.on_attach,
-        capabilities = capabilities,
-    })
-    lspconfig.yamlls.setup({
-        settings = {
-            yaml = {
-                keyOrdering = false,
-            },
-        },
     })
 
     -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
@@ -108,6 +78,72 @@ local function config()
         -- ["rust_analyzer"] = function ()
         --     require("rust-tools").setup {}
         -- end
+        ["lua_ls"] = function()
+            lspconfig.lua_ls.setup({
+                on_attach = M.on_attach,
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                        workspace = {
+                            library = {
+                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                            },
+                            maxPreload = 100000,
+                            preloadFileSize = 10000,
+                        },
+                    },
+                },
+            })
+        end,
+        ["pyright"] = function()
+            lspconfig.pyright.setup({
+                on_attach = M.on_attach,
+                capabilities = capabilities,
+            })
+        end,
+        ["yamlls"] = function()
+            lspconfig.yamlls.setup({
+                on_attach = M.on_attach,
+                settings = {
+                    yaml = {
+                        schemaStore = {
+                            url = "https://www.schemastore.org/api/json/catalog.json",
+                            enable = true,
+                        },
+                        keyOrdering = false,
+                    },
+                },
+                capabilities = capabilities,
+            })
+        end,
+        ["emmet_ls"] = function()
+            lspconfig.emmet_ls.setup({
+                -- on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = {
+                    "html",
+                    "typescriptreact",
+                    "javascriptreact",
+                    "css",
+                    "sass",
+                    "scss",
+                    "less",
+                    "htmldjango",
+                },
+                init_options = {
+                    html = {
+                        options = {
+                            -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+                            ["bem.enabled"] = true,
+                        },
+                    },
+                },
+            })
+        end,
         ["efm"] = function()
             lspconfig.efm.setup({
                 capabilities = capabilities,
@@ -143,26 +179,11 @@ local function config()
         end,
     })
 
-    require("lspconfig").emmet_ls.setup({
-        -- on_attach = on_attach,
-        capabilities = capabilities,
-        filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "htmldjango" },
-        init_options = {
-            html = {
-                options = {
-                    -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-                    ["bem.enabled"] = true,
-                },
-            },
-        },
-    })
-
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         -- whether to show or not inline diagnostics errors - still available as float
         virtual_text = true,
     })
 
-    local lsp_signature = require("lsp_signature")
     local options_saga = {
         ui = {},
         lightbulb = {
@@ -173,39 +194,7 @@ local function config()
             virtual_text = false,
         },
     }
-    -- lsp_signature.setup(options_saga)
-
     local lspsaga = require("lspsaga")
-
-    local options = {
-        symbol_in_winbar = {
-            in_custom = false,
-            enable = true,
-            click_support = function(node, clicks, button, modifiers)
-                -- To see all avaiable details: vim.pretty_print(node)
-                local st = node.range.start
-                local en = node.range["end"]
-                if button == "l" then
-                    if clicks == 2 then
-                        -- double left click to do nothing
-                        clicks = 2
-                    else -- jump to node's starting line+char
-                        vim.fn.cursor(st.line + 1, st.character + 1)
-                    end
-                elseif button == "r" then
-                    if modifiers == "s" then
-                        print("lspsaga") -- shift right click to print "lspsaga"
-                    end -- jump to node's ending line+char
-                    vim.fn.cursor(en.line + 1, en.character + 1)
-                elseif button == "m" then
-                    -- middle click to visual select node
-                    vim.fn.cursor(st.line + 1, st.character + 1)
-                    vim.cmd("normal v")
-                    vim.fn.cursor(en.line + 1, en.character + 1)
-                end
-            end,
-        },
-    }
     lspsaga.setup(options_saga)
 
     return M
@@ -220,7 +209,6 @@ return {
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
             "neovim/nvim-lspconfig",
-            "ray-x/lsp_signature.nvim",
             "glepnir/lspsaga.nvim",
             "liuchengxu/vista.vim",
         },

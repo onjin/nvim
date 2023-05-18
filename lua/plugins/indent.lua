@@ -1,7 +1,6 @@
 vim.opt.list = true
 
 local function set_listchars(listchars)
-    vim.notify("Using listchars theme " .. listchars.name)
     vim.opt.listchars:append("space:" .. listchars.space)
     vim.opt.listchars:append("tab:" .. listchars.tab)
     vim.opt.listchars:append("eol:" .. listchars.eol)
@@ -43,6 +42,12 @@ local function cycle_listchars()
 end
 
 set_listchars(current_listchars)
+vim.api.nvim_create_user_command("CycleListchars", cycle_listchars, {})
+
+vim.opt.termguicolors = true
+
+vim.cmd([[highlight IndentBlanklineIndent1 guibg=#1e1e2e  gui=nocombine]])
+vim.cmd([[highlight IndentBlanklineIndent2 guibg=#1b1b2b gui=nocombine]])
 
 return {
     {
@@ -53,8 +58,15 @@ return {
                 space_char_blankline = " ",
                 show_current_context = true,
                 show_current_context_start = true,
+                char_highlight_list = {
+                    "IndentBlanklineIndent1",
+                    "IndentBlanklineIndent2",
+                },
+                space_char_highlight_list = {
+                    "IndentBlanklineIndent1",
+                    "IndentBlanklineIndent2",
+                },
             })
-            vim.api.nvim_create_user_command("CycleListchars", cycle_listchars, {})
         end,
     },
 }
