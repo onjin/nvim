@@ -146,7 +146,7 @@ return {
         lazy = true,
     },
     { "cljoly/telescope-repo.nvim", lazy = true },
-    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
     {
         "ahmedkhalf/project.nvim",

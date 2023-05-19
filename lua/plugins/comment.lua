@@ -6,7 +6,7 @@ local opts = {
 	},
 	opleader = {
 		line = "<leader>/",
-		block = "<leader>b",
+		block = "<leader>b/",
 	},
 }
 return {

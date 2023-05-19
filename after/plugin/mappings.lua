@@ -329,7 +329,7 @@ register("n", {
         end,
         "   lsp document symbols",
     },
-    ["<leader>f"] = {
+    ["<leader>ld"] = {
         -- function()
         -- 	vim.diagnostic.open_float()
         -- end,

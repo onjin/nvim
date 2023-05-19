@@ -1,7 +1,4 @@
 /.netrwhist
-/autoload/plug.vim*
-/black
 /tags
 /sessions
-/plugin
 /lua/local/*.lua
