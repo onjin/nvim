@@ -73,7 +73,15 @@ if require("lazy.core.config").plugins["lualine.nvim"] then
             lualine_b = { "branch", "diff", "diagnostics" },
             lualine_c = {
                 get_short_cwd,
-                "filename",
+                {
+                    function()
+                        local cur_buf = vim.api.nvim_get_current_buf()
+                        return require("hbac.state").is_pinned(cur_buf) and "📍" or ""
+                        -- tip: nerd fonts have pinned/unpinned icons!
+                    end,
+                    color = { fg = "#ef5f6b", gui = "bold" },
+                    "filename",
+                },
             },
             lualine_x = { LspStatus, LspSign, "encoding", "fileformat", "filetype" },
             lualine_y = { "progress" },

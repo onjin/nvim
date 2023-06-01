@@ -464,3 +464,7 @@ register("n", {
         "toggle conceal level (listchars)",
     },
 })
+register("n", {
+  ['<leader>bm'] = {"<cmd>lua require('hbac').toggle_pin()<CR>", 'Toggle buffer pin'},
+  ['<leader>bx'] = {"<cmd>lua require('hbac').close_unpinned()<CR>", 'Close unpinned buffers'},
+})

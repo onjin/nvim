@@ -1,7 +1,7 @@
 vim.g["test#neovim#term_position"] = "vert"
 vim.g["test#strategy"] = "vimux"
 vim.g.VimuxOrientation = "v"
-vim.g.VimuxHeight = "20"
+vim.g.VimuxHeight = "30"
 
 return {
 	{
