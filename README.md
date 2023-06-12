@@ -40,6 +40,10 @@ git clone https://github.com/onjin/nvim ~/.config/nvim
 
 Plugins should be installed at first run of editor. If not, then run `:Lazy` to do it manually.
 
+Discover shortcuts:
+- press `,` or `<space>` to get help for leader keys from `which-key`
+- press `<ctrl-p` - to get available all commands registered which `which-key` displayed by `legendary.vim`
+
 
 ## Requirements for python
 
