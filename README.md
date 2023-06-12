@@ -4,12 +4,12 @@ Mostly used for DevOps and Python (web) development.
 
 ## Features
 
- * Plugins manager — https://github.com/folke/lazy.nvim
- * Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
- * Fuzzy search engine https://github.com/nvim-telescope/telescope.nvim
- * Intellisense engine https://github.com/neovim/nvim-lspconfig
- * Autoresize windows — https://github.com/camspiers/lens.vim
- * Displays available keybindings in popup — https://github.com/liuchengxu/vim-which-key
+- Plugins manager — https://github.com/folke/lazy.nvim
+- Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
+- Fuzzy search engine https://github.com/nvim-telescope/telescope.nvim
+- Intellisense engine https://github.com/neovim/nvim-lspconfig + https://github.com/williamboman/mason-lspconfig.nvim
+- Autoresize windows — https://github.com/camspiers/lens.vim
+- Displays available keybindings in popup — https://github.com/liuchengxu/vim-which-key
 
 For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/init.lua
 
@@ -18,7 +18,6 @@ For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/
 Which key keybindings popup, just press `,` and wait for help
 
 ![Screenshot](https://user-images.githubusercontent.com/44516/162916448-0d41d3e6-96e2-4ab4-92f0-6e4f7fcc1f8c.png)
-
 
 LSP support
 
@@ -40,18 +39,65 @@ git clone https://github.com/onjin/nvim ~/.config/nvim
 
 Plugins should be installed at first run of editor. If not, then run `:Lazy` to do it manually.
 
-Discover shortcuts:
-- press `,` or `<space>` to get help for leader keys from `which-key`
-- press `<ctrl-p` - to get available all commands registered which `which-key` displayed by `legendary.vim`
+## Daily usage
 
+Discover shortcuts:
+
+- `,` or `<space>` to get help for leader keys from `which-key`
+- `<ctrl-p>` - to get available all commands registered which `which-key` displayed by `legendary.vim`
+
+Common shortcuts:
+
+- `<ctrl-[hjkl]>` - to move cursor between splits and/or tmux splits (look integration doc below)
+- `<space>f` - fuzzy search files for current directory
+- `<space>g` - fuzzy search GIT files for current (or searched for `.git` upward) directory
+- `<space>X` - to open buffer's management menu, or `<space>x` to just close current buffer
+- `,z` - toogle `zoom` for current buffer
+
+- `,ld` - show current line diagnostics in popup
+- `,q` - quick load all diagnostics messages in `loclist`
+- `,fm` - format current buffer using LSP
+- `,ca` - show code action selector, `q` to close
+- `,ra` - open rename action selector
+- `gd` - goto current symbol definition, `<ctrl-o>` to get back, and back and back, ...
+- `gp` - peek definition in popup window, `q` to close it
+- `K` - show symbol's docstring in popup window, move cursor to exit
+
+Update:
+
+- `:Lazy` to install/update/clean plugins
+- `:Mason` to install/update/clean LSP servers/formatters/DAPs/linters
+
+Syntax highlighting:
+
+- `TSInstallInfo` - display info about installed/available TreeSitter syntax
+- `TSInstall <name>` - install TreeSitter syntax
+
+## Integrations
+
+**tmux**:
+
+Add these lines to `tmux` to move around vim/tmux splits with same shortcuts
+
+```ini
+# smart pane switching with awareness of vim splits
+bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
+bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-j) || tmux select-pane -D"
+bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U"
+bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-l) || tmux select-pane -R"
+bind -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
+
+```
 
 ## Requirements for python
 
-* pynvim
+- pynvim
+
 ```
 pip install pynvim
 ```
 
-
 ## Nice to have
-* Nerd Icons - https://www.nerdfonts.com/
+
+- Nerd Icons - https://www.nerdfonts.com/
+
