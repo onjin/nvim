@@ -10,6 +10,7 @@ return {
             require("codeium").setup({})
         end,
     },
+    --[[
     {
         "zbirenbaum/copilot.lua",
         cmd = "Copilot",
@@ -27,4 +28,5 @@ return {
             require("copilot_cmp").setup()
         end,
     },
+    ]]
 }
