@@ -8,7 +8,7 @@ Mostly used for DevOps and Python (web) development.
 - Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
 - Fuzzy search engine https://github.com/nvim-telescope/telescope.nvim
 - Intellisense engine https://github.com/neovim/nvim-lspconfig + https://github.com/williamboman/mason-lspconfig.nvim
-- Autoresize windows — https://github.com/camspiers/lens.vim
+- AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing
 - Displays available keybindings in popup — https://github.com/liuchengxu/vim-which-key
 
 For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/init.lua
