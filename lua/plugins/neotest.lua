@@ -3,11 +3,16 @@ vim.g["test#strategy"] = "vimux"
 vim.g.VimuxOrientation = "v"
 vim.g.VimuxHeight = "30"
 
+local function get_neotest_python_path()
+  return "./neotest.py"
+end
+
 return {
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+      -- {dir="~/Workspace/develop/onjin/neotest-python"},
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",
       "nvim-neotest/neotest-vim-test",
@@ -39,5 +44,5 @@ return {
 				},
 			})
 		end,
-	},
+	}
 }

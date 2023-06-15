@@ -104,6 +104,7 @@ register("n", {
     ["<leader>x"] = { "<cmd> :bd <CR>", "   close buffer" },
     ["<leader>X"] = { "<cmd> :BClose menu<CR>", "   buffers delete menu" },
     -- buffers shortcuts
+    --[[
     ["<leader>1"] = { "<cmd> LualineBuffersJump 1  <CR>", "jump to buffer 1" },
     ["<leader>2"] = { "<cmd> LualineBuffersJump 2  <CR>", "jump to buffer 2" },
     ["<leader>3"] = { "<cmd> LualineBuffersJump 3  <CR>", "jump to buffer 3" },
@@ -114,6 +115,7 @@ register("n", {
     ["<leader>8"] = { "<cmd> LualineBuffersJump 8  <CR>", "jump to buffer 8" },
     ["<leader>9"] = { "<cmd> LualineBuffersJump 9  <CR>", "jump to buffer 9" },
     ["<leader>0"] = { "<cmd> LualineBuffersJump 10  <CR>", "jump to buffer 10" },
+    ]]
 })
 
 -- nvimtree

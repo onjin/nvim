@@ -30,6 +30,7 @@ opt.wrap = false -- do not wrap lines
 opt.termguicolors = true -- Enable 24-bit RGB colors
 opt.laststatus = 3 -- Set global statusline
 opt.scrolloff = 5 -- leave 5 lines before and after cursor
+opt.showtabline = 2
 
 -----------------------------------------------------------
 -- Tabs, indent

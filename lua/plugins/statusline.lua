@@ -1,7 +1,8 @@
 return {
-    {
+    --[[{
         "nvim-lualine/lualine.nvim",
     },
+    ]]
     {
         "linrongbin16/lsp-progress.nvim",
         event = { "VimEnter" },
@@ -10,4 +11,5 @@ return {
             require("lsp-progress").setup()
         end,
     },
+    {"rebelot/heirline.nvim"},
 }
