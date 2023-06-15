@@ -338,6 +338,13 @@ register("n", {
         "<cmd>Lspsaga show_line_diagnostics<CR>",
         "   floating diagnostic",
     },
+    ["gl"] = {
+        -- function()
+        -- 	vim.diagnostic.open_float()
+        -- end,
+        "<cmd>Lspsaga show_line_diagnostics<CR>",
+        "   floating diagnostic",
+    },
     ["[d"] = {
         function()
             vim.diagnostic.goto_prev()

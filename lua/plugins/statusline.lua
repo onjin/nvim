@@ -11,5 +11,8 @@ return {
             require("lsp-progress").setup()
         end,
     },
-    {"rebelot/heirline.nvim"},
+    {
+        "rebelot/heirline.nvim",
+        event = "BufEnter",
+    },
 }
