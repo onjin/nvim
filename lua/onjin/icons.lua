@@ -131,6 +131,7 @@ M.misc = {
     circle_slash = "",
     ellipse = "",
     kebab = "",
+    cog = " "
 }
 
 M.available_listchars = {

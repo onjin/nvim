@@ -10,28 +10,13 @@ local function set_listchars(listchars)
 end
 
 local icons = require("onjin.icons")
+local utils = require("utils")
 local current_listchars = icons.available_listchars[icons.default_listchars]
 
-local function indexOf(array, value)
-    for i, v in ipairs(array) do
-        if v == value then
-            return i
-        end
-    end
-    return nil
-end
-
-local function tablelength(T)
-    local count = 0
-    for _ in pairs(T) do
-        count = count + 1
-    end
-    return count
-end
 
 local function cycle_listchars()
-    local index = indexOf(icons.available_listchars, current_listchars)
-    local length = tablelength(icons.available_listchars)
+    local index = utils.indexOf(icons.available_listchars, current_listchars)
+    local length = utils.tablelength(icons.available_listchars)
     if index + 1 > length then
         index = 1
     else

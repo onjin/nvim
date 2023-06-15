@@ -3,7 +3,8 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
     local utils = require("heirline.utils")
     local colors = require("catppuccin.palettes").get_palette()
     local catppuccin = require("catppuccin")
-    local icons = require('onjin.icons')
+    local icons = require("onjin.icons")
+    local misc_utils = require("utils")
 
     conditions.buffer_not_empty = function()
         return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -266,6 +267,22 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
         hl = { bg = colors.crust, fg = colors.surface2 },
     }
 
+    local LSPProgress = {
+        condition = function()
+            return conditions.hide_in_width(120) and conditions.lsp_attached()
+        end,
+        update = { "User LspProgressStatusUpdated" },
+        provider = function()
+            local progress = require("lsp-progress").progress({
+                format = function(messages)
+                    return #messages > 0 and table.concat(messages, " ") or ""
+                end,
+            })
+            return " " .. progress .. " "
+        end,
+        hl = { bg = colors.crust, fg = colors.subtext1, bold = true, italic = false },
+    }
+
     local LSPActive = {
         condition = function()
             return conditions.hide_in_width(120) and conditions.lsp_attached()
@@ -278,9 +295,19 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
                     table.insert(names, server.name)
                 end
             end
-            return "  " .. table.concat(names, " ") .. " "
+            local nr_of_names = misc_utils.tablelength(names)
+            --return " "..icons.misc.cog .. " " .. table.concat(names, " ") .. " "
+            return " LSP [" .. nr_of_names .. "] "
         end,
         hl = { bg = colors.crust, fg = colors.subtext1, bold = true, italic = false },
+        on_click = {
+            callback = function()
+                vim.defer_fn(function()
+                    vim.cmd("LspInfo")
+                end, 100)
+            end,
+            name = "heirline_LSP",
+        },
     }
     local Diagnostics = {
         condition = function()
@@ -694,6 +721,7 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
         Ruler,
         Align,
         LSPActive,
+        LSPProgress,
         Diagnostics,
         FileEncoding,
         FileFormat,
