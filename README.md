@@ -2,6 +2,11 @@
 
 Mostly used for DevOps and Python (web) development.
 
+In neovim help:
+```
+:help onjin
+```
+
 ## Features
 
 - Plugins manager — https://github.com/folke/lazy.nvim
