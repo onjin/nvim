@@ -1,1 +1,1 @@
-vim.g.mapleader = " "
+-- optional mappings settings/options

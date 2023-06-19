@@ -11,6 +11,12 @@ autocmd("TextYankPost", {
 		vim.highlight.on_yank({ higroup = "IncSearch", timeout = "1000" })
 	end,
 })
+autocmd('FileType', {
+    pattern = {"veil"},
+    callback = function(_)
+        vim.opt_local.list = false
+    end
+})
 
 -- Remove whitespace on save
 --[[autocmd("BufWritePre", {

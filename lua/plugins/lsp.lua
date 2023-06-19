@@ -1,8 +1,10 @@
 -- luacheck: globals vim
+
 local function config()
     local mason = require("mason")
     local lspconfig = require("lspconfig")
     local mason_lspconfig = require("mason-lspconfig")
+    local onjin_config = require("onjin.config")
 
     local M = {}
 
@@ -41,32 +43,11 @@ local function config()
         capabilities = capabilities,
     })
 
-    -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
-    local bandit = require("efm/bandit")
-    local black = require("efm/black")
-    local eslint = require("efm/eslint")
-    -- local flake8 = require("efm/flake8")
-    local goimports = require("efm/goimports")
-    local go_vet = require("efm/go_vet")
-    local isort = require("efm/isort")
-    local ruff = require("efm/ruff")
-    local luacheck = require("efm/luacheck")
-    local misspell = require("efm/misspell")
-     local mypy = require("efm/mypy")
-    local opa = require("efm/opa")
-    local prettier = require("efm/prettier")
-    local shellcheck = require("efm/shellcheck")
-    local shfmt = require("efm/shfmt")
-    local staticcheck = require("efm/staticcheck")
-    local stylua = require("efm/stylua")
-    local terraform = require("efm/terraform")
-    local vint = require("efm/vint")
-
     local mason_lspconfig_options = {
-        ensure_installed = { "lua_ls", "efm", "pyright" },
+        ensure_installed = onjin_config.lsp_initial_servers,
     }
     mason_lspconfig.setup(mason_lspconfig_options)
-    mason_lspconfig.setup_handlers({
+    local handlers_config = {
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
         -- a dedicated handler.
@@ -144,7 +125,30 @@ local function config()
                 },
             })
         end,
-        ["efm"] = function()
+    }
+    if onjin_config.lsp_efm_config_enabled then
+        -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
+        local bandit = require("efm/bandit")
+        local black = require("efm/black")
+        local eslint = require("efm/eslint")
+        -- local flake8 = require("efm/flake8")
+        local goimports = require("efm/goimports")
+        local go_vet = require("efm/go_vet")
+        local isort = require("efm/isort")
+        local ruff = require("efm/ruff")
+        local luacheck = require("efm/luacheck")
+        local misspell = require("efm/misspell")
+        local mypy = require("efm/mypy")
+        local opa = require("efm/opa")
+        local prettier = require("efm/prettier")
+        local shellcheck = require("efm/shellcheck")
+        local shfmt = require("efm/shfmt")
+        local staticcheck = require("efm/staticcheck")
+        local stylua = require("efm/stylua")
+        local terraform = require("efm/terraform")
+        local vint = require("efm/vint")
+
+        handlers_config["efm"] = function()
             lspconfig.efm.setup({
                 capabilities = capabilities,
                 on_attach = M.on_attach,
@@ -176,9 +180,9 @@ local function config()
                     },
                 },
             })
-        end,
-    })
-
+        end
+    end
+    mason_lspconfig.setup_handlers(handlers_config)
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         -- whether to show or not inline diagnostics errors - still available as float
         virtual_text = true,

@@ -46,6 +46,9 @@ Plugins should be installed at first run of editor. If not, then run `:Lazy` to 
 
 ## Daily usage
 
+Configuration:
+- edit `lua/onjin/config.lua`
+
 Discover shortcuts:
 
 - `,` or `<space>` to get help for leader keys from `which-key`

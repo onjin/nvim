@@ -1,5 +1,6 @@
 local g = vim.g -- Global variables
 local opt = vim.opt -- Set options (global/buffer/windows-scoped)
+local config = require('onjin.config')
 local prefix = vim.env.XDG_STATE_HOME or vim.fn.expand("~/.local/state")
 
 g.python_host_prog = "~/.pyenv/versions/neovim2/bin/python"
@@ -70,7 +71,8 @@ opt.spelllang = "en"
 -- Startup
 -----------------------------------------------------------
 
-g.mapleader = ","
+g.mapleader = config.leader_key 
+g.maplocalleader = config.local_leader_key
 g.buffet_show_index = true
 
 -- Disable nvim intro

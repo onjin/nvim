@@ -1,26 +1,8 @@
+local onjin_config = require("onjin.config")
+
 local function config()
     require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-            "bash",
-            "comment",
-            "dockerfile",
-            "gitattributes",
-            "gitignore",
-            "html",
-            "json",
-            "latex",
-            "lua",
-            "make",
-            "markdown",
-            "markdown_inline",
-            "python",
-            "regex",
-            "sql",
-            "todotxt",
-            "toml",
-            "vim",
-            "yaml",
-        },
+        ensure_installed = onjin_config.treesitter_initial_servers,
         highlight = {
             enable = true,
             use_languagetree = true,

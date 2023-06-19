@@ -5,6 +5,7 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
     local icons = require("onjin.icons")
     local misc_utils = require("utils")
     local colors = require("catppuccin.palettes").get_palette()
+    local config = require("onjin.config")
 
     conditions.buffer_not_empty = function()
         return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -296,8 +297,12 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
                 end
             end
             local nr_of_names = misc_utils.tablelength(names)
-            --return " "..icons.misc.cog .. " " .. table.concat(names, " ") .. " "
-            return " LSP [" .. nr_of_names .. "] "
+            local prefix = config.status_lsp_prefix or icons.misc.cog
+            if config.status_lsp_show_server_names then
+              return " ".. prefix .. " " .. table.concat(names, " ") .. " "
+            else
+              return " ".. prefix .." [" .. nr_of_names .. "] "
+            end
         end,
         hl = { bg = colors.crust, fg = colors.subtext1, bold = true, italic = false },
         on_click = {

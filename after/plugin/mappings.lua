@@ -251,28 +251,31 @@ register("n", {
 
 -- space
 register("n", {
-    ["<space>g"] = { "<cmd> Telescope git_files <CR>", "  Fuzzy search git files" },
-    ["<space>f"] = { "<cmd> Telescope find_files <CR>", "Open file picker" },
-    ["<space>b"] = { "<cmd> Telescope buffers <CR>", "Open buffer picker" },
-    ["<space>s"] = { "<cmd> Telescope lsp_document_symbols <CR>", "Open symbol picker" },
-    ["<space>d"] = { "<cmd> Telescope diagnostics <CR>", "Open diagnostic picker" },
-    ["<space>a"] = { "<cmd>Lspsaga code_action<CR>", "Perform code action" },
-    ["<space>k"] = { "<cmd>Lspsaga hover_doc<CR>", "Show doc for item under cursor" },
-    ["<space>p"] = { "<cmd> Telescope projects <CR>", "Open projects browser" },
+    ["<localleader>a"] = { "<cmd>Lspsaga code_action<CR>", "Perform code action" },
+    ["<localleader>b"] = { "<cmd> Telescope buffers <CR>", "Open buffer picker" },
+    ["<localleader>c"] = { "<cmd> Telescope file_browser <CR>", "Open current directory browser" },
+    ["<localleader>d"] = { "<cmd> Telescope diagnostics <CR>", "Open diagnostic picker" },
+    ["<localleader>e"] = { F.edit_nvim, "   open ~/.config/nvim" },
+    ["<localleader>f"] = { "<cmd> Telescope find_files <CR>", "Open file picker" },
+    ["<localleader>g"] = { "<cmd> Telescope git_files <CR>", "  Fuzzy search git files" },
+    ["<localleader>k"] = { "<cmd>Lspsaga hover_doc<CR>", "Show doc for item under cursor" },
+    ["<localleader>p"] = { "<cmd> Telescope projects <CR>", "Browse projects" },
+    ["<localleader>r"] = { "<cmd> Telescope live_grep <CR>", "   live grep" },
+    ["<localleader>s"] = { "<cmd> Telescope lsp_document_symbols <CR>", "Open symbol picker" },
 })
 
 -- resize
 register("n", {
-    ["<space>1"] = { ":vertical resize 80<cr>", "Resize buffer width to 80" },
-    ["<space>2"] = { ":vertical resize 120<cr>", "Resize buffer width to 120" },
-    ["<space>ww"] = { ":TZAtaraxis<cr>", "Focus window as floating" },
-    ["<space>wa"] = { ":TZAtaraxis<cr>", "Focus window as floating" },
-    ["<space>wf"] = { ":TZFocus<cr>", "Focus window as single" },
-    ["<space>wm"] = { ":TZMinimalist<cr>", "Focus windows using minimalistic mode" },
-    ["<space>wn"] = { ":TZNarrow<cr>", "Focus code by narrowing" },
+    ["<localleader>1"] = { ":vertical resize 80<cr>", "Resize buffer width to 80" },
+    ["<localleader>2"] = { ":vertical resize 120<cr>", "Resize buffer width to 120" },
+    ["<localleader>ww"] = { ":TZAtaraxis<cr>", "Focus window as floating" },
+    ["<localleader>wa"] = { ":TZAtaraxis<cr>", "Focus window as floating" },
+    ["<localleader>wf"] = { ":TZFocus<cr>", "Focus window as single" },
+    ["<localleader>wm"] = { ":TZMinimalist<cr>", "Focus windows using minimalistic mode" },
+    ["<localleader>wn"] = { ":TZNarrow<cr>", "Focus code by narrowing" },
 })
 register("v", {
-    ["<space>wn"] = { ":'<,'>TZNarrow<cr>", "Focus code by narrowing" },
+    ["<localleader>wn"] = { ":'<,'>TZNarrow<cr>", "Focus code by narrowing" },
 })
 
 -- lspconfig
@@ -396,12 +399,11 @@ register("n", {
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "  find files" },
     ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "  find all" },
     ["<leader>fr"] = { "<cmd> Telescope live_grep <CR>", "   live grep" },
-    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  find buffers" },
+    ["<leader>fb"] = { "<cmd> Telescope buffers <CR>", "  browse buffers" },
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "   find oldfiles" },
     ["<leader>fs"] = { "<cmd>:lua require('spectacle').SpectacleTelescope()<CR>", "   pick saved session to load" },
     ["<leader>ft"] = { "<cmd> Telescope file_browser <CR>", "   open file browser" },
-    ["<leader><leader>e"] = { F.edit_nvim, "   open ~/.config/nvim" },
     ["<leader><leader>d"] = {
         "<cmd> Telescope file_browser path=" .. home .. "/dotfiles <CR>",
         "   open ~/dotfiles",
