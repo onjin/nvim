@@ -17,6 +17,12 @@ Table of Contents                                    *onjin-table-of-contents*
 
 Mostly used for DevOps and Python (web) development.
 
+In neovim help:
+
+>
+    :help onjin
+<
+
 
 FEATURES                       *onjin-personal-neovim-configuration.-features*
 
