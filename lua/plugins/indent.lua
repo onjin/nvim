@@ -1,4 +1,6 @@
-vim.opt.list = true
+local config = require('onjin.config')
+
+vim.opt.list = config.listchars
 
 local function set_listchars(listchars)
     vim.opt.listchars:append("space:" .. listchars.space)
@@ -11,7 +13,7 @@ end
 
 local icons = require("onjin.icons")
 local utils = require("utils")
-local current_listchars = icons.available_listchars[icons.default_listchars]
+local current_listchars = icons.available_listchars[config.listchars_theme_number]
 
 
 local function cycle_listchars()

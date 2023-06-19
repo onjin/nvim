@@ -159,10 +159,9 @@ M.available_listchars = {
         tab = ">-",
         eol = "$",
         trail = "~",
-        extends = ">",
         precedes = "<",
+        extends = ">",
     },
 }
-M.default_listchars = 2
 
 return M

@@ -1,21 +1,21 @@
 -- luacheck: globals vim
-local catppuccin = require("catppuccin")
+local config = require("onjin.config")
 
-local options = {
-	compile = {
-		enabled = true,
-		path = vim.fn.stdpath("cache") .. "/catppuccin",
-	},
-}
-vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+if config.theme == "catppuccin" then
+    local catppuccin = require("catppuccin")
 
-catppuccin.setup(options)
+    local options = {
+        compile = {
+            enabled = true,
+            path = vim.fn.stdpath("cache") .. "/catppuccin",
+        },
+    }
+    vim.g.catppuccin_flavour = config.theme_flavour
 
-vim.cmd([[
-try
-  colorscheme catppuccin
-catch /^Vim\%((\a\+)\)\=:E185/
-  colorscheme default
-  set background=dark
-endtry
-]])
+    catppuccin.setup(options)
+end
+
+local theme = config.theme
+
+local cmd = string.format("colorscheme %s", theme)
+vim.cmd(cmd)
