@@ -671,7 +671,6 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
         { provider = "  ", hl = { fg = colors.text } },
         { provider = "  ", hl = { fg = colors.text } }
     )
-    print(BufferLine)
 
     local Tabpage = {
         provider = function(self)
@@ -757,7 +756,6 @@ if require("lazy.core.config").plugins["lualine.nvim"] then
         })
         local fun_name = string.format("%s", f) -- convert to string, it may be a empty ts node
 
-        -- print(string.find(fun_name, "vim.NIL"))
         if fun_name == "vim.NIL" then
             return " "
         end
