@@ -1,4 +1,4 @@
-*onjin.txt*            For Neovim >= 0.8.0           Last change: 2023 June 19
+*onjin.txt*            For Neovim >= 0.8.0           Last change: 2023 June 20
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
@@ -61,6 +61,8 @@ do it manually.
 
 
 DAILY USAGE                 *onjin-personal-neovim-configuration.-daily-usage*
+
+Configuration: - edit `lua/onjin/config.lua`
 
 Discover shortcuts:
 
