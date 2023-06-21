@@ -59,7 +59,7 @@ local config = function()
                     text = "Browse Last Opened Files",
                     shortcut = onjin_config.leader_key .. "fo",
                     callback = function()
-                        vim.cmd("Telescope file_browser")
+                        vim.cmd("Telescope oldfiles")
                     end,
                 },
                 {

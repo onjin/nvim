@@ -58,4 +58,7 @@ M.status_lsp_show_server_names = true
 -- Status line // Prefix for LSP status - default `icons.misc.cog`
 M.status_lsp_prefix = icons.misc.cog
 
+-- Use just text date or animated data
+M.dashboard_simple_header = true
+
 return M

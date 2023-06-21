@@ -108,17 +108,6 @@ local function config()
             vim.api.nvim_set_hl(0, hl, col)
         end
     end, 5000)
-
-    -- vim.api.nvim_create_autocmd("FileType", {
-    -- 	pattern = "gitcommit",
-    -- 	callback = function()
-    -- 		vim.api.nvim_exec("Telescope conventional_commits", true)
-    -- 		-- vim.keymap.set('n', '<leader>cc', ':Telescope conventional_commits<CR>', {
-    -- 		-- 	buffer = true,
-    -- 		--
-    -- 		-- })
-    -- 	end
-    -- })
 end
 
 return {

@@ -1,1 +1,2 @@
 -- optional mappings settings/options
+-- mappins are defined at after/plugin/mappings.lua
