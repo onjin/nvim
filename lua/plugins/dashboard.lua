@@ -1,4 +1,3 @@
-local onjin_config = require("onjin.config")
 local function edit_nvim()
     require("telescope.builtin").git_files({
         shorten_path = true,
@@ -73,6 +72,22 @@ local config = function()
                 },
                 {
                     icon = "",
+                    text = "Plugins manager (Lazy)",
+                    shortcut = "p",
+                    callback = function()
+                        vim.cmd("Lazy")
+                    end,
+                },
+                {
+                    icon = "",
+                    text = "LSP manager (Mason)",
+                    shortcut = "l",
+                    callback = function()
+                        vim.cmd("Mason")
+                    end,
+                },
+                {
+                    icon = "",
                     text = "Config",
                     shortcut = "<space>e",
                     callback = function()
@@ -80,7 +95,7 @@ local config = function()
                     end,
                 },
             }),
-            builtin.sections.oldfiles(),
+            builtin.sections.oldfiles({ align = "left" }),
         },
         mappings = {},
         startup = true,

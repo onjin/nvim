@@ -6,17 +6,53 @@ local function config()
     local mason_lspconfig = require("mason-lspconfig")
     local onjin_config = require("onjin.config")
 
-    local M = {}
-
     local mason_options = {}
     mason.setup(mason_options)
 
-    M.on_attach = function(client, bufnr)
-        -- print("attached")
+    local mason_lspconfig_options = {
+        ensure_installed = onjin_config.lsp_initial_servers,
+    }
+    mason_lspconfig.setup(mason_lspconfig_options)
+
+    local function on_attach(client, bufnr)
+        if client.name == "pyright" then
+            local util = require("lspconfig/util")
+            local path = util.path
+
+            -- From: https://github.com/IceS2/dotfiles/blob/master/nvim/lua/plugins_cfg/mason_ls_and_dap.lua
+            local function get_python_path(workspace)
+                -- Use activated virtualenv.
+                if vim.env.VIRTUAL_ENV then
+                    return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+                end
+
+                -- Find and use virtualenv in workspace directory.
+                for _, pattern in ipairs({ "*", ".*" }) do
+                    local match = vim.fn.glob(path.join(workspace, pattern, ".python-local"))
+                    if match ~= "" then
+                        return path.join(vim.env.PYENV_ROOT, "versions", path.dirname(match), "bin", "python")
+                    end
+                end
+
+                -- Fallback to system Python.
+                return exepath("python3") or exepath("python") or "python"
+            end
+
+            local function get_venv(workspace)
+                for _, pattern in ipairs({ "*", ".*" }) do
+                    local match = vim.fn.glob(path.join(workspace, pattern, ".python-local"))
+                    if match ~= "" then
+                        return match
+                    end
+                end
+            end
+            client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
+            client.config.settings.venvPath = path.join(vim.env.PYENV_ROOT, "versions")
+            client.config.settings.venv = get_venv(client.config.root_dir)
+        end
     end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-
     capabilities.textDocument.completion.completionItem = {
         documentationFormat = { "markdown", "plaintext" },
         snippetSupport = true,
@@ -35,24 +71,15 @@ local function config()
         },
     }
 
-    -- autocnofigure all servers
-
-    -- 2. (optional) Override the default configuration to be applied to all servers.
-    lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
-        on_attach = M.on_attach,
-        capabilities = capabilities,
-    })
-
-    local mason_lspconfig_options = {
-        ensure_installed = onjin_config.lsp_initial_servers,
-    }
-    mason_lspconfig.setup(mason_lspconfig_options)
     local handlers_config = {
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
         -- a dedicated handler.
         function(server_name) -- default handler (optional)
-            require("lspconfig")[server_name].setup({})
+            require("lspconfig")[server_name].setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+            })
         end,
         -- Next, you can provide a dedicated handler for specific servers.
         -- For example, a handler override for the `rust_analyzer`:
@@ -61,7 +88,7 @@ local function config()
         -- end
         ["lua_ls"] = function()
             lspconfig.lua_ls.setup({
-                on_attach = M.on_attach,
+                on_attach = on_attach,
                 capabilities = capabilities,
                 settings = {
                     Lua = {
@@ -82,13 +109,42 @@ local function config()
         end,
         ["pyright"] = function()
             lspconfig.pyright.setup({
-                on_attach = M.on_attach,
+                on_attach = on_attach,
                 capabilities = capabilities,
+                settings = {
+                    python = {
+                        analysis = {
+                            indexing = true,
+                            typeCheckingMode = "strict",
+                            diagnosticMode = "openFilesOnly",
+                            autoImportCompletions = true,
+                            autoSearchPaths = true,
+                            inlayHints = {
+                                variableTypes = true,
+                                functionReturnTypes = true,
+                            },
+                            useLibraryCodeForTypes = true,
+                            diagnosticSeverityOverrides = {
+                                reportUnusedImport = "error",
+                                reportUnusedClass = "error",
+                                reportUnusedFunction = "error",
+                                reportUnusedVariable = "error",
+                                reportDuplicateImport = "error",
+                                reportMissingTypeArgument = "error",
+                                reportMissingImports = "error",
+                                reportOptionalMemberAccess = "error",
+                                reportOptionalSubscript = "error",
+                                reportGeneralTypeIssues = "none",
+                                reportPrivateImportUsage = "none",
+                            },
+                        },
+                    },
+                },
             })
         end,
         ["yamlls"] = function()
             lspconfig.yamlls.setup({
-                on_attach = M.on_attach,
+                on_attach = on_attach,
                 settings = {
                     yaml = {
                         schemaStore = {
@@ -151,7 +207,7 @@ local function config()
         handlers_config["efm"] = function()
             lspconfig.efm.setup({
                 capabilities = capabilities,
-                on_attach = M.on_attach,
+                on_attach = on_attach,
                 init_options = { documentFormatting = true },
                 root_dir = vim.loop.cwd,
                 settings = {
@@ -200,9 +256,21 @@ local function config()
     }
     local lspsaga = require("lspsaga")
     lspsaga.setup(options_saga)
-
-    return M
 end
+
+vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = "LspAttach_inlayhints",
+    callback = function(args)
+        if not (args.data and args.data.client_id) then
+            return
+        end
+
+        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        require("lsp-inlayhints").on_attach(client, bufnr)
+    end,
+})
 
 return {
     {
@@ -232,4 +300,6 @@ return {
         },
         -- your lsp config or other stuff
     },
+    { "lvimuser/lsp-inlayhints.nvim" },
+    { "haringsrob/nvim_context_vt" },
 }
