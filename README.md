@@ -14,7 +14,7 @@ In neovim help:
 - Fuzzy search engine https://github.com/nvim-telescope/telescope.nvim
 - Intellisense engine https://github.com/neovim/nvim-lspconfig + https://github.com/williamboman/mason-lspconfig.nvim
 - AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing
-- Displays available keybindings in popup — https://github.com/liuchengxu/vim-which-key
+- Displays available keybindings in popup — https://github.com/folke/which-key.nvim
 
 For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/
 
