@@ -1,3 +1,5 @@
+local onjin_config = require('onjin.config')
+
 local function edit_nvim()
     require("telescope.builtin").git_files({
         shorten_path = true,
@@ -16,24 +18,22 @@ local config = function()
 
     local static = Section:new({
         contents = function()
-            return { "Current dir:", " - " .. vim.fn.getcwd() }
+            return { "You are here:", " - " .. vim.fn.getcwd() }
         end,
         hl = "Normal",
     })
 
     require("veil").setup({
         sections = {
-            --[[
             builtin.sections.animated(builtin.headers.frames_days_of_week[current_day], {
                 hl = { fg = "#5de4c7" },
             }),
-            ]]
             static,
             builtin.sections.buttons({
                 {
                     icon = "",
                     text = "Find Files",
-                    shortcut = "<space>f",
+                    shortcut = onjin_config.leader_key .. "ff",
                     callback = function()
                         vim.cmd("Telescope find_files")
                     end,
@@ -41,7 +41,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Find Word",
-                    shortcut = "<space>r",
+                    shortcut = onjin_config.leader_key .. "fr",
                     callback = function()
                         vim.cmd("Telescope live_grep")
                     end,
@@ -49,7 +49,15 @@ local config = function()
                 {
                     icon = "",
                     text = "Browse Files",
-                    shortcut = "<space>c",
+                    shortcut = onjin_config.leader_key .. "fb",
+                    callback = function()
+                        vim.cmd("Telescope file_browser")
+                    end,
+                },
+                {
+                    icon = "",
+                    text = "Browse Last Opened Files",
+                    shortcut = onjin_config.leader_key .. "fo",
                     callback = function()
                         vim.cmd("Telescope file_browser")
                     end,
@@ -57,7 +65,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Browse Projects",
-                    shortcut = "<space>p",
+                    shortcut = onjin_config.leader_key .. "p/",
                     callback = function()
                         vim.cmd("Telescope projects")
                     end,
@@ -65,7 +73,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Browse Buffers",
-                    shortcut = "<space>b",
+                    shortcut = onjin_config.leader_key .. "b/",
                     callback = function()
                         vim.cmd("Telescope buffers")
                     end,
@@ -73,7 +81,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Plugins manager (Lazy)",
-                    shortcut = "p",
+                    shortcut = onjin_config.leader_key .. "p/",
                     callback = function()
                         vim.cmd("Lazy")
                     end,
@@ -81,21 +89,21 @@ local config = function()
                 {
                     icon = "",
                     text = "LSP manager (Mason)",
-                    shortcut = "l",
+                    shortcut = onjin_config.leader_key .. "pl",
                     callback = function()
                         vim.cmd("Mason")
                     end,
                 },
                 {
                     icon = "",
-                    text = "Config",
+                    text = "Browse NVIM Config Files",
                     shortcut = "<space>e",
                     callback = function()
                         edit_nvim()
                     end,
                 },
             }),
-            builtin.sections.oldfiles({ align = "left" }),
+            -- builtin.sections.oldfiles({ align = "left" }),
         },
         mappings = {},
         startup = true,

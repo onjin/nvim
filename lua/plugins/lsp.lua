@@ -1,5 +1,6 @@
 -- luacheck: globals vim
 
+
 local function config()
     local mason = require("mason")
     local lspconfig = require("lspconfig")

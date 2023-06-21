@@ -23,7 +23,6 @@ local function config_tmux()
     p.setup(options_tmux())
 end
 
-vim.keymap.set('n', '<leader>vg', ':call VimuxRunCommand("clear; glow " . bufname("%"))<CR>')
 
 return {
     {

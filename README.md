@@ -19,6 +19,9 @@ In neovim help:
 For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/init.lua
 
 ## Screenshots
+Simple dashboard
+
+![Screenshot](https://github.com/onjin/nvim/assets/44516/1bb97e31-b452-49c7-b2ac-ed2bf7183877)
 
 Which key keybindings popup, just press `,` and wait for help
 
@@ -51,22 +54,23 @@ Configuration:
 
 Discover shortcuts:
 
+- `,hK` - display all keybindings [help keybindings]
 - `,` or `<space>` to get help for leader keys from `which-key`
 - `<ctrl-p>` - to get available all commands registered which `which-key` displayed by `legendary.vim`
 
 Common shortcuts:
 
 - `<ctrl-[hjkl]>` - to move cursor between splits and/or tmux splits (look integration doc below)
-- `<space>f` - fuzzy search files for current directory
-- `<space>g` - fuzzy search GIT files for current (or searched for `.git` upward) directory
-- `<space>X` - to open buffer's management menu, or `<space>x` to just close current buffer
-- `,z` - toogle `zoom` for current buffer
+- `,ff` - fuzzy search files for current directory [find files]
+- `,fg` - fuzzy search GIT files for current (or searched for `.git` upward) directory [find git]
+- `,bX` - to open buffer's management menu, or `,bx` to just close current buffer [buffer 'X'] [buffer 'x']
+- `,wz` - toogle `zoom` for current buffer [window zoom]
 
-- `,ld` - show current line diagnostics in popup
-- `,q` - quick load all diagnostics messages in `loclist`
-- `,fm` - format current buffer using LSP
-- `,ca` - show code action selector, `q` to close
-- `,ra` - open rename action selector
+- `,ld` - show current line diagnostics in popup [lsp diagnostic]
+- `,dl` - quick load all diagnostics messages in `loclist` [diagnostics loclist]
+- `,lm` - format current buffer using LSP [lsp format]
+- `,la` - show code action selector, `q` to close [lsp action]
+- `,lR` - open rename action selector [lsp rename]
 - `gd` - goto current symbol definition, `<ctrl-o>` to get back, and back and back, ...
 - `gp` - peek definition in popup window, `q` to close it
 - `K` - show symbol's docstring in popup window, move cursor to exit
