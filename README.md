@@ -16,7 +16,7 @@ In neovim help:
 - AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing
 - Displays available keybindings in popup — https://github.com/liuchengxu/vim-which-key
 
-For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/init.lua
+For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/
 
 ## Screenshots
 Simple dashboard
