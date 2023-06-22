@@ -292,12 +292,6 @@ register("n", {
         end,
         "  LSP Code Format",
     },
-    ["<leader>ls"] = {
-        function()
-            require("lsp_signature").signature()
-        end,
-        "  LSP Signature_help",
-    },
     ["<leader>ld"] = { "<cmd>Lspsaga show_line_diagnostics<CR>", "  LSP Floating Diagnostic" },
     ["<leader>lr"] = { "<cmd>Lspsaga lsp_finder<CR>", "  LSP Find References" },
     ["<leader>lo"] = { "<cmd>Lspsaga outline<CR>", "  LSP Toggle Outline" },

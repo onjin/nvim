@@ -32,6 +32,7 @@
   "lsp-inlayhints.nvim": { "branch": "main", "commit": "d981f65c9ae0b6062176f0accb9c151daeda6f16" },
   "lsp-progress.nvim": { "branch": "main", "commit": "52bd3da14392c54a1b0dedf8ef81ee6628de9d6e" },
   "lsp-zero.nvim": { "branch": "v2.x", "commit": "cf38e6034f2d776ebd16304a334b79543d1ffa60" },
+  "lsp_signature.nvim": { "branch": "master", "commit": "17ff7a405fea8376b015b8ea7910d2e59958bf68" },
   "lspsaga.nvim": { "branch": "main", "commit": "4f075452c466df263e69ae142f6659dcf9324bf6" },
   "lush.nvim": { "branch": "main", "commit": "25cf75a5347d664783fce3d16f7fee3f58f37e1d" },
   "markdown-preview.nvim": { "branch": "master", "commit": "02cc3874738bc0f86e4b91f09b8a0ac88aef8e96" },
