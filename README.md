@@ -50,6 +50,7 @@ Plugins should be installed at first run of editor. If not, then run `:Lazy` to 
 ## Daily usage
 
 Configuration:
+ 
 - edit `lua/onjin/config.lua`
 
 Discover shortcuts:
@@ -93,7 +94,7 @@ Discover shortcuts:
 - `,fh` - find help tags
 - `,fo` - find old files
 - `,fr` - find within files (live grep)
-- `,fs` - find saved sessins
+- `,fs` - find saved sessions
 
 +Files +Git:
 
@@ -105,13 +106,15 @@ Discover shortcuts:
 - `,fgs` - find git status
 - `,fgt` - find git stash
 
-+Files +Workspaces
++Files +Workspaces:
+
 - `,fw` - workspaces submenu
 - `,fwa` - add workspace folder
 - `,fwl` - list workspace folders
 - `,fwr` - remove workspace folder
 
-+Help
++Help:
+
 - `,h` - help menu
 - `,hK` - display all mappings using `which-key`
 - `,hk` - find and use mapping
@@ -121,11 +124,13 @@ Discover shortcuts:
 - `,hlf` - choose functions using `legendary.vim`
 - `,hlk` - choose keymaps using `legendary.vim`
 
-+Jump
++Jump:
+
 - `,j` - jump menu
 - `,jc` - jump to current context using indents
 
-+LSP
++LSP:
+
 - `,l` - LSP menu
 - `,la` - LSP Code Action menu using `lspsaga`
 - `,ld` - LSP Show Line Diagnostics for current line in floating window using `lspsaga`
@@ -136,21 +141,25 @@ Discover shortcuts:
 - `,lR` - LSP Run Symbol Rename using `lspasage`
 - `,lt` - LSP Show type definition using `telescope`
 
-+Projects/Packages
++Projects/Packages:
+
 - `,p` - Projects/Packages
 - `,pp` - Open Plugins Management UI using `Lazy`
 - `,pl` - Open LSP Servers/DAPs/Formatters UI using `Mason`
 - `,p/` - Open projects selector using `telescope`
 
-+Registers
++Registers:
+
 - `,r` - Registers menu
 - `,rp` - Paset from *pp register
 
-+Spelling
++Spelling:
+
 - `,s` - Spelling menu
 - `,ss` - Open spell suggestions using `telescope`
 
-+Toggles
++Toggles:
+
 - `,t` - Toggles menu
 - `,tb` - toggle git blame for current line
 - `,tc` - toggle conceal level
@@ -158,22 +167,26 @@ Discover shortcuts:
 - `,tp` - toggle buffer pin (used with `,bc` to close unpinned buffers)
 - `,tr` - toggle relative line numbers
 
-+UI Toggles/Themes
++UI Toggles/Themes:
+
 - `,T` - UI Toggles/Themes menu
 - `,T1` - set buffer width to 80 chars
 - `,T2` - set buffer width to 120 chars
 - `,Tc` - select and change color scheme using `telescope`
 - `,Tl` - cycle list chars theme
 
-+Utils
++Utils:
+
 - `,u` - Utils menu
 - `,uh` - convert number under cursor between dec/hex
 
-+Windows
++Windows:
+
 - `,w` - Windows menu
 - `,wz` - toggle window zoome
 
-+Windows +Vimux
++Windows +Vimux:
+
 - `,wv` - Vimux menu
 - `,wvi` - inspect Vimux runner
 - `,wvo` - open Vimux runner
