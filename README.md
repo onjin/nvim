@@ -119,53 +119,109 @@ Discover shortcuts:
 
 +Jump
 - `,j` - jump menu
-- ...
+- `,jc` - jump to current context using indents
 
 +LSP
 - `,l` - LSP menu
-- ...
+- `,la` - LSP Code Action menu using `lspsaga`
+- `,ld` - LSP Show Line Diagnostics for current line in floating window using `lspsaga`
+- `,lf` - LSP Format current's buffer code
+- `,ln` - LSP Open Code Navigation Popup using `navbuddy`
+- `,lo` - LSP Toggle Outline using `lspsaga`
+- `,lr` - LSP Open Current symbol finder using `lspsaga`
+- `,lR` - LSP Run Symbol Rename using `lspasage`
+- `,lt` - LSP Show type definition using `telescope`
 
 +Projects/Packages
 - `,p` - Projects/Packages
-- ...
+- `,pp` - Open Plugins Management UI using `Lazy`
+- `,pl` - Open LSP Servers/DAPs/Formatters UI using `Mason`
+- `,p/` - Open projects selector using `telescope`
 
 +Registers
 - `,r` - Registers menu
-- ...
+- `,rp` - Paset from *pp register
 
 +Spelling
 - `,s` - Spelling menu
-- ...
+- `,ss` - Open spell suggestions using `telescope`
 
 +Toggles
 - `,t` - Toggles menu
-- ...
+- `,tb` - toggle git blame for current line
+- `,tc` - toggle conceal level
+- `,tn` - toggle line numbers
+- `,tp` - toggle buffer pin (used with `,bc` to close unpinned buffers)
+- `,tr` - toggle relative line numbers
 
 +UI Toggles/Themes
 - `,T` - UI Toggles/Themes menu
-- ...
+- `,T1` - set buffer width to 80 chars
+- `,T2` - set buffer width to 120 chars
+- `,Tc` - select and change color scheme using `telescope`
+- `,Tl` - cycle list chars theme
 
 +Utils
 - `,u` - Utils menu
-- ...
+- `,uh` - convert number under cursor between dec/hex
 
 +Windows
-- `,u` - Windows menu
-- ...
+- `,w` - Windows menu
+- `,wz` - toggle window zoome
+
++Windows +Vimux
+- `,wv` - Vimux menu
+- `,wvi` - inspect Vimux runner
+- `,wvo` - open Vimux runner
+- `,wvp` - prompt for command to run using Vimux
+- `,wvq` - close Vimux runner
+- `,wvx` - interrupt Vimux runner
+- `,wvz` - zoom Vimux runner
+- `,wv<C-l>` - clear screen of Vimux runner
 
 Context mappings using `SPC`
 
 Cargo:
-- `SPC c`
+- `SPC c` - Cargo (Rust) menu
+- `SPC ca` - update all creates
+- `SPC cd` - show dependencies
+- `SPC cf` - show features
+- `SPC cr` - reload
+- `SPC ct` - toggle
+- `SPC cu` - update create
+- `SPC cv` - show versions
+- `SPC cA` - upgrade all
+- `SPC cC` - focus popup
+- `SPC cU` - upgrade crate
 
 GitSigns:
-- `SPC g`
+- `SPC g` - GitSigns menu
+- `SPC gb` - show blame for current line
+- `SPC gd` - diff this
+- `SPC gp` - preview hunk
+- `SPC gr` - reset hunk
+- `SPC gs` - stage hunk
+- `SPC gu` - undo stage hunk
+- `SPC gx` - toggle deleted
+- `SPC gR` - reset buffer
+- `SPC gS` - stage buffer
 
 NeoTest (in split):
-- `SPC T`
+- `SPC T` - NeoTest menu (in split using `Vimux`)
+- `SPC Tf` - test file
+- `SPC Tl` - test latest
+- `SPC Tr` - test single
 
 NeoTest (in background):
-- `SPC t`
+- `SPC t` - NeoTest menu (in background)
+- `SPC ta` - attach to tests process
+- `SPC tf` - test file
+- `SPC tl` - test lastes
+- `SPC to` - open test output (short)
+- `SPC tO` - open test output  (full)
+- `SPC tr` - test single
+- `SPC ts` - stop tests
+- `SPC tv` - toggle tests summary
 
 ## Syntax highlighting
 
