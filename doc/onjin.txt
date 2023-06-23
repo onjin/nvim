@@ -79,25 +79,48 @@ MAPPINGS                       *onjin-personal-neovim-configuration.-mappings*
 
 - `<ctrl-[hjkl]>` - to move cursor between splits and/or tmux splits (look integration doc below)
 
-+Buffers: - `tab` - next buffer - `shift+tab` - previous buffer - `,b` -
-buffers submenu - `,b/` - buffer picker by fuzzy search filename - `,bc` -
-close unpinned buffers (use toggle `,tp` to toggle pin) - `,bn` - create new
-buffer - `,bx` - close current buffer - `,bX` - open buffers closing menu
++Buffers:
 
-+Diagnostics: - `,d` - diagnostics submenu - `,ds` - show diagnostics messages
-- `,dh` - hide diagnostics messages - `,dd` - disable diagnostics messages -
-`,de` - enable diagnostics messages - `,dl` - load diagnostics messages to
-`loclist` - `[d` - jump to previous diagnostic location - `d]` - jump to next
-diagnostic location
+- `tab` - next buffer
+- `shift+tab` - previous buffer
+- `,b` - buffers submenu
+- `,b/` - buffer picker by fuzzy search filename
+- `,bc` - close unpinned buffers (use toggle `,tp` to toggle pin)
+- `,bn` - create new buffer
+- `,bx` - close current buffer
+- `,bX` - open buffers closing menu
 
-+Files: - `,f` - files submenu - `,f/`, `,ff` - find not hidden files - `,fa` -
-find also hidden files - `,fb` - run file/directories browser - `,fh` - find
-help tags - `,fo` - find old files - `,fr` - find within files (live grep) -
-`,fs` - find saved sessins
++Diagnostics:
 
-+Files +Git: - `,fg` - git files submenu - `,fg/`, `,fgf` - find git files -
-`,fgb` - find git branches - `,fgc` - find git commits - `,fgo` - find git
-buffer commits - `,fgs` - find git status - `,fgt` - find git stash
+- `,d` - diagnostics submenu
+- `,ds` - show diagnostics messages
+- `,dh` - hide diagnostics messages
+- `,dd` - disable diagnostics messages
+- `,de` - enable diagnostics messages
+- `,dl` - load diagnostics messages to `loclist`
+- `[d` - jump to previous diagnostic location
+- `d]` - jump to next diagnostic location
+
++Files:
+
+- `,f` - files submenu
+- `,f/`, `,ff` - find not hidden files
+- `,fa` - find also hidden files
+- `,fb` - run file/directories browser
+- `,fh` - find help tags
+- `,fo` - find old files
+- `,fr` - find within files (live grep)
+- `,fs` - find saved sessins
+
++Files +Git:
+
+- `,fg` - git files submenu
+- `,fg/`, `,fgf` - find git files
+- `,fgb` - find git branches
+- `,fgc` - find git commits
+- `,fgo` - find git buffer commits
+- `,fgs` - find git status
+- `,fgt` - find git stash
 
 +Files +Workspaces - `,fw` - workspaces submenu - `,fwa` - add workspace folder
 - `,fwl` - list workspace folders - `,fwr` - remove workspace folder
@@ -145,25 +168,53 @@ open Vimux runner - `,wvp` - prompt for command to run using Vimux - `,wvq` -
 close Vimux runner - `,wvx` - interrupt Vimux runner - `,wvz` - zoom Vimux
 runner - `,wv<C-l>` - clear screen of Vimux runner
 
-Context mappings using `SPC`
+**Context mappings using SPC.**
 
-Cargo: - `SPC c` - Cargo (Rust) menu - `SPC ca` - update all creates - `SPC cd`
-- show dependencies - `SPC cf` - show features - `SPC cr` - reload - `SPC ct` -
-toggle - `SPC cu` - update create - `SPC cv` - show versions - `SPC cA` -
-upgrade all - `SPC cC` - focus popup - `SPC cU` - upgrade crate
+Cargo:
 
-GitSigns: - `SPC g` - GitSigns menu - `SPC gb` - show blame for current line -
-`SPC gd` - diff this - `SPC gp` - preview hunk - `SPC gr` - reset hunk - `SPC
-gs` - stage hunk - `SPC gu` - undo stage hunk - `SPC gx` - toggle deleted -
-`SPC gR` - reset buffer - `SPC gS` - stage buffer
+- `SPC c` - Cargo (Rust) menu
+- `SPC ca` - update all creates
+- `SPC cd` - show dependencies
+- `SPC cf` - show features
+- `SPC cr` - reload
+- `SPC ct` - toggle
+- `SPC cu` - update create
+- `SPC cv` - show versions
+- `SPC cA` - upgrade all
+- `SPC cC` - focus popup
+- `SPC cU` - upgrade crate
 
-NeoTest (in split): - `SPC T` - NeoTest menu (in split using `Vimux`) - `SPC
-Tf` - test file - `SPC Tl` - test latest - `SPC Tr` - test single
+GitSigns:
 
-NeoTest (in background): - `SPC t` - NeoTest menu (in background) - `SPC ta` -
-attach to tests process - `SPC tf` - test file - `SPC tl` - test lastes - `SPC
-to` - open test output (short) - `SPC tO` - open test output (full) - `SPC tr`
-- test single - `SPC ts` - stop tests - `SPC tv` - toggle tests summary
+- `SPC g` - GitSigns menu
+- `SPC gb` - show blame for current line
+- `SPC gd` - diff this
+- `SPC gp` - preview hunk
+- `SPC gr` - reset hunk
+- `SPC gs` - stage hunk
+- `SPC gu` - undo stage hunk
+- `SPC gx` - toggle deleted
+- `SPC gR` - reset buffer
+- `SPC gS` - stage buffer
+
+NeoTest (in split):
+
+- `SPC T` - NeoTest menu (in split using `Vimux`)
+- `SPC Tf` - test file
+- `SPC Tl` - test latest
+- `SPC Tr` - test single
+
+NeoTest (in background):
+
+- `SPC t` - NeoTest menu (in background)
+- `SPC ta` - attach to tests process
+- `SPC tf` - test file
+- `SPC tl` - test lastes
+- `SPC to` - open test output (short)
+- `SPC tO` - open test output (full)
+- `SPC tr` - test single
+- `SPC ts` - stop tests
+- `SPC tv` - toggle tests summary
 
 
 SYNTAX HIGHLIGHTING *onjin-personal-neovim-configuration.-syntax-highlighting*
