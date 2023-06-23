@@ -299,9 +299,9 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
             local nr_of_names = misc_utils.tablelength(names)
             local prefix = config.status_lsp_prefix or icons.misc.cog
             if config.status_lsp_show_server_names then
-              return " ".. prefix .. " " .. table.concat(names, " ") .. " "
+                return " " .. prefix .. " " .. table.concat(names, " ") .. " "
             else
-              return " ".. prefix .." [" .. nr_of_names .. "] "
+                return " " .. prefix .. " [" .. nr_of_names .. "] "
             end
         end,
         hl = { bg = colors.crust, fg = colors.subtext1, bold = true, italic = false },
@@ -625,6 +625,12 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
             hl = { fg = colors.peach },
         },
     }
+    local TablineBufnr = {
+        provider = function(self)
+            return tostring(self.bufnr) .. ". "
+        end,
+        hl = "Comment",
+    }
 
     local BufferlineFileIcon = {
         init = function(self)
@@ -643,6 +649,55 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
             return { fg = self.icon_color }
         end,
     }
+    -- a nice "x" button to close the buffer
+    local TablineCloseButton = {
+        condition = function(self)
+            return not vim.api.nvim_buf_get_option(self.bufnr, "modified")
+        end,
+        { provider = " " },
+        {
+            provider = "",
+            hl = { fg = "gray" },
+            on_click = {
+                callback = function(_, minwid)
+                    vim.schedule(function()
+                        vim.api.nvim_buf_delete(minwid, { force = false })
+                        vim.cmd.redrawtabline()
+                    end)
+                end,
+                minwid = function(self)
+                    return self.bufnr
+                end,
+                name = "heirline_tabline_close_buffer_callback",
+            },
+        },
+    }
+    -- allow to jump to buffer by 'gbX' where 'X' is first available letter of buffer file name
+    local TablinePicker = {
+        condition = function(self)
+            return self._show_picker
+        end,
+        init = function(self)
+            local bufname = vim.api.nvim_buf_get_name(self.bufnr)
+            bufname = vim.fn.fnamemodify(bufname, ":t")
+            local label = bufname:sub(1, 1)
+            local i = 2
+            while self._picker_labels[label] do
+                if i > #bufname then
+                    break
+                end
+                label = bufname:sub(i, i)
+                i = i + 1
+            end
+            self._picker_labels[label] = self.bufnr
+            self.label = label .. " "
+        end,
+        provider = function(self)
+            return self.label
+        end,
+        hl = { fg = "red", bold = true },
+    }
+
 
     local BufferlineFileNameBlock = {
         init = function(self)
@@ -666,9 +721,12 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
             name = "heirline_tabline_buffer_callback",
         },
         { provider = "   " },
+        TablinePicker,
+        -- TablineBufnr,
         BufferlineFileIcon,
         BufferlineFileName,
         BufferlineFileFlags,
+        TablineCloseButton,
     }
 
     local BufferLine = utils.make_buflist(

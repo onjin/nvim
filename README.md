@@ -58,29 +58,116 @@ Discover shortcuts:
 - `,` or `<space>` to get help for leader keys from `which-key`
 - `<ctrl-p>` - to get available all commands registered which `which-key` displayed by `legendary.vim`
 
-Common shortcuts:
+## Mappings
 
 - `<ctrl-[hjkl]>` - to move cursor between splits and/or tmux splits (look integration doc below)
-- `,ff` - fuzzy search files for current directory [find files]
-- `,fg` - fuzzy search GIT files for current (or searched for `.git` upward) directory [find git]
-- `,bX` - to open buffer's management menu, or `,bx` to just close current buffer [buffer 'X'] [buffer 'x']
-- `,wz` - toogle `zoom` for current buffer [window zoom]
 
-- `,ld` - show current line diagnostics in popup [lsp diagnostic]
-- `,dl` - quick load all diagnostics messages in `loclist` [diagnostics loclist]
-- `,lm` - format current buffer using LSP [lsp format]
-- `,la` - show code action selector, `q` to close [lsp action]
-- `,lR` - open rename action selector [lsp rename]
-- `gd` - goto current symbol definition, `<ctrl-o>` to get back, and back and back, ...
-- `gp` - peek definition in popup window, `q` to close it
-- `K` - show symbol's docstring in popup window, move cursor to exit
++Buffers:
+- `tab` - next buffer
+- `shift+tab` - previous buffer
+- `,b` - buffers submenu
+- `,b/` - buffer picker by fuzzy search filename
+- `,bc` - close unpinned buffers (use toggle `,tp` to toggle pin)
+- `,bn` - create new buffer
+- `,bx` - close current buffer
+- `,bX` - open buffers closing menu
 
-Update:
++Diagnostics:
+- `,d` - diagnostics submenu
+- `,ds` - show diagnostics messages
+- `,dh` - hide diagnostics messages
+- `,dd` - disable diagnostics messages
+- `,de` - enable diagnostics messages
+- `,dl` - load diagnostics messages to `loclist`
+- `[d` - jump to previous diagnostic location
+- `d]` - jump to next diagnostic location
 
-- `:Lazy` to install/update/clean plugins
-- `:Mason` to install/update/clean LSP servers/formatters/DAPs/linters
++Files:
+- `,f` - files submenu
+- `,f/`, `,ff` - find not hidden files
+- `,fa` - find also hidden files
+- `,fb` - run file/directories browser
+- `,fh` - find help tags
+- `,fo` - find old files
+- `,fr` - find within files (live grep)
+- `,fs` - find saved sessins
 
-Syntax highlighting:
++Files +Git:
+- `,fg` - git files submenu
+- `,fg/`, `,fgf` - find git files
+- `,fgb` - find git branches
+- `,fgc` - find git commits
+- `,fgo` - find git buffer commits
+- `,fgs` - find git status
+- `,fgt` - find git stash
+
++Files +Workspaces
+- `,fw` - workspaces submenu
+- `,fwa` - add workspace folder
+- `,fwl` - list workspace folders
+- `,fwr` - remove workspace folder
+
++Help
+- `,h` - help menu
+- `,hK` - display all mappings using `which-key`
+- `,hk` - find and use mapping
+- `,hm` - show mappings with fuzzy search
+- `,hla` - choose auto commands using `legendary.vim`
+- `,hlc` - choose commands using `legendary.vim`
+- `,hlf` - choose functions using `legendary.vim`
+- `,hlk` - choose keymaps using `legendary.vim`
+
++Jump
+- `,j` - jump menu
+- ...
+
++LSP
+- `,l` - LSP menu
+- ...
+
++Projects/Packages
+- `,p` - Projects/Packages
+- ...
+
++Registers
+- `,r` - Registers menu
+- ...
+
++Spelling
+- `,s` - Spelling menu
+- ...
+
++Toggles
+- `,t` - Toggles menu
+- ...
+
++UI Toggles/Themes
+- `,T` - UI Toggles/Themes menu
+- ...
+
++Utils
+- `,u` - Utils menu
+- ...
+
++Windows
+- `,u` - Windows menu
+- ...
+
+Context mappings using `SPC`
+
+Cargo:
+- `SPC c`
+
+GitSigns:
+- `SPC g`
+
+NeoTest (in split):
+- `SPC T`
+
+NeoTest (in background):
+- `SPC t`
+
+## Syntax highlighting
 
 - `TSInstallInfo` - display info about installed/available TreeSitter syntax
 - `TSInstall <name>` - install TreeSitter syntax

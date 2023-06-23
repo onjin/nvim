@@ -130,10 +130,27 @@ register("n", {
         end,
         "   lsp document symbols",
     },
+    ["gb"] = {
+    function()
+        local tabline = require("heirline").tabline
+        local buflist = tabline._buflist[1]
+        buflist._picker_labels = {}
+        buflist._show_picker = true
+        vim.cmd.redrawtabline()
+        local char = vim.fn.getcharstr()
+        local bufnr = buflist._picker_labels[char]
+        if bufnr then
+            vim.api.nvim_win_set_buf(0, bufnr)
+        end
+        buflist._show_picker = false
+        vim.cmd.redrawtabline()
+    end, "Go buffer by letter"
+
+    }
   })
 -- lsp g/K }}}(
 
--- <leader> w - +Applications {{{
+-- <leader> a - +Applications {{{
 
 -- vimux
 register("n", {
@@ -141,7 +158,7 @@ register("n", {
     ["<leader>ag"] = { ':call VimuxRunCommand("clear; glow " . bufname("%"))<CR>', "Preview markdown buffer in glow" },
     ["<leader>am"] = { "<cmd>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
   })
--- <leader> w - +Applications }}}
+-- <leader> a - +Applications }}}
 
 -- <leader> b - +Buffers prefix {{{
 register("n", {
@@ -152,24 +169,8 @@ register("n", {
     ["<leader>b/"] = { "<cmd> Telescope buffers <CR>", "Open buffer picker" },
     ["<leader>bc"] = { "<cmd>lua require('hbac').close_unpinned()<CR>", "Close unpinned buffers" },
     ["<leader>bn"] = { "<cmd> enew <CR>", "烙 new buffer" },
-    ["<leader>Tp"] = { "<cmd> tabprevious <CR>", "  goto next tab" },
-    ["<leader>Tn"] = { "<cmd> tabnext <CR> ", "  goto prev tab" },
     ["<leader>bx"] = { "<cmd> :bd <CR>", "   close buffer" },
     ["<leader>bX"] = { "<cmd> :BClose menu<CR>", "   buffers delete menu" },
-
-    --[[
-    -- FIXME: add jumps
-    ["<leader>1"] = { "<cmd> LualineBuffersJump 1  <CR>", "jump to buffer 1" },
-    ["<leader>2"] = { "<cmd> LualineBuffersJump 2  <CR>", "jump to buffer 2" },
-    ["<leader>3"] = { "<cmd> LualineBuffersJump 3  <CR>", "jump to buffer 3" },
-    ["<leader>4"] = { "<cmd> LualineBuffersJump 4  <CR>", "jump to buffer 4" },
-    ["<leader>5"] = { "<cmd> LualineBuffersJump 5  <CR>", "jump to buffer 5" },
-    ["<leader>6"] = { "<cmd> LualineBuffersJump 6  <CR>", "jump to buffer 6" },
-    ["<leader>7"] = { "<cmd> LualineBuffersJump 7  <CR>", "jump to buffer 7" },
-    ["<leader>8"] = { "<cmd> LualineBuffersJump 8  <CR>", "jump to buffer 8" },
-    ["<leader>9"] = { "<cmd> LualineBuffersJump 9  <CR>", "jump to buffer 9" },
-    ["<leader>0"] = { "<cmd> LualineBuffersJump 10  <CR>", "jump to buffer 10" },
-    ]]
 })
 -- <leader> b - +Buffers prefix }}}
 
@@ -203,6 +204,7 @@ register("n", {
     ["<leader>fb"] = { "<cmd> Telescope file_browser <CR>", "  open file browser" },
 
     ["<leader>fg"] = { name = "+Git" },
+    ["<leader>fg/"] = { "<cmd> Telescope git_files <CR>", "  Fuzzy search git files" },
     ["<leader>fgf"] = { "<cmd> Telescope git_files <CR>", "  Fuzzy search git files" },
     ["<leader>fgb"] = { "<cmd> Telescope git_branches <CR>", "  git branches" },
     ["<leader>fgc"] = { "<cmd> Telescope git_commits <CR>", "  git commits" },
@@ -250,11 +252,11 @@ register("n", {
         end,
         "   which-key query lookup",
     },
-    ["<leader>hm"] = { "<cmd> Telescope Mappings <CR>", "   show keys" },
+    ["<leader>hm"] = { "<cmd> Telescope keymaps <CR>", "   show keys" },
 
     ["<leader>hla"] = { "<cmd>Legendary autocmds<CR>", "   Auto commands legend" },
     ["<leader>hlc"] = { "<cmd>Legendary commands<CR>", "   Commands legend" },
-    ["<leader>hlF"] = { "<cmd>Legendary functions<CR>", "   Functions legend" },
+    ["<leader>hlf"] = { "<cmd>Legendary functions<CR>", "   Functions legend" },
     ["<leader>hlk"] = { "<cmd>Legendary keymaps<CR>", "   Keymaps legend" },
 })
 -- <leader> h - +Help prefix }}}
@@ -445,7 +447,7 @@ register("x", {
 })
 -- <localleader> g - +GitSigns prefix }}}
 
--- <localleader> T - +Context/NeoTest (in background) prefix {{{
+-- <localleader> T - +Context/NeoTest (in split) prefix {{{
 register("n", {
 
     ["<localleader>T"] = { name = "+NeoTest - in split" },
@@ -453,9 +455,9 @@ register("n", {
     ["<localleader>Tf"] = { ":TestFile<cr>", "λ Test file" },
     ["<localleader>Tl"] = { ":TestLast<cr>", "λ Run last test" },
 })
--- <localleader> T - +Context/NeoTest (in background) prefix }}}
+-- <localleader> T - +Context/NeoTest (in split) prefix }}}
 
--- <localleader> t - +Context/NeoTest (in split) prefix {{{
+-- <localleader> t - +Context/NeoTest (in background) prefix {{{
 register("n", {
 
     ["<localleader>t"] = { name = "+NeoTest - in background" },
@@ -472,7 +474,7 @@ register("v", {
     ["<localleader>cu"] = { ":lua require('crates').update_crates()<cr>", "[Cargo] update crates" },
     ["<localleader>cU"] = { ":lua require('crates').upgrade_crates()<cr>", "[Cargo] upgrade crates" },
 })
--- <localleader> t - +Context/NeoTest (in split) prefix }}}
+-- <localleader> t - +Context/NeoTest (in background) prefix }}}
 
 
 -- [ and ] custom jumps {{{
