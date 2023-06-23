@@ -63,6 +63,7 @@ Discover shortcuts:
 - `<ctrl-[hjkl]>` - to move cursor between splits and/or tmux splits (look integration doc below)
 
 +Buffers:
+
 - `tab` - next buffer
 - `shift+tab` - previous buffer
 - `,b` - buffers submenu
@@ -73,6 +74,7 @@ Discover shortcuts:
 - `,bX` - open buffers closing menu
 
 +Diagnostics:
+
 - `,d` - diagnostics submenu
 - `,ds` - show diagnostics messages
 - `,dh` - hide diagnostics messages
@@ -83,6 +85,7 @@ Discover shortcuts:
 - `d]` - jump to next diagnostic location
 
 +Files:
+
 - `,f` - files submenu
 - `,f/`, `,ff` - find not hidden files
 - `,fa` - find also hidden files
@@ -93,6 +96,7 @@ Discover shortcuts:
 - `,fs` - find saved sessins
 
 +Files +Git:
+
 - `,fg` - git files submenu
 - `,fg/`, `,fgf` - find git files
 - `,fgb` - find git branches
@@ -179,9 +183,10 @@ Discover shortcuts:
 - `,wvz` - zoom Vimux runner
 - `,wv<C-l>` - clear screen of Vimux runner
 
-Context mappings using `SPC`
+**Context mappings using `SPC`.**
 
 Cargo:
+
 - `SPC c` - Cargo (Rust) menu
 - `SPC ca` - update all creates
 - `SPC cd` - show dependencies
@@ -195,6 +200,7 @@ Cargo:
 - `SPC cU` - upgrade crate
 
 GitSigns:
+
 - `SPC g` - GitSigns menu
 - `SPC gb` - show blame for current line
 - `SPC gd` - diff this
@@ -207,12 +213,14 @@ GitSigns:
 - `SPC gS` - stage buffer
 
 NeoTest (in split):
+
 - `SPC T` - NeoTest menu (in split using `Vimux`)
 - `SPC Tf` - test file
 - `SPC Tl` - test latest
 - `SPC Tr` - test single
 
 NeoTest (in background):
+
 - `SPC t` - NeoTest menu (in background)
 - `SPC ta` - attach to tests process
 - `SPC tf` - test file
