@@ -249,6 +249,28 @@ NeoTest (in background):
 - `TSInstallInfo` - display info about installed/available TreeSitter syntax
 - `TSInstall <name>` - install TreeSitter syntax
 
+## TODO comments highlight
+
+By default these comment's prefixes are highlighted:
+
+- FIX (or FIXME", "BUG", "FIXIT", "ISSUE")
+- TODO
+- HACK
+- WARN
+- PERF
+- NOTE
+- TEST
+
+You can search for comments tags using `Telescope`:
+
+- `:TodoTelescope` - for all
+- `:TodoTelescope keywords=TODO,FIX` - for all
+
+Or you can fill `quickfix` or `location` list by:
+
+- `TodoQuickFix`
+- `TodoLocList`
+
 ## Integrations
 
 **tmux**:
