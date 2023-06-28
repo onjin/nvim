@@ -1,4 +1,4 @@
-*onjin.txt*            For Neovim >= 0.8.0           Last change: 2023 June 26
+*onjin.txt*            For Neovim >= 0.8.0           Last change: 2023 June 28
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
@@ -10,6 +10,7 @@ Table of Contents                                    *onjin-table-of-contents*
   - Daily usage             |onjin-personal-neovim-configuration.-daily-usage|
   - Mappings                   |onjin-personal-neovim-configuration.-mappings|
   - Syntax highlighting|onjin-personal-neovim-configuration.-syntax-highlighting|
+  - TODO comments highlight|onjin-personal-neovim-configuration.-todo-comments-highlight|
   - Integrations           |onjin-personal-neovim-configuration.-integrations|
   - Requirements for python|onjin-personal-neovim-configuration.-requirements-for-python|
   - Nice to have           |onjin-personal-neovim-configuration.-nice-to-have|
@@ -267,6 +268,29 @@ SYNTAX HIGHLIGHTING *onjin-personal-neovim-configuration.-syntax-highlighting*
 
 - `TSInstallInfo` - display info about installed/available TreeSitter syntax
 - `TSInstall <name>` - install TreeSitter syntax
+
+
+TODO COMMENTS HIGHLIGHT*onjin-personal-neovim-configuration.-todo-comments-highlight*
+
+By default these comment’s prefixes are highlighted:
+
+- FIX (or FIXME”, "BUG", "FIXIT", "ISSUE")
+- TODO
+- HACK
+- WARN
+- PERF
+- NOTE
+- TEST
+
+You can search for comments tags using `Telescope`
+
+- `:TodoTelescope`- for all
+- `:TodoTelescope keywords=TODO,FIX` - for all
+
+Or you can fill `quickfix` or `location` list by:
+
+- `TodoQuickFix`
+- `TodoLocList`
 
 
 INTEGRATIONS               *onjin-personal-neovim-configuration.-integrations*
