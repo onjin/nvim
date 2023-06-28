@@ -253,13 +253,13 @@ NeoTest (in background):
 
 By default these comment's prefixes are highlighted:
 
-- FIX (or FIXME", "BUG", "FIXIT", "ISSUE")
+- FIX (or FIXME, BUG, FIXIT, ISSUE)
 - TODO
 - HACK
-- WARN
-- PERF
-- NOTE
-- TEST
+- WARN (or WARNING, XXX)
+- PERF (or OPTIM, PERFORMANCE, OPTIMIZE)
+- NOTE (or INFO)
+- TEST (or TESTING, PASSED, FAILED)
 
 You can search for comments tags using `Telescope`:
 
