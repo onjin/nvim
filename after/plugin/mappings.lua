@@ -155,7 +155,16 @@ register("n", {
 register("n", {
   ["<leader>a"] = { name = "+Applications" },
   ["<leader>ag"] = { ':call VimuxRunCommand("clear; glow " . bufname("%"))<CR>', "Preview markdown buffer in glow" },
-  ["<leader>am"] = { "<cmd>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
+
+  ["<leader>am"] = { name = "+Markdown"},
+  ["<leader>amt"] = { "<cmd>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
+  ["<leader>ams"] = { "<cmd>MarkdownPreviewStop<CR>", "Stop Markdown Preview" },
+  ["<leader>amp"] = { "<cmd>MarkdownPreview<CR>", "Start Markdown Preview" },
+
+  ["<leader>at"] = { name ="+Todo"},
+  ["<leader>at/"] = { "<cmd>TodoTelescope<cr>", "Search for TODO marks"},
+  ["<leader>atq"] = { "<cmd>TodoQuickFix<cr>", "Fill quickfix with TODO marks"},
+  ["<leader>atl"] = { "<cmd>TodoLocList<cr>", "Fill loclist with TODO marks"},
 })
 -- <leader> a - +Applications }}}
 
