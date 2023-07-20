@@ -1,4 +1,4 @@
-*onjin.txt*            For Neovim >= 0.8.0           Last change: 2023 June 28
+*onjin.txt*            For Neovim >= 0.8.0           Last change: 2023 July 20
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
@@ -81,22 +81,6 @@ Discover shortcuts:
 MAPPINGS                       *onjin-personal-neovim-configuration.-mappings*
 
 - `<ctrl-[hjkl]>` - to move cursor between splits and/or tmux splits (look integration doc below)
-
-+Applications +Markdown:
-
-Note: you need to open `markdown` file to load these functionality
-
-- `,am` - Markdown submenu
-- `,amt` - Toggle Markdown Preview
-- `,ams` - Stop Markdown Preview
-- `,amp` - STart Markdown Preview
-
-+Applications +Todo:
-
-- `,at` - Todo submenu
-- `,at/` - search for Todo using `Telescope`
-- `,atq` - load Todo marks to `quickfix`
-- `,atl` - load Todo marks to `loclist`
 
 +Buffers:
 
