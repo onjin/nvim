@@ -115,16 +115,20 @@ return {
 					-- NOTE: If you enable messages, then the cmdline is enabled automatically.
 					-- This is a current Neovim limitation.
 					enabled = true, -- enables the Noice messages UI
-					view = "notify", -- default view for messages
-					view_error = "notify", -- view for errors
-					view_warn = "notify", -- view for warnings
+					view = "mini", -- default view for messages
+					view_error = "mini", -- view for errors
+					view_warn = "mini", -- view for warnings
 					view_history = "messages", -- view for :messages
-					view_search = false, -- "virtualtext", -- view for search count messages. Set to `false` to disable
+					view_search = "virtualtext", -- "virtualtext", -- view for search count messages. Set to `false` to disable
 				},
 				redirect = {
 					view = "popup",
 					filter = { event = "msg_show" },
 				},
+        notify = {
+          replace = true,
+          merge = true,
+        },
 			})
 			require("telescope").load_extension("noice")
 		end,
@@ -135,7 +139,7 @@ return {
 			fps = 10,
 			render = "compact",
 			stages = "fade",
-			timeout = 3000,
+			timeout = 2000,
 			top_down = true,
 			background_color = "none",
 		},
