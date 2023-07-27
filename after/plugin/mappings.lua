@@ -119,7 +119,7 @@ register("n", {
     -- function()
     -- 	require("telescope.builtin").lsp_references()
     -- end,
-    "<cmd>Lspsaga lsp_finder<CR>",
+    "<cmd>Lspsaga finder<CR>",
     "   lsp references",
   },
   ["gs"] = {
