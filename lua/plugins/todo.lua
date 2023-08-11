@@ -66,5 +66,8 @@ return {
   {
     "folke/todo-comments.nvim",
     opts = opts,
+  },
+  {
+    "freitass/todo.txt-vim",
   }
 }
