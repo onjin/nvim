@@ -335,6 +335,10 @@ local function config()
             sign_priority = 40,
             virtual_text = false,
         },
+        outline = {
+          win_width = 30,
+          layout = 'float'
+        },
     }
     local lspsaga = require("lspsaga")
     lspsaga.setup(options_saga)
