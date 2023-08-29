@@ -1,4 +1,4 @@
-*onjin.txt*           For Neovim >= 0.8.0          Last change: 2023 August 11
+*onjin.txt*           For Neovim >= 0.8.0          Last change: 2023 August 29
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
