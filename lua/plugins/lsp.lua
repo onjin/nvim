@@ -263,6 +263,15 @@ local function config()
             opts.capabilities = vim.lsp.protocol.make_client_capabilities()
             lspconfig.jdtls.setup(opts)
         end,
+        ["clangd"] = function()
+            lspconfig.clangd.setup({
+                on_attach = on_attach,
+                cmd = {
+                    "clangd",
+                    "--offset-encoding=utf-16",
+                },
+            })
+        end,
     }
     if onjin_config.lsp_efm_config_enabled then
         -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
@@ -336,8 +345,8 @@ local function config()
             virtual_text = false,
         },
         outline = {
-          win_width = 30,
-          layout = 'float'
+            win_width = 30,
+            layout = "float",
         },
     }
     local lspsaga = require("lspsaga")
