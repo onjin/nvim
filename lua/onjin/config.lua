@@ -37,6 +37,7 @@ M.treesitter_initial_servers = {
     "gitattributes",
     "gitignore",
     "html",
+    "javascript",
     "json",
     "latex",
     "lua",
