@@ -1,4 +1,4 @@
-local config = require('onjin.config')
+local config = require("onjin.config")
 
 vim.opt.list = config.listchars
 
@@ -14,7 +14,6 @@ end
 local icons = require("onjin.icons")
 local utils = require("utils")
 local current_listchars = icons.available_listchars[config.listchars_theme_number]
-
 
 local function cycle_listchars()
     local index = utils.indexOf(icons.available_listchars, current_listchars)
@@ -39,20 +38,14 @@ vim.cmd([[highlight IndentBlanklineIndent2 guibg=#1b1b2b gui=nocombine]])
 return {
     {
         "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
         lazy = false,
         config = function()
-            require("indent_blankline").setup({
-                space_char_blankline = " ",
-                show_current_context = true,
-                show_current_context_start = true,
-                char_highlight_list = {
-                    "IndentBlanklineIndent1",
-                    "IndentBlanklineIndent2",
+            require("ibl").setup({
+                whitespace = {
+                    remove_blankline_trail = false,
                 },
-                space_char_highlight_list = {
-                    "IndentBlanklineIndent1",
-                    "IndentBlanklineIndent2",
-                },
+                scope = { enabled = true },
             })
         end,
     },
