@@ -267,6 +267,23 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
         end,
         hl = { bg = colors.crust, fg = colors.surface2 },
     }
+    local LazyStatus = {
+        condition = function()
+            return require("lazy.status").has_updates()
+        end,
+        provider = function()
+            return string.format("Updates: %s", require("lazy.status").updates())
+        end,
+        on_click = {
+            callback = function()
+                vim.defer_fn(function()
+                    vim.cmd("Lazy")
+                end, 100)
+            end,
+            name = "heirline_LSP",
+        },
+        hl = { bg = colors.crust, fg = "" },
+    }
 
     local LSPProgress = {
         condition = function()
@@ -698,7 +715,6 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
         hl = { fg = "red", bold = true },
     }
 
-
     local BufferlineFileNameBlock = {
         init = function(self)
             self.filename = vim.api.nvim_buf_get_name(self.bufnr)
@@ -784,6 +800,7 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
         Align,
         LSPActive,
         LSPProgress,
+        LazyStatus,
         Diagnostics,
         FileEncoding,
         FileFormat,

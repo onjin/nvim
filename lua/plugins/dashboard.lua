@@ -1,4 +1,4 @@
-local onjin_config = require('onjin.config')
+local onjin_config = require("onjin.config")
 
 local function edit_nvim()
     require("telescope.builtin").git_files({
@@ -15,19 +15,32 @@ local config = function()
     local current_day = os.date("%A")
     local builtin = require("veil.builtin")
     local Section = require("veil.section")
+    local elements = {}
+    table.insert(elements, string.format("Dir: %s", vim.fn.getcwd()))
+
+    require("lazy.manage.checker").fast_check({ report = false })
+    --[[
+    local has_updates = require("lazy.status").has_updates()
+    local updates = require("lazy.status").updates()
+
+    if has_updates then
+        table.insert(elements, string.format("Plugins: %s", updates))
+    else
+        table.insert(elements, "Plugins: up to date")
+    end]]
 
     local static = Section:new({
         contents = function()
-            return { "You are here:", " - " .. vim.fn.getcwd() }
+            return elements
         end,
         hl = "Normal",
     })
 
     require("veil").setup({
         sections = {
-            builtin.sections.animated(builtin.headers.frames_days_of_week[current_day], {
+            --[[builtin.sections.animated(builtin.headers.frames_days_of_week[current_day], {
                 hl = { fg = "#5de4c7" },
-            }),
+            }),]]
             static,
             builtin.sections.buttons({
                 {

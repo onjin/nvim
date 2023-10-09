@@ -12,6 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    checker = {
+        enabled = true,
+        frequency = 3600,
+    },
     -- devicons
     "nvim-tree/nvim-web-devicons",
     "stevearc/dressing.nvim",
