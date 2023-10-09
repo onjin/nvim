@@ -272,7 +272,7 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
             return require("lazy.status").has_updates()
         end,
         provider = function()
-            return string.format("Updates: %s", require("lazy.status").updates())
+            return string.format("%s", require("lazy.status").updates())
         end,
         on_click = {
             callback = function()
