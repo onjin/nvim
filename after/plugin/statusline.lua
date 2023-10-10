@@ -289,7 +289,7 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
         condition = function()
             return conditions.hide_in_width(120) and conditions.lsp_attached()
         end,
-        update = { "User LspProgressStatusUpdated" },
+        -- update = { "LspProgressStatusUpdated" },
         provider = function()
             local progress = require("lsp-progress").progress({
                 format = function(messages)
