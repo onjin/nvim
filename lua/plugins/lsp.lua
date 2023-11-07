@@ -272,6 +272,11 @@ local function config()
                 },
             })
         end,
+        ["terraformls"] = function()
+            lspconfig.terraformls.setup({
+                on_attach = on_attach,
+            })
+        end,
     }
     if onjin_config.lsp_efm_config_enabled then
         -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
