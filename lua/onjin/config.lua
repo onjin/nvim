@@ -51,6 +51,18 @@ M.treesitter_initial_servers = {
     "toml",
     "vim",
     "yaml",
+    "comment",
+    "gitcommit",
+    "go",
+    "hcl",
+    "htmldjango",
+    "http",
+    "ini",
+    "regex",
+    "rst",
+    "rust",
+    "ssh_config",
+    "terraform",
 }
 
 -- Status line // Show lsp server names or just show number of attached servers
