@@ -9,8 +9,8 @@ return
             -- NOTE: you can omit `top` and/or `left` to center the floating window.
             -- top = 0,
             -- left = 0.17,
-            width = 150,
-            height = 0.85,
+            width = 0.95,
+            height = 0.90,
           },
           -- NOTE: check :help nvim_open_win() for possible border values.
           -- border = 'double',
