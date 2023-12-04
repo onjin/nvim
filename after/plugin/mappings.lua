@@ -37,7 +37,7 @@ end
 
 -- normal mode shortcuts CTRL {{{
 register("n", {
-  ["<C-p>"] = { "<cmd>Legendary<CR>", "  Commands Palette" },
+  ["<C-S-P>"] = { "<cmd>Legendary<CR>", "  Commands Palette" },
 })
 -- normal mode shortcuts CTRL }}}
 
@@ -205,6 +205,7 @@ register("n", {
   ["<leader>f/"] = { "<cmd> Telescope find_files <CR>", "  find files" },
   ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "  find all" },
   ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "  find files" },
+  ["<C-p>"] = { "<cmd> Telescope find_files <CR>", "  find files" },
   ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
   ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "  find oldfiles" },
   ["<leader>fr"] = { "<cmd> Telescope live_grep <CR>", "  live grep" },
@@ -334,15 +335,11 @@ register("n", {
 })
 -- <leader> r - +Registers prefix }}}
 
--- <leader> s - +Spelling prefix {{{
-
+-- <leader> s - +Substitutions prefix {{{
 register("n", {
-  ["<leader>s"] = { name = "+Spelling" },
-
-  -- spelling
-  ["<leader>ss"] = { "<cmd> Telescope spell_suggest<CR>", "   spelling" },
+  ["<leader>ss"] = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]] },
 })
--- <leader> s - +Spelling prefix }}}
+-- <leader> s - +Substitutions prefix }}}
 
 -- <leader> t - +Toggles prefix {{{
 register("n", {
@@ -393,6 +390,12 @@ register("n", {
   ["<leader>wvx"] = { ":VimuxInterruptRunner<cr>", "~ Interrupt vimux runner process" },
   ["<leader>wvz"] = { ":VimuxZoomRunner<cr>", "~ Zoom vimux runner" },
   ["<leader>wv<C-l>"] = { ":VimuxClearTerminalScreen<cr>", "~ Clear screen of vimux runner" },
+})
+
+-- execute
+register("n", {
+  ["<leader>x"] = { name = "+Execute" },
+  ["<leader>xr"] = { ":call VrcQuery()<CR>", "~ Execute REST call" },
 })
 -- <leader> w - +Windows }}}
 
@@ -451,6 +454,16 @@ register("n", {
   ["<localleader>Tr"] = { ":TestNearest<cr>", "λ Run tests" },
 })
 -- <localleader> T - +Context/NeoTest (in split) prefix }}}
+
+-- <localleader> s - +Spelling prefix {{{
+
+register("n", {
+  ["<localleader>s"] = { name = "+Spelling" },
+
+  -- spelling
+  ["<localleader>ss"] = { "<cmd> Telescope spell_suggest<CR>", "   spelling" },
+})
+-- <localleader> s - +Spelling prefix }}}
 
 -- <localleader> t - +Context/NeoTest (in background) prefix {{{
 register("n", {
