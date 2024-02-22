@@ -1,0 +1,25 @@
+{
+    "struct:decorator": {
+        "prefix": "struct:decorator",
+        "body": [
+            "from typing import Callable, ParamSpec, TypeVar",
+            "from functools import wraps",
+            "",
+            "Param = ParamSpec(\"Param\")",
+            "RetType = TypeVar(\"RetType\")",
+            "",
+            "",
+            "def ${1:decorator}(${2:params}) -> Callable[[Callable[Param, RetType]], Callable[Param, RetType]]:",
+            "    def decorator(func: Callable[Param, RetType]) -> Callable[Param, RetType]:",
+            "        @wraps(func)",
+            "        def wrapper(*args: Param.args, **kwargs: Param.kwargs) -> RetType:",
+            "            ${3:pass}",
+            "            return func(*args, **kwargs)",
+            "",
+            "        return wrapper",
+            "",
+            "    return decorator"
+        ],
+        "description": "Code snippet generic decorator with type hints"
+    }
+}

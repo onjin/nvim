@@ -18,6 +18,10 @@ In neovim help:
 
 For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/
 
+### Custom plugins
+
+To add custom plugins (not versioned in this repo) you can put them into `~/.config/nvim/lua/custom/plugins/` folder.
+
 ## Screenshots
 Simple dashboard
 

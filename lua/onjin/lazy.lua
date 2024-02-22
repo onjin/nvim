@@ -69,6 +69,7 @@ require("lazy").setup({
 
     -- Util for commands requiring password for sudo, ssh etc.
     -- "lambdalisue/askpass.vim",
+    { import = "custom.plugins" },
 }, {
     -- Options
     -- colorscheme = { "minimus" },

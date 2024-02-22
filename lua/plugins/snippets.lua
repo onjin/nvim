@@ -9,7 +9,7 @@ local function config()
 
   luasnip.config.set_config(options)
   require("luasnip.loaders.from_vscode").lazy_load()
-  require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.luasnippets_path or "" })
+  require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.luasnippets_path or "~/.config/nvim/snippets" })
   require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/LuaSnip/"})
 
   vim.api.nvim_create_autocmd("InsertLeave", {
