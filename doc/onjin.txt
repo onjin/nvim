@@ -1,4 +1,4 @@
-*onjin.txt*          For Neovim >= 0.8.0         Last change: 2023 December 12
+*onjin.txt*          For Neovim >= 0.8.0         Last change: 2024 February 22
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
@@ -38,6 +38,12 @@ FEATURES                       *onjin-personal-neovim-configuration.-features*
 
 For a full list of plugins refer to
 https://github.com/onjin/.vim/blob/main/lua/plugins/
+
+
+CUSTOM PLUGINS ~
+
+To add custom plugins (not versioned in this repo) you can put them into
+`~/.config/nvim/lua/custom/plugins/` folder.
 
 
 SCREENSHOTS                 *onjin-personal-neovim-configuration.-screenshots*
