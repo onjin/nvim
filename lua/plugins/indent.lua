@@ -1,4 +1,4 @@
-local config = require("onjin.config")
+local config = require("config")
 
 vim.opt.list = config.listchars
 
@@ -11,7 +11,7 @@ local function set_listchars(listchars)
     vim.opt.listchars:append("extends:" .. listchars.extends)
 end
 
-local icons = require("onjin.icons")
+local icons = require("icons")
 local utils = require("utils")
 local current_listchars = icons.available_listchars[config.listchars_theme_number]
 

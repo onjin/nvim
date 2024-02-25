@@ -1,6 +1,6 @@
 local g = vim.g -- Global variables
 local opt = vim.opt -- Set options (global/buffer/windows-scoped)
-local config = require('onjin.config')
+local config = require('config')
 local prefix = vim.env.XDG_STATE_HOME or vim.fn.expand("~/.local/state")
 
 g.python_host_prog = "~/.pyenv/versions/neovim2/bin/python"

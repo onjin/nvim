@@ -55,7 +55,7 @@ Plugins should be installed at first run of editor. If not, then run `:Lazy` to 
 
 Configuration:
  
-- edit `lua/onjin/config.lua`
+- edit `lua/config.lua`
 
 Discover shortcuts:
 

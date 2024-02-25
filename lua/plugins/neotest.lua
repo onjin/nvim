@@ -12,7 +12,6 @@ return {
 		"nvim-neotest/neotest",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-      -- {dir="~/Workspace/develop/onjin/neotest-python"},
       "nvim-neotest/neotest-python",
       "nvim-neotest/neotest-plenary",
       "nvim-neotest/neotest-vim-test",

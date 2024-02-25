@@ -16,32 +16,26 @@ require("lazy").setup({
         enabled = true,
         frequency = 3600,
     },
-    -- devicons
-    "nvim-tree/nvim-web-devicons",
-    "stevearc/dressing.nvim",
 
-    { import = "plugins" },
+    -- Git related plugins
+    "tpope/vim-fugitive",
+    "tpope/vim-rhubarb",
+
+    -- Detect tabstop and shiftwidth automatically
+    "tpope/vim-sleuth",
+
     {
         "dstein64/vim-startuptime",
         lazy = true,
         event = "VeryLazy",
     },
-    --
-    -- -- Crates
-    -- {
-    -- 	"saecki/crates.nvim",
-    -- 	tag = "v0.3.0",
-    -- 	lazy = true,
-    -- 	enabled = false,
-    -- },
 
-    -- Neoclip
-    {
-        "kkharji/sqlite.lua",
-        module = "sqlite",
-        lazy = true,
-        event = "VeryLazy",
-    },
+    -- devicons
+    "nvim-tree/nvim-web-devicons",
+
+    -- Neovim plugin to improve the default vim.ui interfaces
+    "stevearc/dressing.nvim",
+
     {
         "AckslD/nvim-neoclip.lua",
         dependencies = { "kkharji/sqlite.lua", module = "sqlite" },
@@ -52,23 +46,16 @@ require("lazy").setup({
         event = "VeryLazy",
     },
 
-    -- Telescope
-    -- "nvim-lua/popup.nvim",
-
-    -- tmux-navigator
-    -- {
-    -- 	"christoomey/vim-tmux-navigator",
-    -- 	config = function() end,
-    -- },
-
     -- bufdelete (used to open dash when all buffers are closed)
     "famiu/bufdelete.nvim",
 
     -- surround
     "tpope/vim-surround",
 
-    -- Util for commands requiring password for sudo, ssh etc.
-    -- "lambdalisue/askpass.vim",
+    -- import built in plugins from lua/plugins/*
+    { import = "plugins" },
+
+    -- to add your own plugins, fork repo or usa lua/custom/plugins/* (loaded later)
     { import = "custom.plugins" },
 }, {
     -- Options

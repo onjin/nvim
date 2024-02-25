@@ -4,13 +4,13 @@ local function config()
     local mason = require("mason")
     local lspconfig = require("lspconfig")
     local mason_lspconfig = require("mason-lspconfig")
-    local onjin_config = require("onjin.config")
+    local local_config = require("config")
 
     local mason_options = {}
     mason.setup(mason_options)
 
     local mason_lspconfig_options = {
-        ensure_installed = onjin_config.lsp_initial_servers,
+        ensure_installed = local_config.lsp_initial_servers,
     }
     mason_lspconfig.setup(mason_lspconfig_options)
 
@@ -79,32 +79,6 @@ local function config()
             require("lspconfig")[server_name].setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
-            })
-        end,
-        -- Next, you can provide a dedicated handler for specific servers.
-        -- For example, a handler override for the `rust_analyzer`:
-        -- ["rust_analyzer"] = function ()
-        --     require("rust-tools").setup {}
-        -- end
-        ["lua_ls"] = function()
-            lspconfig.lua_ls.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { "vim" },
-                        },
-                        workspace = {
-                            library = {
-                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                            },
-                            maxPreload = 100000,
-                            preloadFileSize = 10000,
-                        },
-                    },
-                },
             })
         end,
         ["pyright"] = function()
@@ -278,7 +252,7 @@ local function config()
             })
         end,
     }
-    if onjin_config.lsp_efm_config_enabled then
+    if local_config.lsp_efm_config_enabled then
         -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
         local bandit = require("efm/bandit")
         local black = require("efm/black")
@@ -373,27 +347,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 return {
-  {
-    "nvim-java/nvim-java",
-    dependencies = {
-        "nvim-java/lua-async-await",
-        "nvim-java/nvim-java-core",
-        "nvim-java/nvim-java-test",
-        "nvim-java/nvim-java-dap",
-        "MunifTanjim/nui.nvim",
-        "neovim/nvim-lspconfig",
-        "mfussenegger/nvim-dap",
-        {
-            "williamboman/mason.nvim",
-            opts = {
-                registries = {
-                    "github:nvim-java/mason-registry",
-                    "github:mason-org/mason-registry",
+    {
+        "nvim-java/nvim-java",
+        dependencies = {
+            "nvim-java/lua-async-await",
+            "nvim-java/nvim-java-core",
+            "nvim-java/nvim-java-test",
+            "nvim-java/nvim-java-dap",
+            "MunifTanjim/nui.nvim",
+            "neovim/nvim-lspconfig",
+            "mfussenegger/nvim-dap",
+            {
+                "williamboman/mason.nvim",
+                opts = {
+                    registries = {
+                        "github:nvim-java/mason-registry",
+                        "github:mason-org/mason-registry",
+                    },
                 },
             },
         },
     },
-  },
     {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
@@ -418,10 +392,20 @@ return {
                 },
                 opts = { lsp = { auto_attach = true } },
             },
+
+            -- Additional lua configuration, makes nvim stuff amazing!
+            "folke/neodev.nvim",
         },
         -- your lsp config or other stuff
     },
     { "lvimuser/lsp-inlayhints.nvim" },
     { "haringsrob/nvim_context_vt" },
     { "mfussenegger/nvim-jdtls" },
+    {
+        "folke/neodev.nvim",
+        config = function()
+            -- Setup neovim lua configuration
+            require("neodev").setup()
+        end,
+    },
 }

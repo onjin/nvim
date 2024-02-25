@@ -2,10 +2,10 @@ if require("lazy.core.config").plugins["heirline.nvim"] then
     local conditions = require("heirline.conditions")
     local utils = require("heirline.utils")
     local catppuccin = require("catppuccin")
-    local icons = require("onjin.icons")
+    local icons = require("icons")
     local misc_utils = require("utils")
     local colors = require("catppuccin.palettes").get_palette()
-    local config = require("onjin.config")
+    local config = require("config")
 
     conditions.buffer_not_empty = function()
         return vim.fn.empty(vim.fn.expand("%:t")) ~= 1

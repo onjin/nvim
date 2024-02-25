@@ -1,4 +1,4 @@
-local icons = require("onjin.icons")
+local icons = require("icons")
 
 return {
 	{

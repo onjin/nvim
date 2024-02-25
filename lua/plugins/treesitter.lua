@@ -1,4 +1,4 @@
-local onjin_config = require("onjin.config")
+local config = require("config")
 
 return {
     {
@@ -12,7 +12,7 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("nvim-treesitter.configs").setup({
-                ensure_installed = onjin_config.treesitter_initial_servers,
+                ensure_installed = config.treesitter_initial_servers,
                 highlight = {
                     enable = true,
                     use_languagetree = true,

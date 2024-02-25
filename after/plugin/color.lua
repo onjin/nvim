@@ -1,5 +1,5 @@
 -- luacheck: globals vim
-local config = require("onjin.config")
+local config = require("config")
 
 if config.theme == "catppuccin" then
     local catppuccin = require("catppuccin")
