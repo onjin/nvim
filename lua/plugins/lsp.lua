@@ -186,12 +186,8 @@ local function config()
                         configuration = {
                             runtimes = {
                                 {
-                                    name = "JavaSE-17",
-                                    path = "/usr/lib/jvm/java-17-openjdk/",
-                                },
-                                {
-                                    name = "JavaSE-20",
-                                    path = "/usr/lib/jvm/java-20-openjdk/",
+                                    name = "JavaSE-21",
+                                    path = "/usr/lib/jvm/java-21-openjdk/",
                                 },
                             },
                         },
@@ -208,7 +204,7 @@ local function config()
             -- local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
             local jdtls_bin = vim.fn.stdpath("data") .. "/mason/bin/jdtls"
 
-            local root_markers = { ".git", ".gradle", "gradlew" }
+            local root_markers = { ".git", ".gradle", "gradlew", "pom.xml"}
             local root_dir = jdtls.setup.find_root(root_markers)
             local home = os.getenv("HOME")
             local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
