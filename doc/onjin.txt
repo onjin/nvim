@@ -1,4 +1,4 @@
-*onjin.txt*           For Neovim >= 0.8.0           Last change: 2024 March 22
+*onjin.txt*           For Neovim >= 0.8.0           Last change: 2024 March 29
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
@@ -14,6 +14,7 @@ Table of Contents                                    *onjin-table-of-contents*
   - Integrations           |onjin-personal-neovim-configuration.-integrations|
   - Requirements for python|onjin-personal-neovim-configuration.-requirements-for-python|
   - Nice to have           |onjin-personal-neovim-configuration.-nice-to-have|
+2. Links                                                         |onjin-links|
 
 ==============================================================================
 1. Personal neovim configuration.       *onjin-personal-neovim-configuration.*
