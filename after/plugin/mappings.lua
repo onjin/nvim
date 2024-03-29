@@ -275,15 +275,7 @@ register("n", {
   ["<leader>j"] = { name = "+Jump" },
   ["<leader>jc"] = {
     function()
-      local ok, start = require("indent_blankline.utils").get_current_context(
-        vim.g.indent_blankline_context_patterns,
-        vim.g.indent_blankline_use_treesitter_scope
-      )
-
-      if ok then
-        vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
-        vim.cmd([[normal! _]])
-      end
+      require('treesitter-context').go_to_context(vim.v.count1)
     end,
 
     "  Jump to current_context",
@@ -353,6 +345,7 @@ register("n", {
   ["<leader>tn"] = { "<cmd> set nu! <CR>", "   Toggle Line Numbers" },
   ["<leader>tp"] = { "<cmd>lua require('hbac').toggle_pin()<CR>", "Toggle Buffer Pin" },
   ["<leader>tr"] = { "<cmd> set rnu! <CR>", "   Toggle Relative Number" },
+  ["<leader>tt"] = { ":lua require('treesitter-context').toggle()<CR>", "   Toggle TreeSitter Context" },
 
   ["<leader>T"] = { name = "+UI Toggles/Themes" },
   ["<leader>T1"] = { ":vertical resize 80<cr>", "Resize buffer width to 80" },
