@@ -47,10 +47,10 @@ M.kinds.spaced = setmetatable({}, {
 })
 
 M.diagnostics = {
-    errors = "",
-    warnings = "",
-    hints = "",
-    info = "",
+    errors = " ",
+    warnings = " ",
+    hints = " ",
+    info = " ",
     --[[
     errors = "",
     warnings = "",
