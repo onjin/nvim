@@ -1,3 +1,4 @@
+local M = {}
 M.kinds = {
     Method = "ƒ ",
     Function = " ",
