@@ -1,43 +1,41 @@
-local M = {}
-
 M.kinds = {
-    Method = "",
-    Function = "󰡱",
-    Constructor = "",
-    Field = "ﰠ",
-    Variable = "",
-    Class = "",
-    Property = "ﰠ",
-    Interface = "",
-    Enum = "",
-    EnumMember = "",
-    Reference = "",
-    Struct = "",
+    Method = "ƒ ",
+    Function = " ",
+    Constructor = " ",
+    Field = " ",
+    Variable = "󰫧 ",
+    Class = "  ",
+    Property = " ",
+    Interface = " ",
+    Enum = "了",
+    EnumMember = " ",
+    Reference = " ",
+    Struct = "  ",
     Event = "",
-    Constant = "",
-    Keyword = "",
+    Constant = " ",
+    Keyword = " ",
 
-    Module = "",
-    Package = "",
-    Namespace = "",
+    Module = " ",
+    Package = "  ",
+    Namespace = "  ",
 
-    Unit = "",
-    Value = "",
-    String = "",
-    Number = "",
-    Boolean = "",
-    Array = "",
-    Object = "",
-    Key = "",
-    Null = "",
+    Unit = " ",
+    Value = " ",
+    String = " ",
+    Number = " ",
+    Boolean = " ",
+    Array = " ",
+    Object = " ",
+    Key = "󰌆 ",
+    Null = " ",
 
-    Text = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Folder = "",
-    Operator = "",
-    TypeParameter = "",
+    Text = " ",
+    Snippet = " ",
+    Color = " ",
+    File = " ",
+    Folder = " ",
+    Operator = " ",
+    TypeParameter = " ",
 }
 
 M.kinds.spaced = setmetatable({}, {
@@ -47,16 +45,10 @@ M.kinds.spaced = setmetatable({}, {
 })
 
 M.diagnostics = {
-    errors = " ",
-    warnings = " ",
+    errors = "✖",
+    warnings = "▼",
     hints = " ",
-    info = " ",
-    --[[
-    errors = "",
-    warnings = "",
-    hints = "",
-    info = "",
-    ]]
+    info = "●",
 }
 M.diagnostics.Error = M.diagnostics.errors
 M.diagnostics.Warn = M.diagnostics.warnings
@@ -89,9 +81,9 @@ M.dap = {
 }
 
 M.actions = {
-    close_hexagon = "",
-    close2 = "⌧",
-    close = "",
+    close_hexagon = "󰅜",
+    close2 = "",
+    close = "",
 }
 
 M.fold = {

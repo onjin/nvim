@@ -1,4 +1,4 @@
-local config = require("config")
+local my_config = require("config")
 
 local function edit_nvim()
     require("telescope.builtin").git_files({
@@ -12,7 +12,7 @@ local function edit_nvim()
 end
 
 local config = function()
-    local current_day = os.date("%A")
+    -- local current_day = os.date("%A")
     local builtin = require("veil.builtin")
     local Section = require("veil.section")
     local elements = {}
@@ -46,7 +46,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Find Files",
-                    shortcut = config.leader_key .. "ff",
+                    shortcut = my_config.leader_key .. "ff",
                     callback = function()
                         vim.cmd("Telescope find_files")
                     end,
@@ -54,7 +54,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Find Word",
-                    shortcut = config.leader_key .. "fr",
+                    shortcut = my_config.leader_key .. "fr",
                     callback = function()
                         vim.cmd("Telescope live_grep")
                     end,
@@ -62,7 +62,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Browse Files",
-                    shortcut = config.leader_key .. "fb",
+                    shortcut = my_config.leader_key .. "fb",
                     callback = function()
                         vim.cmd("Telescope file_browser")
                     end,
@@ -70,7 +70,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Browse Last Opened Files",
-                    shortcut = config.leader_key .. "fo",
+                    shortcut = my_config.leader_key .. "fo",
                     callback = function()
                         vim.cmd("Telescope oldfiles")
                     end,
@@ -78,7 +78,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Browse Projects",
-                    shortcut = config.leader_key .. "p/",
+                    shortcut = my_config.leader_key .. "p/",
                     callback = function()
                         vim.cmd("Telescope projects")
                     end,
@@ -86,7 +86,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Browse Buffers",
-                    shortcut = config.leader_key .. "b/",
+                    shortcut = my_config.leader_key .. "b/",
                     callback = function()
                         vim.cmd("Telescope buffers")
                     end,
@@ -94,7 +94,7 @@ local config = function()
                 {
                     icon = "",
                     text = "Plugins manager (Lazy)",
-                    shortcut = config.leader_key .. "p/",
+                    shortcut = my_config.leader_key .. "p/",
                     callback = function()
                         vim.cmd("Lazy")
                     end,
@@ -102,7 +102,7 @@ local config = function()
                 {
                     icon = "",
                     text = "LSP manager (Mason)",
-                    shortcut = config.leader_key .. "pl",
+                    shortcut = my_config.leader_key .. "pl",
                     callback = function()
                         vim.cmd("Mason")
                     end,

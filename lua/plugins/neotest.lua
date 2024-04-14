@@ -3,9 +3,9 @@ vim.g["test#strategy"] = "vimux"
 vim.g.VimuxOrientation = "v"
 vim.g.VimuxHeight = "30"
 
-local function get_neotest_python_path()
-    return "./neotest.py"
-end
+-- local function get_neotest_python_path()
+--     return "./neotest.py"
+-- end
 
 return {
     {

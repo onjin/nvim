@@ -35,7 +35,7 @@ local function config()
                 end
 
                 -- Fallback to system Python.
-                return exepath("python3") or exepath("python") or "python"
+                return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
             end
 
             local function get_venv(workspace)
@@ -250,18 +250,18 @@ local function config()
     }
     if local_config.lsp_efm_config_enabled then
         -- thanks to https://github.com/lukas-reineke/dotfiles/blob/6a407f32a73fe8233688e6abfcf366fe5c5c7125/vim/lua/lsp/init.lua
-        local bandit = require("efm/bandit")
+        -- local bandit = require("efm/bandit")
         local black = require("efm/black")
         local nixfmt = require("efm/nixfmt")
         local eslint = require("efm/eslint")
         -- local flake8 = require("efm/flake8")
         local goimports = require("efm/goimports")
         local go_vet = require("efm/go_vet")
-        local isort = require("efm/isort")
+        -- local isort = require("efm/isort")
         local ruff = require("efm/ruff")
         local luacheck = require("efm/luacheck")
         local misspell = require("efm/misspell")
-        local mypy = require("efm/mypy")
+        -- local mypy = require("efm/mypy")
         local opa = require("efm/opa")
         local prettier = require("efm/prettier")
         local shellcheck = require("efm/shellcheck")
