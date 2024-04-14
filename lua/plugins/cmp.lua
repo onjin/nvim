@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+local icons = require('icons')
 
 local function config()
     local cmp = require("cmp")
@@ -21,32 +22,33 @@ local function config()
     end
 
     local CompletionItemKind = {
-        Text = " [text]",
-        Method = " [method]",
-        Function = " [function]",
-        Constructor = " [constructor]",
-        Field = "ﰠ [field]",
-        Variable = " [variable]",
-        Class = " [class]",
-        Interface = " [interface]",
-        Module = " [module]",
-        Property = " [property]",
-        Unit = " [unit]",
-        Value = " [value]",
-        Enum = " [enum]",
-        Keyword = " [key]",
-        Snippet = "﬌ [snippet]",
-        Color = " [color]",
-        File = " [file]",
-        Reference = " [reference]",
-        Folder = " [folder]",
-        EnumMember = " [enum member]",
-        Constant = " [constant]",
-        Struct = " [struct]",
-        Event = "⌘ [event]",
-        Operator = " [operator]",
-        TypeParameter = " [type]",
-        CmpItemKindCopilot = " [copilot]",
+        Text = icons.kinds.Text .. "[text]",
+        Method = icons.kinds.Method .. "method]",
+        Function = icons.kinds.Function .. "[function]",
+        Constructor = icons.kinds.Constructor .. "[constructor]",
+        Field = icons.kinds.Field .. "[field]",
+        Variable = icons.kinds.Variable .. "[variable]",
+        Class = icons.kinds.Class .. "[class]",
+        Interface = icons.kinds.Interface .. "[interface]",
+        Module = icons.kinds.Module .. "[module]",
+        Property = icons.kinds.Property .."[property]",
+        Unit = icons.kinds.Unit .. "[unit]",
+        Value = icons.kinds.Value .. "[value]",
+        Enum = icons.kinds.Enum .. "[enum]",
+        Keyword = icons.kinds.Keyword .."[keyword]",
+        Snippet = icons.kinds.Snippet .. "[snippet]",
+        Color = icons.kinds.Color .. "[color]",
+        File = icons.kinds.File .. "[file]",
+        Reference = icons.kinds.Reference .. "[reference]",
+        Folder = icons.kinds.Folder .. "[folder]",
+        EnumMember = icons.kinds.EnumMember .. "[enum member]",
+        Constant = icons.kinds.Constant .. "[constant]",
+        Struct = icons.kinds.Struct .. "[struct]",
+        Event = icons.kinds.Event .. "[event]",
+        Operator = icons.kinds.Operator .. "[operator]",
+        TypeParameter = icons.kinds.TypeParameter .. "[type]",
+        CmpItemKindCopilot = icons.git.copilot .. "[copilot]",
+        Codeium = icons.misc.codeium,
     }
 
     local cmp_window = require("cmp.utils.window")
@@ -86,11 +88,14 @@ local function config()
                     look = "[Look]",
                     rg = "[RG]",
                     copilot = "[copilot]",
+                    codeium = "[codeium]",
                     -- cmp_tabnine = "[Tabnine]",
                 }
-                vim_item.menu = menu_map[entry.source.name] or string.format("[%s]", entry.source.name)
+                local menu = menu_map[entry.source.name] or entry.source_name
+                vim_item.menu = menu
 
-                vim_item.kind = CompletionItemKind[vim_item.kind]
+                local kind = CompletionItemKind[vim_item.kind] or vim_item.kind
+                vim_item.kind = kind
                 return vim_item
             end,
         },

@@ -4,7 +4,7 @@ M.kinds = {
     Function = " ",
     Constructor = " ",
     Field = " ",
-    Variable = "󰫧 ",
+    Variable = "  ",
     Class = "  ",
     Property = " ",
     Interface = " ",
@@ -16,7 +16,7 @@ M.kinds = {
     Constant = " ",
     Keyword = " ",
 
-    Module = " ",
+    Module = "  ",
     Package = "  ",
     Namespace = "  ",
 
@@ -125,6 +125,7 @@ M.misc = {
     ellipse = "",
     kebab = "",
     cog = " ",
+    codeium = " ";
 }
 
 M.available_listchars = {
