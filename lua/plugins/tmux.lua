@@ -23,7 +23,6 @@ local function config_tmux()
     p.setup(options_tmux())
 end
 
-
 return {
     {
         "aserowy/tmux.nvim",

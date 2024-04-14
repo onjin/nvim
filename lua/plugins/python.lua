@@ -1,3 +1,3 @@
 return {
-  { "raimon49/requirements.txt.vim" },
+    { "raimon49/requirements.txt.vim" },
 }
