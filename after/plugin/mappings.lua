@@ -43,24 +43,24 @@ register("n", {
 
 -- insert mode movements {{{
 register("i", {
-    ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
-    ["<C-e>"] = { "<End>", "壟 end of line" },
+    ["<C-b>"] = { "<ESC>^i", "󰘴  beginning of line" },
+    ["<C-e>"] = { "<End>", " end of line" },
     -- navigate within insert mode
-    ["<C-h>"] = { "<Left>", "  move left" },
-    ["<C-l>"] = { "<Right>", " move right" },
-    ["<C-j>"] = { "<Down>", " move down" },
-    ["<C-k>"] = { "<Up>", " move up" },
+    ["<C-h>"] = { "<Left>", "  move left" },
+    ["<C-l>"] = { "<Right>", "  move right" },
+    ["<C-j>"] = { "<Down>", "  move down" },
+    ["<C-k>"] = { "<Up>", "  move up" },
 })
 -- insert mode movements }}}
 
 -- generic movements/ESC {{{
 register("n", {
-    ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
+    ["<ESC>"] = { "<cmd> noh <CR>", "󰙒  no highlight" },
     -- switch between windows
     -- save
-    ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
+    ["<C-s>"] = { "<cmd> w <CR>", "  save file" },
     -- Copy all
-    ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
+    ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
     -- line numbers
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -176,9 +176,9 @@ register("n", {
     ["<leader>b"] = { name = "+Buffers" },
     ["<leader>b/"] = { "<cmd> Telescope buffers <CR>", "Open buffer picker" },
     ["<leader>bc"] = { "<cmd>lua require('hbac').close_unpinned()<CR>", "Close unpinned buffers" },
-    ["<leader>bn"] = { "<cmd> enew <CR>", "烙 new buffer" },
-    ["<leader>bx"] = { "<cmd> :bd <CR>", "   close buffer" },
-    ["<leader>bX"] = { "<cmd> :BClose menu<CR>", "   buffers delete menu" },
+    ["<leader>bn"] = { "<cmd> enew <CR>", " new buffer" },
+    ["<leader>bx"] = { "<cmd> :bd <CR>", "󰆴 close buffer" },
+    ["<leader>bX"] = { "<cmd> :BClose menu<CR>", "󰗩 buffers delete menu" },
 })
 -- <leader> b - +Buffers prefix }}}
 
@@ -206,7 +206,7 @@ register("n", {
     ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "  find all" },
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "  find files" },
     ["<C-p>"] = { "<cmd> Telescope find_files <CR>", "  find files" },
-    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "  help page" },
+    ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "󰋖  help page" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "  find oldfiles" },
     ["<leader>fr"] = { "<cmd> Telescope live_grep <CR>", "  live grep" },
     ["<leader>fs"] = { "<cmd>:lua require('spectacle').SpectacleTelescope()<CR>", "  pick saved session to load" },
