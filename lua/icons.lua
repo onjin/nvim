@@ -118,7 +118,7 @@ M.separators = {
 
 M.misc = {
     modified = "●",
-    newline = "﬋",
+    newline = "󰘌",
     circle = "",
     circle_filled = "",
     circle_slash = "",

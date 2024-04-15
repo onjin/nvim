@@ -226,19 +226,19 @@ register("n", {
         function()
             vim.lsp.buf.add_workspace_folder()
         end,
-        "  add workspace folder",
+        "󰉗  add workspace folder",
     },
     ["<leader>fwr"] = {
         function()
             vim.lsp.buf.remove_workspace_folder()
         end,
-        "  remove workspace folder",
+        "󰉘  remove workspace folder",
     },
     ["<leader>fwl"] = {
         function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end,
-        "  list workspace folders",
+        "󰉕  list workspace folders",
     },
 })
 
@@ -278,7 +278,7 @@ register("n", {
             require("treesitter-context").go_to_context(vim.v.count1)
         end,
 
-        "  Jump to current_context",
+        "󰆧  Jump to current_context",
     },
 })
 -- <leader> j - +Jump prefix }}}
