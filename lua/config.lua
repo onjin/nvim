@@ -25,7 +25,7 @@ M.listchars = true
 M.listchars_theme_number = 2
 
 -- LSP // Initial servers for Mason
-M.lsp_initial_servers = { "lua_ls", "efm", "pyright", "nil_ls", "bashls" }
+M.lsp_initial_servers = { "lua_ls", "efm", "nil_ls", "bashls" }
 
 -- LSP // EFM // default configuration loaded at lua/plugins/lsp.lua
 M.lsp_efm_config_enabled = true
