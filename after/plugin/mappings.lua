@@ -494,3 +494,6 @@ register("n", {
     },
 })
 -- [ and ] custom jumps }}}
+register("n", {
+    ["-"] = { '<CMD>Oil<CR>', " Open parent directory" },
+})
