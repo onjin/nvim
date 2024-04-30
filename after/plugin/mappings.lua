@@ -209,7 +209,6 @@ register("n", {
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "󰋖  help page" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "  find oldfiles" },
     ["<leader>fr"] = { "<cmd> Telescope live_grep <CR>", "  live grep" },
-    ["<leader>fs"] = { "<cmd>:lua require('spectacle').SpectacleTelescope()<CR>", "  pick saved session to load" },
     ["<leader>fb"] = { "<cmd> Telescope file_browser <CR>", "  open file browser" },
 
     ["<leader>fg"] = { name = "+Git" },
@@ -327,11 +326,11 @@ register("n", {
 })
 -- <leader> r - +Registers prefix }}}
 
--- <leader> s - +Substitutions prefix {{{
+-- <leader> R - +Substitutions prefix {{{
 register("n", {
-    ["<leader>ss"] = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]] },
+    ["<leader>Rs"] = { [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]] },
 })
--- <leader> s - +Substitutions prefix }}}
+-- <leader> R - +Substitutions prefix }}}
 
 -- <leader> t - +Toggles prefix {{{
 register("n", {
@@ -494,6 +493,15 @@ register("n", {
     },
 })
 -- [ and ] custom jumps }}}
+-- <leader> f - +Files prefix {{{
+register("n", {
+    ["<leader>s"] = { name = "+Sessions" },
+
+    ["<leader>sr"] = { "<cmd>lua require('persistence').load()<CR>", "󰸧  Restore session for CWD" },
+    ["<leader>sl"] = { "<cmd>lua require('persistence').load({last=true})<CR>", "󰸧  Restore last session" },
+    ["<leader>sd"] = { "<cmd>lua require('persistence').stop()<CR>", "󱙃  Stop persistence" },
+})
+
 register("n", {
     ["-"] = { '<CMD>Oil<CR>', " Open parent directory" },
 })
