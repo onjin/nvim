@@ -179,6 +179,12 @@ local function config()
   }
 
   cmp.setup(options)
+  cmp.setup.filetype({ "sql" }, {
+    sources = {
+      { name = "vim-dadbod-completion" },
+      { name = "buffer" },
+    },
+  })
 end
 return {
   {
