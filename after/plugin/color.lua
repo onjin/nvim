@@ -1,18 +1,18 @@
 -- luacheck: globals vim
-local config = require("config")
+local config = require "config"
 
 if config.theme == "catppuccin" then
-    local catppuccin = require("catppuccin")
+  local catppuccin = require "catppuccin"
 
-    local options = {
-        compile = {
-            enabled = true,
-            path = vim.fn.stdpath("cache") .. "/catppuccin",
-        },
-    }
-    vim.g.catppuccin_flavour = config.theme_flavour
+  local options = {
+    compile = {
+      enabled = true,
+      path = vim.fn.stdpath "cache" .. "/catppuccin",
+    },
+  }
+  vim.g.catppuccin_flavour = config.theme_flavour
 
-    catppuccin.setup(options)
+  catppuccin.setup(options)
 end
 
 local theme = config.theme

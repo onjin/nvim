@@ -1,4 +1,4 @@
 return {
-    formatCommand = "nixfmt -",
-    formatStdin = true,
+  formatCommand = "nixfmt -",
+  formatStdin = true,
 }

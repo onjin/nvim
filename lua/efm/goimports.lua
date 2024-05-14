@@ -1,4 +1,4 @@
 return {
-    formatCommand = "goimports",
-    formatStdin = true,
+  formatCommand = "goimports",
+  formatStdin = true,
 }

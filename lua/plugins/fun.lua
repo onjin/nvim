@@ -1,3 +1,3 @@
 return {
-    "Eandrju/cellular-automaton.nvim",
+  "Eandrju/cellular-automaton.nvim",
 }

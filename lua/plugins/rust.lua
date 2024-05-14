@@ -1,8 +1,8 @@
 return {
-    {
-        "Saecki/crates.nvim",
-        config = function()
-            require("crates").setup()
-        end,
-    },
+  {
+    "Saecki/crates.nvim",
+    config = function()
+      require("crates").setup()
+    end,
+  },
 }

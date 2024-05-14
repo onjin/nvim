@@ -1,7 +1,7 @@
 -- luacheck: globals vim
-vim.cmd([[
+vim.cmd [[
   try
     source .nvimrc
   catch
   endtry
-]])
+]]

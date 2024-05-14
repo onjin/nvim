@@ -1,3 +1,3 @@
 return {
-    formatCommand = "opa fmt",
+  formatCommand = "opa fmt",
 }

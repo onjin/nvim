@@ -1,7 +1,7 @@
 local g = vim.g -- Global variables
 local opt = vim.opt -- Set options (global/buffer/windows-scoped)
-local config = require("config")
-local prefix = vim.env.XDG_STATE_HOME or vim.fn.expand("~/.local/state")
+local config = require "config"
+local prefix = vim.env.XDG_STATE_HOME or vim.fn.expand "~/.local/state"
 
 g.python_host_prog = "~/.pyenv/versions/neovim2/bin/python"
 g.python3_host_prog = "~/.pyenv/versions/neovim/bin/python"
@@ -76,53 +76,53 @@ g.maplocalleader = config.local_leader_key
 g.buffet_show_index = true
 
 -- Disable nvim intro
-opt.shortmess:append("sI")
+opt.shortmess:append "sI"
 
 -- Allow .nvimrc and .exrc
 opt.exrc = true
 
 -- Disable builtins plugins
 local disabled_built_ins = {
-    "2html_plugin",
-    "getscript",
-    "getscriptPlugin",
-    "gzip",
-    "logipat",
-    "matchit",
-    "tar",
-    "tarPlugin",
-    "rrhelper",
-    "vimball",
-    "vimballPlugin",
-    "zip",
-    "zipPlugin",
-    "tutor",
-    "rplugin",
-    "syntax",
-    "synmenu",
-    "optwin",
-    "compiler",
-    "bugreport",
-    "ftplugin",
+  "2html_plugin",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "matchit",
+  "tar",
+  "tarPlugin",
+  "rrhelper",
+  "vimball",
+  "vimballPlugin",
+  "zip",
+  "zipPlugin",
+  "tutor",
+  "rplugin",
+  "syntax",
+  "synmenu",
+  "optwin",
+  "compiler",
+  "bugreport",
+  "ftplugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-    g["loaded_" .. plugin] = 1
+  g["loaded_" .. plugin] = 1
 end
 
 local default_providers = {
-    "node",
-    "perl",
-    "python3",
-    "ruby",
+  "node",
+  "perl",
+  "python3",
+  "ruby",
 }
 
 for _, provider in ipairs(default_providers) do
-    vim.g["loaded_" .. provider .. "_provider"] = 0
+  vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
 -- set shada path
 vim.schedule(function()
-    vim.opt.shadafile = vim.fn.expand("$HOME") .. "/.local/share/nvim/shada/main.shada"
-    vim.cmd([[ silent! rsh ]])
+  vim.opt.shadafile = vim.fn.expand "$HOME" .. "/.local/share/nvim/shada/main.shada"
+  vim.cmd [[ silent! rsh ]]
 end)

@@ -1,3 +1,3 @@
 return {
-    { "kylef/apiblueprint.vim" },
+  { "kylef/apiblueprint.vim" },
 }
