@@ -13,6 +13,7 @@ return {
     config = function()
       require("nvim-treesitter.configs").setup {
         ensure_installed = config.treesitter_initial_servers,
+        auto_install = true,
         highlight = {
           enable = true,
           use_languagetree = true,
