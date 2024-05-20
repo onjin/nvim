@@ -294,6 +294,7 @@ register("n", {
     end,
     "  LSP Code Format",
   },
+  ["<leader>lh"] = { ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>", "  LSP Inlay Hints" },
   ["<leader>ln"] = { "<cmd>Navbuddy<CR>", "Code navigation popup" },
   ["<leader>lo"] = { "<cmd>Lspsaga outline<CR>", "  LSP Toggle Outline" },
   ["<leader>lr"] = { "<cmd>Lspsaga lsp_finder<CR>", "  LSP Find References" },
