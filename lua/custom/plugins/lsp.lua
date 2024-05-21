@@ -12,7 +12,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "SmiteshP/nvim-navbuddy",
+      { "SmiteshP/nvim-navbuddy", opts = {lsp ={auto_attach = true}}, dependencies = { "MunifTanjim/nui.nvim" } },
       "folke/neodev.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",

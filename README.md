@@ -20,28 +20,21 @@ In neovim help:
 - AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing
 - Displays available keybindings in popup — https://github.com/folke/which-key.nvim
 
-For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/
-
-### Custom plugins
-
-To add custom plugins (not versioned in this repo) you can put them into `~/.config/nvim/lua/custom/plugins/` folder.
+For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/custom/plugins/
 
 ## Screenshots
-Simple dashboard
-
-![Screenshot](https://github.com/onjin/nvim/assets/44516/1bb97e31-b452-49c7-b2ac-ed2bf7183877)
 
 Which key keybindings popup, just press `,` and wait for help
 
-![Screenshot](https://user-images.githubusercontent.com/44516/162916448-0d41d3e6-96e2-4ab4-92f0-6e4f7fcc1f8c.png)
+![Screenshot](https://github.com/onjin/nvim/assets/44516/a689b08b-632d-47f9-ba14-a69afa84aac5)
 
 LSP support
 
-![Screenshot](https://user-images.githubusercontent.com/44516/162918787-1c788b22-51db-4c9a-888a-f5cfc4abcc79.png)
+![Screenshot](https://github.com/onjin/nvim/assets/44516/00d7de32-539a-435f-8acd-c98a6b185d31)
 
 Markdown live preview
 
-![Screenshot](https://user-images.githubusercontent.com/44516/162917974-f36a192c-3347-476d-91e0-e22f2e1bf916.png)
+![Screenshot](https://github.com/onjin/nvim/assets/44516/0678cc18-c93d-483d-a1dd-5d7213190efe)
 
 ## Install by `git`
 
@@ -55,245 +48,10 @@ git clone https://github.com/onjin/nvim ~/.config/nvim
 
 Plugins should be installed at first run of editor. If not, then run `:Lazy` to do it manually.
 
-## Daily usage
-
-Configuration:
- 
-- edit `lua/config.lua`
 
 Discover shortcuts:
 
-- `,hK` - display all keybindings [help keybindings]
 - `,` or `<space>` to get help for leader keys from `which-key`
-- `<ctrl-p>` - to get available all commands registered which `which-key` displayed by `legendary.vim`
-
-## Mappings
-
-- `<ctrl-[hjkl]>` - to move cursor between splits and/or tmux splits (look integration doc below)
-
-+Buffers:
-
-- `tab` - next buffer
-- `shift+tab` - previous buffer
-- `,b` - buffers submenu
-- `,b/` - buffer picker by fuzzy search filename
-- `,bc` - close unpinned buffers (use toggle `,tp` to toggle pin)
-- `,bn` - create new buffer
-- `,bx` - close current buffer
-- `,bX` - open buffers closing menu
-
-+Diagnostics:
-
-- `,d` - diagnostics submenu
-- `,ds` - show diagnostics messages
-- `,dh` - hide diagnostics messages
-- `,dd` - disable diagnostics messages
-- `,de` - enable diagnostics messages
-- `,dl` - load diagnostics messages to `loclist`
-- `[d` - jump to previous diagnostic location
-- `d]` - jump to next diagnostic location
-
-+Files:
-
-- `,f` - files submenu
-- `,f/`, `,ff` - find not hidden files
-- `,fa` - find also hidden files
-- `,fb` - run file/directories browser
-- `,fh` - find help tags
-- `,fo` - find old files
-- `,fr` - find within files (live grep)
-- `,fs` - find saved sessions
-
-+Files +Git:
-
-- `,fg` - git files submenu
-- `,fg/`, `,fgf` - find git files
-- `,fgb` - find git branches
-- `,fgc` - find git commits
-- `,fgo` - find git buffer commits
-- `,fgs` - find git status
-- `,fgt` - find git stash
-
-+Files +Workspaces:
-
-- `,fw` - workspaces submenu
-- `,fwa` - add workspace folder
-- `,fwl` - list workspace folders
-- `,fwr` - remove workspace folder
-
-+Help:
-
-- `,h` - help menu
-- `,hK` - display all mappings using `which-key`
-- `,hk` - find and use mapping
-- `,hm` - show mappings with fuzzy search
-- `,hla` - choose auto commands using `legendary.vim`
-- `,hlc` - choose commands using `legendary.vim`
-- `,hlf` - choose functions using `legendary.vim`
-- `,hlk` - choose keymaps using `legendary.vim`
-
-+Jump:
-
-- `,j` - jump menu
-- `,jc` - jump to current context using indents
-
-+LSP:
-
-- `,l` - LSP menu
-- `,la` - LSP Code Action menu using `lspsaga`
-- `,ld` - LSP Show Line Diagnostics for current line in floating window using `lspsaga`
-- `,lf` - LSP Format current's buffer code
-- `,ln` - LSP Open Code Navigation Popup using `navbuddy`
-- `,lo` - LSP Toggle Outline using `lspsaga`
-- `,lr` - LSP Open Current symbol finder using `lspsaga`
-- `,lR` - LSP Run Symbol Rename using `lspasage`
-- `,lt` - LSP Show type definition using `telescope`
-
-+Projects/Packages:
-
-- `,p` - Projects/Packages
-- `,pp` - Open Plugins Management UI using `Lazy`
-- `,pl` - Open LSP Servers/DAPs/Formatters UI using `Mason`
-- `,p/` - Open projects selector using `telescope`
-
-+Registers:
-
-- `,r` - Registers menu
-- `,rp` - Paset from *pp register
-
-+Spelling:
-
-- `,s` - Spelling menu
-- `,ss` - Open spell suggestions using `telescope`
-
-+Toggles:
-
-- `,t` - Toggles menu
-- `,tb` - toggle git blame for current line
-- `,tc` - toggle conceal level
-- `,tn` - toggle line numbers
-- `,tp` - toggle buffer pin (used with `,bc` to close unpinned buffers)
-- `,tr` - toggle relative line numbers
-
-+UI Toggles/Themes:
-
-- `,T` - UI Toggles/Themes menu
-- `,T1` - set buffer width to 80 chars
-- `,T2` - set buffer width to 120 chars
-- `,Tc` - select and change color scheme using `telescope`
-- `,Tl` - cycle list chars theme
-
-+Utils:
-
-- `,u` - Utils menu
-- `,uh` - convert number under cursor between dec/hex
-
-+Windows:
-
-- `,w` - Windows menu
-- `,wz` - toggle window zoome
-
-+Windows +Vimux:
-
-- `,wv` - Vimux menu
-- `,wvi` - inspect Vimux runner
-- `,wvo` - open Vimux runner
-- `,wvp` - prompt for command to run using Vimux
-- `,wvq` - close Vimux runner
-- `,wvx` - interrupt Vimux runner
-- `,wvz` - zoom Vimux runner
-- `,wv<C-l>` - clear screen of Vimux runner
-
-**Context mappings using `SPC`.**
-
-Cargo:
-
-- `SPC c` - Cargo (Rust) menu
-- `SPC ca` - update all creates
-- `SPC cd` - show dependencies
-- `SPC cf` - show features
-- `SPC cr` - reload
-- `SPC ct` - toggle
-- `SPC cu` - update create
-- `SPC cv` - show versions
-- `SPC cA` - upgrade all
-- `SPC cC` - focus popup
-- `SPC cU` - upgrade crate
-
-GitSigns:
-
-- `SPC g` - GitSigns menu
-- `SPC gb` - show blame for current line
-- `SPC gd` - diff this
-- `SPC gp` - preview hunk
-- `SPC gr` - reset hunk
-- `SPC gs` - stage hunk
-- `SPC gu` - undo stage hunk
-- `SPC gx` - toggle deleted
-- `SPC gR` - reset buffer
-- `SPC gS` - stage buffer
-
-NeoTest (in split):
-
-- `SPC T` - NeoTest menu (in split using `Vimux`)
-- `SPC Tf` - test file
-- `SPC Tl` - test latest
-- `SPC Tr` - test single
-
-NeoTest (in background):
-
-- `SPC t` - NeoTest menu (in background)
-- `SPC ta` - attach to tests process
-- `SPC tf` - test file
-- `SPC tl` - test lastes
-- `SPC to` - open test output (short)
-- `SPC tO` - open test output  (full)
-- `SPC tr` - test single
-- `SPC ts` - stop tests
-- `SPC tv` - toggle tests summary
-
-## Syntax highlighting
-
-- `TSInstallInfo` - display info about installed/available TreeSitter syntax
-- `TSInstall <name>` - install TreeSitter syntax
-
-## TODO comments highlight
-
-By default these comment's prefixes are highlighted:
-
-- FIX (or FIXME, BUG, FIXIT, ISSUE)
-- TODO
-- HACK
-- WARN (or WARNING, XXX)
-- PERF (or OPTIM, PERFORMANCE, OPTIMIZE)
-- NOTE (or INFO)
-- TEST (or TESTING, PASSED, FAILED)
-
-You can search for comments tags using `Telescope`:
-
-- `:TodoTelescope` - for all
-- `:TodoTelescope keywords=TODO,FIX` - for all
-
-Or you can fill `quickfix` or `location` list by:
-
-- `TodoQuickFix`
-- `TodoLocList`
-
-## Integrations
-
-**tmux**:
-
-Add these lines to `tmux` to move around vim/tmux splits with same shortcuts
-
-```ini
-# smart pane switching with awareness of vim splits
-bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
-bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-j) || tmux select-pane -D"
-bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U"
-bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-l) || tmux select-pane -R"
-bind -n C-\\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
-
-```
 
 ## Requirements for python
 
