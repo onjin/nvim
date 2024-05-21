@@ -4,4 +4,3 @@
 /lua/local/*.lua
 /doc/tags
 .spectacle
-/lazy-lock.json
