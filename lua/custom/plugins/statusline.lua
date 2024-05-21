@@ -2,7 +2,7 @@ return {
   {
     "tjdevries/express_line.nvim",
     config = function()
-      require("custom.statusline").setup()
+      require("custom.statusline").setup_el()
     end,
   },
   -- {
@@ -17,7 +17,7 @@ return {
   --   "rebelot/heirline.nvim",
   --   event = "BufEnter",
   --   config = function()
-  --     require("custom.statusline").setup()
+  --     require("custom.statusline").setup_heir()
   --   end,
   -- },
 }

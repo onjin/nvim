@@ -41,3 +41,40 @@ vim.opt.scrolloff = 10
 
 -- buffers list as tab, and context
 vim.opt.showtabline = 2
+
+vim.g.buffet_show_index = true
+
+-- Disable nvim intro
+vim.opt.shortmess:append "sI"
+
+-- Allow .nvimrc and .exrc
+vim.opt.exrc = true
+
+-- Disable builtins plugins
+local disabled_built_ins = {
+  "2html_plugin",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "matchit",
+  "tar",
+  "tarPlugin",
+  "rrhelper",
+  "vimball",
+  "vimballPlugin",
+  "zip",
+  "zipPlugin",
+  "tutor",
+  "rplugin",
+  "syntax",
+  "synmenu",
+  "optwin",
+  "compiler",
+  "bugreport",
+  "ftplugin",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+  vim.g["loaded_" .. plugin] = 1
+end

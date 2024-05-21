@@ -3,7 +3,7 @@ return {
     "norcalli/nvim-colorizer.lua",
     config = function()
       vim.opt.termguicolors = true
-      require("colorizer").setup { { "*" } }
+      require("colorizer").setup { "*" }
     end,
   },
 }

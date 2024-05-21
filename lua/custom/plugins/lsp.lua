@@ -1,14 +1,18 @@
 return {
   {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {},
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
-      {
-        "SmiteshP/nvim-navbuddy",
-        dependencies = {
-          "SmiteshP/nvim-navic",
-          "MunifTanjim/nui.nvim",
-        },
-      }, -- nav* must be load before lsp
+      "SmiteshP/nvim-navbuddy",
       "folke/neodev.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -24,8 +28,6 @@ return {
       "b0o/SchemaStore.nvim",
     },
     config = function()
-      local navbuddy = require "nvim-navbuddy"
-      navbuddy.setup { lsp = { auto_attach = true, preference = { "basedpyright", "pyright", "ruff_lsp" } } }
       require("neodev").setup {
         -- library = {
         --   plugins = { "nvim-dap-ui" },
@@ -173,6 +175,7 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local bufnr = args.buf
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
           vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
           local map = function(keys, func, desc)
@@ -226,7 +229,6 @@ return {
           --    See `:help CursorHold` for information about when this is executed
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {

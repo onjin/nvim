@@ -1,13 +1,12 @@
 local M = {}
 
-local builtin = require "el.builtin"
-local extensions = require "el.extensions"
-local subscribe = require "el.subscribe"
-local sections = require "el.sections"
+M.setup_el = function()
+  local builtin = require "el.builtin"
+  local extensions = require "el.extensions"
+  local subscribe = require "el.subscribe"
+  local sections = require "el.sections"
 
-vim.opt.laststatus = 3
-
-M.setup = function()
+  vim.opt.laststatus = 3
   require("el").setup {
     generator = function()
       local segments = {}
@@ -55,9 +54,7 @@ M.setup = function()
   }
 end
 
-M.setup()
-
-M.setup_2 = function()
+M.setup_heir = function()
   if require("lazy.core.config").plugins["heirline.nvim"] then
     local conditions = require "heirline.conditions"
     local utils = require "heirline.utils"
