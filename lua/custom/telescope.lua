@@ -6,8 +6,7 @@ require("telescope").setup {
 
     fzf = {},
     -- history = {
-    --   path = data..  "/telescope_history.sqlite3",
-    -- path = vim.fs.joinpath(data, "telescope_history.sqlite3"),
+    --   path = vim.fs.joinpath(data, "telescope_history.sqlite3"),
     --   limit = 100,
     -- },
     ["ui-select"] = {
