@@ -1,3 +1,0 @@
-return {
-  formatCommand = "opa fmt",
-}

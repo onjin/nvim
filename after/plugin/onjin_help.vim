@@ -1,1 +1,0 @@
-helptags ~/.config/nvim/doc
