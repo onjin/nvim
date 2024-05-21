@@ -8,10 +8,6 @@ return {
           "SmiteshP/nvim-navic",
           "MunifTanjim/nui.nvim",
         },
-        config = function()
-          local navbuddy = require "nvim-navbuddy"
-          navbuddy.setup { lsp = { auto_attach = true, preference = { "basedpyright", "pyright", "ruff_lsp" } } }
-        end,
       }, -- nav* must be load before lsp
       "folke/neodev.nvim",
       "williamboman/mason.nvim",
@@ -28,6 +24,8 @@ return {
       "b0o/SchemaStore.nvim",
     },
     config = function()
+      local navbuddy = require "nvim-navbuddy"
+      navbuddy.setup { lsp = { auto_attach = true, preference = { "basedpyright", "pyright", "ruff_lsp" } } }
       require("neodev").setup {
         -- library = {
         --   plugins = { "nvim-dap-ui" },
