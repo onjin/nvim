@@ -1,6 +1,10 @@
 # Personal `neovim` configuration.
 
 Mostly used for DevOps and Python (web) development.
+black
+#112233
+#000000
+#ff0000
 
 In neovim help:
 ```

@@ -48,7 +48,3 @@ set("n", "<M-k>", function()
     vim.cmd [[m .-2<CR>==]]
   end
 end)
-
-set("n", "<leader>tc", function()
-  require("treesitter-context").toggle()
-end, { desc = "[T]oggle TreeSitter [C]ontext" })

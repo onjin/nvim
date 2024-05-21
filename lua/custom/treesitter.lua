@@ -61,6 +61,14 @@ M.setup = function()
       end
     end,
   })
+
+  vim.keymap.set("n", "<leader>jc", function()
+    require("treesitter-context").go_to_context(vim.v.count1)
+  end, { desc = "󰆧  Jump to current_context" })
+
+  vim.keymap.set("n", "<leader>tc", function()
+    require("treesitter-context").toggle()
+  end, { desc = "[T]oggle TreeSitter [C]ontext" })
 end
 
 M.setup()
