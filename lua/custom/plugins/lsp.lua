@@ -2,10 +2,22 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+        },
+        config = function()
+          local navbuddy = require "nvim-navbuddy"
+          navbuddy.setup { lsp = { auto_attach = true, preference = { "basedpyright", "pyright", "ruff_lsp" } } }
+        end,
+      }, -- nav* must be load before lsp
       "folke/neodev.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "haringsrob/nvim_context_vt",
 
       { "j-hui/fidget.nvim", opts = {} },
 

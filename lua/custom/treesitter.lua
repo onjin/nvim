@@ -41,6 +41,8 @@ M.setup = function()
       "terraform",
     },
   }
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
   local syntax_on = {
     elixir = true,
