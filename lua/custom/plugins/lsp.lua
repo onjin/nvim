@@ -12,7 +12,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "SmiteshP/nvim-navbuddy", opts = {lsp ={auto_attach = true}}, dependencies = { "MunifTanjim/nui.nvim" } },
+      { "SmiteshP/nvim-navbuddy", opts = { lsp = { auto_attach = true } }, dependencies = { "MunifTanjim/nui.nvim" } },
       "folke/neodev.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -29,10 +29,10 @@ return {
     },
     config = function()
       require("neodev").setup {
-        -- library = {
-        --   plugins = { "nvim-dap-ui" },
-        --   types = true,
-        -- },
+        library = {
+          plugins = { "nvim-dap-ui" },
+          types = true,
+        },
       }
 
       local capabilities = nil
