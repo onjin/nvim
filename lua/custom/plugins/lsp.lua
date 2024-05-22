@@ -287,6 +287,12 @@ return {
           }
         end,
       })
+      vim.keymap.set("n", "<leader>lf", function()
+        require("conform").format {
+          lsp_fallback = true,
+          quiet = true,
+        }
+      end, { desc = "LSP [C]ode [F]ormat" })
     end,
   },
 }

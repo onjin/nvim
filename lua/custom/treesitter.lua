@@ -71,6 +71,9 @@ M.setup = function()
   vim.keymap.set("n", "<leader>tc", function()
     require("treesitter-context").toggle()
   end, { desc = "[T]oggle TreeSitter [C]ontext" })
+  vim.keymap.set("n", "<leader>tC", function()
+    require("nvim_context_vt").toggle_context()
+  end, { desc = "[T]oggle Virtual Text [C]ontext" })
 end
 
 M.setup()
