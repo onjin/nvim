@@ -12,7 +12,16 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "SmiteshP/nvim-navbuddy", opts = { lsp = { auto_attach = true } }, dependencies = { "MunifTanjim/nui.nvim" } },
+      {
+        "SmiteshP/nvim-navbuddy",
+        config = function()
+          require("nvim-navbuddy").setup { lsp = { auto_attach = true } }
+          vim.keymap.set("n", "<leader>ln", function()
+            require("nvim-navbuddy").open()
+          end, { desc = "LSP: [G]oto [N]avbuddy" })
+        end,
+        dependencies = { "MunifTanjim/nui.nvim" },
+      },
       "folke/neodev.nvim",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -292,7 +301,7 @@ return {
           lsp_fallback = true,
           quiet = true,
         }
-      end, { desc = "LSP [C]ode [F]ormat" })
+      end, { desc = "LSP: [C]ode [F]ormat" })
     end,
   },
 }

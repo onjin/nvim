@@ -23,9 +23,6 @@ return {
       vim.keymap.set("n", "<leader>dtc", function()
         require("dap-python").test_class()
       end, { desc = "[D]AP UI [T]est [C]lass" })
-      require("which-key").register {
-        ["<leader>dt"] = { name = "[D]AP [T]est", _ = "which_key_ignore" },
-      }
     end,
   },
 }

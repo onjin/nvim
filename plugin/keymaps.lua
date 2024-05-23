@@ -10,15 +10,12 @@ set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
 set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
 -- Toggle hlsearch if it's on, otherwise just do "enter"
 
-set("n", "<CR>", function()
+set("n", "<C-/>", function()
   if vim.opt.hlsearch then
     ---@diagnostic disable-next-line: undefined-field
     vim.cmd.nohl()
-    return ""
-  else
-    return "<CR>"
   end
-end, { expr = true })
+end)
 
 -- There are builtin keymaps for this now, but I like that it shows
 -- the float when I navigate to the error - so I override them.

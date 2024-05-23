@@ -14,7 +14,10 @@ return {
     event = "VeryLazy",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     config = function()
-      require("hardtime").setup { enabled = false }
+      require("hardtime").setup {
+        enabled = true,
+        restriction_mode = "hint", -- hint, block
+      }
       vim.keymap.set("n", "<leader>tH", function()
         require("hardtime").toggle()
       end, { desc = "[T]oggle [H]ardtime hints" })
