@@ -71,6 +71,9 @@ return {
           single_file_support = true,
         },
         ruff_lsp = {},
+        html = {},
+        tailwindcss = {},
+        htmx = {},
         gopls = {
           settings = {
             gopls = {
@@ -160,7 +163,9 @@ return {
         "stylua",
         "lua_ls",
         "delve",
-        -- "tailwind-language-server",
+        "tailwindcss",
+        "htmx-lsp",
+        "html-lsp",
       }
 
       vim.list_extend(ensure_installed, servers_to_install)
