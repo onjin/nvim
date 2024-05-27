@@ -72,6 +72,7 @@ return {
         },
         ruff = {},
         html = {},
+        emmet_ls = {},
         tailwindcss = {},
         htmx = {},
         gopls = {
