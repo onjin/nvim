@@ -1,4 +1,5 @@
 local opt = vim.opt
+local state_prefix = vim.env.XDG_STATE_HOME or vim.fn.expand "~/.local/state"
 
 ----- Interesting Options -----
 
@@ -49,6 +50,32 @@ vim.opt.shortmess:append "sI"
 
 -- Allow .nvimrc and .exrc
 vim.opt.exrc = true
+-----------------------------------------------------------
+-- Memory, CPU
+-----------------------------------------------------------
+opt.hidden = true -- Enable background buffers
+opt.history = 100 -- Remember N lines in history
+-- opt.lazyredraw = true -- Faster scrolling
+opt.synmaxcol = 240 -- Max column for syntax highlight
+opt.updatetime = 700 -- ms to wait for trigger an event
+
+-----------------------------------------------------------
+-- Undo, backup
+-----------------------------------------------------------
+opt.undofile = true
+opt.swapfile = true
+opt.backup = false
+
+opt.undodir = { state_prefix .. "/nvim/undo//" }
+opt.backupdir = { state_prefix .. "/nvim/backup//" }
+opt.directory = { state_prefix .. "/nvim/swp//" }
+
+-----------------------------------------------------------
+-- Spelling
+-----------------------------------------------------------
+
+opt.spell = true
+opt.spelllang = "en"
 
 -- Disable builtins plugins
 local disabled_built_ins = {
