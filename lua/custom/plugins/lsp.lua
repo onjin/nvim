@@ -70,7 +70,7 @@ return {
           },
           single_file_support = true,
         },
-        ruff_lsp = {},
+        ruff = {},
         html = {},
         tailwindcss = {},
         htmx = {},
