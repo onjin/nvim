@@ -51,15 +51,37 @@ return {
 
       local lspconfig = require "lspconfig"
 
+      local ruff_on_attach = function(client, bufnr)
+        if client.name == "ruff" then
+          -- Disable hover in favor of Pyright
+          client.server_capabilities.hoverProvider = false
+        end
+      end
+
       local servers = {
-        bashls = true,
         basedpyright = {
+          bashls = true,
           settings = {
             basedpyright = {
               disableOrganizeImports = true, -- Using Ruff LSP
             },
             python = {
               analysis = {
+                autoSearchPaths = true,
+                exclude = {
+                  "**/node_modules",
+                  "**/__pycache__",
+                  "**/dist",
+                },
+                indexing = true,
+                typeCheckingMode = "strict",
+                memory = {
+                  keepLibraryAst = true,
+                  keepLibraryLocalVariables = false,
+                },
+                diagnosticMode = "workspace",
+                useLibraryCodeForTypes = true,
+                logflevel = "Error",
                 ignore = { "*" }, -- Using Ruff LSP
                 inlayHints = {
                   variableTypes = true,
@@ -70,7 +92,7 @@ return {
           },
           single_file_support = true,
         },
-        ruff = {},
+        ruff = { on_attach = ruff_on_attach },
         html = {},
         emmet_ls = {},
         tailwindcss = {},
