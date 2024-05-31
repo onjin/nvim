@@ -94,7 +94,7 @@ return {
         },
         ruff = { on_attach = ruff_on_attach },
         html = {},
-        emmet_ls = {},
+        -- emmet_ls = {},
         tailwindcss = {},
         htmx = {},
         gopls = {
