@@ -24,6 +24,23 @@ set("n", "[d", vim.diagnostic.goto_prev)
 set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 
+set("n", "<leader>tD", function()
+  if vim.diagnostic.is_enabled() then
+    vim.diagnostic.enable(false)
+  else
+    vim.diagnostic.enable(true)
+  end
+end, { desc = "[T]oggle All [D]iagnostics" })
+
+set("n", "<leader>td", function()
+  local current_value = vim.diagnostic.config().virtual_text
+  if current_value then
+    vim.diagnostic.config { virtual_text = false }
+  else
+    vim.diagnostic.config { virtual_text = true }
+  end
+end, { desc = "[T]oggle Virtual [d]iagnostics" })
+
 -- These mappings control the size of splits (height/width)
 set("n", "<M-,>", "<c-w>5<")
 set("n", "<M-.>", "<c-w>5>")

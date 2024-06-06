@@ -11,6 +11,12 @@ return {
     vim.keymap.set("n", "<m-h><m-l>", function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
     end)
+    vim.keymap.set("n", "<m-p>", function()
+      harpoon:list():prev()
+    end, { desc = "Harpoon [P]rev" })
+    vim.keymap.set("n", "<m-n>", function()
+      harpoon:list():next()
+    end, { desc = "Harpoon [N]ext" })
 
     -- Set <space>1..<space>5 be my shortcuts to moving to the files
     for _, idx in ipairs { 1, 2, 3, 4, 5 } do
@@ -18,5 +24,21 @@ return {
         harpoon:list():select(idx)
       end)
     end
+
+    harpoon:extend {
+      UI_CREATE = function(cx)
+        vim.keymap.set("n", "<C-v>", function()
+          harpoon.ui:select_menu_item { vsplit = true }
+        end, { buffer = cx.bufnr })
+
+        vim.keymap.set("n", "<C-x>", function()
+          harpoon.ui:select_menu_item { split = true }
+        end, { buffer = cx.bufnr })
+
+        vim.keymap.set("n", "<C-t>", function()
+          harpoon.ui:select_menu_item { tabedit = true }
+        end, { buffer = cx.bufnr })
+      end,
+    }
   end,
 }
