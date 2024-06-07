@@ -69,9 +69,14 @@ return {
               analysis = {
                 autoSearchPaths = true,
                 exclude = {
-                  "**/node_modules",
+                  "**/.cache",
+                  "**/.mypy_cache",
+                  "**/.pytest_cache",
+                  "**/.ruff_cache",
+                  "**/.venv",
                   "**/__pycache__",
                   "**/dist",
+                  "**/node_modules",
                 },
                 indexing = true,
                 typeCheckingMode = "strict",
