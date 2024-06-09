@@ -1,16 +1,36 @@
-return {}
--- return {
---   "onjin/tailwind-tools.nvim",
---   event = "VeryLazy",
---   dependencies = { "nvim-treesitter/nvim-treesitter" },
---   opts = {
---     document_color = {
---       enabled = true,
---       kind = "inline",
---     },
---     conceal = {
---       enabled = true,
---       min_length = 15,
---     },
---   }, -- your configuration
--- }
+return {
+  -- {
+  --   "roobert/tailwindcss-colorizer-cmp.nvim",
+  --   -- optionally, override the default options:
+  --   config = function()
+  --     require("tailwindcss-colorizer-cmp").setup {
+  --       color_square_width = 2,
+  --     }
+  --     require("cmp").config.formatting = {
+  --       format = require("tailwindcss-colorizer-cmp").formatter,
+  --     }
+  --   end,
+  -- },
+  -- {
+  --   "onjin/tailwind-tools.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   config = function()
+  --     require("tailwind-tools").setup {
+  --       document_color = {
+  --         enabled = true,
+  --         kind = "inline",
+  --       },
+  --       conceal = {
+  --         enabled = true,
+  --         min_length = 25,
+  --       },
+  --       formatting = {
+  --         format = require("lspkind").cmp_format {
+  --           before = require("tailwind-tools.cmp").lspkind_format,
+  --         },
+  --       },
+  --     }
+  --   end, -- your configuration
+  -- },
+}

@@ -98,10 +98,12 @@ return {
           single_file_support = true,
         },
         ruff = { on_attach = ruff_on_attach },
-        html = {},
+        html = { filetypes = { "html", "templ" } },
         -- emmet_ls = {},
-        tailwindcss = {},
-        htmx = {},
+        tailwindcss = { settings = {
+          emmetCompletions = true,
+        } },
+        -- htmx = {},
         gopls = {
           settings = {
             gopls = {
@@ -119,9 +121,9 @@ return {
         },
         lua_ls = true,
         rust_analyzer = true,
-        svelte = true,
         templ = true,
-        cssls = true,
+        -- cssls = true,
+        -- svelte = true,
 
         -- Probably want to disable formatting for this lang server
         tsserver = true,
@@ -192,7 +194,6 @@ return {
         "lua_ls",
         "delve",
         "tailwindcss",
-        "htmx-lsp",
         "html-lsp",
       }
 
