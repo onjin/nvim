@@ -62,3 +62,7 @@ set("n", "<M-k>", function()
     vim.cmd [[m .-2<CR>==]]
   end
 end)
+
+set("n", "<leader>tm", function()
+  vim.o.scrolloff = 9999 - vim.o.scrolloff
+end, { noremap = true, silent = true, desc = "[T]oggle [M]iddle line focus" }) -- toggle centering cursor at middle line
