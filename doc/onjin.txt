@@ -1,10 +1,11 @@
-*onjin.txt*            For Neovim >= 0.8.0           Last change: 2024 June 17
+*onjin.txt*            For Neovim >= 0.8.0           Last change: 2024 June 19
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
 
 1. Personal neovim configuration.       |onjin-personal-neovim-configuration.|
   - Features                   |onjin-personal-neovim-configuration.-features|
+  - Local .nvimrc.ini config for global variables|onjin-personal-neovim-configuration.-local-.nvimrc.ini-config-for-global-variables|
   - Screenshots             |onjin-personal-neovim-configuration.-screenshots|
   - Install by git       |onjin-personal-neovim-configuration.-install-by-git|
   - Requirements for python|onjin-personal-neovim-configuration.-requirements-for-python|
@@ -30,11 +31,25 @@ FEATURES                       *onjin-personal-neovim-configuration.-features*
 - Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
 - Fuzzy search engine https://github.com/nvim-telescope/telescope.nvim
 - Intellisense engine https://github.com/neovim/nvim-lspconfig + https://github.com/williamboman/mason-lspconfig.nvim
-- AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing
+- AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing (set .nvimrc.ini or vim.g.ai_enabled directly to enable)
 - Displays available keybindings in popup — https://github.com/folke/which-key.nvim
 
 For a full list of plugins refer to
 https://github.com/onjin/.vim/blob/main/lua/custom/plugins/
+
+
+LOCAL .NVIMRC.INI CONFIG FOR GLOBAL VARIABLES*onjin-personal-neovim-configuration.-local-.nvimrc.ini-config-for-global-variables*
+
+By creating `.nvimrc.ini` file in your project folder you can set global
+variables.
+
+>dosini
+    ;enable AI codeium
+    ai_enabled = 1
+    
+    ; set leader key
+    mapleader = ' '
+<
 
 
 SCREENSHOTS                 *onjin-personal-neovim-configuration.-screenshots*
