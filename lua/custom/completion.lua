@@ -6,19 +6,22 @@ vim.opt.shortmess:append "c"
 local lspkind = require "lspkind"
 lspkind.init {}
 
-require("codeium").setup {}
-
 local cmp = require "cmp"
+local sources = {
+  { name = "nvim_lsp" },
+  { name = "cody" },
+  { name = "path" },
+  { name = "buffer" },
+  { name = "luasnip" },
+}
+
+if vim.g.ai_enabled then
+  require("codeium").setup {}
+  table.insert(sources, { name = "codeium" })
+end
 
 cmp.setup {
-  sources = {
-    { name = "nvim_lsp" },
-    { name = "cody" },
-    { name = "path" },
-    { name = "buffer" },
-    { name = "luasnip" },
-    { name = "codeium" },
-  },
+  sources = sources,
   mapping = {
     ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
     ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },

@@ -10,7 +10,7 @@ return {
       "hrsh7th/cmp-buffer",
       { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
       "saadparwaiz1/cmp_luasnip",
-      "jcdickinson/codeium.nvim",
+      "jcdickinson/codeium.nvim", -- set vim.g.ai_enabled to true to activate
       "nvim-lua/plenary.nvim",
     },
     config = function()

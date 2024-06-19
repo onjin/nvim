@@ -17,10 +17,22 @@ In neovim help:
 - Support for `.editorconfig` — https://github.com/editorconfig/editorconfig-vim
 - Fuzzy search engine https://github.com/nvim-telescope/telescope.nvim
 - Intellisense engine https://github.com/neovim/nvim-lspconfig + https://github.com/williamboman/mason-lspconfig.nvim
-- AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing
+- AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing (set .nvimrc.ini or vim.g.ai_enabled directly to enable)
 - Displays available keybindings in popup — https://github.com/folke/which-key.nvim
 
 For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/custom/plugins/
+
+## Local .nvimrc.ini config for global variables
+
+By creating `.nvimrc.ini` file in your project folder you can set global variables.
+
+```dosini
+;enable AI codeium
+ai_enabled = 1
+
+; set leader key
+mapleader = ' '
+```
 
 ## Screenshots
 
