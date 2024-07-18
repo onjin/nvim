@@ -66,3 +66,7 @@ end)
 set("n", "<leader>tm", function()
   vim.o.scrolloff = 9999 - vim.o.scrolloff
 end, { noremap = true, silent = true, desc = "[T]oggle [M]iddle line focus" }) -- toggle centering cursor at middle line
+
+-- obsidian settings
+set("n", "<leader>of", ':Telescope find_files search_dirs={"/home/onjin/notes"}<cr>')
+set("n", "<leader>og", ':Telescope live_grep search_dirs={"/home/onjin/notes"}<cr>')
