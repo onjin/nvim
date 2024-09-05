@@ -126,7 +126,7 @@ return {
         -- svelte = true,
 
         -- Probably want to disable formatting for this lang server
-        tsserver = true,
+        -- ts_ls = true,
 
         jsonls = {
           settings = {
