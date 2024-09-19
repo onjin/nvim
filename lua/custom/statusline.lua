@@ -48,6 +48,10 @@ M.setup_el = function()
       table.insert(segments, ":")
       table.insert(segments, builtin.column_with_width(2))
       table.insert(segments, "]")
+      if require("lazy.status").has_updates() then
+        -- table.insert(segments, require("lazy.status").updates)
+        table.insert(segments, require("lazy.status").updates())
+      end
 
       return segments
     end,
