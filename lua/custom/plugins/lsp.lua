@@ -129,6 +129,7 @@ return {
         lua_ls = true,
         rust_analyzer = true,
         templ = true,
+        nil_ls = true,
         -- cssls = true,
         -- svelte = true,
 
