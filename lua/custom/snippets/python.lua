@@ -30,3 +30,12 @@ local struct_decorator = [=[
 ls.add_snippets("python", {
   s("struct:decorator", fmt(struct_decorator, { i(1), i(2), i(3) })),
 })
+ls.add_snippets("python", {
+  s(
+    "Generator",
+    fmt(
+      "Generator[{yield_type}, {send_type}, {return_type}]",
+      { yield_type = i(1, "yield_type"), send_type = i(2, "send_type"), return_type = i(3, "return_type") }
+    )
+  ),
+})
