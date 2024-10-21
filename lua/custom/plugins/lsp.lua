@@ -86,7 +86,7 @@ return {
                   "**/node_modules",
                 },
                 indexing = true,
-                typeCheckingMode = "strict",
+                typeCheckingMode = "recommended",
                 memory = {
                   keepLibraryAst = true,
                   keepLibraryLocalVariables = false,
