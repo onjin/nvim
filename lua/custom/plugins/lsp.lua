@@ -330,15 +330,17 @@ return {
         },
       }
 
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        callback = function(args)
-          require("conform").format {
-            bufnr = args.buf,
-            lsp_fallback = true,
-            quiet = true,
-          }
-        end,
-      })
+      if vim.g.autoformat_on_save_enabled then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          callback = function(args)
+            require("conform").format {
+              bufnr = args.buf,
+              lsp_fallback = true,
+              quiet = true,
+            }
+          end,
+        })
+      end
       vim.keymap.set("n", "<leader>lf", function()
         require("conform").format {
           lsp_fallback = true,

@@ -30,6 +30,9 @@ By creating `.nvimrc.ini` file in your project folder you can set global variabl
 ;enable AI codeium
 ai_enabled = 1
 
+;enable autoformat on save
+autoformat_on_save_enabled = 1
+
 ; set leader key
 mapleader = ' '
 ```
