@@ -1,4 +1,4 @@
-*onjin.txt*          For Neovim >= 0.8.0          Last change: 2024 October 24
+*onjin.txt*          For Neovim >= 0.8.0          Last change: 2024 October 30
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
@@ -46,6 +46,9 @@ variables.
 >dosini
     ;enable AI codeium
     ai_enabled = 1
+    
+    ;enable autoformat on save
+    autoformat_on_save_enabled = 1
     
     ; set leader key
     mapleader = ' '
