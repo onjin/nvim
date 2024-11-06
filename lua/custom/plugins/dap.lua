@@ -32,7 +32,7 @@ return {
         request = "attach",
         name = "Container Python Attach",
         port = function()
-          return vim.fn.input("Port > ", 3001)
+          return vim.fn.input("Port > ", 3000)
         end,
         host = function()
           return vim.fn.input("Host > ", "127.0.0.1")
@@ -42,7 +42,7 @@ return {
         pathMappings = {
           {
             localRoot = function()
-              return vim.fn.input("Local code folder > ", vim.fn.getcwd() .. "/src", "file")
+              return vim.fn.input("Local code folder > ", vim.fn.getcwd(), "file")
             end,
             remoteRoot = function()
               return vim.fn.input("Container code folder > ", "/opt/application", "file")
