@@ -133,9 +133,6 @@ return {
         -- cssls = true,
         -- svelte = true,
 
-        -- Probably want to disable formatting for this lang server
-        -- ts_ls = true,
-
         jsonls = {
           settings = {
             json = {
@@ -144,6 +141,8 @@ return {
             },
           },
         },
+        eslint = true,
+        ts_ls = true,
 
         yamlls = {
           settings = {
@@ -327,6 +326,25 @@ return {
           lua = { "stylua" },
           nix = { "nixfmt" },
           python = { "black", "ruff" },
+          rust = { "rustfmt", lsp_format = "fallback" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
+          javascript = { "prettier" },
+          javascriptreact = { "prettier" },
+          html = { "prettier" },
+          css = { "prettier" },
+          scss = { "prettier" },
+          markdown = { "prettier" },
+          yaml = { "prettier" },
+          graphql = { "prettier" },
+          vue = { "prettier" },
+          angular = { "prettier" },
+          less = { "prettier" },
+          flow = { "prettier" },
+          sh = { "beautysh" },
+          bash = { "beautysh" },
+          zsh = { "beautysh" },
+          http = { "kulala-fmt" },
         },
       }
 
