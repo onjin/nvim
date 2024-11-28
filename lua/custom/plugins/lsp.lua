@@ -66,8 +66,9 @@ return {
       end
 
       local servers = {
+        terraformls = true,
+        bashls = true,
         basedpyright = {
-          bashls = true,
           settings = {
             basedpyright = {
               disableOrganizeImports = true, -- Using Ruff LSP
