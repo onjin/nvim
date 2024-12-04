@@ -6,8 +6,6 @@ set("n", "<c-k>", "<c-w><c-k>")
 set("n", "<c-l>", "<c-w><c-l>")
 set("n", "<c-h>", "<c-w><c-h>")
 
-set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
-set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
 -- Toggle hlsearch if it's on, otherwise just do "enter"
 
 set("n", "<C-/>", function()
@@ -70,3 +68,42 @@ end, { noremap = true, silent = true, desc = "[T]oggle [M]iddle line focus" }) -
 -- obsidian settings
 set("n", "<leader>of", ':Telescope find_files search_dirs={"/home/onjin/notes"}<cr>')
 set("n", "<leader>og", ':Telescope live_grep search_dirs={"/home/onjin/notes"}<cr>')
+
+-- running code blocks
+set(
+  "n",
+  "<space><space>r",
+  ":lua require('utils').run_block_in_buffer_split('vertical')<CR>",
+  { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
+)
+set(
+  "n",
+  "<space>rbv",
+  ":lua require('utils').run_block_in_buffer_split('vertical')<CR>",
+  { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
+)
+set(
+  "n",
+  "<space>rbh",
+  ":lua require('utils').run_block_in_buffer_split('horizontal')<CR>",
+  { desc = "Run code block in horizontal buffer split", noremap = true, silent = true }
+)
+
+set(
+  "n",
+  "<space><space>t",
+  ":lua require('utils').run_block_in_terminal_split('vertical')<CR>",
+  { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
+)
+set(
+  "n",
+  "<space>rtv",
+  ":lua require('utils').run_block_in_terminal_split('vertical')<CR>",
+  { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
+)
+set(
+  "n",
+  "<space>rth",
+  ":lua require('utils').run_block_in_terminal_split('horizontal')<CR>",
+  { desc = "Run code block in horizontal terminal split", noremap = true, silent = true }
+)
