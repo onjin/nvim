@@ -72,38 +72,38 @@ set("n", "<leader>og", ':Telescope live_grep search_dirs={"/home/onjin/notes"}<c
 -- running code blocks
 set(
   "n",
-  "<space><space>r",
-  ":lua require('utils').run_block_in_buffer_split('vertical')<CR>",
+  "<space>x",
+  ":lua require('codeblocks').run_block('vertical')<CR>",
   { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
 )
 set(
   "n",
   "<space>rbv",
-  ":lua require('utils').run_block_in_buffer_split('vertical')<CR>",
+  ":lua require('codeblocks').run_block('vertical')<CR>",
   { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
 )
 set(
   "n",
   "<space>rbh",
-  ":lua require('utils').run_block_in_buffer_split('horizontal')<CR>",
+  ":lua require('codeblocks').run_block('horizontal')<CR>",
   { desc = "Run code block in horizontal buffer split", noremap = true, silent = true }
 )
 
 set(
   "n",
-  "<space><space>t",
-  ":lua require('utils').run_block_in_terminal_split('vertical')<CR>",
+  "<space>t",
+  ":lua require('codeblocks').run_block('vertical', 'terminal')<CR>",
   { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
 )
 set(
   "n",
   "<space>rtv",
-  ":lua require('utils').run_block_in_terminal_split('vertical')<CR>",
+  ":lua require('codeblocks').run_block('vertical', 'terminal')<CR>",
   { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
 )
 set(
   "n",
   "<space>rth",
-  ":lua require('utils').run_block_in_terminal_split('horizontal')<CR>",
+  ":lua require('codeblocks').run_block('horizontal', 'terminal')<CR>",
   { desc = "Run code block in horizontal terminal split", noremap = true, silent = true }
 )
