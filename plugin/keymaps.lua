@@ -107,3 +107,34 @@ set(
   ":lua require('codeblocks').run_block('horizontal', 'terminal')<CR>",
   { desc = "Run code block in horizontal terminal split", noremap = true, silent = true }
 )
+-- toggle cases
+set(
+  "n",
+  "<space>ct",
+  ":lua require('cases').toggle_case()<CR>",
+  { desc = "Toggle snake, camel, pascal, kebab cases", noremap = true, silent = true }
+)
+set(
+  "n",
+  "<space>cs",
+  ":lua require('cases').convert_case('snake')<CR>",
+  { desc = "Convert to snake case", noremap = true, silent = true }
+)
+set(
+  "n",
+  "<space>cc",
+  ":lua require('cases').convert_case('camel')<CR>",
+  { desc = "Convert to camel case", noremap = true, silent = true }
+)
+set(
+  "n",
+  "<space>cp",
+  ":lua require('cases').convert_case('pascal')<CR>",
+  { desc = "Convert to pascal case", noremap = true, silent = true }
+)
+set(
+  "n",
+  "<space>ck",
+  ":lua require('cases').convert_case('kebab')<CR>",
+  { desc = "Convert to kebab case", noremap = true, silent = true }
+)
