@@ -1,5 +1,7 @@
-vim.opt.shiftwidth = 3
-vim.opt.expandtab = true
+local set = vim.opt_local
+
+set.shiftwidth = 3
+set.expandtab = true
 
 vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>", { desc = "[X] Source file" })
 vim.keymap.set("n", "<space>x", ":.lua<CR>", { desc = "[X] Run with lua" })

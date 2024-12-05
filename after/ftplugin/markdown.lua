@@ -1,4 +1,6 @@
-vim.opt_local.conceallevel = 2
+local set = vim.opt_local
+
+set.conceallevel = 2
 
 local function sanitize_shell_string(input)
   local sanitized = input:gsub("'", "'\\''")

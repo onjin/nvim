@@ -1,4 +1,6 @@
-vim.opt_local.conceallevel = 2
-vim.opt_local.concealcursor = ""
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+local set = vim.opt_local
+
+set.conceallevel = 2
+set.concealcursor = ""
+set.shiftwidth = 4
+set.expandtab = true
