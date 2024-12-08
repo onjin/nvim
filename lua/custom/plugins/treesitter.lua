@@ -6,7 +6,6 @@ return {
       --"nvim-treesitter/nvim-treesitter-textobjects",
     },
     build = ":TSUpdate",
-    branch = "main",
     lazy = false,
     config = function()
       require("custom.treesitter").setup()
