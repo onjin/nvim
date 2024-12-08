@@ -8,7 +8,7 @@ M.setup = function()
 
   require("mason").setup()
   require("mason-lspconfig").setup {
-    ensure_installed = { "lua_ls" },
+    ensure_installed = vim.g.lsp_servers_ensure_installed,
     handlers = {
       -- The first entry (without a key) will be the default handler
       -- and will be called for each installed server that doesn't have
@@ -115,10 +115,6 @@ M.setup = function()
   --   capabilities = require("cmp_nvim_lsp").default_capabilities()
   -- end
 
-  local disable_semantic_tokens = {
-    lua = true,
-  }
-
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local bufnr = args.buf
@@ -210,7 +206,7 @@ M.setup = function()
       end
 
       local filetype = vim.bo[bufnr].filetype
-      if disable_semantic_tokens[filetype] then
+      if vim.g.lsp_disable_semantic_tokens[filetype] then
         client.server_capabilities.semanticTokensProvider = nil
       end
     end,

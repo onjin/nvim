@@ -6,40 +6,7 @@ M.setup = function()
   local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
 
   require("nvim-treesitter").setup {
-    ensure_install = {
-      "bash",
-      "comment",
-      "dockerfile",
-      "gitattributes",
-      "gitignore",
-      "html",
-      "javascript",
-      "json",
-      "latex",
-      "lua",
-      "make",
-      "markdown",
-      "markdown_inline",
-      "python",
-      "regex",
-      "sql",
-      "todotxt",
-      "toml",
-      "vim",
-      "yaml",
-      "comment",
-      "gitcommit",
-      "go",
-      "hcl",
-      "htmldjango",
-      "http",
-      "ini",
-      "regex",
-      "rst",
-      "rust",
-      "ssh_config",
-      "terraform",
-    },
+    ensure_install = vim.g.treesitter_ensure_installed,
   }
   vim.opt.foldmethod = "expr"
   vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

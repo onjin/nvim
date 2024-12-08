@@ -10,6 +10,50 @@
 -- if vim.g.ai_enabled then ... end
 --
 --]]
+
+-- vim global settings here, so we can override it with .nvimrc.ini
+vim.g.mapleader = ","
+vim.g.ai_enabled = 0
+vim.g.autoformat_on_save_enabled = 0
+vim.g.lsp_servers_ensure_installed = { "lua_ls" }
+vim.g.lsp_disable_semantic_tokens = {
+  lua = true,
+} -- disable semanticTokensProvider for filetype
+vim.g.treesitter_ensure_installed = {
+  "bash",
+  "comment",
+  "dockerfile",
+  "gitattributes",
+  "gitignore",
+  "html",
+  "javascript",
+  "json",
+  "latex",
+  "lua",
+  "make",
+  "markdown",
+  "markdown_inline",
+  "python",
+  "regex",
+  "sql",
+  "todotxt",
+  "toml",
+  "vim",
+  "yaml",
+  "comment",
+  "gitcommit",
+  "go",
+  "hcl",
+  "htmldjango",
+  "http",
+  "ini",
+  "regex",
+  "rst",
+  "rust",
+  "ssh_config",
+  "terraform",
+}
+
 local function trim(s)
   return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
@@ -37,9 +81,6 @@ local function set_global_variables(variables)
     vim.g[key] = value
   end
 end
-
--- vim global settings here, so we can override it with .nvimrc.ini
-vim.g.mapleader = ","
 
 -- Load and set variables from .nvimrc.ini
 local ini_file = vim.fn.getcwd() .. "/.nvimrc.ini"
