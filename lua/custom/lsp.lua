@@ -102,13 +102,6 @@ M.setup = function()
     },
   }
 
-  require("neodev").setup {
-    library = {
-      plugins = { "nvim-dap-ui" },
-      types = true,
-    },
-  }
-
   -- disable this so far, not sure whether i need this
   -- local capabilities = nil
   -- if pcall(require, "cmp_nvim_lsp") then
