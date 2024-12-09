@@ -5,8 +5,14 @@ local M = {}
 M.setup = function()
   local group = vim.api.nvim_create_augroup("custom-treesitter", { clear = true })
 
-  require("nvim-treesitter").setup {
-    ensure_install = vim.g.treesitter_ensure_installed,
+  require("nvim-treesitter.configs").setup {
+    ensure_installed = vim.g.treesitter_ensure_installed,
+    sync_install = false,
+    auto_install = true,
+    ignore_install = {},
+    highlight = {
+      enable = true,
+    },
   }
   vim.opt.foldmethod = "expr"
   vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
