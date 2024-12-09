@@ -194,7 +194,6 @@ M.setup = function()
     callback = function(args)
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      vim.notify("client " .. client.name .. "attached")
       vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
       local map = function(keys, func, desc)
