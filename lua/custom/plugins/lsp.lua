@@ -40,6 +40,7 @@ return {
       require("custom.lsp").setup()
     end,
   },
+  { "mfussenegger/nvim-jdtls" }, -- the exension for built in LSP jdtls
   {
     "SmiteshP/nvim-navic",
   },
