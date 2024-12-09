@@ -1,5 +1,86 @@
 local M = {}
 
+-- Function to toggle diagnostics for a specific namespace
+local function toggle_diagnostics_for_namespace(namespace_id)
+  local namespace = vim.diagnostic.get_namespace(namespace_id)
+  if namespace == nil then
+    return
+  end
+
+  if namespace.disabled then
+    vim.diagnostic.enable(true, { ns_id = namespace_id })
+    vim.notify(string.format("Diagnostics enabled for namespace ID: %d", namespace_id))
+  else
+    vim.diagnostic.enable(false, { ns_id = namespace_id })
+    vim.notify(string.format("Diagnostics disabled for namespace ID: %d", namespace_id))
+  end
+end
+
+-- Function to create a Telescope picker for toggling namespaces
+function toggle_diagnostics_selector()
+  local namespaces = vim.diagnostic.get_namespaces()
+  local results = {}
+
+  for namespace_id, namespace_info in pairs(namespaces) do
+    local namespace_name = namespace_info.name
+    local diagnostic_status = namespace_info.disabled == true and "Off" or "On"
+    table.insert(results, {
+      id = namespace_id,
+      name = namespace_name,
+      status = diagnostic_status,
+      display = string.format("%-4d | %-20s | %s", namespace_id, namespace_name, diagnostic_status),
+    })
+  end
+
+  require("telescope.pickers")
+    .new({}, {
+      prompt_title = "Toggle Diagnostics by Namespace",
+      finder = require("telescope.finders").new_table {
+        results = results,
+        entry_maker = function(entry)
+          return {
+            value = entry.id,
+            display = entry.display,
+            ordinal = entry.name,
+            namespace_id = entry.id,
+          }
+        end,
+      },
+      sorter = require("telescope.config").values.generic_sorter {},
+      attach_mappings = function(prompt_bufnr, map)
+        local actions = require "telescope.actions"
+        local action_state = require "telescope.actions.state"
+
+        map("i", "<CR>", function()
+          local selection = action_state.get_selected_entry()
+          if selection then
+            toggle_diagnostics_for_namespace(selection.namespace_id)
+          end
+          actions.close(prompt_bufnr)
+        end)
+
+        map("n", "<CR>", function()
+          local selection = action_state.get_selected_entry()
+          if selection then
+            toggle_diagnostics_for_namespace(selection.namespace_id)
+          end
+          actions.close(prompt_bufnr)
+        end)
+
+        return true
+      end,
+    })
+    :find()
+end
+
+-- Map the selector to <leader>tn
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tn",
+  "<cmd>lua toggle_diagnostics_selector()<CR>",
+  { noremap = true, silent = true, desc = "Select and toggle diagnostics by namespace" }
+)
+
 M.setup = function()
   -- Setup the LSP using mason autoconfig,
   -- without auto installing configured servers
@@ -8,6 +89,7 @@ M.setup = function()
 
   require("mason").setup()
   require("mason-lspconfig").setup {
+    automatic_installation = false,
     ensure_installed = vim.g.lsp_servers_ensure_installed,
     handlers = {
       -- The first entry (without a key) will be the default handler
@@ -112,6 +194,7 @@ M.setup = function()
     callback = function(args)
       local bufnr = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
+      vim.notify("client " .. client.name .. "attached")
       vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
       local map = function(keys, func, desc)
