@@ -1,3 +1,6 @@
+lint:
+	selene ./lua/
+
 update:
 	nvim --headless "+Lazy! sync" +qa
 
@@ -8,6 +11,3 @@ clean:
 
 uninstall: clean
 	rm -rf ~/.config/nvim
-
-lint:
-	selene ./lua/
