@@ -1,30 +1,67 @@
-local data = assert(vim.fn.stdpath "data") --[[@as string]]
+local pickers = require "telescope.pickers"
+local finders = require "telescope.finders"
+local conf = require "telescope.config".values
+local live_multigrep = function(opts)
+   opts = opts or {}
+   opts.cwd = opts.cwd or vim.uv.cwd()
+   local finder = finders.new_async_job {
+      command_generator = function(prompt)
+         if not prompt or prompt == "" then
+            return nil
+         end
+
+         local pieces = vim.split(prompt, "  ")
+         local args = { "rg" }
+         if pieces[1] then
+            table.insert(args, "-e")
+            table.insert(args, pieces[1])
+         end
+         if pieces[2] then
+            table.insert(args, "-g")
+            table.insert(args, pieces[2])
+         end
+         ---@diagnostic disable-next-line: deprecated
+         return vim.tbl_flatten {
+            args,
+            { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" }
+
+         }
+      end,
+   }
+   pickers.new(opts, {
+      debounde = 100,
+      prompt_title = "Multi Grep",
+      finder = finder,
+      previewer = conf.grep_previewer(opts),
+      sorter = require("telescope.sorters").empty(),
+   }):find()
+end
 
 require("telescope").setup {
-  defaults = {
-    vimgrep_arguments = {
-      "rg",
-      "--color=never",
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
-    },
-    initial_mode = "insert",
-  },
-  extensions = {
-    wrap_results = true,
+   defaults = {
+      vimgrep_arguments = {
+         "rg",
+         "--color=never",
+         "--no-heading",
+         "--with-filename",
+         "--line-number",
+         "--column",
+         "--smart-case",
+      },
+      initial_mode = "insert",
+   },
+   extensions = {
+      wrap_results = true,
 
-    fzf = {},
-    -- history = {
-    --   path = vim.fs.joinpath(data, "telescope_history.sqlite3"),
-    --   limit = 100,
-    -- },
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {},
-    },
-  },
+      fzf = {},
+      -- history = {
+      --   path = vim.fs.joinpath(data, "telescope_history.sqlite3"),
+      --   limit = 100,
+      -- },
+      ["ui-select"] = {
+         require("telescope.themes").get_dropdown {},
+      },
+   },
 }
 
 pcall(require("telescope").load_extension, "fzf")
@@ -37,7 +74,8 @@ local builtin = require "telescope.builtin"
 
 vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+-- vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+vim.keymap.set("n", "<leader>sg", live_multigrep, { desc = "[S]earch Multi [G]rep" })
 vim.keymap.set("n", "<leader>sG", builtin.git_files, { desc = "[S]earch by [G]it Files" })
 vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
@@ -52,23 +90,27 @@ vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find exis
 
 -- Slightly advanced example of overriding default behavior and theme
 vim.keymap.set("n", "<leader>/", function()
-  -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-  builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+   builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+      winblend = 10,
+      previewer = false,
+   })
 end, { desc = "[/] Fuzzily search in current buffer" })
 
 -- It's also possible to pass additional configuration options.
 --  See `:help telescope.builtin.live_grep()` for information about particular keys
 vim.keymap.set("n", "<leader>s/", function()
-  builtin.live_grep {
-    grep_open_files = true,
-    prompt_title = "Live Grep in Open Files",
-  }
+   builtin.live_grep {
+      grep_open_files = true,
+      prompt_title = "Live Grep in Open Files",
+   }
 end, { desc = "[S]earch [/] in Open Files" })
 
--- Shortcut for searching your Neovim configuration files
-vim.keymap.set("n", "<leader>sn", function()
-  builtin.find_files { cwd = vim.fn.stdpath "config" }
-end, { desc = "[S]earch [N]eovim files" })
+-- Shortcut for editing searching your Neovim configuration files
+
+vim.keymap.set("n", "<space>en", function()
+   builtin.find_files { cwd = vim.fn.stdpath "config" }
+end, { desc = "[E]earch [N]eovim files" })
+vim.keymap.set("n", "<space>ep", function()
+   builtin.find_files { cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy") }
+end, { desc = "[E]earch Neovim Installed [P]ackages" })

@@ -3,29 +3,29 @@ require("luasnip.session.snippet_collection").clear_snippets "sh"
 local ls = require "luasnip"
 
 local s = ls.snippet
-local i = ls.insert_node
+-- local i = ls.insert_node
 
 local fmt = require("luasnip.extras.fmt").fmt
 
 ls.add_snippets("sh", {
-  s("set#safe", fmt([[set -Eeuo pipefail]], {})),
+   s("set#safe", fmt([[set -Eeuo pipefail]], {})),
 
-  s("$script_dir", fmt([[script_dir=$(cd "$(dirname "${{BASH_SOURCE[0]}}")" &>/dev/null && pwd -P)]], {})),
+   s("$script_dir", fmt([[script_dir=$(cd "$(dirname "${{BASH_SOURCE[0]}}")" &>/dev/null && pwd -P)]], {})),
 
-  s(
-    "trap#close",
-    fmt(
-      [[trap cleanup SIGINT SIGTERM ERR EXIT
+   s(
+      "trap#close",
+      fmt(
+         [[trap cleanup SIGINT SIGTERM ERR EXIT
 cleanup() {{
     # script cleanup here
 }}]],
-      {}
-    )
-  ),
-  s(
-    "die",
-    fmt(
-      [[
+         {}
+      )
+   ),
+   s(
+      "die",
+      fmt(
+         [[
       die() {{
         local msg=$1
         local code=${{2-1}} # default exit status 1
@@ -33,13 +33,13 @@ cleanup() {{
         exit "$code"
       }}
     ]],
-      {}
-    )
-  ),
-  s(
-    "setup_colors",
-    fmt(
-      [[
+         {}
+      )
+   ),
+   s(
+      "setup_colors",
+      fmt(
+         [[
 setup_colors() {{
   if test -t 2; then
     if test -z "${{NO_COLOR-}}"; then
@@ -62,13 +62,13 @@ msg() {{
 
 setup_colors
 ]],
-      {}
-    )
-  ),
-  s(
-    "parse_params",
-    fmt(
-      [[
+         {}
+      )
+   ),
+   s(
+      "parse_params",
+      fmt(
+         [[
       parse_params() {{
         # default values of variables set from params
         flag=0
@@ -105,7 +105,7 @@ setup_colors
 
       parse_params "$@"
       ]],
-      {}
-    )
-  ),
+         {}
+      )
+   ),
 })
