@@ -1,3 +1,4 @@
+print("init")
 --[[
 -- Support of setting global variables per project by  .nvimrc.ini file
 --

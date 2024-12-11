@@ -1,7 +1,6 @@
 local M = {}
 
 M.setup_mini = function()
-   require("mini.icons").setup()
    require("mini.git").setup()
    require("mini.diff").setup()
    require('mini.notify').setup({
