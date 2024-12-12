@@ -1,4 +1,5 @@
 require "custom.snippets"
+
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.opt.shortmess:append "c"
@@ -13,12 +14,8 @@ local sources = {
    { name = "path" },
    { name = "buffer" },
    { name = "luasnip" },
+   { name = "codeium" },
 }
-
-if vim.g.ai_enabled then
-   require("codeium").setup {}
-   table.insert(sources, { name = "codeium" })
-end
 
 cmp.setup {
    sources = sources,
