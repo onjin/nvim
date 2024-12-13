@@ -12,8 +12,5 @@ return {
          "saadparwaiz1/cmp_luasnip",
          "nvim-lua/plenary.nvim",
       },
-      config = function()
-         require "custom.completion"
-      end,
    },
 }

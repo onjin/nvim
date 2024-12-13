@@ -11,4 +11,5 @@ return {
    { 'echasnovski/mini.tabline',     version = false }, -- Minimal and fast tabline showing listed buffers
    { "editorconfig/editorconfig-vim" },                 -- Support .editorconfig file settings
    { "chaoren/vim-wordmotion" },                        -- More useful word motions for Vim
+   { 'echasnovski/mini.hipatterns',  version = false }, -- Highlight patterns in text
 }

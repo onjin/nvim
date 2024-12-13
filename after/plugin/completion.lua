@@ -18,6 +18,28 @@ local sources = {
 }
 
 cmp.setup {
+   window = {
+      completion = {
+         winhighlight = "Normal:Pmenu,CursorLine:CmpCursorLine,Search:None",
+         col_offset = -3,
+         side_padding = 0,
+      },
+   },
+   formatting = {
+      expandable_indicator = false,
+      fields = { "kind", "abbr", "menu" },
+      format = function(entry, vim_item)
+         local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+         local strings = vim.split(kind.kind, "%s", { trimempty = true })
+         kind.kind = " " .. (strings[1] or "") .. " "
+         kind.menu = "    (" .. (strings[2] or "") .. ")"
+         if kind.kind == " Codeium " then
+            kind.kind = " λ "
+         end
+
+         return kind
+      end,
+   },
    sources = sources,
    mapping = {
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
@@ -46,3 +68,7 @@ cmp.setup.filetype({ "sql" }, {
       { name = "buffer" },
    },
 })
+
+-- Customization for CmpCursorline cause is same as not selected
+local mocha = require("catppuccin.palettes").get_palette "mocha"
+vim.api.nvim_set_hl(0, "CmpCursorLine", { bg = mocha.base, fg = mocha.pink })
