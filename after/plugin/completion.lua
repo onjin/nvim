@@ -68,7 +68,3 @@ cmp.setup.filetype({ "sql" }, {
       { name = "buffer" },
    },
 })
-
--- Customization for CmpCursorline cause is same as not selected
-local mocha = require("catppuccin.palettes").get_palette "mocha"
-vim.api.nvim_set_hl(0, "CmpCursorLine", { bg = mocha.base, fg = mocha.pink })
