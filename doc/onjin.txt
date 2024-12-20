@@ -1,4 +1,4 @@
-*onjin.txt*          For Neovim >= 0.8.0         Last change: 2024 December 18
+*onjin.txt*          For Neovim >= 0.8.0         Last change: 2024 December 20
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
@@ -35,7 +35,7 @@ FEATURES                       *onjin-personal-neovim-configuration.-features*
 - Displays available keybindings in popup — https://github.com/folke/which-key.nvim
 
 For a full list of plugins refer to
-https://github.com/onjin/.vim/blob/main/lua/custom/plugins/
+https://github.com/onjin/.vim/blob/main/lua/plugins/
 
 
 LOCAL .NVIMRC.INI CONFIG FOR GLOBAL VARIABLES*onjin-personal-neovim-configuration.-local-.nvimrc.ini-config-for-global-variables*
