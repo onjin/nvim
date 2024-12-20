@@ -20,7 +20,7 @@ In neovim help:
 - AI support https://github.com/jcdickinson/codeium.nvim - free code assistance https://codeium.com/pricing (set .nvimrc.ini or vim.g.ai_enabled directly to enable)
 - Displays available keybindings in popup — https://github.com/folke/which-key.nvim
 
-For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/custom/plugins/
+For a full list of plugins refer to https://github.com/onjin/.vim/blob/main/lua/plugins/
 
 ## Local .nvimrc.ini config for global variables
 
