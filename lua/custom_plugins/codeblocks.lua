@@ -40,6 +40,9 @@ local executors = {
   bash = function(code)
     return "bash <<EOF\n" .. code .. "\nEOF"
   end,
+  typescript = function(code)
+    return "tsx <<EOF\n" .. code .. "\nEOF"
+  end,
   -- Add more executors as needed
 }
 
