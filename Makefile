@@ -1,5 +1,7 @@
 lint:
 	selene ./lua/
+style:
+	stylua .
 
 update:
 	nvim --headless "+Lazy! sync" +qa

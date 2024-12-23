@@ -69,44 +69,6 @@ end, { noremap = true, silent = true, desc = "[T]oggle [M]iddle line focus" }) -
 set("n", "<leader>of", ':Telescope find_files search_dirs={"/home/onjin/notes"}<cr>')
 set("n", "<leader>og", ':Telescope live_grep search_dirs={"/home/onjin/notes"}<cr>')
 
--- running code blocks
-set(
-  "n",
-  "<space>x",
-  ":lua require('custom_plugins.codeblocks').run_block('vertical')<CR>",
-  { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
-)
-set(
-  "n",
-  "<space>rbv",
-  ":lua require('custom_plugins.codeblocks').run_block('vertical')<CR>",
-  { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
-)
-set(
-  "n",
-  "<space>rbh",
-  ":lua require('custom_plugins.codeblocks').run_block('horizontal')<CR>",
-  { desc = "Run code block in horizontal buffer split", noremap = true, silent = true }
-)
-
-set(
-  "n",
-  "<space>t",
-  ":lua require('custom_plugins.codeblocks').run_block('vertical', 'terminal')<CR>",
-  { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
-)
-set(
-  "n",
-  "<space>rtv",
-  ":lua require('custom_plugins.codeblocks').run_block('vertical', 'terminal')<CR>",
-  { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
-)
-set(
-  "n",
-  "<space>rth",
-  ":lua require('custom_plugins.codeblocks').run_block('horizontal', 'terminal')<CR>",
-  { desc = "Run code block in horizontal terminal split", noremap = true, silent = true }
-)
 -- toggle cases
 set(
   "n",
