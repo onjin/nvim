@@ -42,40 +42,40 @@ vim.api.nvim_create_user_command("Glow", preview_markdown, {})
 vim.keymap.set("n", "<leader>m", "<cmd>Glow<cr>", {})
 
 -- running code blocks
-set(
+vim.keymap.set(
   "n",
   "<space>x",
-  ":lua require('custom_plugins.codeblocks').run_block('vertical')<CR>",
+  ":lua require('codeblocks').run_block('vertical')<CR>",
   { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
 )
-set(
+vim.keymap.set(
   "n",
   "<space>rbv",
-  ":lua require('custom_plugins.codeblocks').run_block('vertical')<CR>",
+  ":lua require('codeblocks').run_block('vertical')<CR>",
   { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
 )
-set(
+vim.keymap.set(
   "n",
   "<space>rbh",
-  ":lua require('custom_plugins.codeblocks').run_block('horizontal')<CR>",
+  ":lua require('codeblocks').run_block('horizontal')<CR>",
   { desc = "Run code block in horizontal buffer split", noremap = true, silent = true }
 )
 
-set(
+vim.keymap.set(
   "n",
   "<space>t",
-  ":lua require('custom_plugins.codeblocks').run_block('vertical', 'terminal')<CR>",
+  ":lua require('codeblocks').run_block('vertical', 'terminal')<CR>",
   { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
 )
-set(
+vim.keymap.set(
   "n",
   "<space>rtv",
-  ":lua require('custom_plugins.codeblocks').run_block('vertical', 'terminal')<CR>",
+  ":lua require('codeblocks').run_block('vertical', 'terminal')<CR>",
   { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
 )
-set(
+vim.keymap.set(
   "n",
   "<space>rth",
-  ":lua require('custom_plugins.codeblocks').run_block('horizontal', 'terminal')<CR>",
+  ":lua require('codeblocks').run_block('horizontal', 'terminal')<CR>",
   { desc = "Run code block in horizontal terminal split", noremap = true, silent = true }
 )

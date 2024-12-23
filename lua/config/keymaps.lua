@@ -70,36 +70,6 @@ set("n", "<leader>of", ':Telescope find_files search_dirs={"/home/onjin/notes"}<
 set("n", "<leader>og", ':Telescope live_grep search_dirs={"/home/onjin/notes"}<cr>')
 
 -- toggle cases
-set(
-  "n",
-  "<space>ct",
-  ":lua require('custom_plugins.cases').toggle_case()<CR>",
-  { desc = "Toggle snake, camel, pascal, kebab cases", noremap = true, silent = true }
-)
-set(
-  "n",
-  "<space>cs",
-  ":lua require('custom_plugins.cases').convert_case('snake')<CR>",
-  { desc = "Convert to snake case", noremap = true, silent = true }
-)
-set(
-  "n",
-  "<space>cc",
-  ":lua require('custom_plugins.cases').convert_case('camel')<CR>",
-  { desc = "Convert to camel case", noremap = true, silent = true }
-)
-set(
-  "n",
-  "<space>cp",
-  ":lua require('custom_plugins.cases').convert_case('pascal')<CR>",
-  { desc = "Convert to pascal case", noremap = true, silent = true }
-)
-set(
-  "n",
-  "<space>ck",
-  ":lua require('custom_plugins.cases').convert_case('kebab')<CR>",
-  { desc = "Convert to kebab case", noremap = true, silent = true }
-)
 
 -- Easily hit escape in terminal mode.
 set("t", "<esc><esc>", "<c-\\><c-n>")

@@ -10,7 +10,7 @@ local function setup_core()
   require("mini.pairs").setup() -- Minimal and fast autopairs
   require("mini.surround").setup() -- Fast and feature-rich surround actions
   require("mini.tabline").setup() -- Minimal and fast tabline showing listed buffers
-  require("custom_plugins.lastplace").setup()
+  require("lastplace").setup()
 
   local hipatterns = require "mini.hipatterns"
   hipatterns.setup {

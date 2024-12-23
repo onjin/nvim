@@ -5,25 +5,38 @@ local M = {}
 local available_cases = { "snake", "camel", "pascal" } -- do not use kebab in toggling, cause `-` is breaking getting back from
 local current_case_index = 1 -- Tracks the current case index for toggling
 
--- Helper functions for different cases
+--- Change world to snake case
+---@param word string: World to change case type to snake
+---@return string: Snake cased word
 local function to_snake_case(word)
   return word:gsub("(%l)(%u)", "%1_%2"):gsub("-", "_"):lower()
 end
 
+--- Change world to camel case
+---@param word string: World to change case type to camel
+---@return string: Camel cased word
 local function to_camel_case(word)
   word = word:gsub("[-_](%l)", string.upper):gsub("^%l", string.lower)
   return word
 end
 
+--- Change world to pascal case
+---@param word string: World to change case type to pascal
+---@return string: Pascal cased word
 local function to_pascal_case(word)
   return word:gsub("[-_](%l)", string.upper):gsub("^%l", string.upper)
 end
 
+--- Change world to kebab case
+---@param word string: World to change case type to kebab
+---@return string: Kebab cased word
 local function to_kebab_case(word)
   return word:gsub("(%l)(%u)", "%1-%2"):gsub("_", "-"):lower()
 end
 
--- Convert the current word to the specified case
+--- Convert the current word to the specified case
+---@param target_case string: Name of target case
+---@return nil
 M.convert_case = function(target_case)
   local current_word = vim.fn.expand "<cword>" -- Get the word under the cursor
 
@@ -38,7 +51,7 @@ M.convert_case = function(target_case)
   elseif target_case == "kebab" then
     new_word = to_kebab_case(current_word)
   else
-    print("Unsupported case: " .. target_case)
+    vim.print("Unsupported case: " .. target_case)
     return
   end
 
@@ -48,7 +61,7 @@ M.convert_case = function(target_case)
   vim.fn.setline(".", new_line)
 end
 
--- Toggle through available cases
+--- Toggle through available cases
 M.toggle_case = function()
   -- Determine the next case in the loop
   current_case_index = (current_case_index % #available_cases) + 1
@@ -56,7 +69,7 @@ M.toggle_case = function()
 
   -- Convert and update the word
   M.convert_case(target_case)
-  print("Converted to " .. target_case .. " case")
+  vim.print("Converted to " .. target_case .. " case")
 end
 
 -- Usage:
