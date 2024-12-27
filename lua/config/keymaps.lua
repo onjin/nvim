@@ -82,3 +82,5 @@ set("n", "<leader>st", function()
   vim.wo.winfixheight = true
   vim.cmd.term()
 end)
+
+set("n", "<space>T", "<cmd>PlenaryBustedFile %<CR>")
