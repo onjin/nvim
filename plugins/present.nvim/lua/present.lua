@@ -34,6 +34,11 @@ end
 ---@class present.Slide
 ---@field title string: The title of the slide
 ---@field body string[]: The body of the slide
+---@field blocks present.Block[]: A codeblocks inside of a slide
+---
+---@class present.Block
+---@field language string: The language of the codeblock
+---@field body string[]: The body of the codeblock
 
 --- Takes a list of lines and returns a list of slides
 ---@param lines string[]: The lines of the buffer
@@ -43,6 +48,7 @@ local parse_slides = function(lines)
   local current_slide = {
     title = "",
     body = {},
+    blocks = {},
   }
 
   local separator = "^#+ "
@@ -55,12 +61,38 @@ local parse_slides = function(lines)
       current_slide = {
         title = line,
         body = {},
+        blocks = {},
       }
     else
       table.insert(current_slide.body, line)
     end
   end
   table.insert(slides.slides, current_slide)
+
+  -- blocks
+  for _, slide in ipairs(slides.slides) do
+    local block = {
+      language = nil,
+      body = "",
+    }
+    local inside_block = false
+    for _, line in ipairs(slide.body) do
+      if vim.startswith(line, "```") then
+        if not inside_block then
+          inside_block = true
+          block.language = string.sub(line, 4)
+        else
+          inside_block = false
+          block.body = vim.trim(block.body)
+          table.insert(slide.blocks, block)
+        end
+      else
+        if inside_block then
+          block.body = block.body .. line .. "\n"
+        end
+      end
+    end
+  end
   return slides
 end
 

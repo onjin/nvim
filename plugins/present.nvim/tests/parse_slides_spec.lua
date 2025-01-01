@@ -8,6 +8,7 @@ describe("present.parse_slides", function()
         {
           title = "",
           body = {},
+          blocks = {},
         },
       },
     }, parse {})
@@ -19,6 +20,7 @@ describe("present.parse_slides", function()
           {
             title = "# This is the first slide",
             body = { "This is the body" },
+            blocks = {},
           },
         },
       },
@@ -27,5 +29,27 @@ describe("present.parse_slides", function()
         "This is the body",
       }
     )
+  end)
+  it("should parse a file with one slide, and a codeblock", function()
+    local result = parse {
+      "# This is the first slide",
+      "This is the body",
+      "```lua",
+      "print('hi')",
+      "```",
+    }
+    eq(1, #result.slides)
+
+    local slide = result.slides[1]
+    eq("# This is the first slide", slide.title)
+    eq({
+      "This is the body",
+      "```lua",
+      "print('hi')",
+      "```",
+    }, slide.body)
+    local block_body = vim.trim [[print('hi')]]
+    eq("lua", slide.blocks[1].language)
+    eq(block_body, slide.blocks[1].body)
   end)
 end)
