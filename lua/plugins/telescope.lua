@@ -1,3 +1,75 @@
+-- Function to toggle diagnostics for a specific namespace
+local function toggle_diagnostics_for_namespace(namespace_id)
+  local namespace = vim.diagnostic.get_namespace(namespace_id)
+  if namespace == nil then
+    return
+  end
+
+  if namespace.disabled then
+    vim.diagnostic.enable(true, { ns_id = namespace_id })
+    vim.notify(string.format("Diagnostics enabled for namespace ID: %d", namespace_id))
+  else
+    vim.diagnostic.enable(false, { ns_id = namespace_id })
+    vim.notify(string.format("Diagnostics disabled for namespace ID: %d", namespace_id))
+  end
+end
+
+-- Function to create a Telescope picker for toggling namespaces
+function ToggleDiagnosticsSelector()
+  local namespaces = vim.diagnostic.get_namespaces()
+  local results = {}
+
+  for namespace_id, namespace_info in pairs(namespaces) do
+    local namespace_name = namespace_info.name
+    local diagnostic_status = namespace_info.disabled == true and "Off" or "On"
+    table.insert(results, {
+      id = namespace_id,
+      name = namespace_name,
+      status = diagnostic_status,
+      display = string.format("%-4d | %-20s | %s", namespace_id, namespace_name, diagnostic_status),
+    })
+  end
+
+  require("telescope.pickers")
+    .new({}, {
+      prompt_title = "Toggle Diagnostics by Namespace",
+      finder = require("telescope.finders").new_table {
+        results = results,
+        entry_maker = function(entry)
+          return {
+            value = entry.id,
+            display = entry.display,
+            ordinal = entry.name,
+            namespace_id = entry.id,
+          }
+        end,
+      },
+      sorter = require("telescope.config").values.generic_sorter {},
+      attach_mappings = function(prompt_bufnr, map)
+        local actions = require "telescope.actions"
+        local action_state = require "telescope.actions.state"
+
+        map("i", "<CR>", function()
+          local selection = action_state.get_selected_entry()
+          if selection then
+            toggle_diagnostics_for_namespace(selection.namespace_id)
+          end
+          actions.close(prompt_bufnr)
+        end)
+
+        map("n", "<CR>", function()
+          local selection = action_state.get_selected_entry()
+          if selection then
+            toggle_diagnostics_for_namespace(selection.namespace_id)
+          end
+          actions.close(prompt_bufnr)
+        end)
+
+        return true
+      end,
+    })
+    :find()
+end
 local function setup_telescope()
   local pickers = require "telescope.pickers"
   local finders = require "telescope.finders"
@@ -139,6 +211,30 @@ local function setup_telescope()
   vim.keymap.set("n", "<space>ep", function()
     builtin.find_files { cwd = vim.fs.joinpath(vim.fn.stdpath "data", "lazy") }
   end, { desc = "[E]earch Neovim Installed [P]ackages" })
+
+  -- # Obsidian Keymaps
+  vim.keymap.set("n", "<leader>of", ':Telescope find_files search_dirs={"/home/onjin/notes"}<cr>')
+  vim.keymap.set("n", "<leader>og", ':Telescope live_grep search_dirs={"/home/onjin/notes"}<cr>')
+
+  -- # LSP Keymaps
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+      local map = function(keys, func, desc)
+        vim.keymap.set("n", keys, func, { buffer = args.buf, desc = "LSP: " .. desc .. " (telescope)" })
+      end
+
+      -- # Replace lsp mappings from lua/config/keymaps.lua with Telescope ones
+      map("gO", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
+      map("grC", require("telescope.builtin").lsp_incoming_calls, "Incoming Calls")
+      map("grc", require("telescope.builtin").lsp_outgoing_calls, "Outgoing Calls")
+      map("grd", require("telescope.builtin").lsp_definitions, "Definition")
+      map("gri", require("telescope.builtin").lsp_implementations, "Implementation")
+      map("grr", require("telescope.builtin").lsp_references, "References")
+      map("grt", require("telescope.builtin").lsp_type_definitions, "Type Definition")
+
+      map("grw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
+    end,
+  })
 end
 return {
   { "nvim-lua/plenary.nvim" },
