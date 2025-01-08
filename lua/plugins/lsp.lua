@@ -185,7 +185,7 @@ local function setup_lsp()
     },
   }
 
-  if vim.g.autoformat_on_save_enabled then
+  if vim.g.autoformat_on_save_enabled == 1 then
     vim.api.nvim_create_autocmd("BufWritePre", {
       callback = function(args)
         require("conform").format {
