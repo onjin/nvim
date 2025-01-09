@@ -38,4 +38,20 @@ return {
       { "echasnovski/mini.hipatterns", version = false }, -- Highlight patterns in text
     },
   },
+  {
+    "nullromo/go-up.nvim",
+    config = function()
+      local goUp = require "go-up"
+      goUp.setup {}
+      -- Use ctrl+. to center the screen
+      vim.keymap.set({ "n", "v" }, "<space>.", function()
+        require("go-up").centerScreen()
+      end, { desc = "center the screen" })
+
+      -- Use <C-,> to align
+      vim.keymap.set({ "n", "v" }, "<space>,", function()
+        require("go-up").align()
+      end, { desc = "align the screen" })
+    end,
+  },
 }
