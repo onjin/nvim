@@ -7,3 +7,5 @@ require("utils.helpers").set_globals_from_ini ".nvimrc.ini"
 
 --- initialize plugin manager
 require "config.lazy"
+
+vim.cmd.colorscheme(vim.g.colorscheme)

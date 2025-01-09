@@ -8,6 +8,9 @@ vim.g.mapleader = ","
 -- use .nvimrc.ini to set it per project
 vim.g.ai_enabled = 0
 
+-- default colorscheme
+vim.g.colorscheme = "catppuccin-mocha"
+
 -- whether run autoformat on save
 -- use .nvimrc.ini to set it per project
 vim.g.autoformat_on_save_enabled = 0

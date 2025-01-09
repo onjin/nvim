@@ -21,7 +21,6 @@ local function setup_catppuccin()
   vim.g.catppuccin_flavour = "mocha"
 
   catppuccin.setup(options)
-  vim.cmd "colorscheme catppuccin"
 
   local mocha = require("catppuccin.palettes").get_palette "mocha"
   -- mini.tabline
@@ -39,4 +38,47 @@ local function setup_catppuccin()
 end
 return {
   { "catppuccin/nvim", name = "catppuccin", config = setup_catppuccin },
+  {
+    "jqno/tranquility.nvim",
+
+    config = function()
+      -- vim.cmd.colorscheme "tranquility"
+
+      -- Or pick another scheme:
+      -- vim.cmd.colorscheme('tranquil-nord')
+      -- vim.cmd.colorscheme('tranquil-catppuccin')
+      -- vim.cmd.colorscheme('tranquil-intellij')
+
+      -- Or let Neovim pick one at random:
+      -- vim.cmd.colorscheme('tranquil-random')
+    end,
+  },
+  {
+    "zenbones-theme/zenbones.nvim",
+    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+    -- In Vim, compat mode is turned on as Lush only works in Neovim.
+    dependencies = "rktjmp/lush.nvim",
+    lazy = false,
+    priority = 1000,
+    -- you can set set configuration options here
+    -- config = function()
+    --     vim.g.zenbones_darken_comments = 45
+    --     vim.cmd.colorscheme('zenbones')
+    -- end
+  },
+  {
+    "jackplus-xyz/binary.nvim",
+    dependencies = "catppuccin/nvim",
+    config = function()
+      local mocha = require("catppuccin.palettes").get_palette "mocha"
+      require("binary").setup {
+        style = "system", -- Theme style: "system" | "light" | "dark"
+        colors = { -- Colors used for the "light" theme; reversed automatically for "dark"
+          fg = mocha.base, -- Foreground color
+          bg = mocha.text, -- Background color
+        },
+      }
+    end,
+  },
 }
