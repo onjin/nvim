@@ -6,6 +6,7 @@ local s = ls.snippet
 local i = ls.insert_node
 
 local fmt = require("luasnip.extras.fmt").fmt
+vim.notify "python snippets loaded"
 
 local struct_decorator = [=[
   from typing import Callable, ParamSpec, TypeVar
@@ -49,4 +50,7 @@ ls.add_snippets("python", {
       {}
     )
   ),
+  s("pdb.trace", fmt("import pdb; pdb.set_trace()", {})),
+  s("ipdb.trace", fmt("import ipdb; ipdb.set_trace()", {})),
+  s("br", fmt("breakpoint()", {})),
 })
