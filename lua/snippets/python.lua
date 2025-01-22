@@ -6,7 +6,6 @@ local s = ls.snippet
 local i = ls.insert_node
 
 local fmt = require("luasnip.extras.fmt").fmt
-vim.notify "python snippets loaded"
 
 local struct_decorator = [=[
   from typing import Callable, ParamSpec, TypeVar
