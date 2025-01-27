@@ -52,4 +52,18 @@ ls.add_snippets("python", {
   s("pdb.trace", fmt("import pdb; pdb.set_trace()", {})),
   s("ipdb.trace", fmt("import ipdb; ipdb.set_trace()", {})),
   s("br", fmt("breakpoint()", {})),
+  s(
+    "dependencies.inline",
+    fmt(
+      [[
+# /// script
+# dependencies = [
+#     "{package}",
+# ]
+# ///
+
+  ]],
+      { package = i(1, "package") }
+    )
+  ),
 })
