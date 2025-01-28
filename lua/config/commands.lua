@@ -20,3 +20,78 @@ vim.api.nvim_create_autocmd("TermOpen", {
     set.scrolloff = 0
   end,
 })
+
+-- :qs - write all, session and quit
+--
+-- Create a function for the command
+local function quit_session_command()
+  vim.cmd "wa" -- Save all files
+  vim.cmd "mks!" -- Create or overwrite a session
+  vim.cmd "qa" -- Quit all
+end
+
+-- Create a custom command
+vim.api.nvim_create_user_command("QuitSession", quit_session_command, {})
+
+-- Abbreviate the lowercase command to the uppercase one
+vim.cmd "cnoreabbrev qs QuitSession"
+
+-- testing
+vim.api.nvim_create_user_command("ListChars", function()
+  local options = {
+    { name = "Default", value = { tab = "» ", trail = "·", nbsp = "␣" } },
+    {
+      name = "Symbols",
+      value = {
+        space = " ",
+        tab = "␋ ",
+        eol = "␤",
+        trail = "␠",
+        precedes = "«",
+        extends = "»",
+      },
+    },
+    {
+      name = "Fancy",
+      value = {
+        space = " ",
+        tab = "▸ ",
+        eol = "¬",
+        trail = "●",
+        precedes = "«",
+        extends = "»",
+      },
+    },
+    {
+      name = "Plain",
+      value = {
+        space = " ",
+        tab = ">-",
+        eol = "$",
+        trail = "~",
+        precedes = "<",
+        extends = ">",
+      },
+    },
+  }
+
+  -- Extract the display names for the UI
+  local names = vim.tbl_map(function(option)
+    return option.name
+  end, options)
+
+  vim.ui.select(names, { prompt = "Select Listchars Style:" }, function(choice)
+    if choice then
+      -- Find the corresponding value for the selected name
+      for _, option in ipairs(options) do
+        if option.name == choice then
+          vim.opt.listchars = option.value
+          print("Listchars set to: " .. option.name)
+          return
+        end
+      end
+    else
+      print "No selection made."
+    end
+  end)
+end, {})
