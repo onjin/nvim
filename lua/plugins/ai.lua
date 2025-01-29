@@ -1,5 +1,5 @@
 local function setup_codeium()
-  if vim.g.ai_enabled == 1 then
+  if vim.g.ai_enabled == 1 or vim.g.ai_enabled == true then
     require("codeium").setup {
       enable_cmp_source = true,
       virtual_text = {

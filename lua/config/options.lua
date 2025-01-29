@@ -4,17 +4,6 @@ local state_prefix = vim.env.XDG_STATE_HOME or vim.fn.expand "~/.local/state"
 -- default mapleader
 vim.g.mapleader = ","
 
--- whether enable remote AI plugins - my not be allowed in certain projects
--- use .nvimrc.ini to set it per project
-vim.g.ai_enabled = 0
-
--- default colorscheme
-vim.g.colorscheme = "catppuccin-mocha"
-
--- whether run autoformat on save
--- use .nvimrc.ini to set it per project
-vim.g.autoformat_on_save_enabled = 0
-
 vim.g.lsp_servers_ensure_installed = { "lua_ls" }
 vim.g.lsp_disable_semantic_tokens = {
   lua = true,

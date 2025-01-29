@@ -130,9 +130,6 @@ local function setup_telescope()
   -- `opts  **/plugins/**` will search for all instances of `opts` under the `plugins`-directory.
   -- `fetchuser  *.tsx` will search for all instances of `fetchuser` in `.tsx` files.
   -- `writer  **/client/**/*.go` will search for all instances of `writer` in `.go` files under the `client`-directory
-  M.multi_grep = function()
-    live_multigrep()
-  end
 
   require("telescope").setup {
     defaults = {
