@@ -6,6 +6,7 @@ NvimRC.setup = function(config)
   config = H.setup_config(config)
   H.apply_config(config)
   H.create_user_commands(config)
+  H.create_autocommands(config)
 end
 
 NvimRC.config = {
@@ -40,9 +41,7 @@ end
 ---@param config table
 H.set_globals_from_ini = function(config)
   local ini_file = vim.fn.getcwd() .. "/" .. config.file
-  if NvimRC.config.debug then
-    vim.notify("NVimRC: loading ini file " .. ini_file)
-  end
+  H.log("loading ini file " .. ini_file)
   if vim.fn.filereadable(ini_file) == 1 then
     local variables = H.load_ini_file(ini_file)
     variables = H.merge_configs(config.defaults, variables)
@@ -67,13 +66,14 @@ H.merge_configs = function(default_config, user_config)
   return merged
 end
 
-H.apply_config = function(config, first)
-  first = (first ~= false)
+H.apply_config = function(config)
   NvimRC.config = config
   H.set_globals_from_ini(config)
-  if first == false then
-    vim.cmd.colorscheme(vim.g.colorscheme)
-  end
+end
+
+H.run_hooks = function(config)
+  -- this should be run after setup() and after loading plugins
+  vim.cmd.colorscheme(vim.g.colorscheme)
 end
 
 H.load_ini_file = function(file)
@@ -106,14 +106,18 @@ H.load_ini_file = function(file)
   return variables
 end
 
+H.log = function(msg, level, opts)
+  if NvimRC.config.debug == true then
+    vim.notify("NVimRC: " .. msg, level, opts)
+  end
+end
+
 H.set_global_variables = function(variables)
   NvimRC.loaded_variables = {}
   for key, value in pairs(variables) do
     vim.g[key] = value
     NvimRC.loaded_variables[key] = value
-    if NvimRC.config.debug then
-      vim.notify("NVimRC: setting variable '" .. key .. "' => '" .. tostring(value) .. "'")
-    end
+    H.log("setting variable '" .. key .. "' => '" .. tostring(value) .. "'")
   end
 end
 
@@ -125,8 +129,18 @@ H.create_user_commands = function(config)
     vim.cmd("edit " .. config.file)
   end, {})
   vim.api.nvim_create_user_command("NVRCApply", function()
-    H.apply_config(NvimRC.config, false)
+    H.apply_config(NvimRC.config)
+    H.run_hooks(NvimRC.config)
   end, {})
+end
+
+H.create_autocommands = function(config)
+  vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+      H.log "run hooks"
+      H.run_hooks(NvimRC.config)
+    end,
+  })
 end
 
 H.trim = function(s)

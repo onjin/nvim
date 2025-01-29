@@ -3,9 +3,7 @@ require "config.commands"
 require "config.keymaps"
 
 -- set/override globals (vim.g) variables from ini file
-require("nvimrc").setup()
+require("nvimrc").setup { debug = false }
 
 --- initialize plugin manager
 require "config.lazy"
-
-vim.cmd.colorscheme(vim.g.colorscheme)
