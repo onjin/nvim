@@ -42,12 +42,13 @@ end
 H.set_globals_from_ini = function(config)
   local ini_file = vim.fn.getcwd() .. "/" .. config.file
   H.log("loading ini file " .. ini_file)
-  if vim.fn.filereadable(ini_file) == 1 then
-    local variables = H.load_ini_file(ini_file)
-    variables = H.merge_configs(config.defaults, variables)
+  local variables = config.defaults
 
-    H.set_global_variables(variables)
+  if vim.fn.filereadable(ini_file) == 1 then
+    variables = H.load_ini_file(ini_file)
+    variables = H.merge_configs(config.defaults, variables)
   end
+  H.set_global_variables(variables)
 end
 
 H.merge_configs = function(default_config, user_config)
