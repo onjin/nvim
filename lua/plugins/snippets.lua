@@ -1,6 +1,9 @@
 local function setup_snippets()
   local ls = require "luasnip"
 
+  require("luasnip.loaders.from_vscode").lazy_load() -- load friendly-snippets
+  require("luasnip").filetype_extend("python", { "django", "djangohtml" })
+
   -- TODO: Think about `locally_jumpable`, etc.
   -- Might be nice to send PR to luasnip to use filters instead for these functions ;)
 
@@ -53,28 +56,6 @@ local function setup_snippets()
   vim.keymap.set({ "i", "s" }, "<c-j>", function()
     return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1)
   end, { silent = true })
-end
-local function setup_snippets_old()
-  local luasnip = require "luasnip"
-
-  local options = {
-    history = true,
-    updateevents = "TextChanged,TextChangedI",
-  }
-
-  luasnip.config.set_config(options)
-  require("luasnip.loaders.from_vscode").lazy_load()
-
-  vim.api.nvim_create_autocmd("InsertLeave", {
-    callback = function()
-      if
-        require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-        and not require("luasnip").session.jump_active
-      then
-        require("luasnip").unlink_current()
-      end
-    end,
-  })
 end
 return {
   {
