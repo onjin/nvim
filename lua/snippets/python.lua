@@ -28,6 +28,8 @@ local struct_decorator = [=[
 ]=]
 
 ls.add_snippets("python", {
+  s("#!", fmt("#!/usr/bin/env python", {})),
+  s("#!uv", fmt("#!/usr/bin/env -S uv run", {})),
   s("struct#decorator", fmt(struct_decorator, { i(1), i(2), i(3) })),
   s(
     "Generator",
