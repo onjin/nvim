@@ -11,6 +11,7 @@ local function setup_core()
   require("mini.surround").setup() -- Fast and feature-rich surround actions
   require("mini.tabline").setup() -- Minimal and fast tabline showing listed buffers
   require("lastplace").setup()
+  require("likec4").setup()
 
   local hipatterns = require "mini.hipatterns"
   hipatterns.setup {

@@ -34,5 +34,6 @@ return {
   -- end},
   { dir = plugins_dir .. "/codeblocks.nvim" },
   { dir = plugins_dir .. "/lastplace.nvim" },
+  { dir = plugins_dir .. "/likec4.nvim" },
   { dir = plugins_dir .. "/present.nvim" },
 }
