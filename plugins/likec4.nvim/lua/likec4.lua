@@ -22,30 +22,47 @@ function likec4.setup(options)
 
       vim.cmd [[
         set syntax=likec4
-        syntax keyword likec4Keyword specification element model tag
-        syntax keyword likec4Keyword description technology style shape autoLayout include exclude view dynamic parallel
+        " Keywords
+        syntax keyword likec4Keyword specification model description technology autoLayout include exclude views view dynamic parallel color
+        syntax keyword likec4Keyword icon shape style nextgroup=likec4Variable skipwhite
 
+        " Match user-defined elements (actor/system/component/database) after 'element'
+        syntax match likec4Keyword "element " nextgroup=likec4Defined skipwhite
+        syntax match likec4Keyword "tag " nextgroup=likec4Defined skipwhite
+        syntax match likec4Defined "[a-zA-Z0-9_]*" display contained
+
+        " Match variable names separately
+        syntax match likec4Variable "[a-zA-Z_][a-zA-Z0-9_]*" display contained
+
+        " var = element "
+        syntax match likec4Var "^\s*[^=]\+="
+
+        " Operators and Symbols
         syntax match likec4Operator "->"
         syntax match likec4Operator "<-"
         syntax match likec4Operator "="
         syntax match likec4Operator ":"
-        syntax match likec4Parenthesis "{"
-        syntax match likec4Parenthesis "}"
+        syntax match likec4Parenthesis "[{}]"
 
+        " Strings, Comments, and Tags
         syntax region likec4String start=+'+ end=+'+
         syntax region likec4String start=+"+ end=+"+
         syntax match likec4Comment "//.*$" contains=likec4Todo
-        syntax match likec4Tag "#\w"
+        syntax match likec4Tag "#.*" skipwhite
         syntax keyword likec4Todo TODO FIXME contained
 
-        highligh default link likec4Keyword Keyword
-        highlight default link likec4Operator Operator
-        highlight default link likec4Parenthesis Delimiter
-        highlight default link likec4String String
-        highlight default link likec4Comment Comment
-        highlight default link likec4Tag Special
-        highlight default link likec4Todo Todo
-        ]]
+        " Highlighting rules
+        highlight default likec4Keyword guifg=#c586c0
+        highlight default likec4Defined guifg=#dcdcaa " Light yellow for dynamic elements
+        highlight default likec4Parenthesis guifg=#ffd700
+        highlight default likec4String guifg=#ce9178
+        highlight default likec4Tag guifg=#4ec9b0
+        highlight default likec4Variable guifg=#9cdcfe
+        highlight default likec4Operator guifg=#dcdcaa
+        highlight default likec4Comment guifg=#6a9955
+        highlight default likec4Todo guifg=#ff0000
+        highlight default likec4Var guifg=#4fc1ff
+      ]]
     end,
   })
 end
