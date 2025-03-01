@@ -23,11 +23,12 @@ function likec4.setup(options)
       vim.cmd [[
         set syntax=likec4
         " Keywords
-        syntax keyword likec4Keyword specification model description technology autoLayout include exclude views view dynamic parallel color
-        syntax keyword likec4Keyword icon shape style nextgroup=likec4Variable skipwhite
+        syntax keyword likec4Keyword specification model description technology autoLayout include exclude views view dynamic parallel color deployment
+        syntax keyword likec4Keyword icon shape style link title nextgroup=likec4Variable skipwhite
 
         " Match user-defined elements (actor/system/component/database) after 'element'
         syntax match likec4Keyword "element " nextgroup=likec4Defined skipwhite
+        syntax match likec4Keyword "deploymentNode " nextgroup=likec4Defined skipwhite
         syntax match likec4Keyword "tag " nextgroup=likec4Defined skipwhite
         syntax match likec4Defined "[a-zA-Z0-9_]*" display contained
 
