@@ -4,6 +4,7 @@ local function setup_lsp()
   -- and do not require specific configuration to auto setup servers
   local lspconfig = require "lspconfig"
 
+  require("java").setup()
   require("mason").setup()
   require("mason-lspconfig").setup {
     automatic_installation = false,
@@ -96,6 +97,11 @@ local function setup_lsp()
             },
             schemas = require("schemastore").yaml.schemas(),
           },
+        }
+      end,
+      ["jdtls"] = function()
+        lspconfig.jdtls.setup {
+          root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml" }, { upward = true })[1]),
         }
       end,
     },
@@ -249,10 +255,10 @@ return {
 
       -- Schema information
       "b0o/SchemaStore.nvim",
+      "nvim-java/nvim-java",
     },
     config = setup_lsp,
   },
-  { "mfussenegger/nvim-jdtls" }, -- the exension for built in LSP jdtls
   {
     "SmiteshP/nvim-navic",
   },
