@@ -175,6 +175,7 @@ local function setup_lsp()
       javascript = { "prettier" },
       javascriptreact = { "prettier" },
       html = { "prettier" },
+      htmldjango = { "djlint" },
       css = { "prettier" },
       scss = { "prettier" },
       markdown = { "prettier" },
