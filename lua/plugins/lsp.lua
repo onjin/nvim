@@ -172,6 +172,7 @@ local function setup_lsp()
       rust = { "rustfmt", lsp_format = "fallback" },
       typescript = { "prettier" },
       typescriptreact = { "prettier" },
+      java = { "checkstyle" },
       javascript = { "prettier" },
       javascriptreact = { "prettier" },
       html = { "prettier" },
