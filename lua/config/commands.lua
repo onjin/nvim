@@ -33,9 +33,6 @@ end
 -- Create a custom command
 vim.api.nvim_create_user_command("QuitSession", quit_session_command, {})
 
--- Abbreviate the lowercase command to the uppercase one
-vim.cmd "cnoreabbrev qs QuitSession"
-
 -- testing
 vim.api.nvim_create_user_command("ListChars", function()
   local options = {
