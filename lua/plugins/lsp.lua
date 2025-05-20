@@ -106,6 +106,33 @@ local function setup_lsp()
       end,
     },
   }
+  vim.lsp.config("basedpyright", {
+    on_attach = function(client)
+      -- disable diagnostics in favour of `ty`
+      client.handlers["textDocument/publishDiagnostics"] = function() end
+    end,
+  })
+  vim.lsp.config("ty", {
+    cmd = { "uvx", "ty", "server" },
+    filetypes = { "python" },
+    root_dir = vim.fs.dirname(vim.fs.find({ "ty.toml", ".git", "pyproject.toml" }, { upward = true })[1])
+      or vim.fn.getcwd(),
+    capabilities = {
+      textDocument = {
+        publishDiagnostics = {},
+      },
+    },
+    on_attach = function(client, bufnr)
+      -- Disable everything else
+      client.server_capabilities.hoverProvider = false
+      client.server_capabilities.definitionProvider = false
+      client.server_capabilities.referencesProvider = false
+      client.server_capabilities.completionProvider = false
+      client.server_capabilities.renameProvider = false
+      client.server_capabilities.documentSymbolProvider = false
+    end,
+  })
+  vim.lsp.enable "ty"
 
   -- disable this so far, not sure whether i need this
   -- local capabilities = nil
