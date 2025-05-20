@@ -4,7 +4,7 @@ local function setup_lsp()
   -- and do not require specific configuration to auto setup servers
   local lspconfig = require "lspconfig"
 
-  require("java").setup()
+  -- require("java").setup()
   require("mason").setup()
   require("mason-lspconfig").setup {
     automatic_installation = false,
