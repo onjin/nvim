@@ -2,6 +2,8 @@ local function setup_lsp()
   -- Setup the LSP using mason autoconfig,
   -- without auto installing configured servers
   -- and do not require specific configuration to auto setup servers
+  local use_ty = false -- so far just testing, but `ty` fails on many Generic/TypeVarTuples etc
+
   local lspconfig = require "lspconfig"
 
   -- require("java").setup()
@@ -45,12 +47,15 @@ local function setup_lsp()
               },
               diagnosticMode = "workspace",
               useLibraryCodeForTypes = true,
-              logflevel = "Error",
+              logLevel = "Error",
               ignore = { "*" }, -- Using Ruff LSP
               inlayHints = {
+                callArgumentNames = true,
                 variableTypes = true,
                 functionReturnTypes = true,
+                genericTypes = true,
               },
+              useTypingExtensions = true,
             },
           },
         }
@@ -109,30 +114,35 @@ local function setup_lsp()
   vim.lsp.config("basedpyright", {
     on_attach = function(client)
       -- disable diagnostics in favour of `ty`
-      client.handlers["textDocument/publishDiagnostics"] = function() end
+      if use_ty then
+        client.handlers["textDocument/publishDiagnostics"] = function() end
+      end
     end,
   })
-  vim.lsp.config("ty", {
-    cmd = { "uvx", "ty", "server" },
-    filetypes = { "python" },
-    root_dir = vim.fs.dirname(vim.fs.find({ "ty.toml", ".git", "pyproject.toml" }, { upward = true })[1])
-      or vim.fn.getcwd(),
-    capabilities = {
-      textDocument = {
-        publishDiagnostics = {},
+
+  if use_ty then
+    vim.lsp.config("ty", {
+      cmd = { "uvx", "ty", "server" },
+      filetypes = { "python" },
+      root_dir = vim.fs.dirname(vim.fs.find({ "ty.toml", ".git", "pyproject.toml" }, { upward = true })[1])
+        or vim.fn.getcwd(),
+      capabilities = {
+        textDocument = {
+          publishDiagnostics = {},
+        },
       },
-    },
-    on_attach = function(client, bufnr)
-      -- Disable everything else
-      client.server_capabilities.hoverProvider = false
-      client.server_capabilities.definitionProvider = false
-      client.server_capabilities.referencesProvider = false
-      client.server_capabilities.completionProvider = false
-      client.server_capabilities.renameProvider = false
-      client.server_capabilities.documentSymbolProvider = false
-    end,
-  })
-  vim.lsp.enable "ty"
+      on_attach = function(client, bufnr)
+        -- Disable everything else
+        client.server_capabilities.hoverProvider = false
+        client.server_capabilities.definitionProvider = false
+        client.server_capabilities.referencesProvider = false
+        client.server_capabilities.completionProvider = false
+        client.server_capabilities.renameProvider = false
+        client.server_capabilities.documentSymbolProvider = false
+      end,
+    })
+    vim.lsp.enable "ty"
+  end
 
   -- disable this so far, not sure whether i need this
   -- local capabilities = nil
