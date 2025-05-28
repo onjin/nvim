@@ -6,8 +6,6 @@ local function setup_lsp()
 
   local lspconfig = require "lspconfig"
 
-  -- require("java").setup()
-  require("mason").setup()
   require("mason-lspconfig").setup {
     automatic_installation = false,
     ensure_installed = vim.g.lsp_servers_ensure_installed,
@@ -282,7 +280,19 @@ return {
           },
         },
       },
-      "williamboman/mason.nvim",
+      {
+        "williamboman/mason.nvim",
+        opts = {
+          ui = {
+            icons = {
+              package_installed = "✓",
+              package_pending = "➜",
+              package_uninstalled = "✗",
+            },
+          },
+        },
+      },
+
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "haringsrob/nvim_context_vt",
@@ -294,7 +304,51 @@ return {
 
       -- Schema information
       "b0o/SchemaStore.nvim",
-      "nvim-java/nvim-java",
+      {
+        "nvim-java/nvim-java",
+        config = false,
+        dependencies = {
+          {
+            "neovim/nvim-lspconfig",
+            opts = {
+              servers = {
+                -- Your JDTLS configuration goes here
+                jdtls = {
+                  -- settings = {
+                  --   java = {
+                  --     configuration = {
+                  --       runtimes = {
+                  --         {
+                  --           name = "JavaSE-23",
+                  --           path = "/usr/local/sdkman/candidates/java/23-tem",
+                  --         },
+                  --       },
+                  --     },
+                  --   },
+                  -- },
+                },
+              },
+              setup = {
+                jdtls = function()
+                  -- Your nvim-java configuration goes here
+                  require("java").setup {
+                    -- root_markers = {
+                    --   "settings.gradle",
+                    --   "settings.gradle.kts",
+                    --   "pom.xml",
+                    --   "build.gradle",
+                    --   "mvnw",
+                    --   "gradlew",
+                    --   "build.gradle",
+                    --   "build.gradle.kts",
+                    -- },
+                  }
+                end,
+              },
+            },
+          },
+        },
+      },
     },
     config = setup_lsp,
   },
