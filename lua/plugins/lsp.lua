@@ -102,11 +102,11 @@ local function setup_lsp()
           },
         }
       end,
-      ["jdtls"] = function()
-        lspconfig.jdtls.setup {
-          root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml" }, { upward = true })[1]),
-        }
-      end,
+      -- ["jdtls"] = function()
+      --   lspconfig.jdtls.setup {
+      --     root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml" }, { upward = true })[1]),
+      --   }
+      -- end,
     },
   }
   vim.lsp.config("basedpyright", {
@@ -280,20 +280,9 @@ return {
           },
         },
       },
-      {
-        "williamboman/mason.nvim",
-        opts = {
-          ui = {
-            icons = {
-              package_installed = "✓",
-              package_pending = "➜",
-              package_uninstalled = "✗",
-            },
-          },
-        },
-      },
+      { "mason-org/mason.nvim", opts = {} },
+      { "mason-org/mason-lspconfig.nvim", opts = {} },
 
-      "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "haringsrob/nvim_context_vt",
 
@@ -305,47 +294,21 @@ return {
       -- Schema information
       "b0o/SchemaStore.nvim",
       {
-        "nvim-java/nvim-java",
-        config = false,
+        "onjin/nvim-java",
+        opts = {
+          jdtls = {
+            version = "v1.46.1",
+          },
+          java_debug_adapter = {
+            enable = false,
+          },
+          java_test = {
+            enable = false,
+          },
+        },
         dependencies = {
           {
-            "neovim/nvim-lspconfig",
-            opts = {
-              servers = {
-                -- Your JDTLS configuration goes here
-                jdtls = {
-                  -- settings = {
-                  --   java = {
-                  --     configuration = {
-                  --       runtimes = {
-                  --         {
-                  --           name = "JavaSE-23",
-                  --           path = "/usr/local/sdkman/candidates/java/23-tem",
-                  --         },
-                  --       },
-                  --     },
-                  --   },
-                  -- },
-                },
-              },
-              setup = {
-                jdtls = function()
-                  -- Your nvim-java configuration goes here
-                  require("java").setup {
-                    -- root_markers = {
-                    --   "settings.gradle",
-                    --   "settings.gradle.kts",
-                    --   "pom.xml",
-                    --   "build.gradle",
-                    --   "mvnw",
-                    --   "gradlew",
-                    --   "build.gradle",
-                    --   "build.gradle.kts",
-                    -- },
-                  }
-                end,
-              },
-            },
+            { "mason-org/mason-lspconfig.nvim", opts = {} },
           },
         },
       },
