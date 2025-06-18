@@ -27,10 +27,33 @@ local struct_decorator = [=[
 
 ]=]
 
+local helper_benchmark = [=[
+    def benchmark(func, data, label=None):
+        import copy
+        import time
+        import tracemalloc
+
+        label = label or str(func)
+        data_copy = copy.deepcopy(data)
+        tracemalloc.start()
+        start = time.time()
+        result = func(data_copy)
+        end = time.time()
+        mem_current, mem_peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
+        return {{
+            "label": label,
+            "result": result,
+            "time": f"{{end - start:.4f}}",
+            "memory": f"{{mem_peak / 1024:.2f}}",
+        }}
+]=]
+
 ls.add_snippets("python", {
   s("#!", fmt("#!/usr/bin/env python", {})),
   s("#!uv", fmt("#!/usr/bin/env -S uv run", {})),
   s("struct#decorator", fmt(struct_decorator, { i(1), i(2), i(3) })),
+  s("helper#benchmark", fmt(helper_benchmark, {})),
   s(
     "Generator",
     fmt(
