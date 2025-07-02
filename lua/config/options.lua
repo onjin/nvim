@@ -93,6 +93,20 @@ opt.backupdir = { state_prefix .. "/nvim/backup//" }
 opt.directory = { state_prefix .. "/nvim/swp//" }
 
 -----------------------------------------------------------
+-- Folding
+-----------------------------------------------------------
+-- 1) fold by indent - default, we can use treesitter expression at some places
+vim.opt_local.foldmethod = "indent"
+vim.opt_local.foldlevelstart = 1
+vim.opt_local.foldlevel = 1
+
+vim.opt_local.foldminlines = 5 -- at least 5 lines to make a fold
+vim.opt_local.foldnestmax = 3 -- no more than 3 levels deep
+
+-- 4) keep folding turned on
+vim.opt_local.foldenable = true
+
+-----------------------------------------------------------
 -- Spelling
 -----------------------------------------------------------
 

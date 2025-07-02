@@ -14,8 +14,8 @@ local function setup_treesitter()
     },
     indent = { enable = true, disable = { "ruby" } },
   }
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+  -- vim.opt.foldmethod = "expr"
+  -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
   local syntax_on = {
     elixir = true,
