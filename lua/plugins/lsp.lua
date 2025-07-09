@@ -3,6 +3,7 @@ local function setup_lsp()
   -- without auto installing configured servers
   -- and do not require specific configuration to auto setup servers
   local use_ty = false -- so far just testing, but `ty` fails on many Generic/TypeVarTuples etc
+  require('java').setup()
 
   local lspconfig = require "lspconfig"
 
@@ -123,7 +124,7 @@ local function setup_lsp()
       cmd = { "uvx", "ty", "server" },
       filetypes = { "python" },
       root_dir = vim.fs.dirname(vim.fs.find({ "ty.toml", ".git", "pyproject.toml" }, { upward = true })[1])
-        or vim.fn.getcwd(),
+          or vim.fn.getcwd(),
       capabilities = {
         textDocument = {
           publishDiagnostics = {},
@@ -280,7 +281,7 @@ return {
           },
         },
       },
-      { "mason-org/mason.nvim", opts = {} },
+      { "mason-org/mason.nvim",           opts = {} },
       { "mason-org/mason-lspconfig.nvim", opts = {} },
 
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -294,18 +295,7 @@ return {
       -- Schema information
       "b0o/SchemaStore.nvim",
       {
-        "onjin/nvim-java",
-        opts = {
-          jdtls = {
-            version = "v1.46.1",
-          },
-          java_debug_adapter = {
-            enable = false,
-          },
-          java_test = {
-            enable = false,
-          },
-        },
+        "nvim-java/nvim-java",
         dependencies = {
           {
             { "mason-org/mason-lspconfig.nvim", opts = {} },
