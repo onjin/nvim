@@ -48,14 +48,17 @@ local function setup_snippets()
   for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/snippets/*.lua", true)) do
     loadfile(ft_path)()
   end
+  vim.keymap.set({ "i", "s" }, "<C-j>", function()
+    if require("luasnip").choice_active() then
+      require("luasnip").change_choice(1)
+    end
+  end, { desc = "Next choice in LuaSnip" })
 
-  vim.keymap.set({ "i", "s" }, "<c-k>", function()
-    return vim.snippet.active { direction = 1 } and vim.snippet.jump(1)
-  end, { silent = true })
-
-  vim.keymap.set({ "i", "s" }, "<c-j>", function()
-    return vim.snippet.active { direction = -1 } and vim.snippet.jump(-1)
-  end, { silent = true })
+  vim.keymap.set({ "i", "s" }, "<C-k>", function()
+    if require("luasnip").choice_active() then
+      require("luasnip").change_choice(-1)
+    end
+  end, { desc = "Previous choice in LuaSnip" })
 end
 return {
   {

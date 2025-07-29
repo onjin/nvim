@@ -25,9 +25,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
 --
 -- Create a function for the command
 local function quit_session_command()
-  vim.cmd "wa" -- Save all files
+  vim.cmd "wa"   -- Save all files
   vim.cmd "mks!" -- Create or overwrite a session
-  vim.cmd "qa" -- Quit all
+  vim.cmd "qa"   -- Quit all
 end
 
 -- Create a custom command
@@ -92,3 +92,14 @@ vim.api.nvim_create_user_command("ListChars", function()
     end
   end)
 end, {})
+
+
+-- todo.txt | done.txt support
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  callback = function(args)
+    local name = vim.fn.fnamemodify(args.file, ":t"):lower()
+    if name == "todo.txt" or name == "done.txt" then
+      vim.bo.filetype = "todotxt"
+    end
+  end,
+})

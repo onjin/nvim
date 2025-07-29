@@ -3,6 +3,7 @@ local state_prefix = vim.env.XDG_STATE_HOME or vim.fn.expand "~/.local/state"
 
 -- default mapleader
 vim.g.mapleader = ","
+vim.g.maplocalleader = " "
 
 vim.g.lsp_servers_ensure_installed = { "lua_ls" }
 vim.g.lsp_disable_semantic_tokens = {
@@ -75,10 +76,10 @@ vim.opt.exrc = true
 -----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------
-opt.hidden = true -- Enable background buffers
-opt.history = 100 -- Remember N lines in history
+opt.hidden = true    -- Enable background buffers
+opt.history = 100    -- Remember N lines in history
 -- opt.lazyredraw = true -- Faster scrolling
-opt.synmaxcol = 240 -- Max column for syntax highlight
+opt.synmaxcol = 240  -- Max column for syntax highlight
 opt.updatetime = 700 -- ms to wait for trigger an event
 
 -----------------------------------------------------------
@@ -101,7 +102,7 @@ vim.opt_local.foldlevelstart = 1
 vim.opt_local.foldlevel = 1
 
 vim.opt_local.foldminlines = 5 -- at least 5 lines to make a fold
-vim.opt_local.foldnestmax = 3 -- no more than 3 levels deep
+vim.opt_local.foldnestmax = 3  -- no more than 3 levels deep
 
 -- 4) keep folding turned on
 vim.opt_local.foldenable = true
