@@ -31,45 +31,46 @@ function ToggleDiagnosticsSelector()
   end
 
   require("telescope.pickers")
-    .new({}, {
-      prompt_title = "Toggle Diagnostics by Namespace",
-      finder = require("telescope.finders").new_table {
-        results = results,
-        entry_maker = function(entry)
-          return {
-            value = entry.id,
-            display = entry.display,
-            ordinal = entry.name,
-            namespace_id = entry.id,
-          }
+      .new({}, {
+        prompt_title = "Toggle Diagnostics by Namespace",
+        finder = require("telescope.finders").new_table {
+          results = results,
+          entry_maker = function(entry)
+            return {
+              value = entry.id,
+              display = entry.display,
+              ordinal = entry.name,
+              namespace_id = entry.id,
+            }
+          end,
+        },
+        sorter = require("telescope.config").values.generic_sorter {},
+        attach_mappings = function(prompt_bufnr, map)
+          local actions = require "telescope.actions"
+          local action_state = require "telescope.actions.state"
+
+          map("i", "<CR>", function()
+            local selection = action_state.get_selected_entry()
+            if selection then
+              toggle_diagnostics_for_namespace(selection.namespace_id)
+            end
+            actions.close(prompt_bufnr)
+          end)
+
+          map("n", "<CR>", function()
+            local selection = action_state.get_selected_entry()
+            if selection then
+              toggle_diagnostics_for_namespace(selection.namespace_id)
+            end
+            actions.close(prompt_bufnr)
+          end)
+
+          return true
         end,
-      },
-      sorter = require("telescope.config").values.generic_sorter {},
-      attach_mappings = function(prompt_bufnr, map)
-        local actions = require "telescope.actions"
-        local action_state = require "telescope.actions.state"
-
-        map("i", "<CR>", function()
-          local selection = action_state.get_selected_entry()
-          if selection then
-            toggle_diagnostics_for_namespace(selection.namespace_id)
-          end
-          actions.close(prompt_bufnr)
-        end)
-
-        map("n", "<CR>", function()
-          local selection = action_state.get_selected_entry()
-          if selection then
-            toggle_diagnostics_for_namespace(selection.namespace_id)
-          end
-          actions.close(prompt_bufnr)
-        end)
-
-        return true
-      end,
-    })
-    :find()
+      })
+      :find()
 end
+
 local function setup_telescope()
   local pickers = require "telescope.pickers"
   local finders = require "telescope.finders"
@@ -88,9 +89,9 @@ local function setup_telescope()
         end
 
         local pieces = vim.split(prompt, "  ") -- Two spaces
-        local args = { "rg" } -- RipGrep
+        local args = { "rg" }                  -- RipGrep
         if pieces[1] then
-          table.insert(args, "-e") -- "rg --help" -> "-e defines pattern to search for"
+          table.insert(args, "-e")             -- "rg --help" -> "-e defines pattern to search for"
           table.insert(args, pieces[1])
         end
 
@@ -100,27 +101,27 @@ local function setup_telescope()
         end
 
         return vim
-          .iter({
-            args,
-            -- extra ripgrep flags to make it play nice with telescope
-            { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
-          })
-          :flatten()
-          :totable()
+            .iter({
+              args,
+              -- extra ripgrep flags to make it play nice with telescope
+              { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+            })
+            :flatten()
+            :totable()
       end,
       entry_maker = make_entry.gen_from_vimgrep(opts),
       cwd = opts.cwd,
     }
 
     pickers
-      .new(opts, {
-        debounce = 100,
-        prompt_title = "Live MultiGrep",
-        finder = finder,
-        previewer = config.grep_previewer(opts),
-        sorter = sorters.empty(),
-      })
-      :find()
+        .new(opts, {
+          debounce = 100,
+          prompt_title = "Live MultiGrep",
+          finder = finder,
+          previewer = config.grep_previewer(opts),
+          sorter = sorters.empty(),
+        })
+        :find()
   end
 
   --- Live MultiGrep (with filetypes!)
@@ -202,10 +203,10 @@ local function setup_telescope()
 
   -- Shortcut for editing searching your Neovim configuration files
 
-  vim.keymap.set("n", "<space>en", function()
+  vim.keymap.set("n", "<leader>Sc", function()
     builtin.find_files { cwd = vim.fn.stdpath "config" }
   end, { desc = "[E]earch [N]eovim files" })
-  vim.keymap.set("n", "<space>ep", function()
+  vim.keymap.set("n", "<leader>Sp", function()
     builtin.find_files { cwd = vim.fs.joinpath(vim.fn.stdpath "data", "lazy") }
   end, { desc = "[E]earch Neovim Installed [P]ackages" })
 

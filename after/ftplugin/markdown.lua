@@ -44,38 +44,38 @@ vim.keymap.set("n", "<leader>m", "<cmd>Glow<cr>", {})
 -- running code blocks
 vim.keymap.set(
   "n",
-  "<space>x",
+  "<localleader>x",
   ":lua require('codeblocks').run_block('vertical')<CR>",
   { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
 )
 vim.keymap.set(
   "n",
-  "<space>rbv",
+  "<localleader>rbv",
   ":lua require('codeblocks').run_block('vertical')<CR>",
   { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
 )
 vim.keymap.set(
   "n",
-  "<space>rbh",
+  "<localleader>rbh",
   ":lua require('codeblocks').run_block('horizontal')<CR>",
   { desc = "Run code block in horizontal buffer split", noremap = true, silent = true }
 )
 
 vim.keymap.set(
   "n",
-  "<space>t",
+  "<localleader>t",
   ":lua require('codeblocks').run_block('vertical', 'terminal')<CR>",
   { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
 )
 vim.keymap.set(
   "n",
-  "<space>rtv",
+  "<localleader>rtv",
   ":lua require('codeblocks').run_block('vertical', 'terminal')<CR>",
   { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
 )
 vim.keymap.set(
   "n",
-  "<space>rth",
+  "<localleader>rth",
   ":lua require('codeblocks').run_block('horizontal', 'terminal')<CR>",
   { desc = "Run code block in horizontal terminal split", noremap = true, silent = true }
 )

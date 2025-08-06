@@ -79,7 +79,7 @@ map("n", "<leader>st", function()
 end)
 
 -- Run tests on current file
-map("n", "<space>T", "<cmd>PlenaryBustedFile %<CR>")
+map("n", "<localleader>T", "<cmd>PlenaryBustedFile %<CR>")
 
 -- Set up an autocommand for LspAttach
 vim.api.nvim_create_autocmd("LspAttach", {

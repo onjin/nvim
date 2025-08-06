@@ -7,13 +7,13 @@
 --
 -- set(
 --   "n",
---   "<space>x",
+--   "<localleader>x",
 --   ":lua require('codeblocks').run_block('vertical')<CR>",
 --   { desc = "Run code block in vertical buffer split", noremap = true, silent = true }
 -- )
 -- set(
 --   "n",
---   "<space>t",
+--   "<localleader>t",
 --   ":lua require('codeblocks').run_block('vertical', 'terminal')<CR>",
 --   { desc = "Run code block in vertical terminal split", noremap = true, silent = true }
 -- )
@@ -140,10 +140,10 @@ function M.run_block(split_type, output_type)
     end
 
     -- Create a new buffer and display the output
-    local buf = vim.api.nvim_create_buf(false, true) -- Create an unlisted, scratch buffer
+    local buf = vim.api.nvim_create_buf(false, true)                       -- Create an unlisted, scratch buffer
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(output, "\n")) -- Set the output lines
-    vim.api.nvim_buf_set_option(buf, "modifiable", false) -- Make buffer readonly
-    vim.api.nvim_buf_set_option(buf, "buftype", "nofile") -- Mark as a scratch buffer
+    vim.api.nvim_buf_set_option(buf, "modifiable", false)                  -- Make buffer readonly
+    vim.api.nvim_buf_set_option(buf, "buftype", "nofile")                  -- Mark as a scratch buffer
 
     -- Set the buffer to the current window
     vim.api.nvim_win_set_buf(0, buf)
