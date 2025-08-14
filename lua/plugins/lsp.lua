@@ -3,7 +3,12 @@ local function setup_lsp()
   -- without auto installing configured servers
   -- and do not require specific configuration to auto setup servers
   local use_ty = false -- so far just testing, but `ty` fails on many Generic/TypeVarTuples etc
-  require('java').setup()
+  require('java').setup({
+    java_debug_adapter = {
+      enable = false,
+    }
+
+  })
 
   local lspconfig = require "lspconfig"
 
