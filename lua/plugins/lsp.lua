@@ -3,12 +3,6 @@ local function setup_lsp()
   -- without auto installing configured servers
   -- and do not require specific configuration to auto setup servers
   local use_ty = false -- so far just testing, but `ty` fails on many Generic/TypeVarTuples etc
-  require('java').setup({
-    java_debug_adapter = {
-      enable = false,
-    }
-
-  })
 
   local lspconfig = require "lspconfig"
 
@@ -301,9 +295,20 @@ return {
       "b0o/SchemaStore.nvim",
       {
         "nvim-java/nvim-java",
+        config = false,
         dependencies = {
           {
-            { "mason-org/mason-lspconfig.nvim", opts = {} },
+            {
+              "mason-org/mason-lspconfig.nvim",
+              opts = {
+                setup = {
+                  jdtls = function()
+                    -- Your nvim-java configuration goes here
+                    require("java").setup({})
+                  end,
+                },
+              },
+            },
           },
         },
       },
