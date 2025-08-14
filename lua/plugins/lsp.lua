@@ -4,6 +4,37 @@ local function setup_lsp()
   -- and do not require specific configuration to auto setup servers
   local use_ty = false -- so far just testing, but `ty` fails on many Generic/TypeVarTuples etc
 
+  require("java").setup(opts)
+  local lsp_opts = {
+    java_debug_adapter = {
+      enable = false,
+    },
+    verification = {
+      -- nvim-java checks for the order of execution of following
+      -- * require('java').setup()
+      -- * require('lspconfig').jdtls.setup()
+      -- IF they are not executed in the correct order, you will see a error
+      -- notification.
+      -- Set following to false to disable the notification if you know what you
+      -- are doing
+      invalid_order = true,
+
+      -- nvim-java checks if the require('java').setup() is called multiple
+      -- times.
+      -- IF there are multiple setup calls are executed, an error will be shown
+      -- Set following property value to false to disable the notification if
+      -- you know what you are doing
+      duplicate_setup_calls = true,
+
+      -- nvim-java checks if nvim-java/mason-registry is added correctly to
+      -- mason.nvim plugin.
+      -- IF it's not registered correctly, an error will be thrown and nvim-java
+      -- will stop setup
+      invalid_mason_registry = false,
+    },
+  }
+  require("lspconfig").jdtls.setup(lsp_opts)
+
   local lspconfig = require "lspconfig"
 
   require("mason-lspconfig").setup {
@@ -102,11 +133,6 @@ local function setup_lsp()
           },
         }
       end,
-      -- ["jdtls"] = function()
-      --   lspconfig.jdtls.setup {
-      --     root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw", "pom.xml" }, { upward = true })[1]),
-      --   }
-      -- end,
     },
   }
   vim.lsp.config("basedpyright", {
@@ -263,6 +289,13 @@ end
 
 return {
   {
+    "nvim-java/nvim-java",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+    },
+    config = false,
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       {
@@ -280,8 +313,8 @@ return {
           },
         },
       },
-      { "mason-org/mason.nvim",           opts = {} },
-      { "mason-org/mason-lspconfig.nvim", opts = {} },
+      { "mason-org/mason.nvim",          opts = {} },
+      { "mason-org/mason-lspconfig.nvim" },
 
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "haringsrob/nvim_context_vt",
@@ -293,25 +326,6 @@ return {
 
       -- Schema information
       "b0o/SchemaStore.nvim",
-      {
-        "nvim-java/nvim-java",
-        config = false,
-        dependencies = {
-          {
-            {
-              "mason-org/mason-lspconfig.nvim",
-              opts = {
-                setup = {
-                  jdtls = function()
-                    -- Your nvim-java configuration goes here
-                    require("java").setup({})
-                  end,
-                },
-              },
-            },
-          },
-        },
-      },
     },
     config = setup_lsp,
   },
