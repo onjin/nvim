@@ -20,8 +20,8 @@ return {
 
       orgmode.setup {
         org_agenda_files = get_agenda_files(),
-        org_default_notes_file = "~/notes/00.Inbox/refile.org",
-        org_todo_keywords = { "TODO", "NEXT", "WAITING", "|", "DONE", "CANCELLED" },
+        org_default_notes_file = "~/notes/inbox.org",
+        org_todo_keywords = { "TODO", "NEXT", "IN-PROGRESS", "WAITING", "|", "DONE", "CANCELLED" },
         -- Performance optimizations
         org_agenda_span = "week",
         org_agenda_start_day = "-3d", -- Show 3 days back
@@ -35,22 +35,32 @@ return {
           t = {
             description = "Task",
             template = "* TODO %?\n  SCHEDULED: %t",
-            target = "~/notes/00.Inbox/tasks.org",
+            target = "~/notes/todo.org",
           },
           p = {
+            description = "Project",
+            template = "* %?\n  %u\n  :CATEGORY: Project",
+            target = "~/notes/todo.org",
+          },
+          a = {
+            description = "Area",
+            template = "* %?\n  %u\n  :CATEGORY: Area",
+            target = "~/notes/todo.org",
+          },
+          r = {
+            description = "Resource",
+            template = "* %?\n  %u\n  :CATEGORY: Resource",
+            target = "~/notes/todo.org",
+          },
+          T = {
             description = "Project Task",
             template = "* TODO %?\n  :PROPERTIES:\n  :PROJECT: %^{Project}\n  :END:\n  SCHEDULED: %t",
-            target = cwd .. "/docs/tasks.org",
+            target = cwd .. "/docs/project.org",
           },
-          n = {
-            description = "Note",
-            template = "* %?\n  %u",
-            target = "~/notes/00.Inbox/notes.org",
-          },
-          m = {
-            description = "Meeting",
+          M = {
+            description = "Project Meeting",
             template = "* MEETING %? :meeting:\n  SCHEDULED: %t\n** Attendees\n** Agenda\n** Notes\n** Action Items",
-            target = cwd .. "/docs/meetings.org",
+            target = cwd .. "/docs/project.org",
           },
         },
         mappings = {
@@ -237,6 +247,28 @@ return {
       }
     end,
   },
+  {
+    "chipsenkbeil/org-roam.nvim",
+    tag = "0.1.1",
+    dependencies = {
+      {
+        "nvim-orgmode/orgmode",
+      },
+    },
+    config = function()
+      require("org-roam").setup({
+        directory = "~/notes/notes/",
+        org_files = {
+          "~/notes/todo.org",
+        },
+        extensions = {
+          dailies = {
+            directory = "journal",
+          },
+        },
+      })
+    end
+  }
 }
 
 -- Optional: Add to lua/plugins/telescope.lua or create lua/plugins/org-telescope.lua
