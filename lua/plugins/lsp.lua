@@ -2,7 +2,6 @@ local function setup_lsp()
   -- Setup the LSP using mason autoconfig,
   -- without auto installing configured servers
   -- and do not require specific configuration to auto setup servers
-  local use_ty = false -- so far just testing, but `ty` fails on many Generic/TypeVarTuples etc
 
   require("java").setup(opts)
   local lsp_opts = {
@@ -136,37 +135,21 @@ local function setup_lsp()
     },
   }
   vim.lsp.config("basedpyright", {
-    on_attach = function(client)
-      -- disable diagnostics in favour of `ty`
-      if use_ty then
-        client.handlers["textDocument/publishDiagnostics"] = function() end
-      end
-    end,
+    on_attach = function(client) end,
   })
 
-  if use_ty then
-    vim.lsp.config("ty", {
-      cmd = { "uvx", "ty", "server" },
-      filetypes = { "python" },
-      root_dir = vim.fs.dirname(vim.fs.find({ "ty.toml", ".git", "pyproject.toml" }, { upward = true })[1])
-          or vim.fn.getcwd(),
-      capabilities = {
-        textDocument = {
-          publishDiagnostics = {},
+  vim.lsp.config("ty", {
+    settings = {
+      ty = {
+        diagnosticMode = "workspace",
+        experimental = {
+          autoImport = true,
+          rename = true,
         },
       },
-      on_attach = function(client, bufnr)
-        -- Disable everything else
-        client.server_capabilities.hoverProvider = false
-        client.server_capabilities.definitionProvider = false
-        client.server_capabilities.referencesProvider = false
-        client.server_capabilities.completionProvider = false
-        client.server_capabilities.renameProvider = false
-        client.server_capabilities.documentSymbolProvider = false
-      end,
-    })
-    vim.lsp.enable "ty"
-  end
+    },
+  })
+  vim.lsp.enable "ty"
 
   -- disable this so far, not sure whether i need this
   -- local capabilities = nil
@@ -313,7 +296,7 @@ return {
           },
         },
       },
-      { "mason-org/mason.nvim",          opts = {} },
+      { "mason-org/mason.nvim", opts = {} },
       { "mason-org/mason-lspconfig.nvim" },
 
       "WhoIsSethDaniel/mason-tool-installer.nvim",
