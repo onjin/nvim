@@ -110,3 +110,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("i", "<C-s>", vim.lsp.buf.signature_help, lsp_opts "Signature Help") -- Signature Help
   end,
 })
+
+-- Put this in your init.lua (or a Lua module you source)
+
+local function copy_cmd_output()
+  vim.ui.input({ prompt = "Shell cmd: " }, function(cmd)
+    if not cmd or cmd == "" then return end
+
+    -- Run command and capture output
+    local out = vim.fn.system(cmd)
+
+    -- Strip one trailing newline (system() usually adds it)
+    out = out:gsub("\r?\n$", "")
+
+    -- If output has newlines, store as linewise; else charwise
+    local regtype = out:find("\n") and "V" or "v"
+
+    -- Copy to system clipboard register (+)
+    vim.fn.setreg("+", out, regtype)
+
+    vim.notify(("Copied %d bytes to clipboard"):format(#out), vim.log.levels.INFO)
+  end)
+end
+
+map("n", "<leader>rs", copy_cmd_output,
+  { desc = "Read shell command output to clipboard" })
