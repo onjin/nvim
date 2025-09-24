@@ -15,8 +15,9 @@ return {
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     config = function()
       require("hardtime").setup {
-        enabled = true,
+        enabled = false,
         restriction_mode = "hint", -- hint, block
+        notification = false,
       }
       vim.keymap.set("n", "<leader>tH", function()
         require("hardtime").toggle()
