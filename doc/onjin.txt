@@ -1,4 +1,4 @@
-*onjin.txt*         For Neovim >= 0.8.0         Last change: 2025 September 24
+*onjin.txt*          For Neovim >= 0.8.0          Last change: 2025 October 01
 
 ==============================================================================
 Table of Contents                                    *onjin-table-of-contents*
@@ -68,7 +68,7 @@ INSTALL BY GIT           *onjin-personal-neovim-configuration.-install-by-git*
 
 Make sure you move old `~/.vim` to f.i. `~/.vim.old` then you can go
 
-**Requirements**some plugins require `rust` already installed (f.e. `blam`).
+**Requirements**: some plugins require `rust` already installed (f.e. `blam`).
 
 >
     git clone https://github.com/onjin/nvim ~/.config/nvim
