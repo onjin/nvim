@@ -9,7 +9,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 
 ls.add_snippets("sh", {
   s("#!", fmt("#!/usr/bin/env bash", {})),
-  s("set#safe", fmt([[set -Eeuo pipefail]], {})),
+  s("set#strict", fmt([[set -Eeuo pipefail]], {})),
   s("$script_dir", fmt([[script_dir=$(cd "$(dirname "${{BASH_SOURCE[0]}}")" &>/dev/null && pwd -P)]], {})),
   s(
     "trap#close",

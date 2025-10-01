@@ -47,10 +47,10 @@ return {
     vim.keymap.set("n", "<m-h><m-l>", function()
       toggle_telescope(harpoon:list())
       --harpoon.ui:toggle_quick_menu(harpoon:list())
-    end)
+    end, { desc = "Harpoon list" })
     vim.keymap.set("n", "<m-h><m-m>", function()
       harpoon:list():add()
-    end)
+    end, { desc = "Harpoon add" })
 
     vim.keymap.set("n", "<m-p>", function()
       harpoon:list():prev()
