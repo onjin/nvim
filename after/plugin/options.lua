@@ -1,26 +1,17 @@
-vim.g.mapleader = ","
-vim.g.maplocalleader = " "
-
 local opt = vim.opt
 local state_prefix = vim.env.XDG_STATE_HOME or vim.fn.expand "~/.local/state"
 
+-- base spaces/tabs if not set
+opt.expandtab = true
+opt.shiftwidth = 4
+opt.tabstop = 4
+
 -- theme
 vim.o.background = "dark"
-vim.cmd.colorscheme "catppuccin_mocha"
-vim.api.nvim_set_hl(0, "Identifier", { fg = "#CDD6F4" }) -- normal text color
-
-
---(S)Ex
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 4
-vim.g.netrw_altv = 1
-vim.g.netrw_winsize = 25
 
 -- fuzzy search by :find text<tab>
 vim.opt.path:append "**"
 
-vim.g.lsp_enabled_servers = { "lua_ls" }
 
 ----- Interesting Options -----
 
@@ -64,8 +55,6 @@ vim.opt.scrolloff = 10
 -- buffers list as tab, and context
 vim.opt.showtabline = 2
 
-vim.g.buffet_show_index = true
-
 -- Disable nvim intro
 vim.opt.shortmess:append "sI"
 
@@ -74,10 +63,10 @@ vim.opt.exrc = true
 -----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------
-opt.hidden = true -- Enable background buffers
-opt.history = 100 -- Remember N lines in history
+opt.hidden = true    -- Enable background buffers
+opt.history = 100    -- Remember N lines in history
 -- opt.lazyredraw = true -- Faster scrolling
-opt.synmaxcol = 240 -- Max column for syntax highlight
+opt.synmaxcol = 240  -- Max column for syntax highlight
 opt.updatetime = 700 -- ms to wait for trigger an event
 
 -----------------------------------------------------------
@@ -100,7 +89,7 @@ vim.opt_local.foldlevelstart = 1
 vim.opt_local.foldlevel = 1
 
 vim.opt_local.foldminlines = 5 -- at least 5 lines to make a fold
-vim.opt_local.foldnestmax = 3 -- no more than 3 levels deep
+vim.opt_local.foldnestmax = 3  -- no more than 3 levels deep
 
 -- 4) keep folding turned on
 vim.opt_local.foldenable = true
@@ -114,35 +103,35 @@ opt.spelllang = "en"
 
 -- Disable builtins plugins
 local disabled_built_ins = {
-  "2html_plugin",
-  "getscript",
-  "getscriptPlugin",
-  "gzip",
-  "logipat",
-  "matchit",
-  "tar",
-  "tarPlugin",
-  "rrhelper",
-  "vimball",
-  "vimballPlugin",
-  "zip",
-  "zipPlugin",
-  "tutor",
-  "rplugin",
-  "syntax",
-  "synmenu",
-  "optwin",
-  "compiler",
-  "bugreport",
-  "ftplugin",
+    "2html_plugin",
+    "getscript",
+    "getscriptPlugin",
+    "gzip",
+    "logipat",
+    "matchit",
+    "tar",
+    "tarPlugin",
+    "rrhelper",
+    "vimball",
+    "vimballPlugin",
+    "zip",
+    "zipPlugin",
+    "tutor",
+    "rplugin",
+    "syntax",
+    "synmenu",
+    "optwin",
+    "compiler",
+    "bugreport",
+    "ftplugin",
 }
 
-for _, plugin in pairs(disabled_built_ins) do
-  vim.g["loaded_" .. plugin] = 1
-end
+-- for _, plugin in pairs(disabled_built_ins) do
+--     vim.g["loaded_" .. plugin] = 1
+-- end
 
 vim.filetype.add {
-  extensions = {
-    cheat = "navi",
-  },
+    extensions = {
+        cheat = "navi",
+    },
 }
