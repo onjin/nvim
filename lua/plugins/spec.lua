@@ -35,13 +35,7 @@ local M = {
         name = "nvim-treesitter",
         stage = "later",
         pin = { checkout = "master" }, -- przykładowy pin; engine zinterpretuje jak potrafi
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                auto_install = true,
-                ensure_installed = { "lua", "vimdoc", "python", "java", "bash" },
-                highlight = { enable = true },
-            })
-        end,
+        config = require('plugins.config.treesitter').config,
     },
 
     -- File manager as buffer
@@ -66,8 +60,19 @@ local M = {
     { source = "editorconfig/editorconfig-vim", stage = "now" },
 
     -- TODO/FIXME & other tags highlightning
-    { source = 'folke/todo-comments.nvim',      stage = "now", opts = require('config.todo-comments') },
+    { source = 'folke/todo-comments.nvim',      stage = "now", opts = require('plugins.config.todo-comments') },
 
+    -- Show menu with mappings
+    {
+        source = 'folke/which-key.nvim',
+        stage = 'now',
+        config = function()
+            vim.keymap.set("n", "<leader>?", function() require("which-key").show({ global = false }) end,
+                { desc = "Buffer Local Keymaps (which-key)" })
+            vim.keymap.set("n", "<leader>/", function() require("which-key").show({ global = true }) end,
+                { desc = "Buffer Local Keymaps (which-key)" })
+        end
+    }
 }
 
 
@@ -80,8 +85,6 @@ for _, mod in ipairs(minis_enabled) do
         stage = "later", --
         config = (mod == "hipatterns") and function()
             local hipatterns = require("mini.hipatterns")
-            local extra      = require("mini.extra")
-            local words      = extra.gen_highlighter.words
 
             hipatterns.setup({
                 highlighters = {

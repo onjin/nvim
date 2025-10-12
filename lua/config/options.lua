@@ -1,3 +1,15 @@
+vim.g.mapleader = ","
+vim.g.maplocalleader = " "
+
+--(S)Ex
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_browse_split = 4
+vim.g.netrw_altv = 1
+vim.g.netrw_winsize = 25
+vim.g.buffet_show_index = true
+
+
 local opt = vim.opt
 local state_prefix = vim.env.XDG_STATE_HOME or vim.fn.expand "~/.local/state"
 
@@ -100,35 +112,6 @@ vim.opt_local.foldenable = true
 
 opt.spell = false
 opt.spelllang = "en"
-
--- Disable builtins plugins
-local disabled_built_ins = {
-    "2html_plugin",
-    "getscript",
-    "getscriptPlugin",
-    "gzip",
-    "logipat",
-    "matchit",
-    "tar",
-    "tarPlugin",
-    "rrhelper",
-    "vimball",
-    "vimballPlugin",
-    "zip",
-    "zipPlugin",
-    "tutor",
-    "rplugin",
-    "syntax",
-    "synmenu",
-    "optwin",
-    "compiler",
-    "bugreport",
-    "ftplugin",
-}
-
--- for _, plugin in pairs(disabled_built_ins) do
---     vim.g["loaded_" .. plugin] = 1
--- end
 
 vim.filetype.add {
     extensions = {

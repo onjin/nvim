@@ -31,10 +31,9 @@ M.lsp_capabilities_keymaps = {
         { mode = "n", lhs = "glf", rhs = vim.lsp.buf.format, desc = "[LSP] Code Format" },
     },
     ["textDocument/publishDiagnostic"] = {
-        { mode = "n", lhs = "<leader>e",  rhs = vim.diagnostic.open_float },
-        { mode = "n", lhs = "<leader>dl", rhs = "<cmd>Pick diagnostic scope='current'<cr>", desc = "List diagnostics (buffer)" },
-        { mode = "n", lhs = "<leader>dL", rhs = "<cmd>Pick diagnostic scope='all'<cr>",     desc = "List diagnostics (all)" },
-
+        { mode = "n", lhs = "<leader>e",  rhs = vim.diagnostic.open_float,                  desc = "[LSP] Open floating diagnostics" },
+        { mode = "n", lhs = "<leader>dl", rhs = "<cmd>Pick diagnostic scope='current'<cr>", desc = "[LSP] List diagnostics (buffer)" },
+        { mode = "n", lhs = "<leader>dL", rhs = "<cmd>Pick diagnostic scope='all'<cr>",     desc = "[LSP] List diagnostics (all)" },
     },
 }
 
