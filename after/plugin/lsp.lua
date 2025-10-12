@@ -1,7 +1,11 @@
-local lsp_global_keymaps = {
+local M = {}
+
+M.lsp_global_keymaps = {
+    { mode = "n", lhs = "gA", rhs = "<cmd>LspAttach<cr>", desc = "[LSP] Pick & Attach LSP" },
+    { mode = "n", lhs = "gD", rhs = "<cmd>LspDetach<cr>", desc = "[LSP] Pick & Detach LSP" },
 }
 
-local lsp_capabilities_keymaps = {
+M.lsp_capabilities_keymaps = {
     ["textdocument/codeaction"] = {
         { mode = "n", lhs = "gra", rhs = vim.lsp.buf.code_action, desc = "[LSP] Code Actions" },
     },
@@ -45,14 +49,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
             vim.keymap.set(m.mode, m.lhs, m.rhs, { buffer = bufnr, silent = true, noremap = true, desc = m.desc })
         end
         -- maps gated by capability
-        for method, maps in pairs(lsp_capabilities_keymaps) do
+        for method, maps in pairs(M.lsp_capabilities_keymaps) do
             if client.supports_method and client:supports_method(method) then
                 for _, m in ipairs(maps) do map(m) end
             end
         end
 
         -- maps that don't depend on a capability
-        for _, m in ipairs(lsp_global_keymaps) do map(m) end
+        for _, m in ipairs(M.lsp_global_keymaps) do map(m) end
 
         -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
         if not client:supports_method('textDocument/willSaveWaitUntil')
@@ -112,3 +116,107 @@ vim.api.nvim_create_user_command("LspInfo", function()
     vim.cmd("silent checkhealth vim.lsp")
 end, { desc = "Get all the information about all LSP attached" })
 -- }}}
+
+
+local has_lspconfig, lspconfig = pcall(require, "lspconfig")
+local configs = has_lspconfig and require("lspconfig.configs") or nil
+
+local function tbl_contains(t, v)
+    for _, x in ipairs(t or {}) do
+        if x == v then return true end
+    end
+    return false
+end
+
+local function get_buf_clients(bufnr)
+    bufnr = bufnr or 0
+    local ok_get_clients = vim.lsp.get_clients ~= nil
+    if ok_get_clients then
+        return vim.lsp.get_clients({ bufnr = bufnr })
+    else
+        -- Neovim <0.10 fallback
+        local attached = {}
+        for _, c in pairs(vim.lsp.get_active_clients()) do
+            if c.attached_buffers and c.attached_buffers[bufnr] then
+                table.insert(attached, c)
+            end
+        end
+        return attached
+    end
+end
+
+local function buf_attached_client_ids(bufnr)
+    local ids = {}
+    for _, c in ipairs(get_buf_clients(bufnr)) do
+        ids[c.id] = true
+    end
+    return ids
+end
+
+--- Pick a matching server (by filetype) and attach/start it for the current buffer.
+function M.attach_picker()
+    local bufnr = 0
+    local ft = vim.bo[bufnr].filetype
+    if not ft or ft == "" then
+        vim.notify("No filetype for current buffer", vim.log.levels.WARN)
+        return
+    end
+
+    -- find servers whose default_config.filetypes contains current ft
+    local candidates = {
+        { label = "basedpyright", name = "basedpyright" },
+        { label = "ruff",         name = "ruff" },
+        { label = "lua_ls",       name = "lua_ls" },
+    }
+
+
+    -- Don’t suggest servers already attached
+    local attached_names = {}
+    for _, c in ipairs(get_buf_clients(bufnr)) do attached_names[c.name] = true end
+    local display = {}
+    for _, item in ipairs(candidates) do
+        local mark = attached_names[item.name] and "✓ " or "  "
+        table.insert(display, mark .. item.label)
+    end
+
+    vim.ui.select(display, { prompt = "Attach LSP to buffer:" }, function(choice, idx)
+        if not choice then return end
+        local picked = candidates[idx]
+        vim.lsp.enable(picked.name)
+    end)
+end
+
+--- Pick an attached client and detach it from current buffer.
+function M.detach_picker()
+    local bufnr = 0
+    local clients = get_buf_clients(bufnr)
+    if #clients == 0 then
+        vim.notify("No LSP clients attached to this buffer", vim.log.levels.INFO)
+        return
+    end
+    local items = {}
+    for _, c in ipairs(clients) do
+        local root = c.config and c.config.root_dir or ""
+        local capn = (c.name or ("id:" .. c.id))
+        local label = root ~= "" and (capn .. "  —  " .. root) or capn
+        table.insert(items, label)
+    end
+
+    vim.ui.select(items, { prompt = "Detach LSP client from buffer:" }, function(choice, idx)
+        if not choice then return end
+        local client = clients[idx]
+        vim.lsp.buf_detach_client(bufnr, client.id) -- buffer-local detach
+        -- If you prefer to stop the whole client (all buffers), use:
+        -- client.stop(true)
+    end)
+end
+
+vim.api.nvim_create_user_command("LspAttach", function()
+    M.attach_picker()
+end, { desc = "Pick & attach matching LSP server" })
+
+vim.api.nvim_create_user_command("LspDettach", function()
+    M.detach_picker()
+end, { desc = "Pick & attach matching LSP server" })
+
+return M
