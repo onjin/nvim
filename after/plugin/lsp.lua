@@ -6,6 +6,22 @@ M.lsp_global_keymaps = {
 }
 
 M.lsp_capabilities_keymaps = {
+    ["textDocument/definition"] = {
+        { mode = "n", lhs = "grd", rhs = vim.lsp.buf.definition, desc = "[LSP] Go to Definition" },
+    },
+    ["textDocument/declaration"] = {
+        { mode = "n", lhs = "grD", rhs = vim.lsp.buf.declaration, desc = "[LSP] Declaration" },
+    },
+    ["textDocument/hover"] = {
+        { mode = "n", lhs = "K", rhs = vim.lsp.buf.hover, desc = "[LSP] Hover Documentation" },
+    },
+    ["callHierarchy/incomingCalls"] = {
+        { mode = "n", lhs = "grC", rhs = vim.lsp.buf.incoming_calls, desc = "[LSP] Incoming Calls" },
+    },
+    ["callHierarchy/outgoingCalls"] = {
+        { mode = "n", lhs = "grc", rhs = vim.lsp.buf.outgoing_calls, desc = "[LSP] Outgoing Calls" },
+    },
+
     ["textdocument/codeaction"] = {
         { mode = "n", lhs = "gra", rhs = vim.lsp.buf.code_action, desc = "[LSP] Code Actions" },
     },
@@ -117,16 +133,6 @@ end, { desc = "Get all the information about all LSP attached" })
 -- }}}
 
 
-local has_lspconfig, lspconfig = pcall(require, "lspconfig")
-local configs = has_lspconfig and require("lspconfig.configs") or nil
-
-local function tbl_contains(t, v)
-    for _, x in ipairs(t or {}) do
-        if x == v then return true end
-    end
-    return false
-end
-
 local function get_buf_clients(bufnr)
     bufnr = bufnr or 0
     local ok_get_clients = vim.lsp.get_clients ~= nil
@@ -144,13 +150,6 @@ local function get_buf_clients(bufnr)
     end
 end
 
-local function buf_attached_client_ids(bufnr)
-    local ids = {}
-    for _, c in ipairs(get_buf_clients(bufnr)) do
-        ids[c.id] = true
-    end
-    return ids
-end
 
 --- Pick a matching server (by filetype) and attach/start it for the current buffer.
 function M.attach_picker()

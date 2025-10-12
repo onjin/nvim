@@ -22,9 +22,11 @@ end
 local function call_setup_or_config(p)
     -- prefer explicit module name, otherwise derive from repo
     local reqname = p.module or plug_name(p):gsub("%.nvim$", "") -- drop .nvim suffix heuristically
+    U.log_debug('[plugins][' .. reqname .. '] loading')
 
     -- If user supplied a config() – always run it (works for Vimscript too)
     if type(p.config) == "function" then
+        U.log_debug('[plugins][' .. reqname .. '] calling .config')
         local okc, err = pcall(p.config)
         if not okc then
             vim.notify("Error in config for " .. p.source .. ": " .. err, vim.log.levels.ERROR)
@@ -35,6 +37,7 @@ local function call_setup_or_config(p)
     -- Optionally try .setup if plugin has a Lua module and exposes it
     if p.has_setup ~= false then
         local ok, mod = pcall(require, reqname)
+        U.log_debug('[plugins][' .. reqname .. '] calling require')
         if not ok then
             -- No module → probably Vimscript plugin; that’s fine, just skip.
             if p.opts then
@@ -44,6 +47,7 @@ local function call_setup_or_config(p)
             return
         end
         if type(mod.setup) == "function" then
+            U.log_debug('[plugins][' .. reqname .. '] calling setup')
             local oks, err = pcall(mod.setup, p.opts or {})
             if not oks then
                 vim.notify("Error in setup for " .. p.source .. ": " .. err, vim.log.levels.ERROR)

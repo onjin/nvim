@@ -54,13 +54,13 @@ local M = {
     },
 
     -- More useful word motions f.e. CameCase or snake_case split into words
-    { source = "chaoren/vim-wordmotion",        stage = "now" },
+    { source = "chaoren/vim-wordmotion",        stage = "later" },
 
     -- Support for loading .editorconfig setting
-    { source = "editorconfig/editorconfig-vim", stage = "now" },
+    { source = "editorconfig/editorconfig-vim", stage = "later" },
 
     -- TODO/FIXME & other tags highlightning
-    { source = 'folke/todo-comments.nvim',      stage = "now", opts = require('plugins.config.todo-comments') },
+    { source = 'folke/todo-comments.nvim',      stage = "later", opts = require('plugins.config.todo-comments') },
 
     -- Show menu with mappings
     {
@@ -72,10 +72,11 @@ local M = {
             vim.keymap.set("n", "<leader>/", function() require("which-key").show({ global = true }) end,
                 { desc = "Buffer Local Keymaps (which-key)" })
         end
-    }
+    },
+
+    -- mini-git - has a 'dash' instead of 'dot' so it is not on a 'minis_enabled' list
+    { source = 'nvim-mini/mini-git', name = 'mini.git', stage = 'later' },
 }
-
-
 
 for _, mod in ipairs(minis_enabled) do
     ---@type PluginSpec
