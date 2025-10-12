@@ -2,6 +2,8 @@
 -- Usage:
 --   local spec = require("plugins.spec")
 --   require("plugins.engine").execute("mini-deps", spec)
+--
+local U = require 'utils'
 
 local Engine = {}
 
@@ -17,24 +19,47 @@ local function plug_name(p)
     local _, repo = split_owner_repo(p.source)
     return repo
 end
-
 local function call_setup_or_config(p)
-    -- If .setup is exported and opts are availabl -> call .setup(opts)
-    -- If not, but p.config available -> call p.config()
-    local ok, mod = pcall(require, plug_name(p))
-    -- use `config` first, then try `setup` with `opts`
+    -- prefer explicit module name, otherwise derive from repo
+    local reqname = p.module or plug_name(p):gsub("%.nvim$", "") -- drop .nvim suffix heuristically
+
+    -- If user supplied a config() – always run it (works for Vimscript too)
     if type(p.config) == "function" then
-        local ok3, err = pcall(p.config)
-        if not ok3 then
+        local okc, err = pcall(p.config)
+        if not okc then
             vim.notify("Error in config for " .. p.source .. ": " .. err, vim.log.levels.ERROR)
         end
-    elseif ok and type(mod.setup) == "function" then
-        local ok2, err = pcall(mod.setup, p.opts or {})
-        if not ok2 then
-            vim.notify("Error in setup for " .. p.source .. ": " .. err, vim.log.levels.ERROR)
-        end
+        return
     end
+
+    -- Optionally try .setup if plugin has a Lua module and exposes it
+    if p.has_setup ~= false then
+        local ok, mod = pcall(require, reqname)
+        if not ok then
+            -- No module → probably Vimscript plugin; that’s fine, just skip.
+            if p.opts then
+                vim.notify(("No Lua module for %s (require('%s')); ignoring opts")
+                    :format(p.source, reqname), vim.log.levels.WARN)
+            end
+            return
+        end
+        if type(mod.setup) == "function" then
+            local oks, err = pcall(mod.setup, p.opts or {})
+            if not oks then
+                vim.notify("Error in setup for " .. p.source .. ": " .. err, vim.log.levels.ERROR)
+            end
+            return
+        end
+        -- Module exists but no setup() – warn only if opts were provided
+        if p.opts then
+            vim.notify(("Module %s has no setup(); opts ignored for %s")
+                :format(reqname, p.source), vim.log.levels.WARN)
+        end
+        return
+    end
+    -- p.has_setup == false → intentional no-op
 end
+
 
 -- ====== Engine: mini.deps ======
 

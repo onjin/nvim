@@ -24,7 +24,8 @@ local M = {
         name = "catppuccin",
         stage = "now",
         config = function()
-            vim.cmd.colorscheme("catppuccin-mocha")
+            vim.cmd.colorscheme(
+                "catppuccin-mocha")
         end,
     },
 
@@ -58,12 +59,15 @@ local M = {
         end,
     },
 
-    -- Mini for all mini plugins (do I need it here? or at engine level?)
-    {
-        source = "nvim-mini/mini.nvim",
-        name = "mini.nvim",
-        stage = "now",
-    },
+    -- More useful word motions f.e. CameCase or snake_case split into words
+    { source = "chaoren/vim-wordmotion",        stage = "now" },
+
+    -- Support for loading .editorconfig setting
+    { source = "editorconfig/editorconfig-vim", stage = "now" },
+
+    -- TODO/FIXME & other tags highlightning
+    { source = 'folke/todo-comments.nvim',      stage = "now", opts = require('config.todo-comments') },
+
 }
 
 
@@ -74,11 +78,17 @@ for _, mod in ipairs(minis_enabled) do
         source = "nvim-mini/mini." .. mod,
         name = "mini." .. mod,
         stage = "later", --
-        opts = (mod == "hipatterns") and {
-            highlighters = {
-                hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
-            },
-        } or nil,
+        config = (mod == "hipatterns") and function()
+            local hipatterns = require("mini.hipatterns")
+            local extra      = require("mini.extra")
+            local words      = extra.gen_highlighter.words
+
+            hipatterns.setup({
+                highlighters = {
+                    hex_color = hipatterns.gen_highlighter.hex_color(),
+                },
+            })
+        end or nil,
     })
 end
 
