@@ -248,7 +248,7 @@ local function setup_lsp()
       end,
     })
   end
-  vim.keymap.set("n", "<leader>lf", function()
+  vim.keymap.set("n", "glf", function()
     require("conform").format {
       lsp_fallback = true,
       quiet = true,
@@ -296,7 +296,7 @@ return {
           },
         },
       },
-      { "mason-org/mason.nvim", opts = {} },
+      { "mason-org/mason.nvim",          opts = {} },
       { "mason-org/mason-lspconfig.nvim" },
 
       "WhoIsSethDaniel/mason-tool-installer.nvim",
