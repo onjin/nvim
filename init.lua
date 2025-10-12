@@ -9,4 +9,4 @@ vim.g.netrw_altv = 1
 vim.g.netrw_winsize = 25
 vim.g.buffet_show_index = true
 
-require "minis"
+require "plugins"

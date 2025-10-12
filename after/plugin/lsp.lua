@@ -1,25 +1,59 @@
+local lsp_global_keymaps = {
+}
+
+local lsp_capabilities_keymaps = {
+    ["textdocument/codeaction"] = {
+        { mode = "n", lhs = "gra", rhs = vim.lsp.buf.code_action, desc = "[LSP] Code Actions" },
+    },
+    ["textDocument/implementation"] = {
+        { mode = "n", lhs = "gri", rhs = vim.lsp.buf.implementation, desc = "[LSP] Go to the implementations" },
+    },
+    ["textDocument/rename"] = {
+        { mode = "n", lhs = "grn", rhs = vim.lsp.buf.rename, desc = "[LSP] Rename" },
+    },
+    ["textDocument/references"] = {
+        { mode = "n", lhs = "grr", rhs = vim.lsp.buf.references, desc = "[LSP] Show references" },
+    },
+    ["textDocument/typeDefinition"] = {
+        { mode = "n", lhs = "grt", rhs = vim.lsp.buf.type_definition, desc = "[LSP] Type Definition" },
+    },
+    ["textDocument/documentSymbol"] = {
+        { mode = "n", lhs = "gO", rhs = vim.lsp.buf.document_symbol, desc = "[LSP] Document Symbols" },
+    },
+    ["textDocument/signatureHelp"] = {
+        { mode = "i", lhs = "<C-s>", rhs = vim.lsp.buf.signature_help, desc = "[LSP] Signature Help" },
+    },
+    ["textDocument/formatting"] = {
+        { mode = "n", lhs = "glf", rhs = vim.lsp.buf.format, desc = "[LSP] Code Format" },
+    },
+    ["textDocument/publishDiagnostic"] = {
+        { mode = "n", lhs = "<leader>e",  rhs = vim.diagnostic.open_float },
+        { mode = "n", lhs = "<leader>dl", rhs = "<cmd>Pick diagnostic scope='current'<cr>", desc = "List diagnostics (buffer)" },
+        { mode = "n", lhs = "<leader>dL", rhs = "<cmd>Pick diagnostic scope='all'<cr>",     desc = "List diagnostics (all)" },
+
+    },
+}
+
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('my.lsp', {}),
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+        local bufnr = args.buf
 
-        if client:supports_method('textDocument/implementation') then
-            -- Create a keymap for vim.lsp.buf.implementation ...
+        -- small helper
+        local function map(m)
+            vim.keymap.set(m.mode, m.lhs, m.rhs, { buffer = bufnr, silent = true, noremap = true, desc = m.desc })
         end
-        -- -- Enable auto-completion. Note: Use CTRL-Y to select an item. |complete_CTRL-Y|
-        -- if client:supports_method('textDocument/completion') then
-        --     -- Optional: trigger autocompletion on EVERY keypress. May be slow!
-        --     -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
-        --     -- client.server_capabilities.completionProvider.triggerCharacters = chars
-        --     vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = false })
-        -- end
-        if client:supports_method('textDocument/publishDiagnostic') then
-            vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+        -- maps gated by capability
+        for method, maps in pairs(lsp_capabilities_keymaps) do
+            if client.supports_method and client:supports_method(method) then
+                for _, m in ipairs(maps) do map(m) end
+            end
         end
-        if client:supports_method('textDocument/formatting') then
-            vim.keymap.set("n", "glf", vim.lsp.buf.format)
-        end
-        -- Auto-format ("lint") on save.
+
+        -- maps that don't depend on a capability
+        for _, m in ipairs(lsp_global_keymaps) do map(m) end
+
         -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
         if not client:supports_method('textDocument/willSaveWaitUntil')
             and client:supports_method('textDocument/formatting') then
@@ -33,6 +67,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
     end,
 })
+
 vim.api.nvim_create_user_command("LspRestart", function()
     local detach_clients = {}
     for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
@@ -53,7 +88,7 @@ vim.api.nvim_create_user_command("LspRestart", function()
                     for _, buf in ipairs(client[2]) do
                         vim.lsp.buf_attach_client(buf, client_id)
                     end
-                    vim.notify("[lsp] " .. name .. ": restarted")
+                    vim.notify("[LSP] " .. name .. ": restarted")
                 end
                 detach_clients[name] = nil
             end
@@ -65,6 +100,7 @@ vim.api.nvim_create_user_command("LspRestart", function()
 end, {
     desc = "Restart all the LSP clients attached to the current buffer",
 })
+
 -- Log {{{
 vim.api.nvim_create_user_command("LspLog", function()
     vim.cmd.vsplit(vim.lsp.log.get_filename())

@@ -68,9 +68,7 @@ end)
 now(function()
     -- Use other plugins with `add()`. It ensures plugin is available in current
     -- session (installs if absent)
-    add({
-        source = "catppuccin/nvim", name = "catppuccin"
-    })
+    add({ source = "catppuccin/nvim", name = "catppuccin" })
     vim.cmd('colorscheme catppuccin-mocha')
 end)
 later(function()
@@ -141,4 +139,17 @@ later(function()
         ensure_installed = { 'lua', 'vimdoc', 'python', 'java', 'bash' },
         highlight = { enable = true },
     })
+
+    add({ source = "stevearc/oil.nvim", name = "oil" })
+    require("oil").setup({
+        keymaps = {
+            ["<C-h>"] = false,
+            ["<M-h>"] = "actions.select_split",
+        },
+        view_options = {
+            show_hidden = true,
+        },
+
+    })
+    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 end)
