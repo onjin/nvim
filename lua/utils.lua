@@ -76,4 +76,8 @@ function M.log_warn(msg, opts) M.zlog(msg, "WARN", opts) end
 
 function M.log_error(msg, opts) M.zlog(msg, "ERROR", opts) end
 
+M.setkey = function(mode, lhs, rhs, desc)
+    vim.keymap.set(mode, lhs, rhs, { desc = desc, noremap = true, silent = true })
+end
+
 return M

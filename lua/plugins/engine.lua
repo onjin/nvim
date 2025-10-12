@@ -84,7 +84,7 @@ local function run_minideps(spec)
     ensure_mini_nvim()
     local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
-    -- "now" first
+    -- "now" firs
     now(function()
         for _, p in ipairs(spec) do
             if p.stage == "now" then

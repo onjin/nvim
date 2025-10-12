@@ -37,6 +37,17 @@ local M = {
         pin = { checkout = "master" }, -- przykładowy pin; engine zinterpretuje jak potrafi
         config = require('plugins.config.treesitter').config,
     },
+    -- Class/method context at the top of screen using treesitter
+    {
+        source = 'nvim-treesitter/nvim-treesitter-context',
+        name = 'treesitter-context',
+        stage = 'later',
+        depends = {
+            -- Virtual context endicator at the end class/method/loop
+            { source = 'andersevenrud/nvim_context_vt' },
+        },
+        config = require('plugins.config.treesitter-context').config,
+    },
 
     -- File manager as buffer
     {

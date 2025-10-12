@@ -1,6 +1,4 @@
-local function set(mode, lhs, rhs, desc)
-    vim.keymap.set(mode, lhs, rhs, { desc = desc, noremap = true, silent = true })
-end
+local setkey = require("utils").setkey
 
 -- Auto insertmode in terminals
 vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
@@ -13,7 +11,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 })
 
 -- Open terminals <leader>o...
-set("n", "<leader>ot", function()
+setkey("n", "<leader>ot", function()
         vim.cmd.new()
         vim.cmd.wincmd "J"
         vim.api.nvim_win_set_height(0, 12)
@@ -23,4 +21,4 @@ set("n", "<leader>ot", function()
     "Open bottom terminal"
 )
 -- Terminal mapping
-set("t", "<esc><esc", "<c-\\><c-n>", "Easy <esc> in terminal")
+setkey("t", "<esc><esc", "<c-\\><c-n>", "Easy <esc> in terminal")

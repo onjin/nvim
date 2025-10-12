@@ -1,6 +1,4 @@
-local function set(mode, lhs, rhs, desc)
-    vim.keymap.set(mode, lhs, rhs, { desc = desc, noremap = true, silent = true })
-end
+local setkey = require('utils').setkey
 
 local MiniPick = require('mini.pick')
 local MiniExtra = require('mini.extra')
@@ -9,28 +7,28 @@ local MiniExtra = require('mini.extra')
 vim.ui.select = MiniPick.ui_select
 
 -- Simple windows navigation, same set in tmux
-set("n", "<c-h>", "<c-w><c-h>", "Switch split left")
-set("n", "<c-j>", "<c-w><c-j>", "Switch split down")
-set("n", "<c-k>", "<c-w><c-k>", "Switch split up")
-set("n", "<c-l>", "<c-w><c-l>", "Switch split right")
+setkey("n", "<c-h>", "<c-w><c-h>", "Switch split left")
+setkey("n", "<c-j>", "<c-w><c-j>", "Switch split down")
+setkey("n", "<c-k>", "<c-w><c-k>", "Switch split up")
+setkey("n", "<c-l>", "<c-w><c-l>", "Switch split right")
 
 -- Utilities
-set("n", "<C-/>", function() if vim.opt.hlsearch then vim.cmd.nohl() end end, "Toggle of hlsearch")
+setkey("n", "<C-/>", function() if vim.opt.hlsearch then vim.cmd.nohl() end end, "Toggle of hlsearch")
 
 -- Files search <leaders>s...
-set("n", "<leader>sf", '<cmd>Pick files<cr>', "Search files")
-set("n", "<leader>sb", MiniPick.builtin.buffers, "Search buffers")
-set("n", "<leader>sg", "<cmd>Pick grep_live tool='git'<cr>", 'Search live git grep')
-set("n", "<leader>sG", "<cmd>Pick grep_live tool='rg'<cr>", 'Search live ripgrep')
-set("n", "<leader>s*", "<cmd>Pick grep pattern='<cword>'<cr>", "Grep string under cursor")
+setkey("n", "<leader>sf", '<cmd>Pick files<cr>', "Search files")
+setkey("n", "<leader>sb", MiniPick.builtin.buffers, "Search buffers")
+setkey("n", "<leader>sg", "<cmd>Pick grep_live tool='git'<cr>", 'Search live git grep')
+setkey("n", "<leader>sG", "<cmd>Pick grep_live tool='rg'<cr>", 'Search live ripgrep')
+setkey("n", "<leader>s*", "<cmd>Pick grep pattern='<cword>'<cr>", "Grep string under cursor")
 
 -- Find some elements <leader>f...
-set("n", "<Leader>fk", MiniExtra.pickers.keymaps, "Find keymaps")
-set("n", "<Leader>fc", MiniExtra.pickers.commands, "Find commands")
-set("n", "<leader>fs", MiniExtra.pickers.spellsuggest, "Find spelling")
+setkey("n", "<Leader>fk", MiniExtra.pickers.keymaps, "Find keymaps")
+setkey("n", "<Leader>fc", MiniExtra.pickers.commands, "Find commands")
+setkey("n", "<leader>fs", MiniExtra.pickers.spellsuggest, "Find spelling")
 
 -- Toggles <leader>t...
-set("n", "<leader>tD", function()
+setkey("n", "<leader>tD", function()
         if vim.diagnostic.is_enabled() then
             vim.diagnostic.enable(false)
             vim.notify("[toggle] Diagnostics disabled")
@@ -41,19 +39,19 @@ set("n", "<leader>tD", function()
     end,
     "Toggle Diagnostics"
 )
-set("n", "<leader>td", function()
-        local current_value = vim.diagnostc.config().virtual_text
+setkey("n", "<leader>td", function()
+        local current_value = vim.diagnostic.config().virtual_text
         if current_value then
-            vim.diagnosci.config { virftual_text = false }
+            vim.diagnostic.config { virftual_text = false }
             vim.notify("[toggle] Virtual diagnostic disabled")
         else
-            vim.diagnosci.config { virftual_text = true }
+            vim.diagnostic.config { virftual_text = true }
             vim.notify("[toggle] Virtual diagnostic disabled")
         end
     end,
     "Toggle Virtual diagnostics"
 )
-set("n", "<leader>tm", function()
+setkey("n", "<leader>tm", function()
         vim.o.scrollof = 9999 - vim.o.scrollof
     end,
     "Toggle middle line focus"
