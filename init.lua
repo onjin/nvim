@@ -9,4 +9,9 @@ vim.g.netrw_altv = 1
 vim.g.netrw_winsize = 25
 vim.g.buffet_show_index = true
 
-require "plugins"
+
+-- load plugins specification & engine
+local spec = require("plugins.spec")
+local engine = require("plugins.engine")
+
+engine.execute("mini-deps", spec) -- mini-deps, lazy, builtin (experimental)
