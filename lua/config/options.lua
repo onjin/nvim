@@ -67,6 +67,11 @@ vim.opt.scrolloff = 10
 -- buffers list as tab, and context
 vim.opt.showtabline = 2
 
+-- Do not update diagnostics in Insert mode - it causes many weird not real/outdated diagnostics
+vim.diagnostic.config({
+    update_in_insert = false,
+})
+
 -- Disable nvim intro
 vim.opt.shortmess:append "sI"
 
