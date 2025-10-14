@@ -1,3 +1,6 @@
+local lsp_cfg = require("config.lsp")
+local server_cfg = lsp_cfg.get("python", "basedpyright")
+
 return {
     cmd = { "basedpyright-langserver", "--stdio" },
     filetypes = { "python" },
@@ -8,21 +11,5 @@ return {
     on_attach = function(client)
     end,
     single_file_support = true,
-    settings = {
-        basedpyright = {
-            -- Using Ruff's import organizer
-            disableOrganizeImports = true,
-        },
-        python = {
-            analysis = {
-                autoImportCompletions = false,
-                autoSeachPaths = false,
-                diagnosticMode = "workspace",
-                typeCheckingMode = "standard",
-                diagnosticSeverityOverrides = {
-                    reportPrivateImportUsage = "none",
-                },
-            },
-        }
-    }
+    settings = server_cfg and vim.deepcopy(server_cfg.settings) or nil,
 }
