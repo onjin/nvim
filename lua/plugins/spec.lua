@@ -112,12 +112,6 @@ local M = {
     -- Generate docstrings using :Neogen
     { source = 'danymat/neogen',               stage = 'later' },
 
-    {
-        source = 'ellisonleao/glow.nvim',
-        stage = 'later',
-        config = require('plugins.config.glow').config,
-    },
-
     -- Harpoon2 - it is nice to jump between marked files
     {
         source = 'ThePrimeagen/harpoon',
