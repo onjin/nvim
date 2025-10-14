@@ -1,6 +1,8 @@
-_G.shell_env_set = _G.shell_env_set or (function()
-    if vim.fn.executable("bash-language-server") == 1 then
-        vim.lsp.enable("bashls")
-    end
-    return true
-end)()
+if not _G.shell_env_set then
+    _G.shell_env_set = true
+    vim.schedule(function()
+        if vim.fn.executable("bash-language-server") == 1 then
+            vim.lsp.enable("bashls")
+        end
+    end)
+end
