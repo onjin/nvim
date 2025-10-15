@@ -13,7 +13,8 @@ local setkey = require('utils').setkey
 
 -- Mini plugins - list of mini plugin names to enable - to lazy to write separate add/require/setup
 local minis_enabled = {
-    "ai", "align", "bracketed", "bufremove", "clue", "completion", "diff", "doc",
+    "ai", "align", "animate", "bracketed", "bufremove", "clue", "completion", "cursorword",
+    "diff", "doc",
     "extra", "files", "fuzzy", "hipatterns", "icons", "indentscope", "keymap",
     "map", "misc", "move", "notify", "operators", "pairs", "pick", "sessions",
     "snippets", "splitjoin", "statusline", "surround", "tabline", "trailspace", "visits",
