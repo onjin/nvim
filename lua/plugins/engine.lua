@@ -64,6 +64,91 @@ local function call_setup_or_config(p)
     -- p.has_setup == false → intentional no-op
 end
 
+local HOOK_ORDER = { "pre_checkout", "post_checkout", "pre_install", "post_install" }
+
+local function normalize_hooks(p)
+    local hooks = p.hooks
+    if hooks == nil then return nil end
+    if type(hooks) ~= "table" then
+        U.log_warn(("Ignoring hooks for %s: expected table, got %s"):format(p.source, type(hooks)))
+        return nil
+    end
+
+    local normalized = {}
+    local mappings = {
+        { field = "pre_checkout", alias = "pre_checkout" },
+        { field = "post_checkout", alias = "post_checkout" },
+        { field = "post_checkout", alias = "post_checout" },
+        { field = "pre_install", alias = "pre_install" },
+        { field = "pre_install", alias = "pre_instann" },
+        { field = "post_install", alias = "post_install" },
+    }
+
+    for _, map in ipairs(mappings) do
+        local fn = hooks[map.alias]
+        if fn ~= nil then
+            if type(fn) == "function" then
+                if normalized[map.field] == nil then
+                    normalized[map.field] = fn
+                end
+            else
+                U.log_warn(
+                    ("Ignoring hook '%s' for %s: expected function, got %s")
+                        :format(map.alias, p.source, type(fn))
+                )
+            end
+        end
+    end
+
+    if next(normalized) == nil then return nil end
+    return normalized
+end
+
+local function minideps_node_from_spec(p)
+    local node = {
+        source = p.source,
+        name = p.name,
+    }
+
+    local hooks = normalize_hooks(p)
+    if hooks then node.hooks = hooks end
+
+    if p.pin then
+        if p.pin.checkout then node.checkout = p.pin.checkout end
+        if p.pin.tag then node.tag = p.pin.tag end
+        if p.pin.commit then node.commit = p.pin.commit end
+    end
+
+    return node
+end
+
+local function make_lazy_build(hooks, spec)
+    if not hooks then return nil end
+    return function(plugin)
+        local ctx = {
+            plugin = plugin,
+            source = spec.source,
+            name = spec.name or plug_name(spec),
+            dir = plugin.dir,
+            stage = spec.stage,
+            pin = spec.pin,
+        }
+
+        for _, hook_name in ipairs(HOOK_ORDER) do
+            local fn = hooks[hook_name]
+            if fn then
+                local ok, err = pcall(fn, ctx)
+                if not ok then
+                    U.log_error(
+                        ("Error in %s hook for %s: %s")
+                            :format(hook_name, spec.source, err)
+                    )
+                end
+            end
+        end
+    end
+end
+
 
 -- ====== Engine: mini.deps ======
 
@@ -94,7 +179,7 @@ local function run_minideps(spec)
                         add({ source = d.source })
                     end
                 end
-                add({ source = p.source, name = p.name })
+                add(minideps_node_from_spec(p))
                 call_setup_or_config(p)
             end
         end
@@ -109,11 +194,7 @@ local function run_minideps(spec)
                         add({ source = d.source })
                     end
                 end
-                local node = { source = p.source, name = p.name }
-                if p.pin and p.pin.checkout then
-                    node.checkout = p.pin.checkout
-                end
-                add(node)
+                add(minideps_node_from_spec(p))
                 call_setup_or_config(p)
             end
         end
@@ -152,6 +233,8 @@ local function run_lazy(spec)
             if p.pin.tag then item.tag = p.pin.tag end
             if p.pin.commit then item.commit = p.pin.commit end
         end
+        local hooks = normalize_hooks(p)
+        if hooks then item.build = make_lazy_build(hooks, p) end
         table.insert(lazy_spec, item)
     end
 

@@ -8,6 +8,7 @@
 --   config   - if there is not `setup()` method or to customize setup
 --   pin      - optional ref/branch/tag/commit
 --   event    - lazy.nvim specific level (np. "VeryLazy" / "BufReadPre"), ignore in others (FIXME)
+--   hooks    - optional install hooks {pre_checkout, post_checkout, pre_install, post_install}
 --
 local setkey = require('utils').setkey
 
@@ -122,6 +123,13 @@ local M = {
         },
         config = require("plugins.config.harpoon").config
     },
+
+    -- Markdown Preview in browser
+    {
+        source = "iamcco/markdown-preview.nvim",
+        stage = 'later',
+        hooks = { post_checkout = function() vim.fn["mkdp#util#install"]() end },
+    }
 }
 
 for _, mod in ipairs(minis_enabled) do

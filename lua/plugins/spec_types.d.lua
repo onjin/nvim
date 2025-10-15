@@ -7,6 +7,14 @@
 ---@field tag?      string  # optional tag
 ---@field commit?   string  # optional commit
 
+---@alias PluginHook fun(ctx?: table)
+
+---@class PluginHooks
+---@field pre_checkout? PluginHook
+---@field post_checkout? PluginHook
+---@field pre_install? PluginHook
+---@field post_install? PluginHook
+
 ---@class PluginDep
 ---@field source string     # "owner/repo"
 ---@field name?  string     # load name (defaults to repo)
@@ -21,5 +29,6 @@
 ---@field pin?     PluginPin         # pinning info
 ---@field event?   string            # hint for lazy.nvim only
 ---@field notes?   string            # free-form doc string
+---@field hooks?   PluginHooks       # install hooks for engines
 
 ---@alias PluginSpecList PluginSpec[]
