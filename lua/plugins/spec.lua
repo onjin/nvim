@@ -175,7 +175,7 @@ local M = {
         opts = {},
     },
     {
-        "nvim-mini/mini.git",
+        "nvim-mini/mini-git",
         name = "mini.git",
         opts = {},
     },
