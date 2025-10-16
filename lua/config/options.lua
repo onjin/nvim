@@ -98,17 +98,24 @@ opt.backupdir = { state_prefix .. "/nvim/backup//" }
 opt.directory = { state_prefix .. "/nvim/swp//" }
 
 -----------------------------------------------------------
--- Folding
 -----------------------------------------------------------
 -- keep folds open by default; treesitter config upgrades the method when available
 opt.foldmethod = "indent"
 opt.foldexpr = ""
 opt.foldenable = true
-opt.foldcolumn = "auto:1"
+opt.foldcolumn = "0"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldminlines = 1
 opt.foldnestmax = 6
+opt.statuscolumn = table.concat({
+    "%s",
+    " ",
+    "%=%{v:lua.require('config.foldcolumn').number()}",
+    " ",
+    "%{v:lua.require('config.foldcolumn').render()}",
+    " ",
+})
 
 -----------------------------------------------------------
 -- Spelling

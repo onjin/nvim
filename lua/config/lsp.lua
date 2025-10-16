@@ -11,8 +11,8 @@ M.servers = {
                 },
                 python = {
                     analysis = {
-                        autoImportCompletions = false,
-                        autoSeachPaths = false,
+                        autoImportCompletions = true,
+                        autoSearchPaths = true,
                         diagnosticMode = "workspace",
                         typeCheckingMode = "standard",
                         diagnosticSeverityOverrides = {

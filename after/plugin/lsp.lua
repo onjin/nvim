@@ -1,5 +1,16 @@
 local M = {}
 
+local mini_completion = require("mini.completion")
+local mini_capabilities = vim.tbl_deep_extend(
+    "force",
+    vim.lsp.protocol.make_client_capabilities(),
+    mini_completion.get_lsp_capabilities()
+)
+
+if vim.lsp.config then
+    vim.lsp.config("*", { capabilities = mini_capabilities })
+end
+
 M.lsp_global_keymaps = {
     { mode = "n", lhs = "gA", rhs = "<cmd>LspAttach<cr>", desc = "[LSP] Pick & Attach LSP" },
     { mode = "n", lhs = "gD", rhs = "<cmd>LspDetach<cr>", desc = "[LSP] Pick & Detach LSP" },
@@ -58,6 +69,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
         local bufnr = args.buf
+
+        if vim.bo[bufnr].omnifunc ~= "v:lua.MiniCompletion.completefunc_lsp" then
+            vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+        end
 
         -- small helper
         local function map(m)

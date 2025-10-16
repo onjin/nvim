@@ -85,7 +85,7 @@ local M = {
     { 'rafamadriz/friendly-snippets' },
 
     -- Generate docstrings using :Neogen
-    { 'danymat/neogen' },
+    { 'danymat/neogen',              opts = {} },
 
     -- Harpoon2 - it is nice to jump between marked files
     {
@@ -324,6 +324,25 @@ local M = {
         "nvim-mini/mini.visits",
         name = "mini.visits",
         opts = {},
+    },
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = { 'kevinhwang91/promise-async' },
+        config = function()
+            require('ufo').setup({
+                enable_get_fold_virt_text = true,
+                provider_selector = function(bufnr, filetype, buftype)
+                    return { 'treesitter', 'indent' }
+                end,
+            })
+            vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
+            vim.keymap.set('n', 'K', function()
+                local winid = require('ufo').peekFoldedLinesUnderCursor()
+                if not winid then
+                    vim.lsp.buf.hover()
+                end
+            end)
+        end
     }
 }
 
