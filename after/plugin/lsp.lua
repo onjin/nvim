@@ -1,14 +1,16 @@
 local M = {}
 
-local mini_completion = require("mini.completion")
-local mini_capabilities = vim.tbl_deep_extend(
-    "force",
-    vim.lsp.protocol.make_client_capabilities(),
-    mini_completion.get_lsp_capabilities()
-)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local has_blink, blink_cmp = pcall(require, "blink.cmp")
+if has_blink then
+    capabilities = blink_cmp.get_lsp_capabilities(capabilities)
+end
 
 if vim.lsp.config then
-    vim.lsp.config("*", { capabilities = mini_capabilities })
+    vim.lsp.config("*", { capabilities = capabilities })
+else
+    vim.lsp.defaults = vim.lsp.defaults or {}
+    vim.lsp.defaults.capabilities = vim.tbl_deep_extend("force", vim.lsp.defaults.capabilities or {}, capabilities)
 end
 
 M.lsp_global_keymaps = {
@@ -69,10 +71,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
         local bufnr = args.buf
-
-        if vim.bo[bufnr].omnifunc ~= "v:lua.MiniCompletion.completefunc_lsp" then
-            vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
-        end
 
         -- small helper
         local function map(m)

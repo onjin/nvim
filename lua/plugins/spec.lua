@@ -84,6 +84,14 @@ local M = {
     -- snippets colletion
     { 'rafamadriz/friendly-snippets' },
 
+    -- Completion engine
+    {
+        "saghen/blink.cmp",
+        version = "v0.*",
+        event = "InsertEnter",
+        config = require('plugins.config.blink'),
+    },
+
     -- Generate docstrings using :Neogen
     { 'danymat/neogen',              opts = {} },
 
@@ -134,11 +142,6 @@ local M = {
     {
         "nvim-mini/mini.clue",
         name = "mini.clue",
-        opts = {},
-    },
-    {
-        "nvim-mini/mini.completion",
-        name = "mini.completion",
         opts = {},
     },
     {

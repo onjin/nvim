@@ -38,7 +38,7 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 - **Navigation & Search** – `mini.pick` replaces Telescope, `mini.extra` adds pickers, `oil.nvim` provides an in-buffer file manager.
 - **UI & Feedback** – `catppuccin`, `mini.notify`, and `todo-comments` surface visual cues and notifications.
-- **Coding Aids** – `nvim-treesitter`, `treesitter-context`, `nvim_context_vt`, and `harpoon` keep structure visible and files at hand.
+- **Coding Aids** – `blink.cmp` surfaces fast completions and imports while `nvim-treesitter`, `treesitter-context`, `nvim_context_vt`, and `harpoon` keep structure visible and files at hand.
 - **Snippets & Docs** – `mini.snippets`, `friendly-snippets`, and `neogen` speed up boilerplate and documentation.
 - **Productivity** – `which-key`, `mini.sessions`, `mini.visits`, and `mini.git` streamline discovery, session handling, and lightweight git status.
 
