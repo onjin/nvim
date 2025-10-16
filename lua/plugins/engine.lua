@@ -1,9 +1,10 @@
--- lua/plugins/spe.lua engines: mini-deps | lazy | builtin
+-- Engines for loading plugin specification expressed in lazy.nvim schema.
 -- Usage:
 --   local spec = require("plugins.spec")
+--   require("plugins.engine").execute(spec)            -- defaults to lazy.nvim
 --   require("plugins.engine").execute("mini-deps", spec)
 --
-local U = require 'utils'
+local U = require('utils')
 
 local Engine = {}
 
@@ -14,141 +15,189 @@ local function split_owner_repo(src)
     return owner, repo or src
 end
 
-local function plug_name(p)
-    if p.name then return p.name end
-    local _, repo = split_owner_repo(p.source)
+local function plug_name(plugin)
+    if plugin.name then return plugin.name end
+    local _, repo = split_owner_repo(plugin.source)
     return repo
 end
-local function call_setup_or_config(p)
-    -- prefer explicit module name, otherwise derive from repo
-    local reqname = p.module or plug_name(p):gsub("%.nvim$", "") -- drop .nvim suffix heuristically
-    U.log_debug('[plugins][' .. reqname .. '] loading')
 
-    -- If user supplied a config() – always run it (works for Vimscript too)
-    if type(p.config) == "function" then
-        U.log_debug('[plugins][' .. reqname .. '] calling .config')
-        local okc, err = pcall(p.config)
-        if not okc then
-            vim.notify("Error in config for " .. p.source .. ": " .. err, vim.log.levels.ERROR)
-        end
-        return
+local function run_init(plugin)
+    if type(plugin.init) ~= "function" then return end
+    local ok, err = pcall(plugin.init, plugin)
+    if not ok then
+        vim.notify(("Error in init for %s: %s"):format(plugin.source, err), vim.log.levels.ERROR)
     end
-
-    -- Optionally try .setup if plugin has a Lua module and exposes it
-    if p.has_setup ~= false then
-        local ok, mod = pcall(require, reqname)
-        U.log_debug('[plugins][' .. reqname .. '] calling require')
-        if not ok then
-            -- No module → probably Vimscript plugin; that’s fine, just skip.
-            if p.opts then
-                vim.notify(("No Lua module for %s (require('%s')); ignoring opts")
-                    :format(p.source, reqname), vim.log.levels.WARN)
-            end
-            return
-        end
-        if type(mod.setup) == "function" then
-            U.log_debug('[plugins][' .. reqname .. '] calling setup')
-            local oks, err = pcall(mod.setup, p.opts or {})
-            if not oks then
-                vim.notify("Error in setup for " .. p.source .. ": " .. err, vim.log.levels.ERROR)
-            end
-            return
-        end
-        -- Module exists but no setup() – warn only if opts were provided
-        if p.opts then
-            vim.notify(("Module %s has no setup(); opts ignored for %s")
-                :format(reqname, p.source), vim.log.levels.WARN)
-        end
-        return
-    end
-    -- p.has_setup == false → intentional no-op
 end
 
-local HOOK_ORDER = { "pre_checkout", "post_checkout", "pre_install", "post_install" }
+local function call_setup_or_config(plugin)
+    local module_name = plugin.module or plug_name(plugin):gsub("%.nvim$", "")
+    U.log_debug('[plugins][' .. module_name .. '] loading')
 
-local function normalize_hooks(p)
-    local hooks = p.hooks
-    if hooks == nil then return nil end
-    if type(hooks) ~= "table" then
-        U.log_warn(("Ignoring hooks for %s: expected table, got %s"):format(p.source, type(hooks)))
+    if type(plugin.config) == "function" then
+        U.log_debug('[plugins][' .. module_name .. '] calling .config')
+        local okc, err = pcall(plugin.config, plugin, plugin.opts)
+        if not okc then
+            vim.notify("Error in config for " .. plugin.source .. ": " .. err, vim.log.levels.ERROR)
+        end
+        return
+    end
+
+    if plugin.has_setup == false then
+        return
+    end
+
+    local ok, mod = pcall(require, module_name)
+    U.log_debug('[plugins][' .. module_name .. '] calling require')
+    if not ok then
+        if plugin.opts then
+            vim.notify(("No Lua module for %s (require('%s')); ignoring opts")
+                :format(plugin.source, module_name), vim.log.levels.WARN)
+        end
+        return
+    end
+
+    if type(mod.setup) == "function" then
+        U.log_debug('[plugins][' .. module_name .. '] calling setup')
+        local oks, err = pcall(mod.setup, plugin.opts or {})
+        if not oks then
+            vim.notify("Error in setup for " .. plugin.source .. ": " .. err, vim.log.levels.ERROR)
+        end
+        return
+    end
+
+    if plugin.opts then
+        vim.notify(("Module %s has no setup(); opts ignored for %s")
+            :format(module_name, plugin.source), vim.log.levels.WARN)
+    end
+end
+
+local function notify_unsupported(plugin, unsupported)
+    if #unsupported == 0 then return end
+    local name = plugin.name or plugin.source
+    vim.schedule(function()
+        vim.notify(
+            ("mini-deps engine: %s uses unsupported fields: %s")
+            :format(name, table.concat(unsupported, ", ")),
+            vim.log.levels.WARN
+        )
+    end)
+end
+
+local function normalize_lazy_item(entry)
+    if type(entry) == "string" then
+        return { source = entry }
+    end
+
+    if type(entry) ~= "table" then
+        vim.notify("Invalid plugin spec entry: expected table or string", vim.log.levels.ERROR)
         return nil
     end
 
-    local normalized = {}
-    local mappings = {
-        { field = "pre_checkout", alias = "pre_checkout" },
-        { field = "post_checkout", alias = "post_checkout" },
-        { field = "post_checkout", alias = "post_checout" },
-        { field = "pre_install", alias = "pre_install" },
-        { field = "pre_install", alias = "pre_instann" },
-        { field = "post_install", alias = "post_install" },
-    }
+    local plugin = vim.deepcopy(entry)
+    plugin.source = plugin[1] or plugin.source
+    plugin[1] = nil
 
-    for _, map in ipairs(mappings) do
-        local fn = hooks[map.alias]
-        if fn ~= nil then
-            if type(fn) == "function" then
-                if normalized[map.field] == nil then
-                    normalized[map.field] = fn
-                end
+    if not plugin.source then
+        vim.notify("Plugin spec entry is missing repository string", vim.log.levels.ERROR)
+        return nil
+    end
+
+    return plugin
+end
+
+local function evaluate_condition(fn, plugin, field, unsupported)
+    if type(fn) == "boolean" then
+        return fn
+    end
+    if type(fn) ~= "function" then
+        table.insert(unsupported, field .. "<" .. type(fn) .. ">")
+        return true
+    end
+    local ok, result = pcall(fn, plugin)
+    if not ok then
+        vim.notify(("Error evaluating %s for %s: %s"):format(field, plugin.source, result), vim.log.levels.ERROR)
+        return false
+    end
+    return not not result
+end
+
+local function plugin_is_enabled(plugin, unsupported)
+    if plugin.enabled ~= nil then
+        if not evaluate_condition(plugin.enabled, plugin, "enabled", unsupported) then
+            return false
+        end
+    end
+    if plugin.cond ~= nil then
+        if not evaluate_condition(plugin.cond, plugin, "cond", unsupported) then
+            return false
+        end
+    end
+    return true
+end
+
+local function extract_dependency_sources(plugin, unsupported)
+    if plugin.dependencies == nil then return nil end
+
+    local sources = {}
+    for _, dep in ipairs(plugin.dependencies) do
+        local dep_type = type(dep)
+        if dep_type == "string" then
+            table.insert(sources, dep)
+        elseif dep_type == "table" then
+            local dep_source = dep[1] or dep.source
+            if type(dep_source) == "string" then
+                table.insert(sources, dep_source)
             else
-                U.log_warn(
-                    ("Ignoring hook '%s' for %s: expected function, got %s")
-                        :format(map.alias, p.source, type(fn))
-                )
+                table.insert(unsupported, "dependency<missing source>")
             end
+        else
+            table.insert(unsupported, "dependency<" .. dep_type .. ">")
         end
     end
 
-    if next(normalized) == nil then return nil end
-    return normalized
+    return sources
 end
 
-local function minideps_node_from_spec(p)
+local function minideps_node_from_lazy(plugin, unsupported)
     local node = {
-        source = p.source,
-        name = p.name,
+        source = plugin.source,
+        name = plugin.name,
     }
 
-    local hooks = normalize_hooks(p)
-    if hooks then node.hooks = hooks end
+    if plugin.branch then node.checkout = plugin.branch end
+    if plugin.tag then node.tag = plugin.tag end
+    if plugin.commit then node.commit = plugin.commit end
 
-    if p.pin then
-        if p.pin.checkout then node.checkout = p.pin.checkout end
-        if p.pin.tag then node.tag = p.pin.tag end
-        if p.pin.commit then node.commit = p.pin.commit end
+    local hooks = nil
+    if plugin.build ~= nil then
+        if type(plugin.build) == "function" then
+            hooks = hooks or {}
+            hooks.post_install = function(ctx)
+                local ok, err = pcall(plugin.build, ctx)
+                if not ok then
+                    U.log_error(("build hook failed for %s: %s"):format(plugin.source, err))
+                end
+            end
+        else
+            table.insert(unsupported, "build<" .. type(plugin.build) .. ">")
+        end
     end
+
+    if hooks then node.hooks = hooks end
 
     return node
 end
 
-local function make_lazy_build(hooks, spec)
-    if not hooks then return nil end
-    return function(plugin)
-        local ctx = {
-            plugin = plugin,
-            source = spec.source,
-            name = spec.name or plug_name(spec),
-            dir = plugin.dir,
-            stage = spec.stage,
-            pin = spec.pin,
-        }
-
-        for _, hook_name in ipairs(HOOK_ORDER) do
-            local fn = hooks[hook_name]
-            if fn then
-                local ok, err = pcall(fn, ctx)
-                if not ok then
-                    U.log_error(
-                        ("Error in %s hook for %s: %s")
-                            :format(hook_name, spec.source, err)
-                    )
-                end
-            end
+local function collect_unsupported_lazy_fields(plugin)
+    local unsupported = {}
+    local fields = { "event", "cmd", "keys", "ft", "priority", "version" }
+    for _, field in ipairs(fields) do
+        if plugin[field] ~= nil then
+            table.insert(unsupported, field)
         end
     end
+    return unsupported
 end
-
 
 -- ====== Engine: mini.deps ======
 
@@ -169,137 +218,88 @@ local function run_minideps(spec)
     ensure_mini_nvim()
     local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
-    -- "now" firs
-    now(function()
-        for _, p in ipairs(spec) do
-            if p.stage == "now" then
-                -- Start with dependencies
-                if p.depends then
-                    for _, d in ipairs(p.depends) do
-                        add({ source = d.source })
-                    end
-                end
-                add(minideps_node_from_spec(p))
-                call_setup_or_config(p)
-            end
+    local normalized = {}
+    for _, entry in ipairs(spec or {}) do
+        local plugin = normalize_lazy_item(entry)
+        if plugin then
+            table.insert(normalized, plugin)
         end
-    end)
+    end
 
-    -- "later" after
-    later(function()
-        for _, p in ipairs(spec) do
-            if p.stage ~= "now" then
-                if p.depends then
-                    for _, d in ipairs(p.depends) do
-                        add({ source = d.source })
-                    end
-                end
-                add(minideps_node_from_spec(p))
-                call_setup_or_config(p)
+    local now_list, later_list = {}, {}
+    for _, plugin in ipairs(normalized) do
+        local unsupported = collect_unsupported_lazy_fields(plugin)
+        if plugin_is_enabled(plugin, unsupported) then
+            run_init(plugin)
+            plugin.__unsupported = unsupported
+            if plugin.lazy == false then
+                table.insert(now_list, plugin)
+            else
+                table.insert(later_list, plugin)
             end
+        else
+            notify_unsupported(plugin, unsupported)
         end
-    end)
+    end
+
+    local function process(list)
+        for _, plugin in ipairs(list) do
+            local unsupported = plugin.__unsupported or {}
+            local deps = extract_dependency_sources(plugin, unsupported)
+            if deps then
+                for _, dep in ipairs(deps) do
+                    add({ source = dep })
+                end
+            end
+
+            add(minideps_node_from_lazy(plugin, unsupported))
+            call_setup_or_config(plugin)
+            notify_unsupported(plugin, unsupported)
+            plugin.__unsupported = nil
+        end
+    end
+
+    now(function() process(now_list) end)
+    later(function() process(later_list) end)
 end
 
 -- ====== Engine: lazy.nvim ======
 
 local function run_lazy(spec)
-    -- bootstrap
     local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
     if not vim.loop.fs_stat(lazypath) then
-        vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
-            lazypath })
+        vim.fn.system({
+            "git",
+            "clone",
+            "--filter=blob:none",
+            "https://github.com/folke/lazy.nvim.git",
+            "--branch=stable",
+            lazypath,
+        })
     end
     vim.opt.rtp:prepend(lazypath)
 
-    local lazy_spec = {}
-    for _, p in ipairs(spec) do
-        local item = {
-            p.source,
-            name = p.name,
-            dependencies = p.depends and vim.tbl_map(function(d) return d.source end, p.depends) or nil,
-            config = p.config,
-            opts = p.opts,
-        }
-        -- Mapowanie stage -> lazy/event
-        if p.stage == "now" then
-            item.lazy = false
-        else
-            item.lazy = true
-            item.event = p.event or "VeryLazy"
-        end
-        if p.pin then
-            if p.pin.checkout then item.branch = p.pin.checkout end
-            if p.pin.tag then item.tag = p.pin.tag end
-            if p.pin.commit then item.commit = p.pin.commit end
-        end
-        local hooks = normalize_hooks(p)
-        if hooks then item.build = make_lazy_build(hooks, p) end
-        table.insert(lazy_spec, item)
-    end
-
-    require("lazy").setup(lazy_spec, {
+    require("lazy").setup(spec or {}, {
         ui = { border = "rounded" },
         checker = { enabled = false },
     })
 end
 
--- ====== Engine: builtin (packages + packadd) ======
--- Simple clone and :packadd; no update option (yet).
--- Stages "now" → start/, "later" → opt/ + packadd on VimEnter.
--- EXPERIMENTAL AS HELL
-
-local function git_clone_if_missing(dst, src, checkout)
-    if vim.loop.fs_stat(dst) then return end
-    vim.fn.mkdir(dst, "p")
-    local url = ("https://github.com/%s.git"):format(src)
-    local ok = vim.fn.system({ "git", "clone", "--filter=blob:none", url, dst })
-    if vim.v.shell_error ~= 0 then
-        vim.notify("git clone failed for " .. src .. ": " .. tostring(ok), vim.log.levels.ERROR)
-        return
-    end
-    if checkout then
-        vim.fn.system({ "git", "-C", dst, "checkout", checkout })
-    end
-end
-
-local function run_builtin(spec)
-    local base = vim.fn.stdpath("data") .. "/site/pack/plugins"
-    for _, p in ipairs(spec) do
-        local sub = (p.stage == "now") and "start" or "opt"
-        local owner, repo = split_owner_repo(p.source)
-        local dst = ("%s/%s/%s"):format(base, sub, repo)
-        git_clone_if_missing(dst, p.source, p.pin and p.pin.checkout or nil)
-
-        -- Load & set
-        if p.stage == "now" then
-            vim.cmd(("packadd %s"):format(repo))
-            call_setup_or_config(p)
-        else
-            -- call later: on VimEnter
-            vim.api.nvim_create_autocmd("VimEnter", {
-                once = true,
-                callback = function()
-                    vim.cmd(("packadd %s"):format(repo))
-                    call_setup_or_config(p)
-                end,
-            })
-        end
-    end
-end
-
 -- ===== Public API =====
 
 ---Execute spec with selected engine.
----@param engine_name '"mini-deps"'|'"lazy"'|'"builtin"'
----@param spec table[]
+---@param engine_name? '"mini-deps"'|'"lazy"'
+---@param spec LazySpec|nil
 function Engine.execute(engine_name, spec)
+    if type(engine_name) ~= "string" then
+        spec = engine_name
+        engine_name = "lazy"
+    end
+
     if engine_name == "mini-deps" then
-        run_minideps(spec)
+        run_minideps(spec or {})
     elseif engine_name == "lazy" then
-        run_lazy(spec)
-    elseif engine_name == "builtin" then
-        run_builtin(spec)
+        run_lazy(spec or {})
     else
         vim.notify("Unknown plugin engine: " .. tostring(engine_name), vim.log.levels.ERROR)
     end

@@ -5,7 +5,7 @@ require 'config.options'
 local spec = require("plugins.spec")
 local engine = require("plugins.engine")
 
-engine.execute("mini-deps", spec) -- mini-deps, lazy, builtin (experimental)
+engine.execute(spec) -- defaults to lazy; pass "mini-deps" for MiniDeps sync
 
 -- load other static config
 require 'config.terminal'

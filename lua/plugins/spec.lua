@@ -1,32 +1,12 @@
--- Plugins specification, do not depend on plugin manager.
--- Fields:
---   source   - "owner/repo"
---   name     - optional name (default repo name after /)
---   stage    - "now" | "later" (when to load plugin)
---   depends  - optional dependencies
---   opts     - options for .setup()
---   config   - if there is not `setup()` method or to customize setup
---   pin      - optional ref/branch/tag/commit
---   event    - lazy.nvim specific level (np. "VeryLazy" / "BufReadPre"), ignore in others (FIXME)
---   hooks    - optional install hooks {pre_checkout, post_checkout, pre_install, post_install}
---
+-- Plugin specification expressed using lazy.nvim schema.
 local setkey = require('utils').setkey
 
--- Mini plugins - list of mini plugin names to enable - to lazy to write separate add/require/setup
-local minis_enabled = {
-    "ai", "align", "animate", "bracketed", "bufremove", "clue", "completion", "cursorword",
-    "diff", "doc",
-    "extra", "files", "fuzzy", "hipatterns", "icons", "indentscope", "keymap",
-    "map", "misc", "move", "notify", "operators", "pairs", "pick", "sessions",
-    "snippets", "splitjoin", "statusline", "surround", "tabline", "trailspace", "visits",
-}
-
----@type PluginSpecList
+---@type LazySpec
 local M = {
     {
-        source = "catppuccin/nvim",
+        "catppuccin/nvim",
         name = "catppuccin",
-        stage = "now",
+        lazy = false,
         config = function()
             vim.cmd.colorscheme(
                 "catppuccin-mocha")
@@ -35,29 +15,26 @@ local M = {
 
     -- Nvim-treesitter for syntax colors/indent/etc
     {
-        source = "nvim-treesitter/nvim-treesitter",
+        "nvim-treesitter/nvim-treesitter",
         name = "nvim-treesitter",
-        stage = "later",
-        pin = { checkout = "master" }, -- przykładowy pin; engine zinterpretuje jak potrafi
+        branch = "master",
         config = require('plugins.config.treesitter').config,
     },
     -- Class/method context at the top of screen using treesitter
     {
-        source = 'nvim-treesitter/nvim-treesitter-context',
+        'nvim-treesitter/nvim-treesitter-context',
         name = 'treesitter-context',
-        stage = 'later',
-        depends = {
+        dependencies = {
             -- Virtual context endicator at the end class/method/loop
-            { source = 'andersevenrud/nvim_context_vt' },
+            'andersevenrud/nvim_context_vt',
         },
         config = require('plugins.config.treesitter-context').config,
     },
 
     -- File manager as buffer
     {
-        source = "stevearc/oil.nvim",
+        "stevearc/oil.nvim",
         name = "oil",
-        stage = "later",
         event = "VeryLazy",
         config = function()
             require("oil").setup({
@@ -69,18 +46,18 @@ local M = {
     },
 
     -- More useful word motions f.e. CameCase or snake_case split into words
-    { source = "chaoren/vim-wordmotion",        stage = "later" },
+    { "chaoren/vim-wordmotion" },
 
     -- Support for loading .editorconfig setting
-    { source = "editorconfig/editorconfig-vim", stage = "later" },
+    { "editorconfig/editorconfig-vim" },
 
     -- TODO/FIXME & other tags highlightning
-    { source = 'folke/todo-comments.nvim',      stage = "later", opts = require('plugins.config.todo-comments') },
+    { 'folke/todo-comments.nvim',     opts = require('plugins.config.todo-comments') },
 
     -- Show menu with mappings
     {
-        source = 'folke/which-key.nvim',
-        stage = 'now',
+        'folke/which-key.nvim',
+        lazy = false,
         config = function()
             vim.keymap.set("n", "<leader>?", function() require("which-key").show({ global = false }) end,
                 { desc = "Buffer Local Keymaps (which-key)" })
@@ -89,14 +66,10 @@ local M = {
         end
     },
 
-    -- mini-git - has a 'dash' instead of 'dot' so it is not on a 'minis_enabled' list
-    { source = 'nvim-mini/mini-git',           name = 'mini.git', stage = 'later' },
-
     -- code outline side window
     {
-        source = 'stevearc/aerial.nvim',
+        'stevearc/aerial.nvim',
         name = 'aerial',
-        stage = 'later',
         config = function()
             require('aerial').setup({
                 on_attach = function(bufnr)
@@ -109,91 +82,249 @@ local M = {
     },
 
     -- snippets colletion
-    { source = 'rafamadriz/friendly-snippets', stage = 'later' },
+    { 'rafamadriz/friendly-snippets' },
 
     -- Generate docstrings using :Neogen
-    { source = 'danymat/neogen',               stage = 'later' },
+    { 'danymat/neogen' },
 
     -- Harpoon2 - it is nice to jump between marked files
     {
-        source = 'ThePrimeagen/harpoon',
-        pin = { checkout = 'harpoon2' },
-        depends = {
-            { source = 'nvim-lua/plenary.nvim' },
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
         },
         config = require("plugins.config.harpoon").config
     },
 
     -- Markdown Preview in browser
     {
-        source = "iamcco/markdown-preview.nvim",
-        stage = 'later',
-        hooks = { post_checkout = function() vim.fn["mkdp#util#install"]() end },
+        "iamcco/markdown-preview.nvim",
+        build = function()
+            vim.fn["mkdp#util#install"]()
+        end,
+    },
+
+    -- mini.nvim modules
+    {
+        "nvim-mini/mini.ai",
+        name = "mini.ai",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.align",
+        name = "mini.align",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.animate",
+        name = "mini.animate",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.bracketed",
+        name = "mini.bracketed",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.bufremove",
+        name = "mini.bufremove",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.clue",
+        name = "mini.clue",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.completion",
+        name = "mini.completion",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.cursorword",
+        name = "mini.cursorword",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.diff",
+        name = "mini.diff",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.doc",
+        name = "mini.doc",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.extra",
+        name = "mini.extra",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.files",
+        name = "mini.files",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.fuzzy",
+        name = "mini.fuzzy",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.git",
+        name = "mini.git",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.hipatterns",
+        name = "mini.hipatterns",
+        config = function()
+            local hipatterns = require("mini.hipatterns")
+
+            hipatterns.setup({
+                highlighters = {
+                    hex_color = hipatterns.gen_highlighter.hex_color(),
+                },
+            })
+        end,
+    },
+    {
+        "nvim-mini/mini.icons",
+        name = "mini.icons",
+        config = function()
+            require('mini.icons').setup()
+            require('mini.icons').tweak_lsp_kind()
+            require('mini.icons').mock_nvim_web_devicons()
+        end,
+    },
+    {
+        "nvim-mini/mini.indentscope",
+        name = "mini.indentscope",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.keymap",
+        name = "mini.keymap",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.map",
+        name = "mini.map",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.misc",
+        name = "mini.misc",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.move",
+        name = "mini.move",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.notify",
+        name = "mini.notify",
+        config = function()
+            require('mini.notify').setup({
+                -- Content management
+                content = {
+                    -- Function which formats the notification message
+                    -- By default prepends message with notification time
+                    format = nil,
+                    -- Function which orders notification array from most to least important
+                    -- By default orders first by level and then by update timestamp
+                    sort = nil,
+                },
+
+                -- Notifications about LSP progress
+                lsp_progress = {
+                    -- Whether to enable showing
+                    enable = false,
+                    -- Notification level
+                    level = 'INFO',
+                    -- Duration (in ms) of how long last message should be shown
+                    duration_last = 1000,
+                },
+                -- Window options
+                window = {
+                    -- Floating window config
+                    config = {},
+                    -- Maximum window width as share (between 0 and 1) of available columns
+                    max_width_share = 0.382,
+                    -- Value of 'winblend' option
+                    winblend = 25,
+                },
+
+            })
+        end,
+    },
+    {
+        "nvim-mini/mini.operators",
+        name = "mini.operators",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.pairs",
+        name = "mini.pairs",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.pick",
+        name = "mini.pick",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.sessions",
+        name = "mini.sessions",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.snippets",
+        name = "mini.snippets",
+        config = function()
+            local gen_loader = require('mini.snippets').gen_loader
+            require('mini.snippets').setup({
+                snippets = {
+                    -- Load snippets based on current language by reading files from
+                    -- "snippets/" subdirectories from 'runtimepath' directories.
+                    gen_loader.from_lang(),
+                },
+            })
+            require('mini.snippets').start_lsp_server() -- add snippets to LSP engine / completion
+        end,
+    },
+    {
+        "nvim-mini/mini.splitjoin",
+        name = "mini.splitjoin",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.statusline",
+        name = "mini.statusline",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.surround",
+        name = "mini.surround",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.tabline",
+        name = "mini.tabline",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.trailspace",
+        name = "mini.trailspace",
+        opts = {},
+    },
+    {
+        "nvim-mini/mini.visits",
+        name = "mini.visits",
+        opts = {},
     }
 }
-
-for _, mod in ipairs(minis_enabled) do
-    ---@type PluginSpec
-    table.insert(M, {
-        source = "nvim-mini/mini." .. mod,
-        name = "mini." .. mod,
-        stage = "later", --
-        config = (mod == "hipatterns") and function()
-                local hipatterns = require("mini.hipatterns")
-
-                hipatterns.setup({
-                    highlighters = {
-                        hex_color = hipatterns.gen_highlighter.hex_color(),
-                    },
-                })
-            end or (mod == 'icons') and function()
-                require('mini.icons').tweak_lsp_kind()
-                require('mini.icons').mock_nvim_web_devicons()
-            end or (mod == "snippets") and function()
-                local gen_loader = require('mini.snippets').gen_loader
-                require('mini.snippets').setup({
-                    snippets = {
-                        -- Load snippets based on current language by reading files from
-                        -- "snippets/" subdirectories from 'runtimepath' directories.
-                        gen_loader.from_lang(),
-                    },
-                })
-                require('mini.snippets').start_lsp_server() -- add snippets to LSP engine / completion
-            end or (mod == "notify") and function()
-                require('mini.notify').setup({
-                    -- Content management
-                    content = {
-                        -- Function which formats the notification message
-                        -- By default prepends message with notification time
-                        format = nil,
-                        -- Function which orders notification array from most to least important
-                        -- By default orders first by level and then by update timestamp
-                        sort = nil,
-                    },
-
-                    -- Notifications about LSP progress
-                    lsp_progress = {
-                        -- Whether to enable showing
-                        enable = false,
-                        -- Notification level
-                        level = 'INFO',
-                        -- Duration (in ms) of how long last message should be shown
-                        duration_last = 1000,
-                    },
-                    -- Window options
-                    window = {
-                        -- Floating window config
-                        config = {},
-                        -- Maximum window width as share (between 0 and 1) of available columns
-                        max_width_share = 0.382,
-                        -- Value of 'winblend' option
-                        winblend = 25,
-                    },
-
-                })
-            end or
-            nil,
-    })
-end
 
 return M

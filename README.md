@@ -75,11 +75,11 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 ## Plugin Management & Updates
 
-- `init.lua` currently targets the `mini-deps` engine; switch to `"lazy"` or `"builtin"` by changing `engine.execute` in `init.lua`.
+- `init.lua` now defaults to the `lazy.nvim` engine; pass `"mini-deps"` to `engine.execute` when you want MiniDeps to drive installs without the lazy UI.
 - Add or adjust plugins via `lua/plugins/spec.lua`; per-plugin settings live in `lua/plugins/config/`.
 - The `minis_enabled` table toggles bundled mini modules—remove entries to slim down features.
 - Run `nvim --headless "+lua require('plugins.engine').execute('mini-deps', require('plugins.spec'))" +qa` after edits to the spec to sync repositories.
-- `MiniDeps` manages pins via optional `pin.checkout` fields; use them to keep critical plugins on known commits.
+- When using MiniDeps, pins honour `branch`, `tag`, and `commit` fields; unsupported lazy-only triggers emit warnings at startup.
 
 ## Maintenance & Troubleshooting
 
