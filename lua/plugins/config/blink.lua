@@ -3,6 +3,12 @@ return function()
     blink.setup({
         keymap = {
             preset = "super-tab",
+            ["<C-y>"] = { "select_and_accept", "fallback" },
+            ["<C-x><C-o>"] = {
+                function(cmp)
+                    return cmp.show({ providers = { "lsp" } })
+                end,
+            },
         },
     })
 
