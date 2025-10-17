@@ -1,21 +1,19 @@
 local lsp_cfg = require("config.lsp")
 local server_cfg = lsp_cfg.get("python", "basedpyright")
-
 local uv = vim.loop
-local sep = package.config:sub(1, 1)
 
-local function detect_virtual_env()
-    local venv = vim.env.VIRTUAL_ENV
-    if not venv or venv == "" then return nil end
-    if not uv.fs_stat(venv) then return nil end
-    return vim.fs.normalize(venv)
+local function contains(tbl, value)
+    for _, item in ipairs(tbl) do
+        if item == value then return true end
+    end
+    return false
 end
 
-local function python_from_venv(venv)
-    if sep == "\\" then
-        return vim.fs.joinpath(venv, "Scripts", "python.exe")
-    end
-    return vim.fs.joinpath(venv, "bin", "python")
+local function activate_venv(venv_path)
+    local command = "source " .. venv_path .. "/bin/activate"
+    vim.env.VIRTUAL_ENV = venv_path
+    vim.env.PATH = venv_path .. "/bin:" .. vim.env.PATH
+    vim.notify("[LSP] Activated venv " .. venv_path)
 end
 
 local function site_packages_from_venv(venv)
@@ -41,39 +39,35 @@ local function site_packages_from_venv(venv)
     return nil
 end
 
-local function contains(tbl, value)
-    for _, item in ipairs(tbl) do
-        if item == value then return true end
-    end
-    return false
-end
 
 return {
     cmd = { "basedpyright-langserver", "--stdio" },
     filetypes = { "python" },
     root_markers = { "pyproject.toml", "settings.py", ".git" },
     before_init = function(_, new_config)
-        local venv = detect_virtual_env()
-        if not venv then return end
+        local venv_path = vim.fn.getcwd() .. "/.venv"
+        if vim.fn.isdirectory(venv_path) == 1 then
+            activate_venv(venv_path)
 
-        local python_path = python_from_venv(venv)
-        local site_packages = site_packages_from_venv(venv)
-        local settings = new_config.settings or {}
-        settings.python = settings.python or {}
+            local python_path = venv_path .. "/bin/python"
+            local site_packages = site_packages_from_venv(venv_path)
+            local settings = new_config.settings or {}
+            settings.python = settings.python or {}
 
-        if python_path and uv.fs_stat(python_path) then
-            settings.python.pythonPath = python_path
-        end
-        if site_packages then
-            settings.python.analysis = settings.python.analysis or {}
-            local extra_paths = settings.python.analysis.extraPaths or {}
-            if not contains(extra_paths, site_packages) then
-                table.insert(extra_paths, site_packages)
+            if python_path and uv.fs_stat(python_path) then
+                settings.python.pythonPath = python_path
             end
-            settings.python.analysis.extraPaths = extra_paths
-        end
+            if site_packages then
+                settings.python.analysis = settings.python.analysis or {}
+                local extra_paths = settings.python.analysis.extraPaths or {}
+                if not contains(extra_paths, site_packages) then
+                    table.insert(extra_paths, site_packages)
+                end
+                settings.python.analysis.extraPaths = extra_paths
+            end
 
-        new_config.settings = settings
+            new_config.settings = settings
+        end
     end,
     on_init = function(client)
         client.offset_encoding = "utf-8"

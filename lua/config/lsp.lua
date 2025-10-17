@@ -48,6 +48,21 @@ M.servers = {
                             "TID",
                             "W",
                         },
+                        ignore = {
+                            "W191",   -- tab-indentation
+                            "E111",   -- indentation-with-invalid-multiple
+                            "E114",   -- indentation-with-invalid-multiple-comment
+                            "E117",   -- over-indented
+                            "D206",   -- docstring-tab-indentation
+                            "D300",   -- triple-single-quotes
+                            "Q000",   -- bad-quotes-inline-string
+                            "Q001",   -- bad-quotes-multiline-string
+                            "Q002",   -- bad-quotes-docstring
+                            "Q003",   -- avoidable-escaped-quote
+                            "COM812", -- missing-trailing-comma
+                            "COM819", -- prohibited-trailing-comma
+                            "ISC002", -- multi-line-implicit-string-concatenation
+                        },
                     },
                 },
             },

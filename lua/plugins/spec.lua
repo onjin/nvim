@@ -346,7 +346,7 @@ local M = {
                 end
             end)
         end
-    }
+    },
 }
 
 return M
