@@ -105,6 +105,18 @@ local M = {
         config = require("plugins.config.harpoon").config
     },
 
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+        config = function()
+            require('markview').setup({
+                preview = {
+                    icon_provider = "mini", -- "internal", "mini" or "devicons"
+                }
+
+            })
+        end
+    },
     -- Markdown Preview in browser
     {
         "iamcco/markdown-preview.nvim",
