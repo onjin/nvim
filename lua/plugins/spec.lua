@@ -110,11 +110,18 @@ local M = {
         lazy = false,
         config = function()
             require('markview').setup({
+
+                html = {
+                    enable = true,
+                },
                 preview = {
+                    enable = false,         -- use <leader>tp to toggle
                     icon_provider = "mini", -- "internal", "mini" or "devicons"
                 }
 
             })
+            vim.api.nvim_set_keymap("n", "<leader>tp", "<CMD>Markview<CR>",
+                { desc = "Toggles `markview` previews globally." });
         end
     },
     -- Markdown Preview in browser
