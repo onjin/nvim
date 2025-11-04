@@ -371,7 +371,7 @@ local M = {
         build = ':Cord update',
         config = function()
             require('cord').setup {
-                log_level = vim.log.levels.INFO,
+                log_level = vim.log.levels.WARN,
                 enabled = true,
                 theme = 'catppuccin',
                 flavor = 'accent',
