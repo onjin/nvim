@@ -369,35 +369,7 @@ local M = {
     {
         'vyfor/cord.nvim',
         build = ':Cord update',
-        opts = {
-            log_level = vim.log.levels.INFO,
-            enabled = true,
-            display = {
-                theme = 'catppuccin',
-                flavor = 'accent',
-            },
-            advanced = {
-                discord = {
-                    pipe_paths = { '/run/user/' .. string.format("%s", io.popen('id -u')) .. 'discord-ipc-0' },
-                    reconnect = {
-                        enabled = true,
-                    }
-                },
-            },
-            plugins = {
-                ['cord.plugins.visibility'] = {
-                    precedence = 'blacklist',
-                    rules = {
-                        blacklist = {
-                            '~/Workspace/p/cint', -- matches path
-                            { type = 'glob', value = '**/sops/**' },
-                            -- function example
-                            function(ctx) return ctx.workspace == 'secret' end,
-                        },
-                    },
-                },
-            }
-        }
+        config = require('plugins.config.cord').config,
     },
 }
 
