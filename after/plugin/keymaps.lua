@@ -56,3 +56,44 @@ setkey("n", "<leader>tm", function()
     end,
     "Toggle middle line focus"
 )
+
+-- ## Common operations
+-- spawn cmd p1 p1 -> spawn "cmd" "p1" "p2"
+-- Quote every word after the first on each selected line
+-- Put this in your init.lua (or a sourced Lua file)
+vim.keymap.set("v", "<leader>rq", function()
+    -- get visual range (1-based rows, 0-based cols)
+    local buf = 0
+    local srow, scol = unpack(vim.api.nvim_buf_get_mark(buf, "<"))
+    local erow, ecol = unpack(vim.api.nvim_buf_get_mark(buf, ">"))
+
+    -- normalize to 0-based row indices for nvim_buf_get_lines/set_lines
+    srow, erow = srow - 1, erow - 1
+
+    local lines = vim.api.nvim_buf_get_lines(buf, srow, erow + 1, false)
+    for i, line in ipairs(lines) do
+        -- keep leading indentation
+        local indent, rest = line:match("^(%s*)(.*)$")
+        rest = rest or ""
+
+        -- split remaining part into words by whitespace
+        local words = vim.split(vim.trim(rest), "%s+", { trimempty = true })
+
+        if #words >= 2 then
+            local first = words[1]
+            local quoted = {}
+            for j = 2, #words do
+                quoted[#quoted + 1] = string.format('"%s"', words[j])
+            end
+            lines[i] = indent .. first .. " " .. table.concat(quoted, " ")
+        else
+            -- 0 or 1 word -> leave as is
+            lines[i] = line
+        end
+    end
+
+    vim.api.nvim_buf_set_lines(buf, srow, erow + 1, false, lines)
+
+    -- reselect previous visual area (handy if you want to run it again)
+    vim.cmd("normal! gv")
+end, { desc = "Quote all but the first word on each selected line" })
