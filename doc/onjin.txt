@@ -124,6 +124,7 @@ PER-PROJECT OVERRIDES & HELP*onjin-neovim-config-per-project-overrides-&-help*
 
 - Drop a `.nvimrc.ini` file in your project root to override globals (e.g., `ai_enabled`, `autoformat_on_save_enabled`, `colorscheme`). Use `:NVRCEdit`, `:NVRCApply`, and `:NVRCVariables` to manage overrides without restarting Neovim.
 - `:help onjin` loads the generated help doc from `doc/onjin.txt`. Regenerate it after README edits with `panvimdoc --project-name onjin --input-file doc/onjin.md --output-file doc/onjin.txt`.
+- After regenerating `doc/onjin.txt`, run `:helptags ~/.config/nvim/doc` (or `:helptags ALL`) so Neovim updates its help index and `:help onjin` resolves correctly.
 
 Happy hacking!
 
