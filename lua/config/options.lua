@@ -9,6 +9,7 @@ vim.g.netrw_browse_split = 4
 vim.g.netrw_altv = 1
 vim.g.netrw_winsize = 25
 vim.g.buffet_show_index = true
+vim.g.enable_windsurf = 0
 
 
 local opt = vim.opt
@@ -78,6 +79,7 @@ vim.opt.shortmess:append "sI"
 
 -- Allow .nvimrc and .exrc
 vim.opt.exrc = true
+vim.opt.secure = true
 -----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------

@@ -1,9 +1,9 @@
 local M = {}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local has_blink, blink_cmp = pcall(require, "blink.cmp")
-if has_blink then
-    capabilities = blink_cmp.get_lsp_capabilities(capabilities)
+local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if has_cmp then
+    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 end
 
 if vim.lsp.config then

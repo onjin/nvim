@@ -6,22 +6,22 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 1. Back up any existing config: `mv ~/.config/nvim ~/.config/nvim.bak`.
 2. Clone this repository: `git clone <repo-url> ~/.config/nvim` (or to `$XDG_CONFIG_HOME/nvim`).
-3. Sync plugins headlessly: `nvim --headless "+lua require('plugins.engine').execute('mini-deps', require('plugins.spec'))" +qa`.
+3. Sync plugins headlessly: `nvim --headless "+Lazy! sync" +qa`.
 4. Run a health check: `nvim --headless "+checkhealth" +qa`.
 5. Launch Neovim normally and open a project to trigger language servers.
 
 ## Requirements
 
 - Neovim 0.10+ with LuaJIT (treesitter folding and `vim.lsp.enable` APIs are used).
-- Git (plugin engine bootstraps repositories on demand).
+- Git (`lazy.nvim` bootstraps repositories on demand).
 - ripgrep (`mini.pick` live grep and `todo-comments` use it).
 - Language servers and formatters: `lua-language-server`, `basedpyright-langserver`, `ruff`, `nixd`, `nixfmt`, `jdtls`.
 
 ## Directory Tour
 
-- **init.lua** – boots editor options, loads the plugin spec, and chooses the plugin engine.
+- **init.lua** – boots editor options, loads the plugin spec, and bootstraps the lazy.nvim manager.
 - **lua/config/** – shared options (`options.lua`), terminal helpers, and general utilities.
-- **lua/plugins/** – plugin spec (`spec.lua`), the engine abstraction, and per-plugin configs under `config/`.
+- **lua/plugins/** – plugin spec (`spec.lua`) and per-plugin configs under `config/`.
 - **after/** – post-load hooks: keymaps, autocommands, and filetype-specific tweaks.
 - **lsp/** – per-server configurations consumed by `vim.lsp.enable`.
 
@@ -38,7 +38,7 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 - **Navigation & Search** – `mini.pick` replaces Telescope, `mini.extra` adds pickers, `oil.nvim` provides an in-buffer file manager.
 - **UI & Feedback** – `catppuccin`, `mini.notify`, and `todo-comments` surface visual cues and notifications.
-- **Coding Aids** – `blink.cmp` surfaces fast completions and imports while `nvim-treesitter`, `treesitter-context`, `nvim_context_vt`, and `harpoon` keep structure visible and files at hand.
+- **Coding Aids** – `nvim-cmp` surfaces fast completions and imports while `nvim-treesitter`, `treesitter-context`, `nvim_context_vt`, and `harpoon` keep structure visible and files at hand.
 - **Snippets & Docs** – `mini.snippets`, `friendly-snippets`, and `neogen` speed up boilerplate and documentation.
 - **Productivity** – `which-key`, `mini.sessions`, `mini.visits`, and `mini.git` streamline discovery, session handling, and lightweight git status.
 
@@ -75,17 +75,16 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 ## Plugin Management & Updates
 
-- `init.lua` now defaults to the `lazy.nvim` engine; pass `"mini-deps"` to `engine.execute` when you want MiniDeps to drive installs without the lazy UI.
-- Add or adjust plugins via `lua/plugins/spec.lua`; per-plugin settings live in `lua/plugins/config/`.
-- The `minis_enabled` table toggles bundled mini modules—remove entries to slim down features.
-- Run `nvim --headless "+lua require('plugins.engine').execute('mini-deps', require('plugins.spec'))" +qa` after edits to the spec to sync repositories.
-- When using MiniDeps, pins honour `branch`, `tag`, and `commit` fields; unsupported lazy-only triggers emit warnings at startup.
+- `init.lua` bootstraps `lazy.nvim` automatically and then loads `lua/plugins/spec.lua`.
+- Keep plugin-specific settings in `lua/plugins/config/`; shared helpers live under `lua/config/`.
+- Run `nvim --headless "+Lazy! sync" +qa` (or `:Lazy sync` interactively) whenever you change the spec.
+- `lazy-lock.json` pins plugin commits; commit it alongside spec changes so checkouts stay reproducible.
 
 ## Maintenance & Troubleshooting
 
 - Run `nvim --headless "+checkhealth" +qa` after adding plugins or language servers to confirm integrations.
 - Set `NVIM_LOG_LEVEL=DEBUG` before launching Neovim to enable verbose logging through `lua/utils.lua`.
 - Use `:messages` and `:LspLog` to inspect errors; most plugin setups emit log lines via `utils.log_*`.
-- If a plugin misbehaves, temporarily disable it in `lua/plugins/spec.lua` or remove its entry from `minis_enabled` and resync.
+- If a plugin misbehaves, temporarily disable it in `lua/plugins/spec.lua`, run `:Lazy sync`, and restart Neovim.
 
 Happy hacking!

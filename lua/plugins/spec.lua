@@ -86,10 +86,14 @@ local M = {
 
     -- Completion engine
     {
-        "saghen/blink.cmp",
-        version = "v0.*",
+        "hrsh7th/nvim-cmp",
         event = "InsertEnter",
-        config = require('plugins.config.blink'),
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-buffer",
+        },
+        config = require('plugins.config.cmp'),
     },
 
     -- Generate docstrings using :Neogen
@@ -371,6 +375,18 @@ local M = {
         build = ':Cord update',
         config = require('plugins.config.cord').config,
     },
+    {
+        "Exafunction/windsurf.nvim",
+        enabled = not vim.loop.cwd():match("/Workspace/cint/"),
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        config = function()
+            require("codeium").setup({
+                virtual_text = { enabled = false },
+            })
+        end,
+    }
 }
 
 return M
