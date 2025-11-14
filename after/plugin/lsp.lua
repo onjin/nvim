@@ -92,14 +92,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
             local bufnr = args.buf
             local group_name = ("my.lsp.format.%s.%d"):format(client.name:gsub("%W", "_"), bufnr)
             local group = vim.api.nvim_create_augroup(group_name, { clear = true })
-            vim.api.nvim_create_autocmd('BufWritePre', {
-                group = group,
-                buffer = bufnr,
-                callback = function()
-                    if not vim.lsp.get_client_by_id(client.id) then return end
-                    vim.lsp.buf.format({ bufnr = bufnr, id = client.id, timeout_ms = 1000 })
-                end,
-            })
+            if vim.g.autoformat_on_save_enabled == true then
+                vim.api.nvim_create_autocmd('BufWritePre', {
+                    group = group,
+                    buffer = bufnr,
+                    callback = function()
+                        if not vim.lsp.get_client_by_id(client.id) then return end
+                        vim.lsp.buf.format({ bufnr = bufnr, id = client.id, timeout_ms = 1000 })
+                    end,
+                })
+            end
         end
     end,
 })

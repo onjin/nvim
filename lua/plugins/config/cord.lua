@@ -12,7 +12,6 @@ M.config = function()
             discord = {
                 pipe_paths = {
                     '/run/user/' .. string.format("%s", io.popen('id -u')) .. 'discord-ipc-0',
-                    '/run/user/' .. string.format("%s", io.popen('id -u'))
                 },
                 reconnect = {
                     enabled = true,

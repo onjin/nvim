@@ -36,11 +36,11 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 ## Plugin Highlights
 
-- **Navigation & Search** – `mini.pick` replaces Telescope, `mini.extra` adds pickers, `oil.nvim` provides an in-buffer file manager.
-- **UI & Feedback** – `catppuccin`, `mini.notify`, and `todo-comments` surface visual cues and notifications.
-- **Coding Aids** – `nvim-cmp` surfaces fast completions and imports while `nvim-treesitter`, `treesitter-context`, `nvim_context_vt`, and `harpoon` keep structure visible and files at hand.
-- **Snippets & Docs** – `mini.snippets`, `friendly-snippets`, and `neogen` speed up boilerplate and documentation.
-- **Productivity** – `which-key`, `mini.sessions`, `mini.visits`, and `mini.git` streamline discovery, session handling, and lightweight git status.
+- **Navigation & Search** – `mini.pick`, `mini.extra`, `reach.nvim`, `marks.nvim`, and `oil.nvim` keep buffers, marks, and files within a keystroke.
+- **UI & Feedback** – `catppuccin`, `mini.notify`, `nvim-ufo`, and `todo-comments` surface structure, notifications, and folding hints.
+- **Coding Aids** – `nvim-cmp` + `cmp-nvim-lsp`, `nvim-treesitter`, `treesitter-context`, and `nvim_context_vt` drive completion and structural awareness.
+- **Snippets & Docs** – `mini.snippets`, `friendly-snippets`, and `neogen` accelerate boilerplate, while `markview.nvim`/`markdown-preview.nvim` preview Markdown.
+- **Integrations** – `which-key`, `mini.sessions`, `mini.visits`, `mini.git`, `cord.nvim` (Discord presence), and `windsurf.nvim` (Codeium when `ai_enabled` is true) round out productivity.
 
 ## Keymaps to Remember
 
@@ -70,7 +70,6 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 - Terminals open in insert mode and can be spawned quickly with `<leader>ot`.
 - `MiniPick` replaces `vim.ui.select` globally, providing consistent fuzzy UIs for LSP pickers and user commands.
-- Harpoon’s quick menu (`<M-h><M-l>`) and slots (`<space>1`…`<space>5`) keep hot files one keystroke away.
 - Diagnostics helpers (`<leader>dl`, `<leader>dL`, `<leader>e`) rely on mini pickers to surface issues by scope.
 
 ## Plugin Management & Updates
@@ -86,5 +85,10 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 - Set `NVIM_LOG_LEVEL=DEBUG` before launching Neovim to enable verbose logging through `lua/utils.lua`.
 - Use `:messages` and `:LspLog` to inspect errors; most plugin setups emit log lines via `utils.log_*`.
 - If a plugin misbehaves, temporarily disable it in `lua/plugins/spec.lua`, run `:Lazy sync`, and restart Neovim.
+
+## Per-project Overrides & Help
+
+- Drop a `.nvimrc.ini` file in your project root to override globals (e.g., `ai_enabled`, `autoformat_on_save_enabled`, `colorscheme`). Use `:NVRCEdit`, `:NVRCApply`, and `:NVRCVariables` to manage overrides without restarting Neovim.
+- `:help onjin` loads the generated help doc from `doc/onjin.txt`. Regenerate it after README edits with `panvimdoc --project-name onjin --input-file doc/onjin.md --output-file doc/onjin.txt`.
 
 Happy hacking!
