@@ -1,5 +1,6 @@
 return function()
     local cmp = require("cmp")
+    local mini_ok, mini_snips = pcall(require, "mini.snippets")
 
     local function has_words_before()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -10,8 +11,29 @@ return function()
         return text:sub(col, col):match("%s") == nil
     end
 
+    local function expand_snippet(body)
+        if mini_ok then
+            local insert = mini_snips.config.expand
+                    and mini_snips.config.expand.insert
+                    or mini_snips.default_insert
+            insert({ body = body })
+            return true
+        elseif vim.snippet then
+            vim.snippet.expand(body)
+            return true
+        elseif vim.fn.exists("*vsnip#anonymous") == 1 then
+            vim.fn["vsnip#anonymous"](body)
+            return true
+        end
+        vim.notify("No snippet engine configured for nvim-cmp", vim.log.levels.WARN)
+        return false
+    end
+
     local function jump_snippet(direction)
-        if vim.snippet and vim.snippet.active({ direction = direction }) then
+        if mini_ok and mini_snips.session.get() then
+            mini_snips.session.jump(direction == 1 and "next" or "prev")
+            return true
+        elseif vim.snippet and vim.snippet.active({ direction = direction }) then
             vim.snippet.jump(direction)
             return true
         end
@@ -21,13 +43,7 @@ return function()
     cmp.setup({
         snippet = {
             expand = function(args)
-                if vim.snippet then
-                    vim.snippet.expand(args.body)
-                elseif vim.fn.exists("*vsnip#anonymous") == 1 then
-                    vim.fn["vsnip#anonymous"](args.body)
-                else
-                    vim.notify("No snippet engine configured for nvim-cmp", vim.log.levels.WARN)
-                end
+                expand_snippet(args.body)
             end,
         },
         mapping = cmp.mapping.preset.insert({
