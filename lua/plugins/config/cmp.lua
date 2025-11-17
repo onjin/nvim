@@ -86,6 +86,7 @@ return function()
             end, { "i" }),
         }),
         sources = cmp.config.sources({
+            { name = "mini_snippets" },
             { name = "nvim_lsp" },
             { name = "path" },
             { name = "buffer" },

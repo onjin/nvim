@@ -70,7 +70,7 @@ return {
         end
     end,
     on_init = function(client)
-        client.offset_encoding = "utf-8"
+        client.offset_encoding = "utf-16"
         if client.config.settings then
             client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
         end

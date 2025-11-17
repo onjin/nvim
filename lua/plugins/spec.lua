@@ -88,6 +88,7 @@ local M = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
+            "abeldekat/cmp-mini-snippets",
         },
         config = require('plugins.config.cmp'),
     },
@@ -304,7 +305,6 @@ local M = {
                     gen_loader.from_lang(),
                 },
             })
-            require('mini.snippets').start_lsp_server() -- add snippets to LSP engine / completion
         end,
     },
     {
@@ -365,14 +365,15 @@ local M = {
     -- AI Windsurf plugin
     {
         "Exafunction/windsurf.nvim",
-        enabled = vim.g.ai_enabled == true,
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
         config = function()
-            require("codeium").setup({
-                virtual_text = { enabled = false },
-            })
+            if vim.g.ai_enabled then
+                require("codeium").setup({
+                    virtual_text = { enabled = false },
+                })
+            end
         end,
     },
     {

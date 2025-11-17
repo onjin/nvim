@@ -5,6 +5,10 @@ local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if has_cmp then
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 end
+local default_position_encoding = "utf-16"
+capabilities.general = capabilities.general or {}
+capabilities.general.positionEncodings = { default_position_encoding }
+capabilities.offsetEncoding = { default_position_encoding }
 
 if vim.lsp.config then
     vim.lsp.config("*", { capabilities = capabilities })

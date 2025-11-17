@@ -19,7 +19,7 @@ return {
     init_options = server_cfg and vim.deepcopy(server_cfg.init_options) or nil,
 
     on_init = function(client)
-        client.offset_encoding = "utf-8"
+        client.offset_encoding = "utf-16"
         client.server_capabilities.hoverProvider = false
     end,
     settings = server_cfg and vim.deepcopy(server_cfg.settings) or nil,

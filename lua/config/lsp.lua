@@ -91,6 +91,16 @@ M.servers = {
             enabled = true,
         },
     },
+    json = {
+        jsonls = {
+            enabled = true,
+        },
+    },
+    xml = {
+        lemminx = {
+            enabled = true,
+        },
+    },
     java = {
         jdtls = {
             enabled = true,

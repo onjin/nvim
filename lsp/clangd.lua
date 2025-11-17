@@ -93,7 +93,10 @@ return {
                 editsNearCursor = true,
             },
         },
-        offsetEncoding = { 'utf-8', 'utf-16' },
+        general = {
+            positionEncodings = { 'utf-16' },
+        },
+        offsetEncoding = { 'utf-16' },
     },
     ---@param init_result ClangdInitializeResult
     on_init = function(client, init_result)
