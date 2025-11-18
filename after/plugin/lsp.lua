@@ -186,9 +186,10 @@ function M.attach_picker()
     -- find servers whose default_config.filetypes contains current ft
     local candidates = {
         { label = "basedpyright", name = "basedpyright" },
-        { label = "ruff",         name = "ruff" },
-        { label = "lua_ls",       name = "lua_ls" },
-        { label = "ty",           name = "ty" },
+        { label = "ruff",          name = "ruff" },
+        { label = "rust-analyzer", name = "rust_analyzer" },
+        { label = "lua_ls",        name = "lua_ls" },
+        { label = "ty",            name = "ty" },
     }
 
 

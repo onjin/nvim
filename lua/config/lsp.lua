@@ -106,6 +106,18 @@ M.servers = {
             enabled = true,
         },
     },
+    rust = {
+        rust_analyzer = {
+            enabled = true,
+            settings = {
+                ["rust-analyzer"] = {
+                    cargo = { allFeatures = true },
+                    check = { command = "clippy" },
+                    procMacro = { enable = true },
+                },
+            },
+        },
+    },
 }
 
 local function normalize_entry(entry)

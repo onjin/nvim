@@ -15,7 +15,7 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 - Neovim 0.10+ with LuaJIT (treesitter folding and `vim.lsp.enable` APIs are used).
 - Git (`lazy.nvim` bootstraps repositories on demand).
 - ripgrep (`mini.pick` live grep and `todo-comments` use it).
-- Language servers and formatters: `lua-language-server`, `basedpyright-langserver`, `ruff`, `nixd`, `nixfmt`, `jdtls`.
+- Language servers and formatters: `lua-language-server`, `basedpyright-langserver`, `ruff`, `rust-analyzer`, `nixd`, `nixfmt`, `jdtls` (Rust checks use `cargo clippy`).
 
 ## Directory Tour
 
@@ -53,8 +53,9 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 ## Language Servers
 
-- **Auto attach** – `after/ftplugin/*.lua` enables servers (`basedpyright`, `ruff`, `lua_ls`, `nixd`, `jdtls`) whenever the corresponding filetype loads and the executable exists.
+- **Auto attach** – `after/ftplugin/*.lua` enables servers (`basedpyright`, `ruff`, `rust_analyzer`, `lua_ls`, `nixd`, `jdtls`) whenever the corresponding filetype loads and the executable exists.
 - **Install tips** – use your package manager or `pip` for `basedpyright-langserver` and `ruff`, Nix flakes for `nixd`/`nixfmt`, and `jdtls` with Lombok support (set `$JDTLS_LOMBOK` or `$LOMBOK_JAR`).
+- **Rust** – uses `rust-analyzer`; if it is missing on NixOS, add `pkgs.rust-analyzer` to your flake/devShell packages or run `nix profile install nixpkgs#rust-analyzer` for a user install. `cargo clippy` powers the default check command.
 - **Commands** – `:LspAttach`, `:LspDettach`, `:LspRestart`, `:LspInfo`, and `:LspLog` manage clients; attach/detach commands use picker UIs.
 - **Formatting** – `ruff` formats Python on save, and a fallback format-on-save autocmd is injected when servers advertise `textDocument/formatting`.
 - **Customizing** – tweak per-server settings in `lsp/*.lua`; these tables are consumed directly by `vim.lsp.enable`.
