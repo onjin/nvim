@@ -65,8 +65,32 @@ M.lsp_capabilities_keymaps = {
     },
     ["textDocument/publishDiagnostic"] = {
         { mode = "n", lhs = "<leader>e",  rhs = vim.diagnostic.open_float,                  desc = "[LSP] Open floating diagnostics" },
-        { mode = "n", lhs = "<leader>dl", rhs = "<cmd>Pick diagnostic scope='current'<cr>", desc = "[LSP] List diagnostics (buffer)" },
-        { mode = "n", lhs = "<leader>dL", rhs = "<cmd>Pick diagnostic scope='all'<cr>",     desc = "[LSP] List diagnostics (all)" },
+        {
+            mode = "n",
+            lhs = "<leader>dl",
+            rhs = function()
+                local ok, Snacks = pcall(require, "snacks")
+                if ok then
+                    Snacks.picker.diagnostics_buffer()
+                else
+                    vim.notify("Snacks diagnostics picker is not available", vim.log.levels.WARN)
+                end
+            end,
+            desc = "[LSP] List diagnostics (buffer)",
+        },
+        {
+            mode = "n",
+            lhs = "<leader>dL",
+            rhs = function()
+                local ok, Snacks = pcall(require, "snacks")
+                if ok then
+                    Snacks.picker.diagnostics()
+                else
+                    vim.notify("Snacks diagnostics picker is not available", vim.log.levels.WARN)
+                end
+            end,
+            desc = "[LSP] List diagnostics (all)",
+        },
     },
 }
 

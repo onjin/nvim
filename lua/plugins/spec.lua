@@ -170,11 +170,6 @@ local M = {
         opts = {},
     },
     {
-        "nvim-mini/mini.extra",
-        name = "mini.extra",
-        opts = {},
-    },
-    {
         "nvim-mini/mini.files",
         name = "mini.files",
         opts = {},
@@ -284,9 +279,10 @@ local M = {
         opts = {},
     },
     {
-        "nvim-mini/mini.pick",
-        name = "mini.pick",
-        opts = {},
+        "folke/snacks.nvim",
+        lazy = false,
+        priority = 1000,
+        config = require("plugins.config.snacks"),
     },
     {
         "nvim-mini/mini.sessions",

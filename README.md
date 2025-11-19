@@ -70,8 +70,8 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 ## Terminal & Tools
 
 - Terminals open in insert mode and can be spawned quickly with `<leader>ot`.
-- `MiniPick` replaces `vim.ui.select` globally, providing consistent fuzzy UIs for LSP pickers and user commands.
-- Diagnostics helpers (`<leader>dl`, `<leader>dL`, `<leader>e`) rely on mini pickers to surface issues by scope.
+- `Snacks.picker` replaces `vim.ui.select` globally, providing consistent fuzzy UIs for LSP pickers and user commands.
+- Diagnostics helpers (`<leader>dl`, `<leader>dL`, `<leader>e`) rely on Snacks pickers to surface issues by scope.
 
 ## Plugin Management & Updates
 

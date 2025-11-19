@@ -1,10 +1,6 @@
 local setkey = require('utils').setkey
-
-local MiniPick = require('mini.pick')
-local MiniExtra = require('mini.extra')
-
--- Use mini.pick as the default selector in vim
-vim.ui.select = MiniPick.ui_select
+local Snacks = require("snacks")
+local picker = Snacks.picker
 
 -- Simple windows navigation, same set in tmux
 setkey("n", "<c-h>", "<c-w><c-h>", "Switch split left")
@@ -16,16 +12,16 @@ setkey("n", "<c-l>", "<c-w><c-l>", "Switch split right")
 setkey("n", "<C-/>", function() if vim.opt.hlsearch then vim.cmd.nohl() end end, "Toggle of hlsearch")
 
 -- Files search <leaders>s...
-setkey("n", "<leader>sf", '<cmd>Pick files<cr>', "Search files")
-setkey("n", "<leader>sb", MiniPick.builtin.buffers, "Search buffers")
-setkey("n", "<leader>sg", "<cmd>Pick grep_live tool='git'<cr>", 'Search live git grep')
-setkey("n", "<leader>sG", "<cmd>Pick grep_live tool='rg'<cr>", 'Search live ripgrep')
-setkey("n", "<leader>s*", "<cmd>Pick grep pattern='<cword>'<cr>", "Grep string under cursor")
+setkey("n", "<leader>sf", picker.files, "Search files")
+setkey("n", "<leader>sb", picker.buffers, "Search buffers")
+setkey("n", "<leader>sg", picker.git_grep, "Search live git grep")
+setkey("n", "<leader>sG", picker.grep, "Search live ripgrep")
+setkey("n", "<leader>s*", picker.grep_word, "Grep string under cursor")
 
 -- Find some elements <leader>f...
-setkey("n", "<Leader>fk", MiniExtra.pickers.keymaps, "Find keymaps")
-setkey("n", "<Leader>fc", MiniExtra.pickers.commands, "Find commands")
-setkey("n", "<leader>fs", MiniExtra.pickers.spellsuggest, "Find spelling")
+setkey("n", "<Leader>fk", picker.keymaps, "Find keymaps")
+setkey("n", "<Leader>fc", picker.commands, "Find commands")
+setkey("n", "<leader>fs", picker.spelling, "Find spelling")
 
 -- Toggles <leader>t...
 setkey("n", "<leader>tD", function()
