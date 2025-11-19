@@ -17,6 +17,8 @@ setkey("n", "<leader>sb", picker.buffers, "Search buffers")
 setkey("n", "<leader>sg", picker.git_grep, "Search live git grep")
 setkey("n", "<leader>sG", picker.grep, "Search live ripgrep")
 setkey("n", "<leader>s*", picker.grep_word, "Grep string under cursor")
+setkey("n", "<leader>sr", picker.resume, "Resume last search")
+setkey("n", "<leader>sn", picker.notifications, "Search notifications")
 
 -- Find some elements <leader>f...
 setkey("n", "<Leader>fk", picker.keymaps, "Find keymaps")
