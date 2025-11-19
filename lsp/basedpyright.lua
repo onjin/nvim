@@ -1,4 +1,5 @@
 local lsp_cfg = require("config.lsp")
+local python_cfg = require("config.python")
 local server_cfg = lsp_cfg.get("python", "basedpyright")
 local uv = vim.loop
 
@@ -71,6 +72,7 @@ return {
     end,
     on_init = function(client)
         client.offset_encoding = "utf-16"
+        python_cfg.apply_diagnostics_policy(client)
         if client.config.settings then
             client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
         end

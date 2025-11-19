@@ -2,6 +2,7 @@ local M = {}
 
 M.servers = {
     python = {
+        preferred_type_server = "basedpyright", -- set to "ty" to use Ty as the primary type provider
         basedpyright = {
             enabled = true,
             settings = {
@@ -132,6 +133,15 @@ function M.get(ft, server)
     local ft_cfg = M.servers[ft]
     if not ft_cfg then return nil end
     return normalize_entry(ft_cfg[server])
+end
+
+function M.get_python_type_server()
+    local ft_cfg = M.servers.python or {}
+    local preferred = ft_cfg.preferred_type_server
+    if preferred == "ty" then
+        return "ty"
+    end
+    return "basedpyright"
 end
 
 function M.is_enabled(ft, server)
