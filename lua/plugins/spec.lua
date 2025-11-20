@@ -342,13 +342,25 @@ local M = {
                 provider_selector = function(bufnr, filetype, buftype)
                     return { 'treesitter', 'indent' }
                 end,
+                open_fold_hl_timeout = 150,
+                close_fold_kinds_for_ft = {
+                    default = { 'imports', 'comment' },
+                    json = { 'array' },
+                    c = { 'comment', 'region' },
+                    python = { 'import_statement', 'import_from_statement', 'comment' }
+                },
+                close_fold_current_line_for_ft = {
+                    default = true,
+                    c = false
+                },
             })
             vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
-            vim.keymap.set('n', 'K', function()
+            vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+            vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+            vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
+            vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+            vim.keymap.set('n', 'zk', function()
                 local winid = require('ufo').peekFoldedLinesUnderCursor()
-                if not winid then
-                    vim.lsp.buf.hover()
-                end
             end)
         end
     },

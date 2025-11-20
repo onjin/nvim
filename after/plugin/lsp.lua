@@ -21,6 +21,14 @@ M.lsp_global_keymaps = {
     { mode = "n", lhs = "gA", rhs = "<cmd>LspAttach<cr>", desc = "[LSP] Pick & Attach LSP" },
     { mode = "n", lhs = "gD", rhs = "<cmd>LspDetach<cr>", desc = "[LSP] Pick & Detach LSP" },
 }
+M.workspace_symbols_for = function(expand_key)
+    return function()
+        local query = vim.fn.expand(expand_key)
+        if query and query ~= "" then
+            vim.lsp.buf.workspace_symbol(query)
+        end
+    end
+end
 
 M.lsp_capabilities_keymaps = {
     ["textDocument/definition"] = {
@@ -55,7 +63,9 @@ M.lsp_capabilities_keymaps = {
         { mode = "n", lhs = "grt", rhs = vim.lsp.buf.type_definition, desc = "[LSP] Type Definition" },
     },
     ["textDocument/documentSymbol"] = {
-        { mode = "n", lhs = "gO", rhs = vim.lsp.buf.document_symbol, desc = "[LSP] Document Symbols" },
+        { mode = "n", lhs = "grO", rhs = vim.lsp.buf.document_symbol,        desc = "[LSP] Document Symbols" },
+        { mode = "n", lhs = "grs", rhs = M.workspace_symbols_for("<cword>"), desc = "Workspace symbols for word under cursor" },
+
     },
     ["textDocument/signatureHelp"] = {
         { mode = "i", lhs = "<C-s>", rhs = vim.lsp.buf.signature_help, desc = "[LSP] Signature Help" },
@@ -64,7 +74,7 @@ M.lsp_capabilities_keymaps = {
         { mode = "n", lhs = "glf", rhs = vim.lsp.buf.format, desc = "[LSP] Code Format" },
     },
     ["textDocument/publishDiagnostic"] = {
-        { mode = "n", lhs = "<leader>e",  rhs = vim.diagnostic.open_float,                  desc = "[LSP] Open floating diagnostics" },
+        { mode = "n", lhs = "<leader>e", rhs = vim.diagnostic.open_float, desc = "[LSP] Open floating diagnostics" },
         {
             mode = "n",
             lhs = "<leader>dl",
@@ -209,7 +219,7 @@ function M.attach_picker()
 
     -- find servers whose default_config.filetypes contains current ft
     local candidates = {
-        { label = "basedpyright", name = "basedpyright" },
+        { label = "basedpyright",  name = "basedpyright" },
         { label = "ruff",          name = "ruff" },
         { label = "rust-analyzer", name = "rust_analyzer" },
         { label = "lua_ls",        name = "lua_ls" },
