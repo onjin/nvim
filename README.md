@@ -14,7 +14,7 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 - Neovim 0.10+ with LuaJIT (treesitter folding and `vim.lsp.enable` APIs are used).
 - Git (`lazy.nvim` bootstraps repositories on demand).
-- ripgrep (`mini.pick` live grep and `todo-comments` use it).
+- ripgrep (`Snacks.picker` live grep flows and `todo-comments` use it).
 - Language servers and formatters: `lua-language-server`, `basedpyright-langserver`, `ruff`, `rust-analyzer`, `nixd`, `nixfmt`, `jdtls` (Rust checks use `cargo clippy`).
 
 ## Directory Tour
@@ -36,20 +36,65 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 ## Plugin Highlights
 
-- **Navigation & Search** – `mini.pick`, `mini.extra`, `reach.nvim`, `marks.nvim`, and `oil.nvim` keep buffers, marks, and files within a keystroke.
+- **Navigation & Search** – `Snacks.picker`, `reach.nvim`, `marks.nvim`, `mini.visits`, and `oil.nvim` keep buffers, marks, and files within a keystroke.
 - **UI & Feedback** – `catppuccin`, `mini.notify`, `nvim-ufo`, and `todo-comments` surface structure, notifications, and folding hints.
 - **Coding Aids** – `nvim-cmp` + `cmp-nvim-lsp`, `nvim-treesitter`, `treesitter-context`, and `nvim_context_vt` drive completion and structural awareness.
 - **Snippets & Docs** – `mini.snippets`, `friendly-snippets`, and `neogen` accelerate boilerplate, while `markview.nvim`/`markdown-preview.nvim` preview Markdown.
 - **Integrations** – `which-key`, `mini.sessions`, `mini.visits`, `mini.git`, `cord.nvim` (Discord presence), and `windsurf.nvim` (Codeium when `ai_enabled` is true) round out productivity.
 
-## Keymaps to Remember
+## Keymap Cheat Sheet
 
-- `<C-h>`, `<C-j>`, `<C-k>`, `<C-l>` move across windows; `<leader>?` shows buffer-local mappings via which-key.
-- `<leader>sf`, `<leader>sb`, `<leader>sg`, `<leader>s*` trigger `mini.pick` for files, buffers, live git grep, and word grep.
-- `<leader>fk`, `<leader>fc`, `<leader>fs` search keymaps, commands, and spelling suggestions with `mini.extra`.
-- `<leader>oo` toggles the `aerial` outline; `<leader>/` invokes a global which-key cheat-sheet.
-- `<leader>ot` opens a reusable bottom terminal; hit `<Esc><Esc>` inside terminals to return to normal mode.
-- `<leader>tD`, `<leader>td`, `<leader>tm` toggle diagnostics, virtual text, and scrolloff focus.
+### Navigation & Layout
+
+- `<C-h>`, `<C-j>`, `<C-k>`, `<C-l>` – move across splits (mirrors the same tmux bindings).
+- `-` – open the parent directory inside `oil.nvim`; close it with `q` or open files like normal buffers.
+- `<leader>?` – show which-key hints for buffer-local mappings; `<leader>/` shows every registered mapping.
+
+### Pickers & Search
+
+- `<leader>sf`, `<leader>sb`, `<leader>sg`, `<leader>sG`, `<leader>s*` – Snacks pickers for files, buffers, git grep, ripgrep, or the word under cursor.
+- `<leader>sr` – resume the previous picker session; `<leader>sn` shows the Snacks notification log.
+- `<leader>fk`, `<leader>fc`, `<leader>fs` – Snacks pickers for keymaps, user commands, and spelling suggestions.
+
+### Outline, Context & Docs
+
+- `<leader>oo` – toggle the `aerial` outline; `{` / `}` move between symbols while focused there.
+- `<leader>jc` – jump to the current Treesitter context node.
+- `<leader>tC` – toggle the pinned Treesitter context window; `<leader>tc` toggles inline context virtual text.
+- `<leader>tp` – enable or disable the global `markview.nvim` Markdown preview (mirrors the `:Markview` command).
+
+### Diagnostics, Toggles & Helpers
+
+- `<leader>tD` – enable/disable diagnostics globally.
+- `<leader>td` – toggle diagnostic virtual text; `<leader>tm` switches between focused scrolloff (huge) and the default.
+- `<leader>dl`, `<leader>dL`, `<leader>e` – buffer diagnostics list, workspace diagnostics list, or a floating window for the cursor location.
+- `<C-/>` – clear highlighted matches when `hlsearch` is on.
+
+### Terminal & Editing Tricks
+
+- `<leader>ot` – open a reusable 12-line terminal anchored to the bottom; terminal buffers always start in insert mode.
+- `<Esc><Esc>` while in terminal mode leaves insert mode without reaching for `<C-\><C-n>`.
+- `<leader>rq` (visual mode) – quote every argument except the first on each selected line, handy for shell-like commands.
+
+### LSP Buffer Keymaps
+
+These map automatically after a server attaches and only for the capabilities it advertises.
+
+| Mode | Mapping | Action |
+| --- | --- | --- |
+| `n` | `gA` | Picker to attach/start a matching language server. |
+| `n` | `gD` | Picker to detach a client from the current buffer. |
+| `n` | `grd` / `grD` | Jump to definition or declaration. |
+| `n` | `K` | Hover documentation. |
+| `n` | `grC` / `grc` | Incoming or outgoing call hierarchy requests. |
+| `n` | `gra` / `gri` | Code actions or implementations. |
+| `n` | `grn` / `grr` | Rename symbols or list references. |
+| `n` | `grt` | Jump to the type definition. |
+| `n` | `grO` / `grs` | Document symbols or workspace symbols for the word under the cursor. |
+| `i` | `<C-s>` | Signature help popup. |
+| `n` | `glf` | Format the buffer with the active LSP. |
+| `n` | `<leader>e` | Open diagnostics in a floating window. |
+| `n` | `<leader>dl` / `<leader>dL` | Snacks pickers scoped to buffer or workspace diagnostics. |
 
 ## Language Servers
 
@@ -69,9 +114,25 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 ## Terminal & Tools
 
-- Terminals open in insert mode and can be spawned quickly with `<leader>ot`.
+- Terminals open in insert mode. Hit `<leader>ot` to spawn a reusable scratch pad and `<Esc><Esc>` to drop back to normal mode instantly.
 - `Snacks.picker` replaces `vim.ui.select` globally, providing consistent fuzzy UIs for LSP pickers and user commands.
 - Diagnostics helpers (`<leader>dl`, `<leader>dL`, `<leader>e`) rely on Snacks pickers to surface issues by scope.
+
+## Commands & Helpers
+
+| Command | Description |
+| --- | --- |
+| `:LspAttach` / `:LspDettach` | Picker flows to start or stop servers that match the current buffer filetype. |
+| `:LspRestart` | Stops every attached client, restarts them with the same settings, and reattaches buffers automatically. |
+| `:LspInfo` / `:LspLog` | Show `:checkhealth vim.lsp` output or open the LSP log in a split. |
+| `:LspClangdSwitchSourceHeader` | With clangd attached, jump between header/source pairs. |
+| `:LspClangdShowSymbolInfo` | With clangd attached, preview the symbol info returned by `textDocument/symbolInfo`. |
+| `:NVRCVariables` / `:NVRCEdit` / `:NVRCApply` | Inspect, edit, and reapply `.nvimrc.ini` overrides such as `ai_enabled` or `colorscheme`. |
+| `:Oil` | Launch the Oil buffer-based file manager (also bound to the `-` keymap). |
+| `:AerialToggle!` | Toggle the outline sidebar that `<leader>oo` controls. |
+| `:Markview` | Toggle the Markdown preview window globally; use `<leader>tp` for the paired keymap. |
+| `:MarkdownPreviewToggle` | Open or close the browser preview from `markdown-preview.nvim`. |
+| `:Neogen` | Generate docstrings/snippets for the current function/class using language-aware templates. |
 
 ## Plugin Management & Updates
 
