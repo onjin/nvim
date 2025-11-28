@@ -1,4 +1,34 @@
 local M = {}
+
+-- helper functions to split buffer completion between the focused buffer and every other listed buffer
+local function current_buffer_only()
+    return { vim.api.nvim_get_current_buf() }
+end
+
+local function other_listed_buffers()
+    local current = vim.api.nvim_get_current_buf()
+    local bufs = {}
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if buf ~= current and vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buflisted and vim.bo[buf].buftype == '' then
+            table.insert(bufs, buf)
+        end
+    end
+    return bufs
+end
+
+-- sources priorities, bigger number means higher priority
+score_offset = {
+    lsp = 50,
+    snippets = 20,
+    codeium = 0,
+    buffer_current = -5,
+    buffer_other = -10,
+    tmux = -15,
+    env = -20,
+    path = -25,
+
+}
+
 M.config = function()
     opts = {
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
@@ -56,8 +86,10 @@ M.config = function()
         -- Default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
-            default = { 'conventional_commits', 'lsp', 'path', 'snippets', 'buffer', 'tmux', 'env' },
+            default = { 'conventional_commits', 'lsp', 'snippets', 'buffer_current', 'buffer_other', 'path', 'env', 'tmux' },
             providers = {
+                lsp = { score_offset = score_offset['lsp'] or 0 },
+                snippets = { score_offset = score_offset['snippets'] or 0 },
                 conventional_commits = {
                     name = 'Conventional Commits',
                     module = 'blink-cmp-conventional-commits',
@@ -68,7 +100,29 @@ M.config = function()
                     ---@type blink-cmp-conventional-commits.Options
                     opts = {}, -- none so far
                 },
+                buffer_current = {
+                    score_offset = score_offset['buffer_current'] or 0,
+                    name = 'Buffer',
+                    module = 'blink.cmp.sources.buffer',
+                    opts = {
+                        get_bufnrs = current_buffer_only,
+                        get_search_bufnrs = current_buffer_only,
+                    },
+                },
+                buffer_other = {
+                    score_offset = score_offset['buffer_other'] or 0,
+                    name = 'Other Buffers',
+                    module = 'blink.cmp.sources.buffer',
+                    enabled = function()
+                        return #other_listed_buffers() > 0
+                    end,
+                    opts = {
+                        get_bufnrs = other_listed_buffers,
+                        get_search_bufnrs = other_listed_buffers,
+                    },
+                },
                 tmux = {
+                    score_offset = score_offset['tmux'] or 0,
                     module = "blink-cmp-tmux",
                     name = "tmux",
                     -- default options
@@ -82,6 +136,7 @@ M.config = function()
                     },
                 },
                 env = {
+                    score_offset = score_offset['env'] or 0,
                     name = "Env",
                     module = "blink-cmp-env",
                     --- @type blink-cmp-env.Options
@@ -90,6 +145,9 @@ M.config = function()
                         show_braces = false,
                         show_documentation_window = true,
                     },
+                },
+                path = {
+                    score_offset = score_offset['path'] or 0,
                 }
 
             }
@@ -104,7 +162,13 @@ M.config = function()
     }
     if vim.g.ai_enabled then
         table.insert(opts.sources.default, 'codeium')
-        opts.sources.providers.codeium = { name = 'Codeium', module = 'codeium.blink', async = true }
+        opts.sources.providers.codeium = {
+            name = 'Codeium',
+            module = 'codeium.blink',
+            async = true,
+            score_offset =
+                score_offset['codeium'] or 0
+        }
     end
     require('blink.cmp').setup(opts);
 end

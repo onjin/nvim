@@ -113,7 +113,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
         -- maps gated by capability
         for method, maps in pairs(M.lsp_capabilities_keymaps) do
-            if client.supports_method and client:supports_method(method) then
+            -- jdtls uses dynamic registration
+            if (client.supports_method and client:supports_method(method)) or client.name == 'jdtls' then
                 for _, m in ipairs(maps) do map(m) end
             end
         end
