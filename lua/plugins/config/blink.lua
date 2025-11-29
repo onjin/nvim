@@ -1,5 +1,51 @@
 local M = {}
 
+local provider_cycle = {}
+local provider_cycle_index = 0
+
+local function configure_provider_cycle(definition)
+    provider_cycle = definition or {}
+    provider_cycle_index = #provider_cycle > 0 and 1 or 0
+end
+
+local function provider_cycle_label(entry)
+    if entry.label then
+        return entry.label
+    end
+    if entry.providers then
+        return table.concat(entry.providers, ', ')
+    end
+    return 'All providers'
+end
+
+local function show_provider_cycle_entry(cmp, idx)
+    local entry = provider_cycle[idx]
+    if not entry then
+        return false
+    end
+    provider_cycle_index = idx
+    local opts = entry.providers and { providers = entry.providers } or nil
+    if opts then
+        cmp.show(opts)
+    else
+        cmp.show()
+    end
+    vim.notify(
+        ('blink.cmp: %s'):format(provider_cycle_label(entry)),
+        vim.log.levels.INFO,
+        { title = 'Completion filter' }
+    )
+    return true
+end
+
+local function cycle_provider_filter(cmp, delta)
+    if #provider_cycle == 0 then
+        return true
+    end
+    local next_idx = ((provider_cycle_index - 1 + delta) % #provider_cycle) + 1
+    return show_provider_cycle_entry(cmp, next_idx)
+end
+
 -- helper functions to split buffer completion between the focused buffer and every other listed buffer
 local function current_buffer_only()
     return { vim.api.nvim_get_current_buf() }
@@ -44,7 +90,18 @@ M.config = function()
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         signature = { enabled = true },
-        keymap = { preset = 'default',
+        keymap = {
+            preset = 'default',
+            ['<M-n>'] = {
+                function(cmp)
+                    return cycle_provider_filter(cmp, 1)
+                end,
+            },
+            ['<M-p>'] = {
+                function(cmp)
+                    return cycle_provider_filter(cmp, -1)
+                end,
+            },
         },
 
         appearance = {
@@ -170,6 +227,16 @@ M.config = function()
                 score_offset['codeium'] or 0
         }
     end
+
+    local provider_cycle_definition = {
+        { label = 'All providers', providers = opts.sources.default },
+        { label = 'LSP only',      providers = { 'lsp' } },
+        { label = 'Snippets',      providers = { 'snippets' } },
+    }
+    if vim.g.ai_enabled then
+        table.insert(provider_cycle_definition, { label = 'Codeium', providers = { 'codeium' } })
+    end
+    configure_provider_cycle(provider_cycle_definition)
     require('blink.cmp').setup(opts);
 end
 
