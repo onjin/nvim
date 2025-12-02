@@ -92,6 +92,16 @@ M.servers = {
             enabled = true,
         },
     },
+    toml = {
+        taplo = {
+            enabled = true,
+        },
+    },
+    yaml = {
+        yamlls = {
+            enabled = true,
+        },
+    },
     json = {
         jsonls = {
             enabled = true,
