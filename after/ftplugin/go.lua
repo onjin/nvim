@@ -1,3 +1,11 @@
+vim.opt_local.expandtab = false
 vim.opt_local.shiftwidth = 4
+vim.opt_local.softtabstop = 4
 vim.opt_local.tabstop = 4
-vim.keymap.set("n", "<localleader>t", ":lua require('utils.helpers').run_current_file_in_split 'go run'<CR>")
+
+if not _G.go_env_set then
+    _G.go_env_set = true
+    vim.schedule(function()
+        vim.lsp.enable("gopls")
+    end)
+end

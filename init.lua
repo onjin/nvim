@@ -1,18 +1,29 @@
-local _deprecate = vim.deprecate
+-- load options first
+require 'config.options'
 
-vim.deprecate = function(name, alternative, version, plugin, backtrace)
-  -- hide deprecation info about migration to vim.lsp.config
-  if plugin ~= "nvim-lspconfig" then
-    _deprecate(name, alternative, version, plugin, backtrace)
-  end
-end -- hide nvim-lspconfig alert
+-- allow per-project overrides via .nvimrc.ini
+require("nvimrc").setup({ debug = false })
 
-require "config.options"
-require "config.commands"
-require "config.keymaps"
+-- bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable",
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- set/override globals (vim.g) variables from ini file
-require("nvimrc").setup { debug = false }
+require("lazy").setup(require("plugins.spec"), {
+    ui = { border = "rounded" },
+    checker = { enabled = false },
+})
 
---- initialize plugin manager
-require "config.lazy"
+vim.cmd.colorscheme(vim.g.colorscheme)
+
+-- load other static config
+require 'config.terminal'

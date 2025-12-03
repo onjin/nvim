@@ -1,9 +1,9 @@
-local set = vim.opt_local
-
-set.shiftwidth = 3
-set.expandtab = true
-
-vim.keymap.set("n", "<localleader><localleader>x", "<cmd>source %<CR>", { desc = "[X] Source file" })
-vim.keymap.set("n", "<localleader>x", ":.lua<CR>", { desc = "[X] Run with lua" })
-vim.keymap.set("v", "<localleader>x", ":lua<CR>", { desc = "[X] Run with lua" })
-vim.keymap.set("n", "<localleader>t", ":lua require('utils.helpers').run_current_file_in_split 'lua'<CR>")
+if not _G.lua_env_set then
+    _G.lua_env_set = true
+    vim.schedule(function()
+        local lsp_cfg = require("config.lsp")
+        if lsp_cfg.is_enabled("lua", "lua_ls") then
+            vim.lsp.enable("lua_ls")
+        end
+    end)
+end

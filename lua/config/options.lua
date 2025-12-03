@@ -1,28 +1,31 @@
+vim.g.mapleader = ","
+vim.g.maplocalleader = " "
+vim.g.compatible = false -- need f.e. \v to work
+
+--(S)Ex
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_browse_split = 4
+vim.g.netrw_altv = 1
+vim.g.netrw_winsize = 25
+vim.g.buffet_show_index = true
+vim.g.enable_windsurf = 0
+
+
 local opt = vim.opt
 local state_prefix = vim.env.XDG_STATE_HOME or vim.fn.expand "~/.local/state"
 
--- default mapleader
-vim.g.mapleader = ","
-vim.g.maplocalleader = " "
+-- base spaces/tabs if not set
+opt.expandtab = true
+opt.shiftwidth = 4
+opt.tabstop = 4
 
-vim.g.lsp_servers_ensure_installed = { "lua_ls" }
-vim.g.lsp_disable_semantic_tokens = {
-  lua = true,
-} -- disable semanticTokensProvider for filetype
+-- theme
+vim.o.background = "dark"
 
-vim.g.treesitter_ensure_installed = {
-  "bash",
-  "c",
-  "diff",
-  "html",
-  "lua",
-  "luadoc",
-  "markdown",
-  "markdown_inline",
-  "query",
-  "vim",
-  "vimdoc",
-}
+-- fuzzy search by :find text<tab>
+vim.opt.path:append "**"
+
 
 ----- Interesting Options -----
 
@@ -66,13 +69,17 @@ vim.opt.scrolloff = 10
 -- buffers list as tab, and context
 vim.opt.showtabline = 2
 
-vim.g.buffet_show_index = true
+-- Do not update diagnostics in Insert mode - it causes many weird not real/outdated diagnostics
+vim.diagnostic.config({
+    update_in_insert = false,
+})
 
 -- Disable nvim intro
 vim.opt.shortmess:append "sI"
 
 -- Allow .nvimrc and .exrc
 vim.opt.exrc = true
+vim.opt.secure = true
 -----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------
@@ -94,57 +101,34 @@ opt.backupdir = { state_prefix .. "/nvim/backup//" }
 opt.directory = { state_prefix .. "/nvim/swp//" }
 
 -----------------------------------------------------------
--- Folding
 -----------------------------------------------------------
--- 1) fold by indent - default, we can use treesitter expression at some places
-vim.opt_local.foldmethod = "indent"
-vim.opt_local.foldlevelstart = 1
-vim.opt_local.foldlevel = 1
-
-vim.opt_local.foldminlines = 5 -- at least 5 lines to make a fold
-vim.opt_local.foldnestmax = 3  -- no more than 3 levels deep
-
--- 4) keep folding turned on
-vim.opt_local.foldenable = true
+-- keep folds open by default; treesitter config upgrades the method when available
+opt.foldmethod = "indent"
+opt.foldexpr = ""
+opt.foldenable = true
+opt.foldcolumn = "0"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldminlines = 1
+opt.foldnestmax = 6
+opt.statuscolumn = table.concat({
+    "%s",
+    " ",
+    "%=%{v:lua.require('config.foldcolumn').number()}",
+    " ",
+    "%{v:lua.require('config.foldcolumn').render()}",
+    " ",
+})
 
 -----------------------------------------------------------
 -- Spelling
 -----------------------------------------------------------
 
-opt.spell = true
+opt.spell = false
 opt.spelllang = "en"
 
--- Disable builtins plugins
-local disabled_built_ins = {
-  "2html_plugin",
-  "getscript",
-  "getscriptPlugin",
-  "gzip",
-  "logipat",
-  "matchit",
-  "tar",
-  "tarPlugin",
-  "rrhelper",
-  "vimball",
-  "vimballPlugin",
-  "zip",
-  "zipPlugin",
-  "tutor",
-  "rplugin",
-  "syntax",
-  "synmenu",
-  "optwin",
-  "compiler",
-  "bugreport",
-  "ftplugin",
-}
-
-for _, plugin in pairs(disabled_built_ins) do
-  vim.g["loaded_" .. plugin] = 1
-end
-
 vim.filetype.add {
-  extensions = {
-    cheat = "navi",
-  },
+    extensions = {
+        cheat = "navi",
+    },
 }
