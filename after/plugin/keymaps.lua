@@ -95,3 +95,5 @@ vim.keymap.set("v", "<leader>rq", function()
     -- reselect previous visual area (handy if you want to run it again)
     vim.cmd("normal! gv")
 end, { desc = "Quote all but the first word on each selected line" })
+
+vim.keymap.set("t", "<Esc>", '<C-\\><C-n>', { desc = "Exit terminal mode" })

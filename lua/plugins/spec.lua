@@ -468,6 +468,31 @@ local M = {
             },
 
         },
+    },
+    -- DAPs
+    {
+        'mfussenegger/nvim-dap',
+        dependencies = {
+            {
+                'mfussenegger/nvim-dap-python',
+                config = function()
+                    require("dap-python").setup("uv")
+                end
+            },
+            {
+                'theHamsta/nvim-dap-virtual-text',
+                config = function()
+                    require('nvim-dap-virtual-text').setup()
+                end
+            },
+            { 'igorlfs/nvim-dap-view', opts = {} },
+        },
+        keys = {
+            { "<leader>bv", "<cmd>DapViewToggle<cr>" },
+            { "<leader>bb", "<cmd>DapToggleBreakpoint<cr>" },
+            { "<leader>bc", "<cmd>DapContinue<cr>" },
+            { "<leader>bw", "<cmd>DapViewWatch<cr>" },
+        }
     }
 
 }
