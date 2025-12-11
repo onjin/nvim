@@ -19,13 +19,20 @@ local function normalize_file(path)
     end
 end
 
-local function find_lombok()
-    -- I installed this by NixOS home-manager, along with sessionVariable
-    for _, candidate in ipairs({ vim.env.JDTLS_LOMBOK, vim.env.LOMBOK_JAR }) do
+local function first_existing(candidates)
+    for _, candidate in ipairs(candidates) do
         local jar = normalize_file(candidate)
         if jar then
             return jar
         end
+    end
+end
+
+local function find_lombok()
+    -- I installed this by NixOS home-manager, along with sessionVariable
+    local jar = first_existing({ vim.env.JDTLS_LOMBOK, vim.env.LOMBOK_JAR })
+    if jar then
+        return jar
     end
 
     local jdtls_exec = vim.fn.exepath("jdtls")
@@ -34,28 +41,39 @@ local function find_lombok()
         local profile_dir = bin_dir and fs.dirname(bin_dir) or nil
         local share_dir = profile_dir and fs.joinpath(profile_dir, "share") or nil
 
-        local nearby_candidates = {
+        jar = first_existing({
             share_dir and fs.joinpath(share_dir, "java", "lombok.jar"),
             share_dir and fs.joinpath(share_dir, "java", "jdtls", "lombok.jar"),
             bin_dir and fs.joinpath(bin_dir, "..", "share", "java", "lombok.jar"),
             bin_dir and fs.joinpath(bin_dir, "..", "share", "java", "jdtls", "lombok.jar"),
-        }
-
-        for _, candidate in ipairs(nearby_candidates) do
-            local jar = normalize_file(candidate)
-            if jar then
-                return jar
-            end
+        })
+        if jar then
+            return jar
         end
 
         if share_dir then
             local found = fs.find("lombok.jar", { fs.normalize(share_dir) }, { limit = 1 })
             if found[1] then
-                local jar = normalize_file(found[1])
-                if jar then
-                    return jar
-                end
+                jar = normalize_file(found[1])
+                if jar then return jar end
             end
+        end
+    end
+
+    local stdpath = vim.fn.stdpath
+    if stdpath then
+        local std_candidates = {}
+        for _, scope in ipairs({ "data", "state" }) do
+            local dir = stdpath(scope)
+            if dir and dir ~= "" then
+                table.insert(std_candidates, fs.joinpath(dir, "mason", "packages", "jdtls", "lombok.jar"))
+                table.insert(std_candidates, fs.joinpath(dir, "java", "jdtls", "lombok.jar"))
+                table.insert(std_candidates, fs.joinpath(dir, "java", "lombok.jar"))
+            end
+        end
+        jar = first_existing(std_candidates)
+        if jar then
+            return jar
         end
     end
 
