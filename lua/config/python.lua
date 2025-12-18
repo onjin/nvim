@@ -95,7 +95,10 @@ end
 
 function M.apply_diagnostics_policy(client)
     if not M.should_client_publish_diagnostics(client.name) then
-        disable_publish_diagnostics(client)
+        if client.name ~= "ty" then -- ty is not duplicating with ruff
+            vim.notify("disabled diagnosics from " .. client.name)
+            disable_publish_diagnostics(client)
+        end
     end
 end
 
