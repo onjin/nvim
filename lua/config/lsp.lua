@@ -4,7 +4,7 @@ M.servers = {
     python = {
         preferred_type_server = "basedpyright", -- set to "ty" to use Ty as the primary type provider
         basedpyright = {
-            enabled = false,
+            enabled = true,
             settings = {
                 basedpyright = {
                     -- Using Ruff's import organizer
@@ -69,7 +69,7 @@ M.servers = {
             },
         },
         ty = {
-            enabled = true,
+            enabled = false,
             settings = {
                 ty = {
                     diagnosticMode = 'workspace',
