@@ -493,7 +493,12 @@ local M = {
             { "<leader>bc", "<cmd>DapContinue<cr>" },
             { "<leader>bw", "<cmd>DapViewWatch<cr>" },
         }
-    }
+    },
+    -- diagrams
+    {
+        "terrastruct/d2-vim",
+        ft = { "d2" },
+    },
 
 }
 
