@@ -38,7 +38,7 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 
 - **Navigation & Search** – `Snacks.picker`, `reach.nvim`, `marks.nvim`, `mini.visits`, and `oil.nvim` keep buffers, marks, and files within a keystroke.
 - **UI & Feedback** – `catppuccin`, `mini.notify`, `nvim-ufo`, and `todo-comments` surface structure, notifications, and folding hints.
-- **Coding Aids** – `nvim-cmp` + `cmp-nvim-lsp`, `nvim-treesitter`, `treesitter-context`, and `nvim_context_vt` drive completion and structural awareness. Cycle blink.cmp provider filters with `<M-n>` / `<M-p>`; a notification shows which sources are active because the popup itself can’t render a window title.
+- **Coding Aids** – `nvim-cmp` + `cmp-nvim-lsp`, `nvim-treesitter`, `treesitter-context`, and `nvim_context_vt` drive completion and structural awareness. Cycle blink.cmp provider filters with `<M-n>` / `<M-p>`; a notification shows which sources are active because the popup itself can’t render a window title. When `ai_enabled` is set, Windsurf/Codeium stays idle until you ask for it via a manual keymap, keeping network calls to a minimum.
 - **Snippets & Docs** – `mini.snippets`, `friendly-snippets`, and `neogen` accelerate boilerplate, while `markview.nvim`/`markdown-preview.nvim` preview Markdown.
 - **Integrations** – `which-key`, `mini.sessions`, `mini.visits`, `mini.git`, `cord.nvim` (Discord presence), and `windsurf.nvim` (Codeium when `ai_enabled` is true) round out productivity.
 
@@ -66,6 +66,7 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 ### Completion
 
 - `<M-n>`, `<M-p>` – cycle blink.cmp provider filters. The completion popup can’t show the active provider group as a title, so watch the notifications for the current selection.
+- `<leader>aa` (normal mode) / `<C-g>a` (insert mode) – when `ai_enabled` is true, open blink.cmp filtered to Windsurf/Codeium only, requesting AI suggestions on demand instead of automatically.
 
 ### Diagnostics, Toggles & Helpers
 

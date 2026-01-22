@@ -217,14 +217,13 @@ M.config = function()
         -- See the fuzzy documentation for more information
         fuzzy = { implementation = "prefer_rust_with_warning" }
     }
+
     if vim.g.ai_enabled then
-        table.insert(opts.sources.default, 'codeium')
         opts.sources.providers.codeium = {
             name = 'Codeium',
             module = 'codeium.blink',
             async = true,
-            score_offset =
-                score_offset['codeium'] or 0
+            score_offset = score_offset['codeium'] or 0
         }
     end
 

@@ -20,6 +20,31 @@ setkey("n", "<leader>s*", picker.grep_word, "Grep string under cursor")
 setkey("n", "<leader>sr", picker.resume, "Resume last search")
 setkey("n", "<leader>sn", picker.notifications, "Search notifications")
 
+if vim.g.ai_enabled then
+    local function trigger_ai_completion()
+        local ok, blink = pcall(require, 'blink.cmp')
+        if not ok then
+            vim.notify("blink.cmp is not available, cannot request AI completion", vim.log.levels.WARN)
+            return
+        end
+
+        local function show_codeium()
+            blink.show({ providers = { 'codeium' } })
+        end
+
+        if vim.fn.mode():match('^[iR]') then
+            show_codeium()
+            return
+        end
+
+        vim.cmd('startinsert')
+        vim.schedule(show_codeium)
+    end
+
+    setkey("n", "<leader>aa", trigger_ai_completion, "Ask AI completion (Codeium)")
+    setkey("i", "<C-g>a", trigger_ai_completion, "Ask AI completion (Codeium)")
+end
+
 -- Find some elements <leader>f...
 setkey("n", "<Leader>fk", picker.keymaps, "Find keymaps")
 setkey("n", "<Leader>fc", picker.commands, "Find commands")
