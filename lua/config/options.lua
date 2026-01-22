@@ -2,6 +2,9 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = " "
 vim.g.compatible = false -- need f.e. \v to work
 
+-- to speed up TS
+vim.g.loaded_matchparen = 1
+
 --(S)Ex
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3

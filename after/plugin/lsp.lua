@@ -275,4 +275,27 @@ vim.api.nvim_create_user_command("LspDettach", function()
     M.detach_picker()
 end, { desc = "Pick & attach matching LSP server" })
 
+do
+    local python_cfg = require("config.python")
+    vim.api.nvim_create_user_command("PythonTypeServer", function(opts)
+        local arg = opts.args
+        local ok, msg
+        if arg == "" then
+            ok, msg = python_cfg.toggle_type_server()
+        elseif arg == "default" then
+            ok, msg = python_cfg.use_type_server(nil)
+        else
+            ok, msg = python_cfg.use_type_server(arg)
+        end
+        local level = ok and vim.log.levels.INFO or vim.log.levels.ERROR
+        vim.notify(msg, level)
+    end, {
+        nargs = "?",
+        complete = function()
+            return { "ty", "basedpyright", "default" }
+        end,
+        desc = "Toggle or set the preferred Python type server (ty/basedpyright)",
+    })
+end
+
 return M

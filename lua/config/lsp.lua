@@ -1,8 +1,10 @@
 local M = {}
 
+local python_type_override = nil
+
 M.servers = {
     python = {
-        preferred_type_server = "basedpyright", -- set to "ty" to use Ty as the primary type provider
+        preferred_type_server = "ty", -- set to "ty" to use Ty as the primary type provider
         basedpyright = {
             enabled = true,
             settings = {
@@ -69,7 +71,7 @@ M.servers = {
             },
         },
         ty = {
-            enabled = false,
+            enabled = true,
             settings = {
                 ty = {
                     diagnosticMode = 'workspace',
@@ -151,12 +153,27 @@ function M.get(ft, server)
 end
 
 function M.get_python_type_server()
+    if python_type_override ~= nil then
+        return python_type_override
+    end
     local ft_cfg = M.servers.python or {}
     local preferred = ft_cfg.preferred_type_server
     if preferred == "ty" then
         return "ty"
     end
     return "basedpyright"
+end
+
+function M.set_python_type_server(server)
+    local valid = {
+        basedpyright = true,
+        ty = true,
+    }
+    if server ~= nil and not valid[server] then
+        return false, ("unknown python type server: %s"):format(server)
+    end
+    python_type_override = server
+    return true
 end
 
 function M.is_enabled(ft, server)
