@@ -182,14 +182,12 @@ M.config = function()
                     score_offset = score_offset['tmux'] or 0,
                     module = "blink-cmp-tmux",
                     name = "tmux",
-                    -- default options
+                    -- stay lean when panes are full of logs
                     opts = {
                         all_panes = true,
-                        capture_history = true,
-                        -- only suggest completions from `tmux` if the `trigger_chars` are
-                        -- used
-                        triggered_only = false,
-                        trigger_chars = { "." }
+                        capture_history = false,
+                        triggered_only = true,
+                        trigger_chars = { ".", "/" },
                     },
                 },
                 env = {
