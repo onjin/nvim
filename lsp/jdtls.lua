@@ -99,7 +99,6 @@ local cmd = { "jdtls" }
 
 if lombok_jar then
     table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok_jar)
-    table.insert(cmd, "--jvm-arg=-Xbootclasspath/a:" .. lombok_jar)
 else
     warn_missing_lombok()
 end
