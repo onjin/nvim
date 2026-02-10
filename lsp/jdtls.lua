@@ -28,6 +28,58 @@ local function first_existing(candidates)
     end
 end
 
+local function read_file(path)
+    if not path or path == "" then
+        return nil
+    end
+    local ok, fd = pcall(uv.fs_open, path, "r", 438) -- 0666
+    if not ok or not fd then
+        return nil
+    end
+    local ok_stat, stat = pcall(uv.fs_fstat, fd)
+    if not ok_stat or not stat or not stat.size then
+        pcall(uv.fs_close, fd)
+        return nil
+    end
+    local ok_data, data = pcall(uv.fs_read, fd, stat.size, 0)
+    pcall(uv.fs_close, fd)
+    if not ok_data then
+        return nil
+    end
+    return data
+end
+
+local function find_spotless_profile_name(formatter_xml)
+    local content = read_file(formatter_xml)
+    if not content then
+        return nil
+    end
+    return content:match('<profile%s+name="([^"]+)"')
+end
+
+local function java_settings_for_root(root_dir)
+    local java = vim.empty_dict()
+    if not root_dir or root_dir == "" then
+        return { java = java }
+    end
+
+    local formatter_xml = normalize_file(fs.joinpath(root_dir, "eclipse.formatter.xml"))
+    if not formatter_xml then
+        return { java = java }
+    end
+
+    local formatter_settings = {
+        url = vim.uri_from_fname(formatter_xml),
+    }
+    local profile_name = find_spotless_profile_name(formatter_xml)
+    if profile_name and profile_name ~= "" then
+        formatter_settings.profile = profile_name
+    end
+
+    java.format = { settings = formatter_settings }
+    return { java = java }
+end
+
 local function find_lombok()
     -- I installed this by NixOS home-manager, along with sessionVariable
     local jar = first_existing({ vim.env.JDTLS_LOMBOK, vim.env.LOMBOK_JAR })
@@ -127,7 +179,12 @@ return {
             },
         },
     },
-    settings = {
-        java = vim.empty_dict(),
-    },
+    before_init = function(_, config)
+        if not config then
+            return
+        end
+        local root_dir = config and config.root_dir or uv.cwd()
+        config.settings = java_settings_for_root(root_dir)
+    end,
+    settings = java_settings_for_root(uv.cwd()),
 }
