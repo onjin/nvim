@@ -31,14 +31,31 @@ local M = {
     {
         "stevearc/oil.nvim",
         name = "oil",
-        event = "VeryLazy",
         config = function()
+            local detail = false
             require("oil").setup({
-                keymaps = { ["<C-h>"] = false, ["<M-h>"] = "actions.select_split" },
+                keymaps = {
+                    ["<C-h>"] = false,
+                    ["<M-h>"] = "actions.select_split",
+                    ["gd"] = {
+                        desc = "Toggle file detail view",
+                        callback = function()
+                            detail = not detail
+                            if detail then
+                                require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+                            else
+                                require("oil").set_columns({ "icon" })
+                            end
+                        end,
+                    },
+                },
                 view_options = { show_hidden = true },
             })
             vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
         end,
+        dependencies = {
+            "benomahony/oil-git.nvim",
+        }
     },
 
     -- More useful word motions f.e. CameCase or snake_case split into words
@@ -212,11 +229,11 @@ local M = {
         name = "mini.doc",
         opts = {},
     },
-    {
-        "nvim-mini/mini.files",
-        name = "mini.files",
-        opts = {},
-    },
+    -- {
+    --     "nvim-mini/mini.files",
+    --     name = "mini.files",
+    --     opts = {},
+    -- },
     {
         "nvim-mini/mini.fuzzy",
         name = "mini.fuzzy",
