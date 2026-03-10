@@ -12,6 +12,7 @@ M.config = function()
             "markdown",
             "markdown_inline",
             "python",
+            "qmljs",
             "query",
             "vim",
             "vimdoc",

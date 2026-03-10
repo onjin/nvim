@@ -84,6 +84,11 @@ M.servers = {
             enabled = true,
         },
     },
+    qml = {
+        qmlls = {
+            enabled = true,
+        },
+    },
     markdown = {
         marksman = {
             enabled = true,
