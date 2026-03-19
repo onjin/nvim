@@ -109,6 +109,11 @@ M.servers = {
             enabled = true,
         },
     },
+    terraform = {
+        terraformls = {
+            enabled = true,
+        },
+    },
     yaml = {
         yamlls = {
             enabled = true,

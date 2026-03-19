@@ -220,6 +220,7 @@ function M.attach_picker()
         { label = "basedpyright",  name = "basedpyright" },
         { label = "ruff",          name = "ruff" },
         { label = "rust-analyzer", name = "rust_analyzer" },
+        { label = "terraform-ls",  name = "terraformls" },
         { label = "lua_ls",        name = "lua_ls" },
         { label = "ty",            name = "ty" },
         { label = "jdtls",         name = "jdtls" },

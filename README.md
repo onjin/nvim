@@ -15,7 +15,7 @@ A focused, batteries-included Neovim configuration built around the `mini.nvim` 
 - Neovim 0.10+ with LuaJIT (treesitter folding and `vim.lsp.enable` APIs are used).
 - Git (`lazy.nvim` bootstraps repositories on demand).
 - ripgrep (`Snacks.picker` live grep flows and `todo-comments` use it).
-- Language servers and formatters: `lua-language-server`, `basedpyright-langserver`, `ruff`, `yaml-language-server`, `taplo`, `rust-analyzer`, `nixd`, `nixfmt`, `jdtls`, `qmlls` (Rust checks use `cargo clippy`).
+- Language servers and formatters: `lua-language-server`, `basedpyright-langserver`, `ruff`, `yaml-language-server`, `taplo`, `terraform-ls`, `rust-analyzer`, `nixd`, `nixfmt`, `jdtls`, `qmlls` (Rust checks use `cargo clippy`).
 
 ## Directory Tour
 
@@ -103,8 +103,12 @@ These map automatically after a server attaches and only for the capabilities it
 
 ## Language Servers
 
-- **Auto attach** – `after/ftplugin/*.lua` enables servers (`basedpyright`, `ruff`, `rust_analyzer`, `lua_ls`, `nixd`, `yamlls`, `taplo`, `jdtls`, `qmlls`) whenever the corresponding filetype loads and the executable exists.
-- **Install tips** – use your package manager or `pip` for `basedpyright-langserver` and `ruff`, Nix flakes for `nixd`/`nixfmt`, install `yaml-language-server` via npm or your distro (on NixOS prefer `pkgs.nodePackages.yaml-language-server`), install `taplo` via cargo/npm/binary releases (on NixOS prefer `pkgs.taplo` or `pkgs.taplo-lsp`), `jdtls` with Lombok support (the config looks for `lombok.jar` via `$JDTLS_LOMBOK`, `$LOMBOK_JAR`, or jars shipped next to the `jdtls` binary/Mason install and warns if none are found), and `qmlls` from a Qt install.
+- **Auto attach** – `after/ftplugin/*.lua` enables servers (`basedpyright`, `ruff`, `rust_analyzer`, `terraformls`, `lua_ls`, `nixd`, `yamlls`, `taplo`, `jdtls`, `qmlls`) whenever the corresponding filetype loads and the executable exists.
+- **Install tips**
+  - **Debian / Ubuntu** – package names vary by release, so install distro packages where they exist for `lua-language-server` and `rust-analyzer`, install Node-based servers with `npm install -g basedpyright yaml-language-server`, install `ruff` with `uv tool install ruff` or `pipx install ruff`, install `taplo` from its release binaries or `cargo install taplo-cli --locked --features lsp`, install `terraform-ls` from the HashiCorp release archive (or `mise use -g terraform-ls@latest`), use Nix tooling for `nixd`/`nixfmt`, and install `jdtls` plus `qmlls` from their upstream packages.
+  - **Nix / NixOS** – add these to your `devShell` or system packages as needed: `pkgs.lua-language-server`, `pkgs.basedpyright`, `pkgs.ruff`, `pkgs.nodePackages.yaml-language-server`, `pkgs.taplo` (or `pkgs.taplo-lsp`), `pkgs.terraform-ls`, `pkgs.rust-analyzer`, `pkgs.nixd`, `pkgs.nixfmt-classic` or `pkgs.nixfmt`, `pkgs.jdt-language-server`, and Qt packages providing `qmlls`. For per-user installs you can also use `nix profile install nixpkgs#terraform-ls nixpkgs#rust-analyzer nixpkgs#taplo`.
+- **Terraform** – uses `terraform-ls serve` for `terraform` and `terraform-vars` buffers. On Debian/Ubuntu, install the upstream `terraform-ls` binary and ensure it is on `PATH`; on Nix/NixOS, add `pkgs.terraform-ls` to your environment or run `nix profile install nixpkgs#terraform-ls`.
+- **Terraform formatting** – `terraform-ls` handles language features, while `terraform fmt -` is used as the format-on-save backend for Terraform buffers when `autoformat_on_save_enabled = true`. Install the `terraform` CLI as well if you want formatting.
 - **Quickshell / QML** – uses `qmlls -E` for `qml` buffers and installs the `qmljs` Treesitter parser. For Quickshell projects, create an empty `.qmlls.ini` in the project root (typically next to `shell.qml`); `qmlls` uses it for project settings and Quickshell can manage it for you.
 - **YAML** – relies on `yaml-language-server`; if it is missing on NixOS, add `pkgs.nodePackages.yaml-language-server` to the devShell or run `nix profile install nixpkgs#nodePackages.yaml-language-server` for a per-user install.
 - **TOML** – powered by `taplo`; if it is missing on NixOS, add `pkgs.taplo`/`pkgs.taplo-lsp` to your devShell or run `nix profile install nixpkgs#taplo`.
