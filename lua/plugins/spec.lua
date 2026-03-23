@@ -433,16 +433,18 @@ local M = {
     -- AI Windsurf plugin
     {
         "Exafunction/windsurf.nvim",
+        enabled = function()
+            return vim.g.ai_enabled
+        end,
+        lazy = true,
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
         config = function()
-            if vim.g.ai_enabled then
-                require("codeium").setup({
-                    virtual_text = { enabled = false },
-                    enable_cmp_source = false,
-                })
-            end
+            require("codeium").setup({
+                virtual_text = { enabled = false },
+                enable_cmp_source = false,
+            })
         end,
     },
     {
