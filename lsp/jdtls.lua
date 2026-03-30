@@ -49,6 +49,14 @@ local function read_file(path)
     return data
 end
 
+local function sanitize_workspace_name(path)
+    if not path or path == "" then
+        return "default"
+    end
+    local normalized = fs.normalize(path)
+    return (normalized:gsub("[/\\:]", "_"):gsub("_+", "_"))
+end
+
 local function find_spotless_profile_name(formatter_xml)
     local content = read_file(formatter_xml)
     if not content then
@@ -78,6 +86,22 @@ local function java_settings_for_root(root_dir)
 
     java.format = { settings = formatter_settings }
     return { java = java }
+end
+
+local function get_java_executable()
+    local java_home = vim.env.JAVA_HOME
+    if java_home and java_home ~= "" then
+        local java_bin = fs.joinpath(java_home, "bin", "java")
+        if vim.fn.executable(java_bin) == 1 then
+            return java_bin
+        end
+    end
+    return nil
+end
+
+local function workspace_dir_for_root(root_dir)
+    local base = vim.fn.stdpath("cache")
+    return fs.joinpath(base, "jdtls", sanitize_workspace_name(root_dir or uv.cwd()))
 end
 
 local function find_lombok()
@@ -147,17 +171,37 @@ local function warn_missing_lombok()
 end
 
 local lombok_jar = find_lombok()
-local cmd = { "jdtls" }
-
-if lombok_jar then
-    table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok_jar)
-else
-    warn_missing_lombok()
+local function build_cmd(root_dir)
+    local cmd = { "jdtls" }
+    local java_executable = get_java_executable()
+    if java_executable then
+        table.insert(cmd, "--java-executable")
+        table.insert(cmd, java_executable)
+    end
+    if lombok_jar then
+        table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok_jar)
+    else
+        warn_missing_lombok()
+    end
+    table.insert(cmd, "-data")
+    table.insert(cmd, workspace_dir_for_root(root_dir))
+    return cmd
 end
 
 return {
-    root_markers = { ".git", "gradlew", "mvnw" },
-    cmd = cmd,
+    root_markers = {
+        "pom.xml",
+        "build.gradle",
+        "build.gradle.kts",
+        "settings.gradle",
+        "settings.gradle.kts",
+        "gradlew",
+        "mvnw",
+        ".classpath",
+        ".project",
+        ".git",
+    },
+    cmd = build_cmd(uv.cwd()),
     filetypes = { "java" },
     init_options = {
         extendedClientCapabilities = {
@@ -184,6 +228,7 @@ return {
             return
         end
         local root_dir = config and config.root_dir or uv.cwd()
+        config.cmd = build_cmd(root_dir)
         config.settings = java_settings_for_root(root_dir)
     end,
     settings = java_settings_for_root(uv.cwd()),
