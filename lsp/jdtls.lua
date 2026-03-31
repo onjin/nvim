@@ -104,6 +104,10 @@ local function workspace_dir_for_root(root_dir)
     return fs.joinpath(base, "jdtls", sanitize_workspace_name(root_dir or uv.cwd()))
 end
 
+local function jdtls_stderr_log_path()
+    return fs.joinpath(vim.fn.stdpath("state"), "jdtls-stderr.log")
+end
+
 local function find_lombok()
     -- I installed this by NixOS home-manager, along with sessionVariable
     local jar = first_existing({ vim.env.JDTLS_LOMBOK, vim.env.LOMBOK_JAR })
@@ -171,7 +175,7 @@ local function warn_missing_lombok()
 end
 
 local lombok_jar = find_lombok()
-local function build_cmd(root_dir)
+local function build_raw_cmd(root_dir)
     local cmd = { "jdtls" }
     local java_executable = get_java_executable()
     if java_executable then
@@ -186,6 +190,22 @@ local function build_cmd(root_dir)
     table.insert(cmd, "-data")
     table.insert(cmd, workspace_dir_for_root(root_dir))
     return cmd
+end
+
+local function shellescape(arg)
+    return vim.fn.shellescape(arg)
+end
+
+local function build_cmd(root_dir)
+    local raw_cmd = build_raw_cmd(root_dir)
+    local stderr_log = jdtls_stderr_log_path()
+    local stderr_dir = fs.dirname(stderr_log)
+    local wrapped = ("mkdir -p %s && exec %s 2>>%s"):format(
+        shellescape(stderr_dir),
+        table.concat(vim.tbl_map(shellescape, raw_cmd), " "),
+        shellescape(stderr_log)
+    )
+    return { "sh", "-c", wrapped }
 end
 
 return {

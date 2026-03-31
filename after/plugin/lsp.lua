@@ -1,4 +1,5 @@
 local M = {}
+local ms = vim.lsp.protocol.Methods
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend('force', capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
@@ -27,12 +28,258 @@ M.workspace_symbols_for = function(expand_key)
     end
 end
 
+local function sanitize_qf_items(items)
+    local valid = {}
+    local dropped = 0
+
+    for _, item in ipairs(items or {}) do
+        local filename = item.filename
+        local lnum = item.lnum
+
+        if not filename or filename == "" or type(lnum) ~= "number" or lnum < 1 then
+            dropped = dropped + 1
+        else
+            local bufnr = vim.fn.bufadd(filename)
+            if vim.fn.bufloaded(bufnr) == 0 then
+                vim.fn.bufload(bufnr)
+            end
+
+            local line_count = vim.api.nvim_buf_line_count(bufnr)
+            if lnum <= line_count then
+                table.insert(valid, item)
+            else
+                dropped = dropped + 1
+            end
+        end
+    end
+
+    return valid, dropped
+end
+
+local function location_uri(location)
+    return location and (location.uri or location.targetUri) or nil
+end
+
+local function location_range(location)
+    return location and (location.range or location.targetSelectionRange or location.targetRange) or nil
+end
+
+local function normalize_locations(result)
+    if not result then
+        return {}
+    end
+    return vim.islist(result) and result or { result }
+end
+
+local function uri_label(uri)
+    if not uri or uri == "" then
+        return "[unknown]"
+    end
+    if vim.startswith(uri, "file://") then
+        return vim.fn.fnamemodify(vim.uri_to_fname(uri), ":~:.")
+    end
+    if vim.startswith(uri, "jdt://") then
+        return uri:match("/([^/?]+%.java)") or uri
+    end
+    return uri
+end
+
+local function position_to_col(line, character, offset_encoding)
+    local ok, col = pcall(vim.str_byteindex, line or "", offset_encoding or "utf-16", character or 0, false)
+    if ok and type(col) == "number" then
+        return col
+    end
+    return 0
+end
+
+local function set_window_cursor_from_range(win, bufnr, range, offset_encoding)
+    local line_count = vim.api.nvim_buf_line_count(bufnr)
+    if line_count < 1 then
+        return
+    end
+
+    local start = range and range.start or { line = 0, character = 0 }
+    local lnum = math.max(1, math.min(line_count, (start.line or 0) + 1))
+    local line = vim.api.nvim_buf_get_lines(bufnr, lnum - 1, lnum, false)[1] or ""
+    local col = position_to_col(line, start.character or 0, offset_encoding)
+    local max_col = #line
+
+    vim.api.nvim_win_set_cursor(win, { lnum, math.max(0, math.min(col, max_col)) })
+    vim._with({ win = win }, function()
+        vim.cmd("normal! zv")
+    end)
+end
+
+local function open_jdt_location(win, client, location)
+    local uri = location_uri(location)
+    local range = location_range(location)
+    local response, err = client:request_sync("java/classFileContents", { uri = uri }, 2000, 0)
+    if not response then
+        vim.notify(("[jdtls] Failed to load class contents: %s"):format(err or "unknown error"), vim.log.levels.WARN)
+        return
+    end
+    if response.err then
+        local message = response.err.message or vim.inspect(response.err)
+        vim.notify(("[jdtls] Failed to load class contents: %s"):format(message), vim.log.levels.WARN)
+        return
+    end
+
+    local text = response.result
+    if type(text) ~= "string" or text == "" then
+        vim.notify("[jdtls] Empty class contents returned for location", vim.log.levels.WARN)
+        return
+    end
+
+    local bufnr = vim.fn.bufnr(uri)
+    if bufnr == -1 then
+        bufnr = vim.api.nvim_create_buf(true, true)
+        vim.api.nvim_buf_set_name(bufnr, uri)
+    end
+
+    local lines = vim.split(text, "\n", { plain = true, trimempty = false })
+    vim.bo[bufnr].modifiable = true
+    vim.bo[bufnr].buftype = "nofile"
+    vim.bo[bufnr].bufhidden = "hide"
+    vim.bo[bufnr].swapfile = false
+    vim.bo[bufnr].filetype = "java"
+    vim.bo[bufnr].readonly = false
+    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+    vim.bo[bufnr].modifiable = false
+    vim.bo[bufnr].readonly = true
+
+    vim.api.nvim_win_set_buf(win, bufnr)
+    set_window_cursor_from_range(win, bufnr, range, client.offset_encoding)
+end
+
+local function open_file_location(win, client, location)
+    local uri = location_uri(location)
+    local range = location_range(location)
+    local bufnr = vim.uri_to_bufnr(uri)
+
+    vim.fn.bufload(bufnr)
+    vim.bo[bufnr].buflisted = true
+    vim.api.nvim_win_set_buf(win, bufnr)
+    set_window_cursor_from_range(win, bufnr, range, client.offset_encoding)
+end
+
+local function open_location(win, entry)
+    local uri = location_uri(entry.location)
+    if not uri then
+        vim.notify("[LSP] Location did not include a URI", vim.log.levels.WARN)
+        return
+    end
+    if vim.startswith(uri, "jdt://") and entry.client.name == "jdtls" then
+        open_jdt_location(win, entry.client, entry.location)
+        return
+    end
+    if vim.startswith(uri, "file://") then
+        open_file_location(win, entry.client, entry.location)
+        return
+    end
+    vim.notify(("[LSP] Unsupported location URI: %s"):format(uri), vim.log.levels.WARN)
+end
+
+local function jump_to_location_safely(method)
+    return function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local win = vim.api.nvim_get_current_win()
+        local clients = vim.lsp.get_clients({ method = method, bufnr = bufnr })
+        if not next(clients) then
+            vim.notify(vim.lsp._unsupported_method(method), vim.log.levels.WARN)
+            return
+        end
+
+        local pending = #clients
+        local matches = {}
+
+        local function finish()
+            if #matches == 0 then
+                vim.notify("No locations found", vim.log.levels.INFO)
+                return
+            end
+
+            if #matches == 1 then
+                open_location(win, matches[1])
+                return
+            end
+
+            vim.ui.select(matches, {
+                prompt = "Select LSP location:",
+                format_item = function(item)
+                    local uri = location_uri(item.location)
+                    local range = location_range(item.location)
+                    local lnum = range and range.start and (range.start.line + 1) or 1
+                    return ("%s:%d [%s]"):format(uri_label(uri), lnum, item.client.name)
+                end,
+            }, function(choice)
+                if choice then
+                    open_location(win, choice)
+                end
+            end)
+        end
+
+        for _, client in ipairs(clients) do
+            local params = vim.lsp.util.make_position_params(win, client.offset_encoding)
+            client:request(method, params, function(err, result)
+                if err then
+                    vim.notify(
+                        ("[LSP] %s request failed for %s: %s"):format(method, client.name, err.message or vim.inspect(err)),
+                        vim.log.levels.WARN
+                    )
+                else
+                    for _, location in ipairs(normalize_locations(result)) do
+                        table.insert(matches, { client = client, location = location })
+                    end
+                end
+
+                pending = pending - 1
+                if pending == 0 then
+                    finish()
+                end
+            end, bufnr)
+        end
+    end
+end
+
+local function list_references_safely()
+    vim.lsp.buf.references(nil, {
+        on_list = function(list)
+            local items, dropped = sanitize_qf_items(list.items)
+            if #items == 0 then
+                if dropped > 0 then
+                    vim.notify(
+                        ("[LSP] References result only contained invalid locations (%d dropped)"):format(dropped),
+                        vim.log.levels.WARN
+                    )
+                else
+                    vim.notify("No references found", vim.log.levels.INFO)
+                end
+                return
+            end
+
+            vim.fn.setqflist({}, " ", {
+                title = list.title,
+                items = items,
+                context = list.context,
+            })
+            vim.cmd("botright copen")
+
+            if dropped > 0 then
+                vim.notify(
+                    ("[LSP] Dropped %d invalid reference location(s) from server response"):format(dropped),
+                    vim.log.levels.WARN
+                )
+            end
+        end,
+    })
+end
+
 M.lsp_capabilities_keymaps = {
     ["textDocument/definition"] = {
-        { mode = "n", lhs = "grd", rhs = vim.lsp.buf.definition, desc = "[LSP] Go to Definition" },
+        { mode = "n", lhs = "grd", rhs = jump_to_location_safely(ms.textDocument_definition), desc = "[LSP] Go to Definition" },
     },
     ["textDocument/declaration"] = {
-        { mode = "n", lhs = "grD", rhs = vim.lsp.buf.declaration, desc = "[LSP] Declaration" },
+        { mode = "n", lhs = "grD", rhs = jump_to_location_safely(ms.textDocument_declaration), desc = "[LSP] Declaration" },
     },
     ["textDocument/hover"] = {
         { mode = "n", lhs = "K", rhs = vim.lsp.buf.hover, desc = "[LSP] Hover Documentation" },
@@ -48,16 +295,16 @@ M.lsp_capabilities_keymaps = {
         { mode = "n", lhs = "gra", rhs = vim.lsp.buf.code_action, desc = "[LSP] Code Actions" },
     },
     ["textDocument/implementation"] = {
-        { mode = "n", lhs = "gri", rhs = vim.lsp.buf.implementation, desc = "[LSP] Go to the implementations" },
+        { mode = "n", lhs = "gri", rhs = jump_to_location_safely(ms.textDocument_implementation), desc = "[LSP] Go to the implementations" },
     },
     ["textDocument/rename"] = {
         { mode = "n", lhs = "grn", rhs = vim.lsp.buf.rename, desc = "[LSP] Rename" },
     },
     ["textDocument/references"] = {
-        { mode = "n", lhs = "grr", rhs = vim.lsp.buf.references, desc = "[LSP] Show references" },
+        { mode = "n", lhs = "grr", rhs = list_references_safely, desc = "[LSP] Show references" },
     },
     ["textDocument/typeDefinition"] = {
-        { mode = "n", lhs = "grt", rhs = vim.lsp.buf.type_definition, desc = "[LSP] Type Definition" },
+        { mode = "n", lhs = "grt", rhs = jump_to_location_safely(ms.textDocument_typeDefinition), desc = "[LSP] Type Definition" },
     },
     ["textDocument/documentSymbol"] = {
         { mode = "n", lhs = "grO", rhs = vim.lsp.buf.document_symbol,        desc = "[LSP] Document Symbols" },
