@@ -104,6 +104,54 @@ local function find_spotless_profile_name(formatter_xml)
     return content:match('<profile%s+name="([^"]+)"')
 end
 
+local function trim(s)
+    return (s:gsub("^%s+", ""):gsub("%s+$", ""))
+end
+
+local function find_spotless_import_order(root_dir)
+    if not root_dir or root_dir == "" then
+        return nil
+    end
+
+    local pom_xml = normalize_file(fs.joinpath(root_dir, "pom.xml"))
+    if not pom_xml then
+        return nil
+    end
+
+    local content = read_file(pom_xml)
+    if not content then
+        return nil
+    end
+
+    local plugin_block = content:match("<plugin>(.-<artifactId>%s*spotless%-maven%-plugin%s*</artifactId>.-)</plugin>")
+    if not plugin_block then
+        return nil
+    end
+
+    local java_block = plugin_block:match("<java>(.-)</java>")
+    if not java_block then
+        return nil
+    end
+
+    local order = java_block:match("<importOrder>%s*<order>(.-)</order>%s*</importOrder>")
+    if not order or order == "" then
+        return nil
+    end
+
+    local entries = vim.split(order, "|", { plain = true, trimempty = false })
+    local import_order = {}
+    for _, entry in ipairs(entries) do
+        local value = trim(entry)
+        if value ~= "" then
+            table.insert(import_order, value)
+        end
+    end
+    if vim.tbl_isempty(import_order) then
+        return nil
+    end
+    return import_order
+end
+
 local function java_settings_for_root(root_dir)
     local java = vim.empty_dict()
     local runtime = nil
@@ -126,6 +174,13 @@ local function java_settings_for_root(root_dir)
 
     if not root_dir or root_dir == "" then
         return { java = java }
+    end
+
+    local import_order = find_spotless_import_order(root_dir)
+    if import_order then
+        java.completion = {
+            importOrder = import_order,
+        }
     end
 
     local formatter_xml = normalize_file(fs.joinpath(root_dir, "eclipse.formatter.xml"))
