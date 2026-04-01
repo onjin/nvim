@@ -1,5 +1,44 @@
 local uv = vim.uv or vim.loop
 local fs = vim.fs
+local get_java_home
+local get_java_executable
+local get_java_release
+
+local function normalize_dir(path)
+    if not path or path == "" then
+        return nil
+    end
+
+    if type(path) == "string" then
+        path = path:gsub("%s+$", "")
+    end
+
+    local stat = uv.fs_stat(path)
+    if stat and stat.type == "directory" then
+        if fs and fs.normalize then
+            return fs.normalize(path)
+        end
+        return path
+    end
+end
+
+local function resolve_jdk_home(path)
+    local dir = normalize_dir(path)
+    if not dir then
+        return nil
+    end
+
+    local nix_jdk_dir = normalize_dir(fs.joinpath(dir, "lib", "openjdk"))
+    if nix_jdk_dir and vim.fn.executable(fs.joinpath(nix_jdk_dir, "bin", "java")) == 1 then
+        return nix_jdk_dir
+    end
+
+    if vim.fn.executable(fs.joinpath(dir, "bin", "java")) == 1 then
+        return dir
+    end
+
+    return nil
+end
 
 local function normalize_file(path)
     if not path or path == "" then
@@ -67,6 +106,24 @@ end
 
 local function java_settings_for_root(root_dir)
     local java = vim.empty_dict()
+    local runtime = nil
+
+    local java_home = get_java_home()
+    local java_release = get_java_release()
+    if java_home and java_release then
+        runtime = {
+            name = ("JavaSE-%s"):format(java_release),
+            path = java_home,
+            default = true,
+        }
+    end
+
+    if runtime then
+        java.configuration = {
+            runtimes = { runtime },
+        }
+    end
+
     if not root_dir or root_dir == "" then
         return { java = java }
     end
@@ -88,14 +145,62 @@ local function java_settings_for_root(root_dir)
     return { java = java }
 end
 
-local function get_java_executable()
-    local java_home = vim.env.JAVA_HOME
-    if java_home and java_home ~= "" then
+get_java_home = function()
+    local candidates = {
+        vim.env.JDTLS_JAVA_HOME,
+        vim.env.JAVA_HOME,
+    }
+
+    for _, candidate in ipairs(candidates) do
+        local dir = resolve_jdk_home(candidate)
+        if dir then
+            return dir
+        end
+    end
+
+    local java_bin = normalize_file(vim.env.JDTLS_JAVA)
+    if java_bin and vim.fn.executable(java_bin) == 1 then
+        local bin_dir = fs.dirname(java_bin)
+        local prefix_dir = bin_dir and normalize_dir(fs.dirname(bin_dir)) or nil
+        return resolve_jdk_home(prefix_dir)
+    end
+
+    return nil
+end
+
+get_java_executable = function()
+    local env_java = normalize_file(vim.env.JDTLS_JAVA)
+    if env_java and vim.fn.executable(env_java) == 1 then
+        return env_java
+    end
+
+    local java_home = get_java_home()
+    if java_home then
         local java_bin = fs.joinpath(java_home, "bin", "java")
         if vim.fn.executable(java_bin) == 1 then
             return java_bin
         end
     end
+
+    return nil
+end
+
+get_java_release = function()
+    local java_executable = get_java_executable()
+    if not java_executable then
+        return nil
+    end
+
+    local out = vim.fn.system({ java_executable, "-XshowSettings:properties", "-version" })
+    if vim.v.shell_error ~= 0 then
+        return nil
+    end
+
+    local major = out:match("java%.version = (%d+)")
+    if major and major ~= "" then
+        return major
+    end
+
     return nil
 end
 
@@ -225,16 +330,27 @@ return {
     filetypes = { "java" },
     init_options = {
         extendedClientCapabilities = {
+            -- Allow opening JDK/dependency classes by asking the server for decompiled source text.
             classFileContentsSupport = true,
+            -- Enable interactive prompts when generating `toString()` implementations.
             generateToStringPromptSupport = true,
+            -- Enable interactive prompts when generating `hashCode()` and `equals()`.
             hashCodeEqualsPromptSupport = true,
+            -- Enable the richer variant of extract refactorings offered by jdtls.
             advancedExtractRefactoringSupport = true,
+            -- Enable the richer organize-imports workflow exposed by jdtls.
             advancedOrganizeImportsSupport = true,
+            -- Enable interactive prompts when generating constructors.
             generateConstructorsPromptSupport = true,
+            -- Enable interactive prompts when generating delegate methods.
             generateDelegateMethodsPromptSupport = true,
+            -- Enable move refactorings such as moving types or members.
             moveRefactoringSupport = true,
+            -- Enable interactive prompts when choosing methods to override.
             overrideMethodsPromptSupport = true,
-            executeClientCommandSupport = true,
+            -- Allow jdtls to attach follow-up text edits to some completion and code-action responses.
+            resolveAdditionalTextEditsSupport = true,
+            -- Tell jdtls which extract-refactoring variants the client can drive from a selection.
             inferSelectionSupport = {
                 "extractMethod",
                 "extractVariable",
