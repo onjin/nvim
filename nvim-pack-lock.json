@@ -1,8 +1,20 @@
 {
   "plugins": {
+    "cord.nvim": {
+      "rev": "283e4a5bdafd0d6187f28e5b739cccab6b4c9c64",
+      "src": "https://github.com/vyfor/cord.nvim"
+    },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
+    },
+    "mini.icons": {
+      "rev": "7fdae2443a0e2910015ca39ad74b50524ee682d3",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "mini.pairs": {
+      "rev": "42387c7fe68fc0b6e95eaf37f1bb76e7bffaa0d9",
+      "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "neodev.nvim": {
       "rev": "46aa467dca16cf3dfe27098042402066d2ae242d",
@@ -35,6 +47,14 @@
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
       "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "todo-comments.nvim": {
+      "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
+      "src": "https://github.com/folke/todo-comments.nvim"
+    },
+    "vim-wordmotion": {
+      "rev": "81d9bd298376ab0dc465c85d55afa4cb8d5f47a1",
+      "src": "https://github.com/chaoren/vim-wordmotion"
     }
   }
 }
