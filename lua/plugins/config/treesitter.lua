@@ -1,5 +1,7 @@
 local M = {}
 M.config = function()
+    local is_nvim_012 = vim.fn.has("nvim-0.12") == 1
+
     require("nvim-treesitter.configs").setup({
         auto_install = true,
         ensure_installed = {
@@ -17,7 +19,12 @@ M.config = function()
             "vim",
             "vimdoc",
         },
-        highlight = { enable = true },
+        highlight = {
+            enable = true,
+            disable = function(lang)
+                return is_nvim_012 and (lang == "markdown" or lang == "markdown_inline")
+            end,
+        },
     })
 
     vim.cmd("syntax off")

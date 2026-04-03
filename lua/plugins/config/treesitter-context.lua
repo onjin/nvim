@@ -2,7 +2,20 @@ local setkey = require('utils').setkey
 
 local M = {}
 M.config = function()
-    local mod = require("treesitter-context");
+    local mod = require("treesitter-context")
+    local is_nvim_012 = vim.fn.has("nvim-0.12") == 1
+
+    if is_nvim_012 then
+        vim.schedule(function()
+            vim.notify(
+                "treesitter-context is disabled on Neovim 0.12 due to a plugin incompatibility",
+                vim.log.levels.WARN,
+                { title = "treesitter-context" }
+            )
+        end)
+        return
+    end
+
     mod.setup()
 
     setkey("n", "<leader>jc", function()

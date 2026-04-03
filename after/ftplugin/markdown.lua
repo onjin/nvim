@@ -1,3 +1,8 @@
+if vim.fn.has("nvim-0.12") == 1 then
+    pcall(vim.treesitter.stop)
+    vim.opt_local.syntax = "markdown"
+end
+
 if not _G.markdown_env_set then
     _G.markdown_env_set = true
     vim.schedule(function()
