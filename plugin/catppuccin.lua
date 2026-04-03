@@ -1,2 +1,2 @@
-vim.pack.add({ "https://github.com/catppuccin/nvim" })
-vim.cmd.colorscheme("catppuccin")
+vim.pack.add { "https://github.com/catppuccin/nvim" }
+vim.cmd.colorscheme "catppuccin"

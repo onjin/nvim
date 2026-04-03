@@ -1,1 +1,1 @@
-vim.cmd.syntax("on")
+vim.cmd.syntax "on"

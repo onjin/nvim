@@ -1,10 +1,10 @@
 vim.lsp.config("ty", {
-	cmd = { "uvx", "ty" },
+  cmd = { "uvx", "ty" },
 })
 
-vim.lsp.enable("ty")
+vim.lsp.enable "ty"
 
 vim.lsp.config("ruff", {
-	cmd = { "uvx", "ruff" },
+  cmd = { "uvx", "ruff" },
 })
-vim.lsp.enable("ruff")
+vim.lsp.enable "ruff"
