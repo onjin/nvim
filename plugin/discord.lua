@@ -20,12 +20,11 @@ require("cord").setup {
     flavor = "accent",
   },
   extensions = {
+ "diagnostics",
     visibility = {
-      precedence = "blacklist",
       rules = {
         blacklist = {
-          "~/Workspace/",
-          { type = "glob", value = "**/sops/**" },
+          '~/Workspace/p', -- matches path
         },
       },
     },
