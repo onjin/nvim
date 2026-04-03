@@ -1,4 +1,34 @@
 vim.pack.add { "https://github.com/neovim/nvim-lspconfig" }
+vim.pack.add { "https://github.com/folke/lazydev.nvim" }
+
+require("lazydev").setup()
+
+vim.lsp.config("jdtls", {
+  filetypes = { "java" },
+})
+vim.lsp.enable "jdtls"
+
+vim.lsp.config("lua_ls", {
+  filetypes = { "lua" },
+})
+vim.lsp.enable "lua_ls"
+
+vim.lsp.config("ty", {
+  cmd = { "uvx", "ty" },
+  filetypes = { "python" },
+  settings = {
+    ty = {
+      diagnosticMode = "workspace",
+    },
+  },
+})
+vim.lsp.enable "ty"
+
+vim.lsp.config("ruff", {
+  cmd = { "uvx", "ruff" },
+  filetypes = { "python" },
+})
+vim.lsp.enable "ruff"
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
