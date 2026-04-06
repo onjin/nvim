@@ -11,22 +11,27 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end
   end,
 })
+local uid = assert(io.popen "id -u"):read "*l"
+local ips = "/run/user/" .. uid .. "/discord-ips-0"
 
-require("cord").setup {
-  log_level = vim.log.levels.WARN,
-  enabled = true,
-  display = {
-    theme = "catppuccin",
-    flavor = "accent",
-  },
-  extensions = {
- "diagnostics",
-    visibility = {
-      rules = {
-        blacklist = {
-          '~/Workspace/p', -- matches path
+if vim.fn.filereadable(ips) == 1 then
+  print(ips)
+  require("cord").setup {
+    log_level = vim.log.levels.WARN,
+    enabled = true,
+    display = {
+      theme = "catppuccin",
+      flavor = "accent",
+    },
+    extensions = {
+      "diagnostics",
+      visibility = {
+        rules = {
+          blacklist = {
+            "~/Workspace/p", -- matches path
+          },
         },
       },
     },
-  },
-}
+  }
+end

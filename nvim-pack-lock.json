@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "conform.nvim": {
+      "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
     "cord.nvim": {
       "rev": "283e4a5bdafd0d6187f28e5b739cccab6b4c9c64",
       "src": "https://github.com/vyfor/cord.nvim"
@@ -47,6 +51,10 @@
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
       "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
+      "src": "https://github.com/folke/snacks.nvim"
     },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",

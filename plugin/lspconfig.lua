@@ -3,32 +3,34 @@ vim.pack.add { "https://github.com/folke/lazydev.nvim" }
 
 require("lazydev").setup()
 
-vim.lsp.config("jdtls", {
-  filetypes = { "java" },
-})
-vim.lsp.enable "jdtls"
-
-vim.lsp.config("lua_ls", {
-  filetypes = { "lua" },
-})
-vim.lsp.enable "lua_ls"
-
-vim.lsp.config("ty", {
-  cmd = { "uvx", "ty" },
-  filetypes = { "python" },
-  settings = {
-    ty = {
-      diagnosticMode = "workspace",
+---@type table<string, vim.lsp.Config|true>
+local servers = {
+  jdtls = {
+    filetypes = { "java" },
+  },
+  lua_ls = {
+    filetypes = { "lua" },
+  },
+  ty = {
+    cmd = { "uvx", "ty" },
+    filetypes = { "python" },
+    settings = {
+      ty = {
+        diagnosticMode = "workspace",
+      },
     },
   },
-})
-vim.lsp.enable "ty"
+  ruff = {
+    cmd = { "uvx", "ruff" },
+    filetypes = { "python" },
+  },
+  bashls = true,
+}
 
-vim.lsp.config("ruff", {
-  cmd = { "uvx", "ruff" },
-  filetypes = { "python" },
-})
-vim.lsp.enable "ruff"
+for name, spec in pairs(servers) do
+  vim.lsp.config(name, spec == true and {} or spec)
+  vim.lsp.enable(name)
+end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
@@ -42,18 +44,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client:supports_method "textDocument/inlayHint" then
       vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
     end
-
-    vim.keymap.set("n", "glf", function()
-      local supports_formatting = vim.iter(vim.lsp.get_clients { bufnr = args.buf }):any(function(buf_client)
-        return buf_client:supports_method "textDocument/formatting"
-      end)
-
-      if supports_formatting then
-        vim.lsp.buf.format { bufnr = args.buf }
-        return
-      end
-
-      vim.notify("LSP formatting is not supported for this buffer", vim.log.levels.WARN)
-    end, { buffer = args.buf, desc = "Format buffer using LSP", silent = true })
   end,
 })
