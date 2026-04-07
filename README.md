@@ -1,6 +1,6 @@
 # Neovim Config
 
-<img width="1888" height="1069" alt="Image" src="https://github.com/user-attachments/assets/280e9f77-094e-4175-93f6-6a11cfda911d" />
+<img width="1888" height="1069" alt="Image" src="https://github.com/user-attachments/assets/693034f4-e4b8-47cb-ba7b-258cf792bc05" />
 
 Small personal Neovim setup built around native `vim.pack`, LSP, fast search, and simple file navigation.
 
