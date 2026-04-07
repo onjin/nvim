@@ -1,5 +1,8 @@
 # Neovim Config
 
+**Note: this is a neovim 0.12 setup, the previous <0.12 version is at the https://github.com/onjin/nvim/tree/0.11
+branch**
+
 <img width="1888" height="1069" alt="Image" src="https://github.com/user-attachments/assets/693034f4-e4b8-47cb-ba7b-258cf792bc05" />
 
 Small personal Neovim setup built around native `vim.pack`, LSP, fast search, and simple file navigation.
