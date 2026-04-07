@@ -33,17 +33,29 @@ Then start Neovim. Plugins are declared in `init.lua` and `plugin/*.lua`.
 
 - `,` is the leader key
 - `-` opens the file explorer (`oil.nvim`)
-- `<leader>sf` search files
-- `<leader>sg` live grep in git-tracked files
-- `<leader>sG` live grep with `rg`
+- `<leader>s` - prefix for file search, i.e.:
+    - `<leader>sf` search files
+    - `<leader>sg` live grep in git-tracked files
+    - `<leader>sG` live grep with `rg`
+- `<leader>f` - prefix for finders, i.e.:
+    - `<leader>fk` - find keymaps
+- `<leader>t` - prefix for toggles, i.e.:
+    - `<leader>ta` - toggle `vim.opt.autocomplete`; default `off` just use `<ctrl-x><ctrl-o>` and friends
+    - `<leader>tb` - toggle light/dark theme
+- `<leader>g` - prefix Git/GH CLI pickers, i.e.:
+    - `<leader>gi` - gh issue list
+    - `<leader>gp` - gh pr list
+    - `<leader>gs` - git status
 - `glf` format the current buffer
 - `grd` jump to definition
 - `<leader>?` shows buffer-local keymaps
+- `TSInsall [python]` - to install required tree sitter queries for certain languages
 
 ## Included
 
 - `snacks.nvim` for pickers and toggles
-- `oil.nvim` for directory editing
+- `quicker.nvim` for editable `quickfix` window as buffer
+- `oil.nvim` for directory editing as buffer
 - native LSP with Lua, Bash, Java, and Python support
 - `conform.nvim` for formatting
 - Treesitter, Catppuccin, mini status/tab line, and todo highlighting
