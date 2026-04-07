@@ -1,18 +1,18 @@
 -- Experimental ui2
-require("vim._core.ui2").enable({})
+require("vim._core.ui2").enable {}
 
 -- color scheme
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } }
 
 require("catppuccin").setup {
-  flavour = "mocha", -- latte, frappe, macchiato, mocha
+  flavour = "auto", -- latte, frappe, macchiato, mocha
   background = { -- :h background
     light = "latte",
     dark = "mocha",
   },
-  transparent_background = true, -- disables setting the background color
+  transparent_background = false, -- disables setting the background color
 }
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme "catppuccin-nvim"
 
 -- Icons pack
 vim.pack.add { "https://github.com/nvim-mini/mini.icons" }
@@ -33,7 +33,13 @@ vim.pack.add {
   { src = "https://github.com/nvim-mini/mini-git", name = "mini.git" },
   { src = "https://github.com/nvim-mini/mini.diff", name = "mini.diff" },
 }
+require("mini.git").setup()
+require("mini.diff").setup()
 require("mini.statusline").setup()
+
+-- Indent indicator
+vim.pack.add { "https://github.com/nvim-mini/mini.indentscope" }
+require("mini.indentscope").setup()
 
 -- Highlight #FFEEFF patterns
 vim.pack.add { "https://github.com/brenoprata10/nvim-highlight-colors" }

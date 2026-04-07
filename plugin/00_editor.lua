@@ -128,3 +128,6 @@ require("todo-comments").setup {
     -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
   },
 }
+
+-- Markdown view
+vim.pack.add { "https://github.com/OXY2DEV/markview.nvim" }

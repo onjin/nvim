@@ -37,6 +37,29 @@ vim.keymap.set("n", "<leader>sn", picker.notifications, { desc = "Search notific
 vim.keymap.set("n", "<Leader>fk", picker.keymaps, { desc = "Find keymaps" })
 vim.keymap.set("n", "<Leader>fc", picker.commands, { desc = "Find commands" })
 vim.keymap.set("n", "<leader>fs", picker.spelling, { desc = "Find spelling" })
+
+-- Git/Gh pickers <leader>g...
+vim.keymap.set("n", "<Leader>gi", picker.gh_issue, { desc = "GH Issues" })
+vim.keymap.set("n", "<Leader>gp", picker.gh_pr, { desc = "GH PRs" })
+vim.keymap.set("n", "<Leader>gs", picker.git_status, { desc = "Git Status" })
+
+-- Toggle mappings
+Snacks.toggle
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+  :map "<leader>tc"
+Snacks.toggle.diagnostics():map "<leader>td"
+Snacks.toggle.inlay_hints():map "<leader>th"
+Snacks.toggle.dim():map "<leader>tD"
+Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map "<leader>tb"
+Snacks.toggle.option("autocomplete", { off = false, on = true, name = "Autocomplete" }):map "<leader>ta"
+
+-- keymap hints
+vim.pack.add { "https://github.com/folke/which-key.nvim" }
+require("which-key").setup()
+vim.keymap.set("n", "<leader>?", function()
+  require("which-key").show { global = false }
+end, { desc = "Buffer Local Keymaps", noremap = true, silent = true })
+
 -- Folders as buffer
 vim.pack.add {
   "https://github.com/stevearc/oil.nvim",
