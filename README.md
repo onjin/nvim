@@ -1,7 +1,11 @@
 # Neovim Config
 
-**Note: this is a neovim 0.12 setup, the previous <0.12 version is at the https://github.com/onjin/nvim/tree/0.11
-branch**
+> [!TIP]
+**Note: this is a neovim 0.12 setup, the previous <0.12 version is at the https://github.com/onjin/nvim/tree/0.11.
+To switch previous `main` into the newest run:
+```bash
+$ git reset --hard origin/main
+```
 
 <img width="1888" height="1069" alt="Image" src="https://github.com/user-attachments/assets/693034f4-e4b8-47cb-ba7b-258cf792bc05" />
 
