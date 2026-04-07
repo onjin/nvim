@@ -44,5 +44,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client:supports_method "textDocument/inlayHint" then
       vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
     end
+    vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "vim.lsp.buf.definition" })
   end,
 })

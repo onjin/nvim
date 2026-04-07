@@ -57,7 +57,31 @@ vim.keymap.set("n", "glf", "<Cmd>lua require('conform').format()<CR>", { silent 
 
 -- Syntax higlighting
 vim.pack.add { "https://github.com/nvim-treesitter/nvim-treesitter" }
-require("nvim-treesitter").setup()
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    local ensureInstalled = {
+      "lua",
+      "bash",
+      "yaml",
+      "toml",
+    }
+    local alreadyInstalled = require("nvim-treesitter.config").get_installed()
+    local parsersToInstall = vim
+      .iter(ensureInstalled)
+      :filter(function(parser)
+        return not vim.tbl_contains(alreadyInstalled, parser)
+      end)
+      :totable()
+    require("nvim-treesitter").install(parsersToInstall)
+    pcall(vim.treesitter.start)
+    -- folds, provided by Neovim
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.wo.foldmethod = "expr"
+    -- indentation, provided by nvim-treesitter
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
 
 vim.pack.add { "https://github.com/ravsii/tree-sitter-d2" }
 
