@@ -63,6 +63,8 @@ vim.api.nvim_create_autocmd("FileType", {
     local ensureInstalled = {
       "lua",
       "bash",
+      "markdown",
+      "markdown_inline",
       "yaml",
       "toml",
     }
