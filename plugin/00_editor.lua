@@ -1,3 +1,66 @@
+-- narrow quickfix using Cfilter / Lfilter
+vim.cmd.packadd "cfilter"
+
+-- :Undotree
+vim.cmd.packadd "nvim.undotree"
+
+-- :DiffTool file/dir /file/dir
+vim.cmd.packadd "nvim.difftool"
+
+-- More useful word motions for Vim, using CameCalse snek_case
+vim.pack.add { "https://github.com/chaoren/vim-wordmotion" }
+
+-- Character pairs
+vim.pack.add { "https://github.com/nvim-mini/mini.pairs" }
+
+require("mini.pairs").setup()
+-- Code formatting
+vim.pack.add { "https://github.com/stevearc/conform.nvim" }
+
+-- Editable quickfix window
+vim.pack.add { "https://github.com/stevearc/quicker.nvim" }
+require("quicker").setup {
+  keys = {
+    {
+      ">",
+      function()
+        require("quicker").expand { before = 2, after = 2, add_to_existing = true }
+      end,
+      desc = "Expand quickfix context",
+    },
+    {
+      "<",
+      function()
+        require("quicker").collapse()
+      end,
+      desc = "Collapse quickfix context",
+    },
+  },
+}
+
+require("conform").setup {
+  default_format_opts = {
+    -- Allow formatting from LSP server if no dedicated formatter is available
+    lsp_format = "fallback",
+  },
+  -- Map of filetype to formatters
+  formatters_by_ft = {
+    javascript = { "prettier" },
+    json = { "prettier" },
+    lua = { "stylua" },
+    python = { "black" },
+    r = { "air" },
+  },
+}
+
+vim.keymap.set("n", "glf", "<Cmd>lua require('conform').format()<CR>", { silent = true })
+
+-- Syntax higlighting
+vim.pack.add { "https://github.com/nvim-treesitter/nvim-treesitter" }
+require("nvim-treesitter").setup()
+
+vim.pack.add { "https://github.com/ravsii/tree-sitter-d2" }
+
 -- NOTE: nice icons for comments
 vim.pack.add { "https://github.com/folke/todo-comments.nvim" }
 
