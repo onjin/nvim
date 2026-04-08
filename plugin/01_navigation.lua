@@ -47,6 +47,7 @@ vim.keymap.set("n", "<Leader>gs", picker.git_status, { desc = "Git Status" })
 Snacks.toggle
   .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
   :map "<leader>tc"
+Snacks.toggle.zoom():map "<leader>tz"
 Snacks.toggle.diagnostics():map "<leader>td"
 Snacks.toggle.inlay_hints():map "<leader>th"
 Snacks.toggle.dim():map "<leader>tD"
