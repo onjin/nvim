@@ -1,3 +1,4 @@
+vim.g.cord_defer_startup = true -- defer to manual setup()
 vim.pack.add { { src = "https://github.com/vyfor/cord.nvim", confirm = false } }
 
 vim.api.nvim_create_autocmd("PackChanged", {
@@ -12,10 +13,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
   end,
 })
 local uid = assert(io.popen "id -u"):read "*l"
-local ips = "/run/user/" .. uid .. "/discord-ips-0"
+local ipc = "/run/user/" .. uid .. "/discord-ipc-0"
 
-if vim.fn.filereadable(ips) == 1 then
-  print(ips)
+if vim.fn.filereadable(ipc) == 1 then
   require("cord").setup {
     log_level = vim.log.levels.WARN,
     enabled = true,
@@ -24,11 +24,12 @@ if vim.fn.filereadable(ips) == 1 then
       flavor = "accent",
     },
     extensions = {
-      "diagnostics",
       visibility = {
+        cache = false,
+        precedence = "whitelist",
         rules = {
-          blacklist = {
-            "~/Workspace/p", -- matches path
+          whitelist = {
+            "~/.config/nvim/", -- matches path
           },
         },
       },
