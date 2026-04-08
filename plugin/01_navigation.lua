@@ -5,7 +5,7 @@ vim.keymap.set("n", "<c-k>", "<c-w><c-k>", { desc = "Switch split up", noremap =
 vim.keymap.set("n", "<c-l>", "<c-w><c-l>", { desc = "Switch split right", noremap = true, silent = true })
 
 -- File picking
-vim.pack.add { "https://github.com/folke/snacks.nvim" }
+vim.pack.add { { src = "https://github.com/folke/snacks.nvim", confirm = false } }
 
 local ok, snacks = pcall(require, "snacks")
 if not ok then
@@ -54,7 +54,7 @@ Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Ba
 Snacks.toggle.option("autocomplete", { off = false, on = true, name = "Autocomplete" }):map "<leader>ta"
 
 -- keymap hints
-vim.pack.add { "https://github.com/folke/which-key.nvim" }
+vim.pack.add { { src = "https://github.com/folke/which-key.nvim", confirm = false } }
 require("which-key").setup()
 vim.keymap.set("n", "<leader>?", function()
   require("which-key").show { global = false }
@@ -62,8 +62,8 @@ end, { desc = "Buffer Local Keymaps", noremap = true, silent = true })
 
 -- Folders as buffer
 vim.pack.add {
-  "https://github.com/stevearc/oil.nvim",
-  "https://github.com/benomahony/oil-git.nvim",
+  { src = "https://github.com/stevearc/oil.nvim", confirm = false },
+  { src = "https://github.com/benomahony/oil-git.nvim", confirm = false },
 }
 local detail = false
 

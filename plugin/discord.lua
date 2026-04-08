@@ -1,4 +1,4 @@
-vim.pack.add { "https://github.com/vyfor/cord.nvim" }
+vim.pack.add { { src = "https://github.com/vyfor/cord.nvim", confirm = false } }
 
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)

@@ -8,17 +8,17 @@ vim.cmd.packadd "nvim.undotree"
 vim.cmd.packadd "nvim.difftool"
 
 -- More useful word motions for Vim, using CameCalse snek_case
-vim.pack.add { "https://github.com/chaoren/vim-wordmotion" }
+vim.pack.add { { src = "https://github.com/chaoren/vim-wordmotion", confirm = false } }
 
 -- Character pairs
-vim.pack.add { "https://github.com/nvim-mini/mini.pairs" }
+vim.pack.add { { src = "https://github.com/nvim-mini/mini.pairs", confirm = false } }
 
 require("mini.pairs").setup()
 -- Code formatting
-vim.pack.add { "https://github.com/stevearc/conform.nvim" }
+vim.pack.add { { src = "https://github.com/stevearc/conform.nvim", confirm = false } }
 
 -- Editable quickfix window
-vim.pack.add { "https://github.com/stevearc/quicker.nvim" }
+vim.pack.add { { src = "https://github.com/stevearc/quicker.nvim", confirm = false } }
 require("quicker").setup {
   keys = {
     {
@@ -56,7 +56,7 @@ require("conform").setup {
 vim.keymap.set("n", "glf", "<Cmd>lua require('conform').format()<CR>", { silent = true })
 
 -- Syntax higlighting
-vim.pack.add { "https://github.com/nvim-treesitter/nvim-treesitter" }
+vim.pack.add { { src = "https://github.com/nvim-treesitter/nvim-treesitter", confirm = false } }
 
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
@@ -85,10 +85,10 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.pack.add { "https://github.com/ravsii/tree-sitter-d2" }
+vim.pack.add { { src = "https://github.com/ravsii/tree-sitter-d2", confirm = false } }
 
 -- NOTE: nice icons for comments
-vim.pack.add { "https://github.com/folke/todo-comments.nvim" }
+vim.pack.add { { src = "https://github.com/folke/todo-comments.nvim", confirm = false } }
 
 require("todo-comments").setup {
   signs = true, -- show icons in the signs column
@@ -156,4 +156,4 @@ require("todo-comments").setup {
 }
 
 -- Markdown view
-vim.pack.add { "https://github.com/OXY2DEV/markview.nvim" }
+vim.pack.add { { src = "https://github.com/OXY2DEV/markview.nvim", confirm = false } }
