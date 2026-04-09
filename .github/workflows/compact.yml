@@ -1,0 +1,43 @@
+name: Generate Compact Init
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "init.lua"
+      - "lua/**/*.lua"
+      - "plugin/**"
+      - "after/**"
+      - "ftplugin/**"
+      - "compact.sh"
+      - ".github/workflows/compact.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compact:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate init_compact.lua
+        run: bash ./compact.sh
+
+      - name: Commit generated file
+        run: |
+          if git diff --quiet -- init_compact.lua; then
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add init_compact.lua
+          git commit -m "chore: regenerate init_compact.lua"
+          git push

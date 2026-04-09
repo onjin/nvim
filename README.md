@@ -19,6 +19,35 @@ Small personal Neovim setup built around native `vim.pack`, LSP, fast search, an
 - formatters you want to use: `stylua`, `prettier`, `black`, `air`
 - optional LSP tools: `lua-language-server`, `bash-language-server`, `uvx ty`, `uvx ruff`
 
+## Quickstart
+
+### Single-file `init_compact.lua`
+
+You can use the generated single-file config without cloning the whole repo.
+
+Save it as your main config:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/onjin/nvim/main/init_compact.lua -o ~/.config/nvim/init.lua
+```
+
+Or run Neovim directly with it from any path:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/onjin/nvim/main/init_compact.lua -o /tmp/init_compact.lua
+nvim -u /tmp/init_compact.lua
+```
+
+### Run directly with Nix
+
+Run this config without cloning the repo or writing it into `~/.config/nvim`:
+
+```bash
+nix run github:onjin/nvim
+```
+
+
+
 ## Install
 
 Clone this repo to:
@@ -27,7 +56,15 @@ Clone this repo to:
 ~/.config/nvim
 ```
 
-Then start Neovim. Plugins are declared in `init.lua` and `plugin/*.lua`.
+Then start Neovim. Plugins are declared in `init.lua` and `lua/plugins/*.lua`.
+
+To generate a self-contained single-file version of this config, run:
+
+```bash
+./compact.sh
+```
+
+This creates `init_compact.lua`, which bundles local modules from `lua/` and runtime files such as `plugin/` and `ftplugin/`.
 
 ## Daily Use
 
@@ -59,3 +96,19 @@ Then start Neovim. Plugins are declared in `init.lua` and `plugin/*.lua`.
 - native LSP with Lua, Bash, Java, and Python support
 - `conform.nvim` for formatting
 - Treesitter, Catppuccin, mini status/tab line, and todo highlighting
+
+### Test in isolation
+
+Run the compact config with isolated `XDG_*` directories:
+
+```bash
+./test-compact.sh
+```
+
+Run the local flake the same way:
+
+```bash
+./test-flake.sh
+```
+
+Both scripts avoid loading `~/.config/nvim`. On the first run they may still need network access, because `vim.pack` installs plugins into isolated `XDG_DATA_HOME`.

@@ -1,11 +1,13 @@
-vim.pack.add { { src = "https://github.com/neovim/nvim-lspconfig", confirm = false } }
-vim.pack.add { { src = "https://github.com/folke/lazydev.nvim", confirm = false } }
+local pack = require "plugins.pack"
+
+pack.add {
+  { src = "https://github.com/neovim/nvim-lspconfig", confirm = false },
+  { src = "https://github.com/folke/lazydev.nvim", confirm = false },
+}
 
 require("lazydev").setup()
 
 local function jdtls_formatter_url(bufnr, client)
-  -- detect workspace if `eclipse.formatter.xml` exists
-  -- and returns full path to it
   local root = client.config.root_dir
   if not root then
     local bufname = vim.api.nvim_buf_get_name(bufnr)
@@ -54,16 +56,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     vim.o.signcolumn = "yes:1"
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
     if client:supports_method "textDocument/completion" then
       vim.o.complete = "o,.,w,b,u"
       vim.o.completeopt = "menu,menuone,popup,noinsert"
       vim.lsp.completion.enable(true, client.id, args.buf)
     end
+
     if client:supports_method "textDocument/inlayHint" then
       vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
     end
+
     if client.name == "jdtls" then
-      -- tell LSP to use `eclipse.formatter.xml` if exits in the workspace
       local formatter_url = jdtls_formatter_url(args.buf, client)
       if formatter_url then
         client.settings = vim.tbl_deep_extend("force", client.settings or {}, {
@@ -78,6 +82,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
         client:notify("workspace/didChangeConfiguration", { settings = client.settings })
       end
     end
-    vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "vim.lsp.buf.definition" })
+
+    vim.keymap.set("n", "grd", vim.lsp.buf.definition, {
+      buffer = args.buf,
+      desc = "Go to definition",
+    })
   end,
 })
