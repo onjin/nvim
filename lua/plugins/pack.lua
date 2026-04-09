@@ -37,7 +37,7 @@ local function ensure_autocmd()
   })
 end
 
-function M.add(specs)
+function M.add(specs, opts)
   ensure_autocmd()
 
   local pack_specs = {}
@@ -57,6 +57,7 @@ function M.add(specs)
       spec.install_hook = nil
       spec.update_hook = nil
       spec.delete_hook = nil
+      spec.confirm = nil
 
       if plugin_hooks.install or plugin_hooks.update or plugin_hooks.delete then
         hooks[name] = plugin_hooks
@@ -66,7 +67,8 @@ function M.add(specs)
     end
   end
 
-  return vim.pack.add(pack_specs)
+  opts = vim.tbl_extend("force", { confirm = false }, opts or {})
+  return vim.pack.add(pack_specs, opts)
 end
 
 return M

@@ -6,14 +6,14 @@ if has_ui then
 end
 
 pack.add {
-  { src = "https://github.com/catppuccin/nvim", name = "catppuccin", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.icons", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.tabline", name = "mini.tabline", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.statusline", name = "mini.statusline", confirm = false },
-  { src = "https://github.com/nvim-mini/mini-git", name = "mini.git", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.diff", name = "mini.diff", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.indentscope", confirm = false },
-  { src = "https://github.com/brenoprata10/nvim-highlight-colors", confirm = false },
+  { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+  { src = "https://github.com/nvim-mini/mini.icons" },
+  { src = "https://github.com/nvim-mini/mini.tabline", name = "mini.tabline" },
+  { src = "https://github.com/nvim-mini/mini.statusline", name = "mini.statusline" },
+  { src = "https://github.com/nvim-mini/mini-git", name = "mini.git" },
+  { src = "https://github.com/nvim-mini/mini.diff", name = "mini.diff" },
+  { src = "https://github.com/nvim-mini/mini.indentscope" },
+  { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 }
 
 require("catppuccin").setup {

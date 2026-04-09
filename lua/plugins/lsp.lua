@@ -1,8 +1,8 @@
 local pack = require "plugins.pack"
 
 pack.add {
-  { src = "https://github.com/neovim/nvim-lspconfig", confirm = false },
-  { src = "https://github.com/folke/lazydev.nvim", confirm = false },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/folke/lazydev.nvim" },
 }
 
 require("lazydev").setup()

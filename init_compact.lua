@@ -30,7 +30,7 @@ vim.opt.wildoptions:append { "fuzzy" }
 vim.opt.path:append { "**" }
 
 pack.add {
-  "https://github.com/nvim-lua/plenary.nvim",
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
 }
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -50,13 +50,12 @@ vim.cmd.packadd "nvim.undotree"
 vim.cmd.packadd "nvim.difftool"
 
 pack.add {
-  { src = "https://github.com/chaoren/vim-wordmotion", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.pairs", confirm = false },
-  { src = "https://github.com/stevearc/conform.nvim", confirm = false },
-  { src = "https://github.com/stevearc/quicker.nvim", confirm = false },
+  { src = "https://github.com/chaoren/vim-wordmotion" },
+  { src = "https://github.com/nvim-mini/mini.pairs" },
+  { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://github.com/stevearc/quicker.nvim" },
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
-    confirm = false,
     update_hook = function()
       vim.notify "[nvim-treesitter] TSUpdate"
       vim.cmd "TSUpdate"
@@ -64,7 +63,6 @@ pack.add {
   },
   {
     src = "https://github.com/ravsii/tree-sitter-d2",
-    confirm = false,
     install_hook = function(ev)
       vim.notify "[tree-sitter-d2] make nvim-install"
       vim.system({ "make", "nvim-install" }, { cwd = ev.data.path }):wait()
@@ -74,8 +72,8 @@ pack.add {
       vim.system({ "make", "nvim-install" }, { cwd = ev.data.path }):wait()
     end,
   },
-  { src = "https://github.com/folke/todo-comments.nvim", confirm = false },
-  { src = "https://github.com/OXY2DEV/markview.nvim", confirm = false },
+  { src = "https://github.com/folke/todo-comments.nvim" },
+  { src = "https://github.com/OXY2DEV/markview.nvim" },
 }
 
 require("mini.pairs").setup()
@@ -116,8 +114,14 @@ vim.keymap.set("n", "glf", function()
   require("conform").format()
 end, { silent = true, desc = "Format buffer" })
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
   callback = function()
+    if vim.fn.executable "tree-sitter" == 0 then
+      vim.notify("tree-sitter executable not found; skipping parser install", vim.log.levels.WARN)
+      return
+    end
+
     local ensure_installed = {
       "lua",
       "bash",
@@ -134,7 +138,14 @@ vim.api.nvim_create_autocmd("FileType", {
       end)
       :totable()
 
-    require("nvim-treesitter").install(parsers_to_install)
+    if #parsers_to_install > 0 then
+      require("nvim-treesitter").install(parsers_to_install)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
     pcall(vim.treesitter.start)
     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.wo.foldmethod = "expr"
@@ -207,7 +218,6 @@ vim.g.cord_defer_startup = true
 pack.add {
   {
     src = "https://github.com/vyfor/cord.nvim",
-    confirm = false,
     update_hook = function(ev)
       if not ev.data.active then
         vim.cmd.packadd "cord.nvim"
@@ -260,8 +270,8 @@ package.preload["plugins.lsp"] = function(...)
 local pack = require "plugins.pack"
 
 pack.add {
-  { src = "https://github.com/neovim/nvim-lspconfig", confirm = false },
-  { src = "https://github.com/folke/lazydev.nvim", confirm = false },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/folke/lazydev.nvim" },
 }
 
 require("lazydev").setup()
@@ -361,10 +371,10 @@ vim.keymap.set("n", "<c-k>", "<c-w><c-k>", { desc = "Switch split up", noremap =
 vim.keymap.set("n", "<c-l>", "<c-w><c-l>", { desc = "Switch split right", noremap = true, silent = true })
 
 pack.add {
-  { src = "https://github.com/folke/snacks.nvim", confirm = false },
-  { src = "https://github.com/folke/which-key.nvim", confirm = false },
-  { src = "https://github.com/stevearc/oil.nvim", confirm = false },
-  { src = "https://github.com/benomahony/oil-git.nvim", confirm = false },
+  { src = "https://github.com/folke/snacks.nvim" },
+  { src = "https://github.com/folke/which-key.nvim" },
+  { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/benomahony/oil-git.nvim" },
 }
 
 local snacks = require "snacks"
@@ -476,7 +486,7 @@ local function ensure_autocmd()
   })
 end
 
-function M.add(specs)
+function M.add(specs, opts)
   ensure_autocmd()
 
   local pack_specs = {}
@@ -496,6 +506,7 @@ function M.add(specs)
       spec.install_hook = nil
       spec.update_hook = nil
       spec.delete_hook = nil
+      spec.confirm = nil
 
       if plugin_hooks.install or plugin_hooks.update or plugin_hooks.delete then
         hooks[name] = plugin_hooks
@@ -505,7 +516,8 @@ function M.add(specs)
     end
   end
 
-  return vim.pack.add(pack_specs)
+  opts = vim.tbl_extend("force", { confirm = false }, opts or {})
+  return vim.pack.add(pack_specs, opts)
 end
 
 return M
@@ -522,14 +534,14 @@ if has_ui then
 end
 
 pack.add {
-  { src = "https://github.com/catppuccin/nvim", name = "catppuccin", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.icons", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.tabline", name = "mini.tabline", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.statusline", name = "mini.statusline", confirm = false },
-  { src = "https://github.com/nvim-mini/mini-git", name = "mini.git", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.diff", name = "mini.diff", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.indentscope", confirm = false },
-  { src = "https://github.com/brenoprata10/nvim-highlight-colors", confirm = false },
+  { src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+  { src = "https://github.com/nvim-mini/mini.icons" },
+  { src = "https://github.com/nvim-mini/mini.tabline", name = "mini.tabline" },
+  { src = "https://github.com/nvim-mini/mini.statusline", name = "mini.statusline" },
+  { src = "https://github.com/nvim-mini/mini-git", name = "mini.git" },
+  { src = "https://github.com/nvim-mini/mini.diff", name = "mini.diff" },
+  { src = "https://github.com/nvim-mini/mini.indentscope" },
+  { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
 }
 
 require("catppuccin").setup {

@@ -27,6 +27,8 @@
               git
               ripgrep
               gnumake
+              tree-sitter
+              stdenv.cc.cc
             ];
             text = ''
               exec nvim -u ${./init_compact.lua} "$@"

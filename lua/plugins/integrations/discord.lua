@@ -5,7 +5,6 @@ vim.g.cord_defer_startup = true
 pack.add {
   {
     src = "https://github.com/vyfor/cord.nvim",
-    confirm = false,
     update_hook = function(ev)
       if not ev.data.active then
         vim.cmd.packadd "cord.nvim"

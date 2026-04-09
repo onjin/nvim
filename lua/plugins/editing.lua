@@ -5,13 +5,12 @@ vim.cmd.packadd "nvim.undotree"
 vim.cmd.packadd "nvim.difftool"
 
 pack.add {
-  { src = "https://github.com/chaoren/vim-wordmotion", confirm = false },
-  { src = "https://github.com/nvim-mini/mini.pairs", confirm = false },
-  { src = "https://github.com/stevearc/conform.nvim", confirm = false },
-  { src = "https://github.com/stevearc/quicker.nvim", confirm = false },
+  { src = "https://github.com/chaoren/vim-wordmotion" },
+  { src = "https://github.com/nvim-mini/mini.pairs" },
+  { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://github.com/stevearc/quicker.nvim" },
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
-    confirm = false,
     update_hook = function()
       vim.notify "[nvim-treesitter] TSUpdate"
       vim.cmd "TSUpdate"
@@ -19,7 +18,6 @@ pack.add {
   },
   {
     src = "https://github.com/ravsii/tree-sitter-d2",
-    confirm = false,
     install_hook = function(ev)
       vim.notify "[tree-sitter-d2] make nvim-install"
       vim.system({ "make", "nvim-install" }, { cwd = ev.data.path }):wait()
@@ -29,8 +27,8 @@ pack.add {
       vim.system({ "make", "nvim-install" }, { cwd = ev.data.path }):wait()
     end,
   },
-  { src = "https://github.com/folke/todo-comments.nvim", confirm = false },
-  { src = "https://github.com/OXY2DEV/markview.nvim", confirm = false },
+  { src = "https://github.com/folke/todo-comments.nvim" },
+  { src = "https://github.com/OXY2DEV/markview.nvim" },
 }
 
 require("mini.pairs").setup()
@@ -71,8 +69,14 @@ vim.keymap.set("n", "glf", function()
   require("conform").format()
 end, { silent = true, desc = "Format buffer" })
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
   callback = function()
+    if vim.fn.executable "tree-sitter" == 0 then
+      vim.notify("tree-sitter executable not found; skipping parser install", vim.log.levels.WARN)
+      return
+    end
+
     local ensure_installed = {
       "lua",
       "bash",
@@ -89,7 +93,14 @@ vim.api.nvim_create_autocmd("FileType", {
       end)
       :totable()
 
-    require("nvim-treesitter").install(parsers_to_install)
+    if #parsers_to_install > 0 then
+      require("nvim-treesitter").install(parsers_to_install)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
     pcall(vim.treesitter.start)
     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.wo.foldmethod = "expr"

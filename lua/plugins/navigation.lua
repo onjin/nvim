@@ -6,10 +6,10 @@ vim.keymap.set("n", "<c-k>", "<c-w><c-k>", { desc = "Switch split up", noremap =
 vim.keymap.set("n", "<c-l>", "<c-w><c-l>", { desc = "Switch split right", noremap = true, silent = true })
 
 pack.add {
-  { src = "https://github.com/folke/snacks.nvim", confirm = false },
-  { src = "https://github.com/folke/which-key.nvim", confirm = false },
-  { src = "https://github.com/stevearc/oil.nvim", confirm = false },
-  { src = "https://github.com/benomahony/oil-git.nvim", confirm = false },
+  { src = "https://github.com/folke/snacks.nvim" },
+  { src = "https://github.com/folke/which-key.nvim" },
+  { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/benomahony/oil-git.nvim" },
 }
 
 local snacks = require "snacks"

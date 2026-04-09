@@ -23,7 +23,7 @@ vim.opt.wildoptions:append { "fuzzy" }
 vim.opt.path:append { "**" }
 
 pack.add {
-  "https://github.com/nvim-lua/plenary.nvim",
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
 }
 
 vim.api.nvim_create_autocmd("TextYankPost", {
