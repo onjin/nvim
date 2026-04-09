@@ -46,6 +46,20 @@ Run this config without cloning the repo or writing it into `~/.config/nvim`:
 nix run github:onjin/nvim
 ```
 
+By default this launcher uses `NVIM_APPNAME=nvim-onjin`, so it keeps its own state separate from your main Neovim setup.
+That means it writes to:
+
+- `~/.config/nvim-onjin`
+- `~/.local/share/nvim-onjin`
+- `~/.local/state/nvim-onjin`
+- `~/.cache/nvim-onjin`
+
+To use a different app name, override it explicitly:
+
+```bash
+NVIM_APPNAME=my-nvim nix run github:onjin/nvim
+```
+
 
 
 ## Install
