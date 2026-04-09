@@ -117,11 +117,6 @@ end, { silent = true, desc = "Format buffer" })
 vim.api.nvim_create_autocmd("VimEnter", {
   once = true,
   callback = function()
-    if vim.fn.executable "tree-sitter" == 0 then
-      vim.notify("tree-sitter executable not found; skipping parser install", vim.log.levels.WARN)
-      return
-    end
-
     local ensure_installed = {
       "lua",
       "bash",
