@@ -43,6 +43,12 @@ vim.api.nvim_create_autocmd("PackChanged", {
       vim.notify "[tree-sitter-d2] make nvim-install"
       vim.system({ "make", "nvim-install" }, { cwd = ev.data.path }):wait()
     end
+    if name == "cord.nvim" and kind == "update" then
+      if not ev.data.active then
+        vim.cmd.packadd "cord.nvim"
+      end
+      vim.cmd "Cord update"
+    end
   end,
 })
 vim.pack.add {
