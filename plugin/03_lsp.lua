@@ -30,7 +30,7 @@ local servers = {
     filetypes = { "lua" },
   },
   ty = {
-    cmd = { "uvx", "ty" },
+    cmd = { "uvx", "ty", "server" },
     filetypes = { "python" },
     settings = {
       ty = {
@@ -39,7 +39,7 @@ local servers = {
     },
   },
   ruff = {
-    cmd = { "uvx", "ruff" },
+    cmd = { "uvx", "ruff", "server" },
     filetypes = { "python" },
   },
   bashls = true,
