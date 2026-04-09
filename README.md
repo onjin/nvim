@@ -46,18 +46,21 @@ Run this config without cloning the repo or writing it into `~/.config/nvim`:
 nix run github:onjin/nvim
 ```
 
-By default this launcher uses `NVIM_APPNAME=nvim-onjin`, so it keeps its own state separate from your main Neovim setup.
+By default this launcher uses its own isolated base directory at `~/.local/share/onjin-nvim`.
 That means it writes to:
 
-- `~/.config/nvim-onjin`
-- `~/.local/share/nvim-onjin`
-- `~/.local/state/nvim-onjin`
-- `~/.cache/nvim-onjin`
+- `~/.local/share/onjin-nvim/config`
+- `~/.local/share/onjin-nvim/data`
+- `~/.local/share/onjin-nvim/state`
+- `~/.local/share/onjin-nvim/cache`
+- `~/.local/share/onjin-nvim/tree-sitter-parsers`
 
-To use a different app name, override it explicitly:
+This also keeps the `tree-sitter` CLI config under the same isolated root, so it does not depend on `~/.config/tree-sitter/config.json`.
+
+To use a different base directory, override it explicitly:
 
 ```bash
-NVIM_APPNAME=my-nvim nix run github:onjin/nvim
+ONJIN_NVIM_HOME=/tmp/onjin-nvim nix run github:onjin/nvim
 ```
 
 
