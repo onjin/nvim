@@ -1,5 +1,6 @@
 require "plugins.core"
 require "plugins.editing"
+require "plugins.generators"
 require "plugins.navigation"
 require "plugins.lsp"
 require "plugins.ui"

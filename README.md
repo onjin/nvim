@@ -103,6 +103,14 @@ This creates `init_compact.lua`, which bundles local modules from `lua/` and run
 - `glf` format the current buffer
 - `grd` jump to definition
 - `<leader>?` shows buffer-local keymaps
+- in insert mode:
+    - `<C-x><C-u>` opens generated values completion (`uuid1-7`, `ulid`, date/time)
+    - `<C-g>k` opens generated values menu (`vim.ui.select`)
+    - `<C-x>1..7` inserts `uuid1..uuid7`
+    - `<C-x>u` inserts `ulid`
+    - `<C-x>d` inserts date (`YYYY-MM-DD`)
+    - `<C-x>t` inserts datetime (`YYYY-MM-DD HH:MM:SS`)
+    - `<C-x>i` inserts ISO datetime (`YYYY-MM-DDTHH:MM:SS+TZ:TZ`)
 - `TSInsall [python]` - to install required tree sitter queries for certain languages
 
 ## Included
