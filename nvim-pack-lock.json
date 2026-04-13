@@ -12,6 +12,10 @@
       "rev": "283e4a5bdafd0d6187f28e5b739cccab6b4c9c64",
       "src": "https://github.com/vyfor/cord.nvim"
     },
+    "dadbod-grip.nvim": {
+      "rev": "3ee0a6d0000bebee89692a39e0d16605c5e17306",
+      "src": "https://github.com/joryeugene/dadbod-grip.nvim"
+    },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
