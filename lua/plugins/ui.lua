@@ -14,6 +14,7 @@ pack.add {
   { src = "https://github.com/nvim-mini/mini.diff", name = "mini.diff" },
   { src = "https://github.com/nvim-mini/mini.indentscope" },
   { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
+  { src = "https://github.com/lewis6991/hover.nvim" },
 }
 
 require("catppuccin").setup {
@@ -34,6 +35,30 @@ if has_ui then
   require("mini.tabline").setup()
   require("mini.statusline").setup()
   require("mini.indentscope").setup()
+
+  require("hover").config {
+    --- List of modules names to load as providers.
+    providers = {
+      "hover.providers.diagnostic",
+      "hover.providers.lsp",
+      "hover.providers.dap",
+      "hover.providers.man",
+      "hover.providers.dictionary",
+      -- Optional, disabled by default:
+      -- 'hover.providers.gh',
+      -- 'hover.providers.gh_user',
+      -- 'hover.providers.jira',
+      -- 'hover.providers.fold_preview',
+      -- 'hover.providers.highlight',
+    },
+    mouse_providers = {
+      -- "hover.providers.lsp",
+    },
+  }
+  -- Setup keymaps
+  vim.keymap.set("n", "K", function()
+    require("hover").open()
+  end, { desc = "hover.nvim (open)" })
 end
 
 require("mini.git").setup()

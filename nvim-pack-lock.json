@@ -16,6 +16,10 @@
       "rev": "3ee0a6d0000bebee89692a39e0d16605c5e17306",
       "src": "https://github.com/joryeugene/dadbod-grip.nvim"
     },
+    "hover.nvim": {
+      "rev": "e73c00da3a9c87a21d2a8ddf7ab4a39824bd5d56",
+      "src": "https://github.com/lewis6991/hover.nvim"
+    },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
