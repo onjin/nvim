@@ -45,6 +45,8 @@ local servers = {
     filetypes = { "python" },
   },
   bashls = true,
+  rust_analyzer = true,
+  taplo = true, -- toml toolkit
 }
 
 for name, spec in pairs(servers) do
