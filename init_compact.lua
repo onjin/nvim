@@ -461,6 +461,17 @@ vim.keymap.set("i", "<C-x>i", function() insert_generated "datetime_iso" end, { 
 ]], "@lua/plugins/generators.lua", "t", _ENV))(...)
 end
 
+package.preload["plugins.integrations.databases"] = function(...)
+  return assert(load([[
+local pack = require "plugins.pack"
+
+pack.add {
+  { src = "https://github.com/joryeugene/dadbod-grip.nvim" },
+}
+require("dadbod-grip").setup { ai = false }
+]], "@lua/plugins/integrations/databases.lua", "t", _ENV))(...)
+end
+
 package.preload["plugins.integrations.discord"] = function(...)
   return assert(load([[
 local pack = require "plugins.pack"
@@ -849,6 +860,7 @@ require "plugins.navigation"
 require "plugins.lsp"
 require "plugins.ui"
 require "plugins.integrations.discord"
+require "plugins.integrations.databases"
 ]], "@init.lua", "t", _ENV))()
 
 -- plugin/*.lua
