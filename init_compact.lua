@@ -530,6 +530,20 @@ end
 
 package.preload["plugins.lsp"] = function(...)
   return assert(load([[
+-- Compatibility filetype registrations for lspconfig defaults on older Neovim
+-- filetype tables. Without these, vim.lsp.config warns about unknown filetypes.
+vim.filetype.add {
+  filename = {
+    ["go.work"] = "gowork",
+  },
+  pattern = {
+    [".*/[Dd]ocker%-compose%.ya?ml"] = "yaml.docker-compose",
+    [".*/compose%.ya?ml"] = "yaml.docker-compose",
+    [".*%.gotmpl"] = "gotmpl",
+    [".*%.go%.tmpl"] = "gotmpl",
+  },
+}
+
 local pack = require "plugins.pack"
 
 pack.add {
@@ -571,14 +585,19 @@ local servers = {
         diagnosticMode = "workspace",
       },
     },
-  },
+  }, -- Python
   ruff = {
     cmd = { "uvx", "ruff", "server" },
     filetypes = { "python" },
   },
   bashls = true,
   rust_analyzer = true,
-  taplo = true, -- toml toolkit
+  taplo = true, -- TOML toolkit
+  lemminx = true, -- XML
+  gopls = true,
+  docker_language_server = true,
+  nixd = true,
+  terraform_lsp = true,
 }
 
 for name, spec in pairs(servers) do
