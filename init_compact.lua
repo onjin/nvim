@@ -201,6 +201,38 @@ require("todo-comments").setup {
     pattern = [[\b(KEYWORDS):]],
   },
 }
+-- mappings to navigate/find tags
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+vim.keymap.set("n", "<leader>ftT", function()
+  require("snacks").picker.todo_comments()
+end, { desc = "Find todo comments" })
+
+vim.keymap.set("n", "<leader>fte", function()
+  require("snacks").picker.todo_comments { keywords = { "FIX", "FIXME", "BUX", "FIXIT", "ISSUE" } }
+end, { desc = "Fix todo comments - FIX, FIXME, BUG, ISSUE" })
+
+vim.keymap.set("n", "<leader>fti", function()
+  require("snacks").picker.todo_comments { keywords = { "INFO", "NOTE" } }
+end, { desc = "Fix todo comments - INFO, NOTE" })
+
+vim.keymap.set("n", "<leader>ftw", function()
+  require("snacks").picker.todo_comments { keywords = { "WARN", "HACK", "WARNING", "XXX" } }
+end, { desc = "Fix todo comments - WARN, HACK" })
+
+vim.keymap.set("n", "<leader>ftt", function()
+  require("snacks").picker.todo_comments { keywords = { "TODO" } }
+end, { desc = "Fix todo comments - TODO" })
+
+vim.keymap.set("n", "<leader>ftp", function()
+  require("snacks").picker.todo_comments { keywords = { "PERF", "OPTIM", "PERFORMANCE", "OPTOMIZE" } }
+end, { desc = "Fix todo comments - PERF, OPTIM, PERFORMANCE, OPTOMIZE" })
 ]=], "@lua/plugins/editing.lua", "t", _ENV))(...)
 end
 
