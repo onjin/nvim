@@ -247,6 +247,15 @@ end
 
 package.preload["plugins.generators"] = function(...)
   return assert(load([[
+local pack = require "plugins.pack"
+
+-- code annotations generator by :Neogen
+pack.add {
+  { src = "https://github.com/danymat/neogen" },
+}
+require("neogen").setup()
+
+-- custom one time items generators
 local uv = vim.uv or vim.loop
 math.randomseed(os.time() + ((uv and uv.hrtime) and math.floor(uv.hrtime() % 1000000) or 0))
 
@@ -321,7 +330,7 @@ local function uuid_v2()
     return nil
   end
 
-  local _, g2, g3, g4, g5 = v1:match("^(%x+)%-(%x+)%-(%x+)%-(%x+)%-(%x+)$")
+  local _, g2, g3, g4, g5 = v1:match "^(%x+)%-(%x+)%-(%x+)%-(%x+)%-(%x+)$"
   if not g2 then
     return nil
   end
@@ -370,7 +379,12 @@ local function ulid()
 end
 
 local generators = {
-  { id = "uuid1", build = function() return run_system { "uuidgen", "--time" } end },
+  {
+    id = "uuid1",
+    build = function()
+      return run_system { "uuidgen", "--time" }
+    end,
+  },
   { id = "uuid2", build = uuid_v2 },
   {
     id = "uuid3",
@@ -390,11 +404,31 @@ local generators = {
       return run_system { "uuidgen", "--sha1", "--namespace", "@dns", "--name", uuid_name() }
     end,
   },
-  { id = "uuid6", build = function() return run_system { "uuidgen", "--time-v6" } end },
-  { id = "uuid7", build = function() return run_system { "uuidgen", "--time-v7" } end },
+  {
+    id = "uuid6",
+    build = function()
+      return run_system { "uuidgen", "--time-v6" }
+    end,
+  },
+  {
+    id = "uuid7",
+    build = function()
+      return run_system { "uuidgen", "--time-v7" }
+    end,
+  },
   { id = "ulid", build = ulid },
-  { id = "date", build = function() return os.date "%Y-%m-%d" end },
-  { id = "datetime", build = function() return os.date "%Y-%m-%d %H:%M:%S" end },
+  {
+    id = "date",
+    build = function()
+      return os.date "%Y-%m-%d"
+    end,
+  },
+  {
+    id = "datetime",
+    build = function()
+      return os.date "%Y-%m-%d %H:%M:%S"
+    end,
+  },
   { id = "datetime_iso", build = datetime_iso },
 }
 
@@ -488,17 +522,39 @@ end, {
 })
 
 vim.keymap.set("i", "<C-g>k", pick_and_insert_generated, { desc = "Insert generated value menu" })
-vim.keymap.set("i", "<C-x>1", function() insert_generated "uuid1" end, { desc = "Insert uuid1" })
-vim.keymap.set("i", "<C-x>2", function() insert_generated "uuid2" end, { desc = "Insert uuid2" })
-vim.keymap.set("i", "<C-x>3", function() insert_generated "uuid3" end, { desc = "Insert uuid3" })
-vim.keymap.set("i", "<C-x>4", function() insert_generated "uuid4" end, { desc = "Insert uuid4" })
-vim.keymap.set("i", "<C-x>5", function() insert_generated "uuid5" end, { desc = "Insert uuid5" })
-vim.keymap.set("i", "<C-x>6", function() insert_generated "uuid6" end, { desc = "Insert uuid6" })
-vim.keymap.set("i", "<C-x>7", function() insert_generated "uuid7" end, { desc = "Insert uuid7" })
-vim.keymap.set("i", "<C-x>u", function() insert_generated "ulid" end, { desc = "Insert ulid" })
-vim.keymap.set("i", "<C-x>d", function() insert_generated "date" end, { desc = "Insert date" })
-vim.keymap.set("i", "<C-x>t", function() insert_generated "datetime" end, { desc = "Insert datetime" })
-vim.keymap.set("i", "<C-x>i", function() insert_generated "datetime_iso" end, { desc = "Insert iso datetime" })
+vim.keymap.set("i", "<C-x>1", function()
+  insert_generated "uuid1"
+end, { desc = "Insert uuid1" })
+vim.keymap.set("i", "<C-x>2", function()
+  insert_generated "uuid2"
+end, { desc = "Insert uuid2" })
+vim.keymap.set("i", "<C-x>3", function()
+  insert_generated "uuid3"
+end, { desc = "Insert uuid3" })
+vim.keymap.set("i", "<C-x>4", function()
+  insert_generated "uuid4"
+end, { desc = "Insert uuid4" })
+vim.keymap.set("i", "<C-x>5", function()
+  insert_generated "uuid5"
+end, { desc = "Insert uuid5" })
+vim.keymap.set("i", "<C-x>6", function()
+  insert_generated "uuid6"
+end, { desc = "Insert uuid6" })
+vim.keymap.set("i", "<C-x>7", function()
+  insert_generated "uuid7"
+end, { desc = "Insert uuid7" })
+vim.keymap.set("i", "<C-x>u", function()
+  insert_generated "ulid"
+end, { desc = "Insert ulid" })
+vim.keymap.set("i", "<C-x>d", function()
+  insert_generated "date"
+end, { desc = "Insert date" })
+vim.keymap.set("i", "<C-x>t", function()
+  insert_generated "datetime"
+end, { desc = "Insert datetime" })
+vim.keymap.set("i", "<C-x>i", function()
+  insert_generated "datetime_iso"
+end, { desc = "Insert iso datetime" })
 ]], "@lua/plugins/generators.lua", "t", _ENV))(...)
 end
 
@@ -994,6 +1050,58 @@ vim.keymap.set(
   { desc = "Toggle cursor-only diagnostics" }
 )
 vim.keymap.set("n", "<leader>dr", "<cmd>TinyInlineDiag reset<cr>", { desc = "Reset diagnostic options" })
+
+-- folding rules
+pack.add {
+  { src = "https://github.com/kevinhwang91/nvim-ufo" },
+  { src = "https://github.com/kevinhwang91/promise-async" },
+}
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
+--- tell the LSP the capbility of foldingRange
+local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
+for _, ls in ipairs(language_servers) do
+  require("lspconfig")[ls].setup {
+    capabilities = capabilities,
+    -- you can add other fields for setting up lsp server in this table
+  }
+end
+
+vim.o.foldcolumn = "1" -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+require("ufo").setup {
+  enable_get_fold_virt_text = true,
+  provider_selector = function(bufnr, filetype, buftype)
+    return { "treesitter", "indent" }
+  end,
+  open_fold_hl_timeout = 150,
+  close_fold_kinds_for_ft = {
+    default = { "imports", "comment" },
+    json = { "array" },
+    c = { "comment", "region" },
+    python = { "import_statement", "import_from_statement", "comment" },
+    java = { "import_declaration", "block_comment" },
+  },
+  close_fold_current_line_for_ft = {
+    default = true,
+    c = false,
+  },
+}
+vim.o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldclose:"
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
+vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+vim.keymap.set("n", "zk", function()
+  require("ufo").peekFoldedLinesUnderCursor()
+end)
 ]=], "@lua/plugins/ui.lua", "t", _ENV))(...)
 end
 
