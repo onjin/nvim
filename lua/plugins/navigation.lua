@@ -25,6 +25,10 @@ snacks.setup {
 
 local picker = snacks.picker
 
+vim.keymap.set("n", "<leader>ss", function()
+  picker()
+end, { desc = "Show all pickers" })
+-- search files
 vim.keymap.set("n", "<leader>sf", picker.files, { desc = "Search files" })
 vim.keymap.set("n", "<leader>sb", picker.buffers, { desc = "Search buffers" })
 vim.keymap.set("n", "<leader>sg", picker.git_grep, { desc = "Search live git grep" })
@@ -32,14 +36,21 @@ vim.keymap.set("n", "<leader>sG", picker.grep, { desc = "Search live ripgrep" })
 vim.keymap.set("n", "<leader>s*", picker.grep_word, { desc = "Grep string under cursor" })
 vim.keymap.set("n", "<leader>sr", picker.resume, { desc = "Resume last search" })
 vim.keymap.set("n", "<leader>sn", picker.notifications, { desc = "Search notifications" })
+-- finders
 vim.keymap.set("n", "<leader>fk", picker.keymaps, { desc = "Find keymaps" })
 vim.keymap.set("n", "<leader>fc", picker.commands, { desc = "Find commands" })
 vim.keymap.set("n", "<leader>fs", picker.spelling, { desc = "Find spelling" })
+-- diagnostics
+vim.keymap.set("n", "<leader>db", picker.diagnostics_buffer, { desc = "Show buffer diagnostics" })
+vim.keymap.set("n", "<leader>da", picker.diagnostics, { desc = "Show workspace diagnostics" })
+-- github / gh
 vim.keymap.set("n", "<leader>gi", picker.gh_issue, { desc = "GH Issues" })
 vim.keymap.set("n", "<leader>gp", picker.gh_pr, { desc = "GH PRs" })
 vim.keymap.set("n", "<leader>gs", picker.git_status, { desc = "Git Status" })
 
-snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map "<leader>tc"
+snacks.toggle
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+  :map "<leader>tc"
 snacks.toggle.zoom():map "<leader>tz"
 snacks.toggle.diagnostics():map "<leader>td"
 snacks.toggle.inlay_hints():map "<leader>th"

@@ -9,7 +9,7 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "cord.nvim": {
-      "rev": "283e4a5bdafd0d6187f28e5b739cccab6b4c9c64",
+      "rev": "0be090969e978f7442870ef227e09eff7bf3480d",
       "src": "https://github.com/vyfor/cord.nvim"
     },
     "dadbod-grip.nvim": {
@@ -25,7 +25,7 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "markview.nvim": {
-      "rev": "1861f959599ae03cfd59f56222a542035b0cd947",
+      "rev": "5a890277ba7edd7823d20f4d0525132d277aea9a",
       "src": "https://github.com/OXY2DEV/markview.nvim"
     },
     "mini.diff": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/nvim-mini/mini-git"
     },
     "mini.icons": {
-      "rev": "7fdae2443a0e2910015ca39ad74b50524ee682d3",
+      "rev": "bac6317300e205335df425296570d84322730067",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.indentscope": {
@@ -56,29 +56,17 @@
       "rev": "169af955ad2ed0ffcc3d2c83e850bcc7eaac2f0e",
       "src": "https://github.com/nvim-mini/mini.tabline"
     },
-    "neodev.nvim": {
-      "rev": "46aa467dca16cf3dfe27098042402066d2ae242d",
-      "src": "https://github.com/folke/neodev.nvim"
-    },
-    "nvim": {
-      "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
-      "src": "https://github.com/catppuccin/nvim"
-    },
     "nvim-highlight-colors": {
       "rev": "e2cb22089cc2358b2b995c09578224f142de6039",
       "src": "https://github.com/brenoprata10/nvim-highlight-colors"
     },
     "nvim-lspconfig": {
-      "rev": "c588db330592fa477a70d2fee6ba20a57194bdc3",
+      "rev": "4b7fbaa239c5db6b36f424a4521ca9f1a401be33",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
-    },
-    "oil-git-status.nvim": {
-      "rev": "a3e2ccb00cb8822115e28a9a1791eda051d940c9",
-      "src": "https://github.com/refractalize/oil-git-status.nvim"
     },
     "oil-git.nvim": {
       "rev": "95b0d83f70e5e3e889f4d2f8b70eba5185ff67b6",
@@ -89,7 +77,7 @@
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "plenary.nvim": {
-      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "quicker.nvim": {
@@ -100,12 +88,16 @@
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
     },
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "57a0eb84b2008c76e77930639890d9874195b1e1",
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
+    },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"
     },
     "tree-sitter-d2": {
-      "rev": "ffb66ce4c801a1e37ed145ebd5eca1ea8865e00f",
+      "rev": "200434618a6bede20ebd4982aa4d4f1edeb0b5c1",
       "src": "https://github.com/ravsii/tree-sitter-d2"
     },
     "vim-wordmotion": {

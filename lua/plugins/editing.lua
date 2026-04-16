@@ -102,7 +102,16 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
+-- scratch buffers
+vim.keymap.set("n", "<leader>cc", function()
+  require("snacks").scratch()
+end, { desc = "Toggle sCratch buffer" })
 
+vim.keymap.set("n", "<leader>cs", function()
+  require("snacks").picker.scratch()
+end, { desc = "Search sCratch buffers" })
+
+-- info comments
 require("todo-comments").setup {
   signs = true,
   sign_priority = 8,

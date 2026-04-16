@@ -77,8 +77,26 @@ if has_ui then
   ]]
 end
 
-vim.diagnostic.config {
-  virtual_lines = {
-    current_line = true,
+-- inline diagnostic
+pack.add {
+  { src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
+}
+require("tiny-inline-diagnostic").setup {
+  options = {
+    multilines = { enabled = true },
+    show_source = { enabled = true },
+    override_open_float = true,
   },
 }
+vim.diagnostic.config { virtual_text = false } -- Disable Neovim's default virtual text diagnostics
+
+vim.keymap.set("n", "<leader>de", "<cmd>TinyInlineDiag enable<cr>", { desc = "Enable diagnostics" })
+vim.keymap.set("n", "<leader>dd", "<cmd>TinyInlineDiag disable<cr>", { desc = "Disable diagnostics" })
+vim.keymap.set("n", "<leader>dt", "<cmd>TinyInlineDiag toggle<cr>", { desc = "Toggle diagnostics" })
+vim.keymap.set(
+  "n",
+  "<leader>dc",
+  "<cmd>TinyInlineDiag toggle_cursor_only<cr>",
+  { desc = "Toggle cursor-only diagnostics" }
+)
+vim.keymap.set("n", "<leader>dr", "<cmd>TinyInlineDiag reset<cr>", { desc = "Reset diagnostic options" })
