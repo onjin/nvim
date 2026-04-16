@@ -147,7 +147,16 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
 })
+-- scratch buffers
+vim.keymap.set("n", "<leader>cc", function()
+  require("snacks").scratch()
+end, { desc = "Toggle sCratch buffer" })
 
+vim.keymap.set("n", "<leader>cs", function()
+  require("snacks").picker.scratch()
+end, { desc = "Search sCratch buffers" })
+
+-- info comments
 require("todo-comments").setup {
   signs = true,
   sign_priority = 8,
@@ -706,6 +715,10 @@ snacks.setup {
 
 local picker = snacks.picker
 
+vim.keymap.set("n", "<leader>ss", function()
+  picker()
+end, { desc = "Show all pickers" })
+-- search files
 vim.keymap.set("n", "<leader>sf", picker.files, { desc = "Search files" })
 vim.keymap.set("n", "<leader>sb", picker.buffers, { desc = "Search buffers" })
 vim.keymap.set("n", "<leader>sg", picker.git_grep, { desc = "Search live git grep" })
@@ -713,14 +726,21 @@ vim.keymap.set("n", "<leader>sG", picker.grep, { desc = "Search live ripgrep" })
 vim.keymap.set("n", "<leader>s*", picker.grep_word, { desc = "Grep string under cursor" })
 vim.keymap.set("n", "<leader>sr", picker.resume, { desc = "Resume last search" })
 vim.keymap.set("n", "<leader>sn", picker.notifications, { desc = "Search notifications" })
+-- finders
 vim.keymap.set("n", "<leader>fk", picker.keymaps, { desc = "Find keymaps" })
 vim.keymap.set("n", "<leader>fc", picker.commands, { desc = "Find commands" })
 vim.keymap.set("n", "<leader>fs", picker.spelling, { desc = "Find spelling" })
+-- diagnostics
+vim.keymap.set("n", "<leader>db", picker.diagnostics_buffer, { desc = "Show buffer diagnostics" })
+vim.keymap.set("n", "<leader>da", picker.diagnostics, { desc = "Show workspace diagnostics" })
+-- github / gh
 vim.keymap.set("n", "<leader>gi", picker.gh_issue, { desc = "GH Issues" })
 vim.keymap.set("n", "<leader>gp", picker.gh_pr, { desc = "GH PRs" })
 vim.keymap.set("n", "<leader>gs", picker.git_status, { desc = "Git Status" })
 
-snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map "<leader>tc"
+snacks.toggle
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+  :map "<leader>tc"
 snacks.toggle.zoom():map "<leader>tz"
 snacks.toggle.diagnostics():map "<leader>td"
 snacks.toggle.inlay_hints():map "<leader>th"
@@ -921,22 +941,40 @@ if has_ui then
   ]]
 end
 
-vim.diagnostic.config {
-  virtual_lines = {
-    current_line = true,
+-- inline diagnostic
+pack.add {
+  { src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
+}
+require("tiny-inline-diagnostic").setup {
+  options = {
+    multilines = { enabled = true },
+    show_source = { enabled = true },
+    override_open_float = true,
   },
 }
+vim.diagnostic.config { virtual_text = false } -- Disable Neovim's default virtual text diagnostics
+
+vim.keymap.set("n", "<leader>de", "<cmd>TinyInlineDiag enable<cr>", { desc = "Enable diagnostics" })
+vim.keymap.set("n", "<leader>dd", "<cmd>TinyInlineDiag disable<cr>", { desc = "Disable diagnostics" })
+vim.keymap.set("n", "<leader>dt", "<cmd>TinyInlineDiag toggle<cr>", { desc = "Toggle diagnostics" })
+vim.keymap.set(
+  "n",
+  "<leader>dc",
+  "<cmd>TinyInlineDiag toggle_cursor_only<cr>",
+  { desc = "Toggle cursor-only diagnostics" }
+)
+vim.keymap.set("n", "<leader>dr", "<cmd>TinyInlineDiag reset<cr>", { desc = "Reset diagnostic options" })
 ]=], "@lua/plugins/ui.lua", "t", _ENV))(...)
 end
 
 -- init.lua
 assert(load([[
 require "plugins.core"
+require "plugins.ui"
 require "plugins.editing"
 require "plugins.generators"
 require "plugins.navigation"
 require "plugins.lsp"
-require "plugins.ui"
 require "plugins.integrations.discord"
 require "plugins.integrations.databases"
 ]], "@init.lua", "t", _ENV))()
