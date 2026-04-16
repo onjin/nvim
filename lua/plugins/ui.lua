@@ -130,3 +130,55 @@ vim.keymap.set(
   { desc = "Toggle cursor-only diagnostics" }
 )
 vim.keymap.set("n", "<leader>dr", "<cmd>TinyInlineDiag reset<cr>", { desc = "Reset diagnostic options" })
+
+-- folding rules
+pack.add {
+  { src = "https://github.com/kevinhwang91/nvim-ufo" },
+  { src = "https://github.com/kevinhwang91/promise-async" },
+}
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
+--- tell the LSP the capbility of foldingRange
+local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
+for _, ls in ipairs(language_servers) do
+  require("lspconfig")[ls].setup {
+    capabilities = capabilities,
+    -- you can add other fields for setting up lsp server in this table
+  }
+end
+
+vim.o.foldcolumn = "1" -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+require("ufo").setup {
+  enable_get_fold_virt_text = true,
+  provider_selector = function(bufnr, filetype, buftype)
+    return { "treesitter", "indent" }
+  end,
+  open_fold_hl_timeout = 150,
+  close_fold_kinds_for_ft = {
+    default = { "imports", "comment" },
+    json = { "array" },
+    c = { "comment", "region" },
+    python = { "import_statement", "import_from_statement", "comment" },
+    java = { "import_declaration", "block_comment" },
+  },
+  close_fold_current_line_for_ft = {
+    default = true,
+    c = false,
+  },
+}
+vim.o.fillchars = "eob: ,fold: ,foldopen:,foldsep: ,foldclose:"
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
+vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
+vim.keymap.set("n", "zk", function()
+  require("ufo").peekFoldedLinesUnderCursor()
+end)

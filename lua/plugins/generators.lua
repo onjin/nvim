@@ -1,3 +1,12 @@
+local pack = require "plugins.pack"
+
+-- code annotations generator by :Neogen
+pack.add {
+  { src = "https://github.com/danymat/neogen" },
+}
+require("neogen").setup()
+
+-- custom one time items generators
 local uv = vim.uv or vim.loop
 math.randomseed(os.time() + ((uv and uv.hrtime) and math.floor(uv.hrtime() % 1000000) or 0))
 
@@ -72,7 +81,7 @@ local function uuid_v2()
     return nil
   end
 
-  local _, g2, g3, g4, g5 = v1:match("^(%x+)%-(%x+)%-(%x+)%-(%x+)%-(%x+)$")
+  local _, g2, g3, g4, g5 = v1:match "^(%x+)%-(%x+)%-(%x+)%-(%x+)%-(%x+)$"
   if not g2 then
     return nil
   end
@@ -121,7 +130,12 @@ local function ulid()
 end
 
 local generators = {
-  { id = "uuid1", build = function() return run_system { "uuidgen", "--time" } end },
+  {
+    id = "uuid1",
+    build = function()
+      return run_system { "uuidgen", "--time" }
+    end,
+  },
   { id = "uuid2", build = uuid_v2 },
   {
     id = "uuid3",
@@ -141,11 +155,31 @@ local generators = {
       return run_system { "uuidgen", "--sha1", "--namespace", "@dns", "--name", uuid_name() }
     end,
   },
-  { id = "uuid6", build = function() return run_system { "uuidgen", "--time-v6" } end },
-  { id = "uuid7", build = function() return run_system { "uuidgen", "--time-v7" } end },
+  {
+    id = "uuid6",
+    build = function()
+      return run_system { "uuidgen", "--time-v6" }
+    end,
+  },
+  {
+    id = "uuid7",
+    build = function()
+      return run_system { "uuidgen", "--time-v7" }
+    end,
+  },
   { id = "ulid", build = ulid },
-  { id = "date", build = function() return os.date "%Y-%m-%d" end },
-  { id = "datetime", build = function() return os.date "%Y-%m-%d %H:%M:%S" end },
+  {
+    id = "date",
+    build = function()
+      return os.date "%Y-%m-%d"
+    end,
+  },
+  {
+    id = "datetime",
+    build = function()
+      return os.date "%Y-%m-%d %H:%M:%S"
+    end,
+  },
   { id = "datetime_iso", build = datetime_iso },
 }
 
@@ -239,14 +273,36 @@ end, {
 })
 
 vim.keymap.set("i", "<C-g>k", pick_and_insert_generated, { desc = "Insert generated value menu" })
-vim.keymap.set("i", "<C-x>1", function() insert_generated "uuid1" end, { desc = "Insert uuid1" })
-vim.keymap.set("i", "<C-x>2", function() insert_generated "uuid2" end, { desc = "Insert uuid2" })
-vim.keymap.set("i", "<C-x>3", function() insert_generated "uuid3" end, { desc = "Insert uuid3" })
-vim.keymap.set("i", "<C-x>4", function() insert_generated "uuid4" end, { desc = "Insert uuid4" })
-vim.keymap.set("i", "<C-x>5", function() insert_generated "uuid5" end, { desc = "Insert uuid5" })
-vim.keymap.set("i", "<C-x>6", function() insert_generated "uuid6" end, { desc = "Insert uuid6" })
-vim.keymap.set("i", "<C-x>7", function() insert_generated "uuid7" end, { desc = "Insert uuid7" })
-vim.keymap.set("i", "<C-x>u", function() insert_generated "ulid" end, { desc = "Insert ulid" })
-vim.keymap.set("i", "<C-x>d", function() insert_generated "date" end, { desc = "Insert date" })
-vim.keymap.set("i", "<C-x>t", function() insert_generated "datetime" end, { desc = "Insert datetime" })
-vim.keymap.set("i", "<C-x>i", function() insert_generated "datetime_iso" end, { desc = "Insert iso datetime" })
+vim.keymap.set("i", "<C-x>1", function()
+  insert_generated "uuid1"
+end, { desc = "Insert uuid1" })
+vim.keymap.set("i", "<C-x>2", function()
+  insert_generated "uuid2"
+end, { desc = "Insert uuid2" })
+vim.keymap.set("i", "<C-x>3", function()
+  insert_generated "uuid3"
+end, { desc = "Insert uuid3" })
+vim.keymap.set("i", "<C-x>4", function()
+  insert_generated "uuid4"
+end, { desc = "Insert uuid4" })
+vim.keymap.set("i", "<C-x>5", function()
+  insert_generated "uuid5"
+end, { desc = "Insert uuid5" })
+vim.keymap.set("i", "<C-x>6", function()
+  insert_generated "uuid6"
+end, { desc = "Insert uuid6" })
+vim.keymap.set("i", "<C-x>7", function()
+  insert_generated "uuid7"
+end, { desc = "Insert uuid7" })
+vim.keymap.set("i", "<C-x>u", function()
+  insert_generated "ulid"
+end, { desc = "Insert ulid" })
+vim.keymap.set("i", "<C-x>d", function()
+  insert_generated "date"
+end, { desc = "Insert date" })
+vim.keymap.set("i", "<C-x>t", function()
+  insert_generated "datetime"
+end, { desc = "Insert datetime" })
+vim.keymap.set("i", "<C-x>i", function()
+  insert_generated "datetime_iso"
+end, { desc = "Insert iso datetime" })
