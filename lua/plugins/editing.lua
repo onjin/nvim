@@ -75,8 +75,11 @@ vim.api.nvim_create_autocmd("VimEnter", {
     local ensure_installed = {
       "lua",
       "bash",
+      "java",
+      "json",
       "markdown",
       "markdown_inline",
+      "python",
       "yaml",
       "toml",
     }

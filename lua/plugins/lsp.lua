@@ -77,19 +77,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     vim.o.signcolumn = "yes:1"
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    local bufnr = args.buf
+    local filetype = vim.bo[bufnr].filetype
+
+    -- Let injected Tree-sitter languages like JSON win inside Python strings.
+    if filetype == "python" then
+      client.server_capabilities.semanticTokensProvider = nil
+    end
 
     if client:supports_method "textDocument/completion" then
       vim.o.complete = "o,.,w,b,u"
       vim.o.completeopt = "menu,menuone,popup,noinsert"
-      vim.lsp.completion.enable(true, client.id, args.buf)
+      vim.lsp.completion.enable(true, client.id, bufnr)
     end
 
     if client:supports_method "textDocument/inlayHint" then
-      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
     end
 
     if client.name == "jdtls" then
-      local formatter_url = jdtls_formatter_url(args.buf, client)
+      local formatter_url = jdtls_formatter_url(bufnr, client)
       if formatter_url then
         client.settings = vim.tbl_deep_extend("force", client.settings or {}, {
           java = {
@@ -105,7 +112,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     vim.keymap.set("n", "grd", vim.lsp.buf.definition, {
-      buffer = args.buf,
+      buffer = bufnr,
       desc = "Go to definition",
     })
   end,
