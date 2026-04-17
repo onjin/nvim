@@ -674,6 +674,10 @@ local servers = {
   jdtls = {
     filetypes = { "java" },
   },
+  jsonls = {
+    cmd = { "vscode-json-language-server", "--stdio" },
+    filetypes = { "json", "jsonc" },
+  },
   lua_ls = {
     filetypes = { "lua" },
   },
