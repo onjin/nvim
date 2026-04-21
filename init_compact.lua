@@ -934,7 +934,7 @@ local pack = require "plugins.pack"
 local has_ui = #vim.api.nvim_list_uis() > 0
 
 if has_ui then
-  require("vim._core.ui2").enable {}
+  -- require("vim._core.ui2").enable {}
 end
 
 pack.add {
@@ -945,6 +945,7 @@ pack.add {
   { src = "https://github.com/nvim-mini/mini-git", name = "mini.git" },
   { src = "https://github.com/nvim-mini/mini.diff", name = "mini.diff" },
   { src = "https://github.com/nvim-mini/mini.indentscope" },
+  { src = "https://github.com/nvim-mini/mini.notify" },
   { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
   { src = "https://github.com/lewis6991/hover.nvim" },
 }
@@ -960,6 +961,7 @@ require("catppuccin").setup {
 vim.cmd.colorscheme "catppuccin-nvim"
 
 if has_ui then
+  require("mini.notify").setup()
   require("mini.icons").setup()
   require("mini.icons").tweak_lsp_kind()
   require("mini.icons").mock_nvim_web_devicons()
