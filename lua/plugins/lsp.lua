@@ -17,6 +17,7 @@ local pack = require "plugins.pack"
 pack.add {
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/folke/lazydev.nvim" },
+  { src = "https://github.com/mfussenegger/nvim-jdtls" },
 }
 
 require("lazydev").setup()
@@ -39,9 +40,6 @@ end
 
 ---@type table<string, vim.lsp.Config|true>
 local servers = {
-  jdtls = {
-    filetypes = { "java" },
-  },
   jsonls = {
     cmd = { "vscode-json-language-server", "--stdio" },
     filetypes = { "json", "jsonc" },
