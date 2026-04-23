@@ -76,6 +76,7 @@ if has_ui then
       "hover.providers.dap",
       "hover.providers.man",
       "hover.providers.dictionary",
+      "hover.providers.java_constructors",
       -- Optional, disabled by default:
       -- 'hover.providers.gh',
       -- 'hover.providers.gh_user',

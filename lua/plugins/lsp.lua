@@ -18,6 +18,7 @@ pack.add {
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/folke/lazydev.nvim" },
   { src = "https://github.com/mfussenegger/nvim-jdtls" },
+  { src = "https://github.com/ray-x/lsp_signature.nvim" },
 }
 
 require("lazydev").setup()
@@ -116,6 +117,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "grd", vim.lsp.buf.definition, {
       buffer = bufnr,
       desc = "Go to definition",
+    })
+
+    vim.keymap.set({ "i" }, "<C-k>", function()
+      require("lsp_signature").toggle_float_win()
+    end, {
+      buffer = bufnr,
+      desc = "Signature help",
     })
   end,
 })

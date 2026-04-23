@@ -19,9 +19,15 @@ end
 
 local workspace_dir = vim.fs.joinpath(vim.fn.stdpath "data", "jdtls-workspace", vim.fs.basename(root_dir))
 
+
 jdtls.start_or_attach {
   cmd = { "jdtls", "-data", workspace_dir },
   root_dir = root_dir,
+  settings = {
+    java = {
+      signatureHelp = { enabled = true },
+    },
+  },
   handlers = {
     ["language/status"] = function(_, _) end,
     ["$/progress"] = function() end,
