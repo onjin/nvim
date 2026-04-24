@@ -731,7 +731,29 @@ pack.add {
   { src = "https://github.com/folke/lazydev.nvim" },
   { src = "https://github.com/mfussenegger/nvim-jdtls" },
   { src = "https://github.com/ray-x/lsp_signature.nvim" },
+  { src = "https://github.com/jmbuhr/otter.nvim" },
 }
+
+require("otter").setup()
+local snacks = require "snacks"
+vim.g.otter_enabled = false
+
+snacks.toggle.new({
+  id = "otter",
+  name = "Embedded LSPs (otter)",
+  get = function()
+    return vim.g.otter_enabled
+  end,
+  set = function(state)
+    if state then
+      vim.g.otter_enabled = true
+      require("otter").activate()
+    else
+      vim.g.otter_enabled = false
+      require("otter").deactivate()
+    end
+  end,
+}):map("<leader>tl")
 
 require("lazydev").setup()
 
