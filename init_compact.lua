@@ -708,6 +708,30 @@ end
 ]], "@lua/plugins/integrations/discord.lua", "t", _ENV))(...)
 end
 
+package.preload["plugins.integrations.lilypond"] = function(...)
+  return assert(load([[
+local pack = require "plugins.pack"
+pack.add {
+  { src = "https://github.com/martineausimon/nvim-lilypond-suite" },
+  { src = "https://github.com/MunifTanjim/nui.nvim" },
+}
+require("nvls").setup {
+  lilypond = {
+    mappings = {
+      player = "<leader>lp",
+      compile = "<leader>lc",
+      open_pdf = "<leader>lv",
+    },
+  },
+  player = {
+    options = {
+      midi_synh = "timidity",
+    },
+  },
+}
+]], "@lua/plugins/integrations/lilypond.lua", "t", _ENV))(...)
+end
+
 package.preload["plugins.lsp"] = function(...)
   return assert(load([[
 -- Compatibility filetype registrations for lspconfig defaults on older Neovim
@@ -907,6 +931,7 @@ vim.keymap.set("n", "<leader>sn", picker.notifications, { desc = "Search notific
 -- finders
 vim.keymap.set("n", "<leader>fk", picker.keymaps, { desc = "Find keymaps" })
 vim.keymap.set("n", "<leader>fc", picker.commands, { desc = "Find commands" })
+vim.keymap.set("n", "<leader>fm", picker.marks, { desc = "Find marks" })
 vim.keymap.set("n", "<leader>fs", picker.spelling, { desc = "Find spelling" })
 -- diagnostics
 vim.keymap.set("n", "<leader>db", picker.diagnostics_buffer, { desc = "Show buffer diagnostics" })
@@ -915,6 +940,7 @@ vim.keymap.set("n", "<leader>da", picker.diagnostics, { desc = "Show workspace d
 vim.keymap.set("n", "<leader>gi", picker.gh_issue, { desc = "GH Issues" })
 vim.keymap.set("n", "<leader>gp", picker.gh_pr, { desc = "GH PRs" })
 vim.keymap.set("n", "<leader>gs", picker.git_status, { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gb", snacks.git.blame_line, { desc = "Git Blame Popup" })
 
 snacks.toggle
   .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
@@ -1241,6 +1267,7 @@ if vim.version.ge(vim.version(), { 0, 12, 0 }) then
   require "plugins.lsp"
   require "plugins.integrations.discord"
   require "plugins.integrations.databases"
+  require "plugins.integrations.lilypond"
 else
   local v = vim.version()
   vim.notify("Skip config, neovim >= 0.12.0 is required. This is " .. v.major .. "." .. v.minor .. "." .. v.patch)
