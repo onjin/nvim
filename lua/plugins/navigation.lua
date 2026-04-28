@@ -39,6 +39,7 @@ vim.keymap.set("n", "<leader>sn", picker.notifications, { desc = "Search notific
 -- finders
 vim.keymap.set("n", "<leader>fk", picker.keymaps, { desc = "Find keymaps" })
 vim.keymap.set("n", "<leader>fc", picker.commands, { desc = "Find commands" })
+vim.keymap.set("n", "<leader>fm", picker.marks, { desc = "Find marks" })
 vim.keymap.set("n", "<leader>fs", picker.spelling, { desc = "Find spelling" })
 -- diagnostics
 vim.keymap.set("n", "<leader>db", picker.diagnostics_buffer, { desc = "Show buffer diagnostics" })
