@@ -7,6 +7,7 @@ if vim.version.ge(vim.version(), { 0, 12, 0 }) then
   require "plugins.lsp"
   require "plugins.integrations.discord"
   require "plugins.integrations.databases"
+  require "plugins.integrations.lilypond"
 else
   local v = vim.version()
   vim.notify("Skip config, neovim >= 0.12.0 is required. This is " .. v.major .. "." .. v.minor .. "." .. v.patch)

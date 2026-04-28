@@ -47,6 +47,7 @@ vim.keymap.set("n", "<leader>da", picker.diagnostics, { desc = "Show workspace d
 vim.keymap.set("n", "<leader>gi", picker.gh_issue, { desc = "GH Issues" })
 vim.keymap.set("n", "<leader>gp", picker.gh_pr, { desc = "GH PRs" })
 vim.keymap.set("n", "<leader>gs", picker.git_status, { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gb", snacks.git.blame_line, { desc = "Git Blame Popup" })
 
 snacks.toggle
   .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
