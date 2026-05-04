@@ -98,7 +98,7 @@ vim.opt.swapfile = false
 vim.opt.confirm = true
 vim.opt.linebreak = true
 vim.opt.termguicolors = true
-vim.opt.expandtab = true
+vim.opt.expandtab = true -- expand tabs to spaces
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.completeopt = "menuone,fuzzy,popup,noinsert,noselect"
@@ -108,6 +108,8 @@ vim.opt.grepprg = "rg --vimgrep --no-messages --smart-case"
 vim.opt.smoothscroll = true
 vim.opt.wildoptions:append { "fuzzy" }
 vim.opt.path:append { "**" }
+vim.opt.splitright = true -- more natural split
+vim.opt.splitbelow = true -- more natural split
 
 pack.add {
   { src = "https://github.com/nvim-lua/plenary.nvim" },
