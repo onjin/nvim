@@ -1170,6 +1170,20 @@ if has_ui then
       -- "hover.providers.lsp",
     },
   }
+  local palette = require("catppuccin.palettes").get_palette()
+  vim.api.nvim_set_hl(0, "HoverActiveSource", {
+    fg = palette.base,
+    bg = palette.mauve,
+    bold = true,
+  })
+  vim.api.nvim_set_hl(0, "HoverInactiveSource", {
+    fg = palette.overlay0,
+    bg = palette.surface0,
+  })
+  vim.api.nvim_set_hl(0, "HoverSourceLine", {
+    fg = palette.overlay0,
+    bg = palette.mantle,
+  })
   -- Setup keymaps
   vim.keymap.set("n", "K", function()
     require("hover").open()
