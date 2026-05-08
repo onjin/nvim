@@ -104,6 +104,8 @@ This creates `init_compact.lua`, which bundles local modules from `lua/` and run
 - `grd` jump to definition
 - `<leader>?` shows buffer-local keymaps
 - in insert mode:
+    - `<C-j>` expands snippets from `friendly-snippets` via `mini.snippets`
+    - `<C-l>` / `<C-h>` jump to the next / previous snippet tabstop while a snippet is active
     - `<C-x><C-u>` opens generated values completion (`uuid1-7`, `ulid`, date/time)
     - `<C-g>k` opens generated values menu (`vim.ui.select`)
     - `<C-x>1..7` inserts `uuid1..uuid7`
@@ -119,6 +121,7 @@ This creates `init_compact.lua`, which bundles local modules from `lua/` and run
 - `quicker.nvim` for editable `quickfix` window as buffer
 - `oil.nvim` for directory editing as buffer
 - native LSP with Lua, Bash, Java, and Python support
+- `friendly-snippets` loaded by `mini.snippets` and exposed through native LSP completion
 - `conform.nvim` for formatting
 - Treesitter, Catppuccin, mini status/tab line, and todo highlighting
 

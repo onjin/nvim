@@ -758,6 +758,8 @@ pack.add {
   { src = "https://github.com/mfussenegger/nvim-jdtls" },
   { src = "https://github.com/ray-x/lsp_signature.nvim" },
   { src = "https://github.com/jmbuhr/otter.nvim" },
+  { src = "https://github.com/nvim-mini/mini.snippets" },
+  { src = "https://github.com/rafamadriz/friendly-snippets" },
 }
 
 require("otter").setup()
@@ -782,6 +784,16 @@ snacks.toggle.new({
 }):map("<leader>tl")
 
 require("lazydev").setup()
+
+local snippets = require "mini.snippets"
+
+snippets.setup {
+  snippets = {
+    snippets.gen_loader.from_lang(),
+  },
+}
+
+snippets.start_lsp_server { match = false }
 
 local function jdtls_formatter_url(bufnr, client)
   local root = client.config.root_dir
