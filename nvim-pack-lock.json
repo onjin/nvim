@@ -36,6 +36,10 @@
       "rev": "e27dee8b2a61f89ac3a06deae0264ad1d3f7b62c",
       "src": "https://github.com/OXY2DEV/markview.nvim"
     },
+    "maven.nvim": {
+      "rev": "3c013c55a381d821c5031dcd279d2e4205011380",
+      "src": "https://github.com/eatgrass/maven.nvim"
+    },
     "mini.diff": {
       "rev": "ab11575a6c147ecfba894d676d0c93e855021d34",
       "src": "https://github.com/nvim-mini/mini.diff"

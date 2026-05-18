@@ -16,6 +16,8 @@ pack.add {
   { src = "https://github.com/nvim-mini/mini.notify" },
   { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
   { src = "https://github.com/lewis6991/hover.nvim" },
+  { src = "https://github.com/eatgrass/maven.nvim" },
+  { src = "MunifTanjim/nui.nvim" }, -- for maven.nvim
 }
 
 require("catppuccin").setup {
@@ -199,3 +201,13 @@ vim.keymap.set("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == clo
 vim.keymap.set("n", "zk", function()
   require("ufo").peekFoldedLinesUnderCursor()
 end)
+
+-- maven
+require("maven").setup {
+  executable = "mvn",
+  settings = nil,
+  commands = {
+    { cmd = { "verify", "--quiet" }, desc = "verify quietly" },
+  },
+}
+vim.keymap.set("n", "<leader>mm", "<cmd>Maven<cr>", { desc = "Maven Projects" })
