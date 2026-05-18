@@ -238,12 +238,45 @@ local function generated_completion_items(base)
   return items
 end
 
-function _G.onjin_generated_complete(findstart, base)
-  if findstart == 1 then
-    return vim.fn.col "." - 1
+local k8s_dict = require "dict.k8s"
+
+local function k8s_completion_items(base)
+  if base == "" then
+    local items = {}
+    for word, desc in pairs(k8s_dict) do
+      items[#items + 1] = { word = word, menu = "[k8s]", info = desc }
+    end
+    return items
   end
 
-  return generated_completion_items(base)
+  local pattern = vim.pesc(base)
+  local prefix, infix = {}, {}
+  for word, desc in pairs(k8s_dict) do
+    local item = { word = word, menu = "[k8s]", info = desc }
+    if word:match("^" .. pattern) then
+      prefix[#prefix + 1] = item
+    elseif word:match(pattern) then
+      infix[#infix + 1] = item
+    end
+  end
+  vim.list_extend(prefix, infix)
+  return prefix
+end
+
+function _G.onjin_generated_complete(findstart, base)
+  if findstart == 1 then
+    local col = vim.fn.col "." - 1
+    local line = vim.fn.getline "."
+    local start = col
+    while start > 0 and line:sub(start, start):match "[%w_]" do
+      start = start - 1
+    end
+    return start
+  end
+
+  local items = generated_completion_items(base)
+  vim.list_extend(items, k8s_completion_items(base))
+  return items
 end
 
 vim.opt.completefunc = "v:lua.onjin_generated_complete"
