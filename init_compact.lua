@@ -3,6 +3,53 @@
 
 local package = package
 
+package.preload["dict.k8s"] = function(...)
+  return assert(load([[
+return {
+  ACCOUNT_ID = "Unique identifier for the cloud account",
+  ACCOUNT_NAME = "Human-readable name of the cloud account, used as a resource naming prefix, like prd, pre, dev",
+  APP_ENV = "Application environment name (e.g. production, staging)",
+  APP_NAME = "Name of the application",
+  APP_VERSION = "Semantic version of the application",
+  BASE_DOMAIN = "Base DNS domain used for ingress hostnames, already contains ENV_SHORT_NAME and ACCOUNT_NAME",
+  CHART_VERSION = "Helm chart version",
+  CLUSTER_NAME = "Name of the Kubernetes cluster",
+  DEPLOYMENT_NAME = "Name of the Kubernetes helm chart resource (repo name + subdirectory, i used)",
+  DEPLOYMENT_NAMESPACE = "Kubernetes namespace where the deployment lives",
+  DOCKER_IMAGE = "Full Docker image reference including registry and tag",
+  DOCKER_REGISTRY = "Docker registry hostname (e.g. registry.example.com)",
+  DOCKER_TAG = "Docker image tag",
+  ENV_SHORT_NAME = "Short environment identifier used in resource names (e.g. prd, releng)",
+  GIT_BRANCH = "Name of the Git branch",
+  GIT_COMMIT_SHA = "Short SHA of the Git commit",
+  GIT_REF = "Git ref (branch, tag, or SHA)",
+  GIT_SHA = "Short Git commit SHA",
+  GIT_TAG = "Git tag associated with the build",
+  IMAGE_TAG = "Container image tag deployed",
+  INGRESS_HOST = "Fully qualified hostname for the ingress rule",
+  KUBE_CONTEXT = "kubectl context name",
+  KUBE_NAMESPACE = "Kubernetes namespace (alias for NAMESPACE)",
+  KUBECONFIG = "Path to the kubeconfig file",
+  MAX_REPLICAS = "Maximum number of pod replicas for HPA",
+  MIN_REPLICAS = "Minimum number of pod replicas for HPA",
+  NAMESPACE = "Kubernetes namespace",
+  NODE_NAME = "Name of the Kubernetes node the pod is scheduled on",
+  POD_IP = "IP address of the pod (from Downward API)",
+  POD_NAME = "Name of the pod (from Downward API)",
+  POD_NAMESPACE = "Namespace of the pod (from Downward API)",
+  POD_SERVICE_ACCOUNT = "Service account name of the pod (from Downward API)",
+  RELEASE_NAME = "Helm release name",
+  RELEASE_NAMESPACE = "Helm release namespace",
+  REPLICA_COUNT = "Desired number of pod replicas",
+  RESOURCE_PREFIX = "Prefix applied to all resource names in the release",
+  SECRET_NAME = "Name of the Kubernetes Secret resource",
+  SERVICE_ACCOUNT = "Kubernetes ServiceAccount name",
+  SERVICE_NAME = "Name of the Kubernetes Service resource",
+  TLS_SECRET = "Name of the Kubernetes Secret containing TLS certificate and key",
+}
+]], "@lua/dict/k8s.lua", "t", _ENV))(...)
+end
+
 package.preload["hover.providers.java_constructors"] = function(...)
   return assert(load([[
 --- hover.nvim provider: shows constructors of the Java class under cursor.
