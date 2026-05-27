@@ -840,28 +840,38 @@ pack.add {
   { src = "https://github.com/jmbuhr/otter.nvim" },
   { src = "https://github.com/nvim-mini/mini.snippets" },
   { src = "https://github.com/rafamadriz/friendly-snippets" },
+  {
+    src = "https://github.com/likec4/likec4.nvim",
+
+    install_hook = function(ev)
+      vim.notify "[likec4.nvim] npm install -g @likec4/lsp"
+      vim.system({ "npm", "install", "-g", "@likec4/lsp" }, { cwd = ev.data.path }):wait()
+    end,
+  },
 }
 
 require("otter").setup()
 local snacks = require "snacks"
 vim.g.otter_enabled = false
 
-snacks.toggle.new({
-  id = "otter",
-  name = "Embedded LSPs (otter)",
-  get = function()
-    return vim.g.otter_enabled
-  end,
-  set = function(state)
-    if state then
-      vim.g.otter_enabled = true
-      require("otter").activate()
-    else
-      vim.g.otter_enabled = false
-      require("otter").deactivate()
-    end
-  end,
-}):map("<leader>tl")
+snacks.toggle
+  .new({
+    id = "otter",
+    name = "Embedded LSPs (otter)",
+    get = function()
+      return vim.g.otter_enabled
+    end,
+    set = function(state)
+      if state then
+        vim.g.otter_enabled = true
+        require("otter").activate()
+      else
+        vim.g.otter_enabled = false
+        require("otter").deactivate()
+      end
+    end,
+  })
+  :map "<leader>tl"
 
 require("lazydev").setup()
 
