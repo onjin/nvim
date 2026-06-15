@@ -67,6 +67,30 @@ snippets.setup {
 
 snippets.start_lsp_server { match = false }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
+
+local function jsonls_unusable()
+  local cmd = vim.fn.exepath "vscode-json-language-server"
+  if cmd == "" then
+    return false
+  end
+
+  local ok, result = pcall(function()
+    return vim.system({ cmd, "--version" }, { text = true }):wait(1000)
+  end)
+  if not ok or not result or result.code == 0 then
+    return false
+  end
+
+  local output = (result.stdout or "") .. (result.stderr or "")
+  return output:find("require is not defined in ES module scope", 1, true) ~= nil
+    or output:find("Cannot use 'import.meta' outside a module", 1, true) ~= nil
+end
+
 local function jdtls_formatter_url(bufnr, client)
   local root = client.config.root_dir
   if not root then
@@ -85,10 +109,6 @@ end
 
 ---@type table<string, vim.lsp.Config|true>
 local servers = {
-  jsonls = {
-    cmd = { "vscode-json-language-server", "--stdio" },
-    filetypes = { "json", "jsonc" },
-  },
   lua_ls = {
     filetypes = { "lua" },
   },
@@ -115,8 +135,23 @@ local servers = {
   terraform_lsp = true,
 }
 
+if jsonls_unusable() then
+  vim.notify(
+    "Skipping jsonls: vscode-json-language-server crashes on startup. Update vscode-langservers-extracted to restore JSON LSP.",
+    vim.log.levels.WARN
+  )
+else
+  servers.jsonls = {
+    cmd = { "vscode-json-language-server", "--stdio" },
+    filetypes = { "json", "jsonc" },
+  }
+end
+
 for name, spec in pairs(servers) do
-  vim.lsp.config(name, spec == true and {} or spec)
+  local config = spec == true and {} or vim.deepcopy(spec)
+  config.capabilities = vim.tbl_deep_extend("force", vim.deepcopy(capabilities), config.capabilities or {})
+
+  vim.lsp.config(name, config)
   vim.lsp.enable(name)
 end
 
