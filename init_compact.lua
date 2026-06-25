@@ -201,6 +201,7 @@ pack.add {
       vim.system({ "make", "nvim-install" }, { cwd = ev.data.path }):wait()
     end,
   },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
   { src = "https://github.com/folke/todo-comments.nvim" },
   { src = "https://github.com/OXY2DEV/markview.nvim" },
 }
