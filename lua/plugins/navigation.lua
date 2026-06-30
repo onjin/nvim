@@ -58,6 +58,18 @@ snacks.toggle.diagnostics():map "<leader>td"
 snacks.toggle.inlay_hints():map "<leader>th"
 snacks.toggle.dim():map "<leader>tD"
 snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map "<leader>tb"
+snacks.toggle
+  .new({
+    id = "transparent_background",
+    name = "Transparent Background",
+    get = function()
+      return require("plugins.ui").transparent_background()
+    end,
+    set = function(state)
+      require("plugins.ui").set_transparent_background(state)
+    end,
+  })
+  :map "<leader>tB"
 snacks.toggle.option("autocomplete", { off = false, on = true, name = "Autocomplete" }):map "<leader>ta"
 
 require("which-key").setup()

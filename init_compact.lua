@@ -1090,6 +1090,18 @@ snacks.toggle.diagnostics():map "<leader>td"
 snacks.toggle.inlay_hints():map "<leader>th"
 snacks.toggle.dim():map "<leader>tD"
 snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map "<leader>tb"
+snacks.toggle
+  .new({
+    id = "transparent_background",
+    name = "Transparent Background",
+    get = function()
+      return require("plugins.ui").transparent_background()
+    end,
+    set = function(state)
+      require("plugins.ui").set_transparent_background(state)
+    end,
+  })
+  :map "<leader>tB"
 snacks.toggle.option("autocomplete", { off = false, on = true, name = "Autocomplete" }):map "<leader>ta"
 
 require("which-key").setup()
@@ -1206,8 +1218,10 @@ end
 
 package.preload["plugins.ui"] = function(...)
   return assert(load([=[
+local M = {}
 local pack = require "plugins.pack"
 local has_ui = #vim.api.nvim_list_uis() > 0
+local transparent_background = true
 
 if has_ui then
   -- require("vim._core.ui2").enable {}
@@ -1225,18 +1239,54 @@ pack.add {
   { src = "https://github.com/brenoprata10/nvim-highlight-colors" },
   { src = "https://github.com/lewis6991/hover.nvim" },
   { src = "https://github.com/eatgrass/maven.nvim" },
-  { src = "MunifTanjim/nui.nvim" }, -- for maven.nvim
+  { src = "https://github.com/MunifTanjim/nui.nvim" }, -- for maven.nvim
 }
 
-require("catppuccin").setup {
-  flavour = "auto",
-  background = {
-    light = "latte",
-    dark = "mocha",
-  },
-  transparent_background = false,
-}
-vim.cmd.colorscheme "catppuccin-nvim"
+local function apply_catppuccin()
+  require("catppuccin").setup {
+    flavour = "auto",
+    background = {
+      light = "latte",
+      dark = "mocha",
+    },
+    transparent_background = transparent_background,
+  }
+  vim.cmd.colorscheme "catppuccin-nvim"
+end
+
+function M.transparent_background()
+  return transparent_background
+end
+
+function M.set_transparent_background(state)
+  transparent_background = state
+  apply_catppuccin()
+  M.apply_highlights()
+end
+
+function M.apply_highlights()
+  vim.api.nvim_set_hl(0, "MiniStatuslineDiagnosticError", {
+    fg = "#f38ba8",
+    bold = true,
+  })
+
+  local palette = require("catppuccin.palettes").get_palette()
+  vim.api.nvim_set_hl(0, "HoverActiveSource", {
+    fg = palette.base,
+    bg = palette.mauve,
+    bold = true,
+  })
+  vim.api.nvim_set_hl(0, "HoverInactiveSource", {
+    fg = palette.overlay0,
+    bg = palette.surface0,
+  })
+  vim.api.nvim_set_hl(0, "HoverSourceLine", {
+    fg = palette.overlay0,
+    bg = palette.mantle,
+  })
+end
+
+apply_catppuccin()
 
 if has_ui then
   require("mini.notify").setup()
@@ -1272,10 +1322,6 @@ if has_ui then
       end,
     },
   }
-  vim.api.nvim_set_hl(0, "MiniStatuslineDiagnosticError", {
-    fg = "#f38ba8",
-    bold = true,
-  })
   require("mini.indentscope").setup()
 
   require("hover").config {
@@ -1298,20 +1344,7 @@ if has_ui then
       -- "hover.providers.lsp",
     },
   }
-  local palette = require("catppuccin.palettes").get_palette()
-  vim.api.nvim_set_hl(0, "HoverActiveSource", {
-    fg = palette.base,
-    bg = palette.mauve,
-    bold = true,
-  })
-  vim.api.nvim_set_hl(0, "HoverInactiveSource", {
-    fg = palette.overlay0,
-    bg = palette.surface0,
-  })
-  vim.api.nvim_set_hl(0, "HoverSourceLine", {
-    fg = palette.overlay0,
-    bg = palette.mantle,
-  })
+  M.apply_highlights()
   -- Setup keymaps
   vim.keymap.set("n", "K", function()
     require("hover").open()
@@ -1405,6 +1438,8 @@ require("maven").setup {
   },
 }
 vim.keymap.set("n", "<leader>mm", "<cmd>Maven<cr>", { desc = "Maven Projects" })
+
+return M
 ]=], "@lua/plugins/ui.lua", "t", _ENV))(...)
 end
 

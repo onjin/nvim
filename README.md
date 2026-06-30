@@ -96,6 +96,7 @@ This creates `init_compact.lua`, which bundles local modules from `lua/` and run
 - `<leader>t` - prefix for toggles, i.e.:
     - `<leader>ta` - toggle `vim.opt.autocomplete`; default `off` just use `<ctrl-x><ctrl-o>` and friends
     - `<leader>tb` - toggle light/dark theme
+    - `<leader>tB` - toggle Catppuccin transparent background
 - `<leader>g` - prefix Git/GH CLI pickers, i.e.:
     - `<leader>gi` - gh issue list
     - `<leader>gp` - gh pr list
