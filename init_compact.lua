@@ -204,6 +204,7 @@ pack.add {
   { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
   { src = "https://github.com/folke/todo-comments.nvim" },
   { src = "https://github.com/OXY2DEV/markview.nvim" },
+  { src = "https://github.com/nacro90/numb.nvim" },
 }
 
 require("mini.pairs").setup()
@@ -375,6 +376,9 @@ end, { desc = "Fix todo comments - TODO" })
 vim.keymap.set("n", "<leader>ftp", function()
   require("snacks").picker.todo_comments { keywords = { "PERF", "OPTIM", "PERFORMANCE", "OPTOMIZE" } }
 end, { desc = "Fix todo comments - PERF, OPTIM, PERFORMANCE, OPTOMIZE" })
+
+-- numb.nvim
+require("numb").setup()
 ]=], "@lua/plugins/editing.lua", "t", _ENV))(...)
 end
 
